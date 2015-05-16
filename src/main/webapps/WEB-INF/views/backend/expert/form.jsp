@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<form class="new_user_form inline-input" />
 <div class="span12 field-box">
-	<label>姓名:</label> <input class="span9" type="text" name="name" />
+	<label>姓名:</label> 
+	<input name="name" class="span9" type="text" name="name" />
 	<div class="span8 notice" id="name-notice"></div>
 </div>
 <div class="span12 field-box">
@@ -66,6 +66,6 @@
    </div>
 </div>
 <div class="span11 field-box actions">
-	<input type="button" id="expert-submit" class="btn-glow primary" value="提交" /> <span>OR</span>
+	<input type="submit" id="expert-submit" class="btn-glow primary" value="提交" /> <span>OR</span>
 	<input type="reset" value="取消" class="reset" />
 </div>

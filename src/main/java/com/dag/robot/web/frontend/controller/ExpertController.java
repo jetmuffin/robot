@@ -12,7 +12,7 @@ import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.entities.Expert;
 
 @Controller
-@RequestMapping("/backend/expert")
+@RequestMapping("/expert")
 public class ExpertController {
 
 	@Autowired
