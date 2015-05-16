@@ -54,6 +54,11 @@ public class BackendExpertController {
 	public String list(Model model) {
 		return "backend/expert/list";
 	}
+	
+	@RequestMapping(value = "/import", method = RequestMethod.GET)
+	public String input(Model model) {
+		return "backend/expert/import";
+	}
 
 	@RequestMapping(value = "/edit/{expertId}", method = RequestMethod.GET)
 	public String edit(@PathVariable int expertId, Model model) {
