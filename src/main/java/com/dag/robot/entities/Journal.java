@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @Table(name = "journal", catalog = "db_expert_robot")
 public class Journal implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer jourId;
 	private String name;
 	private String url;

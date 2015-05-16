@@ -11,6 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class RelPaperJournalId implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int paperId;
 	private int jourId;
 

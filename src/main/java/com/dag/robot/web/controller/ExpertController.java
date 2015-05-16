@@ -1,10 +1,5 @@
 package com.dag.robot.web.controller;
 
-import java.sql.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.entities.Expert;
-import com.dag.robot.entities.Field;
-import com.dag.robot.entities.RelExpertField;
 
 @Controller
 @RequestMapping("/expert")

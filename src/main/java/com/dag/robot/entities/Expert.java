@@ -21,6 +21,7 @@ import javax.persistence.Table;
 @Table(name = "expert", catalog = "db_expert_robot")
 public class Expert implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer expertId;
 	private String name;
 	private String gender;

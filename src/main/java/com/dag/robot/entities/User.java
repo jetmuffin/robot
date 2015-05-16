@@ -22,6 +22,7 @@ import javax.persistence.Table;
 @Table(name = "user", catalog = "db_expert_robot")
 public class User implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer userId;
 	private String account;
 	private String password;

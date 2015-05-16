@@ -12,10 +12,10 @@ import com.dag.robot.entities.Topic;
 public interface ExpertDao {
 	
 	/**
-	 * 保存新专家信息
+	 * 增加专家信息
 	 * @param expert 专家信息
 	 */
-	public void saveExpert(Expert expert);
+	public void addExpert(Expert expert);
 	
 	/**
 	 * 更新专家信息

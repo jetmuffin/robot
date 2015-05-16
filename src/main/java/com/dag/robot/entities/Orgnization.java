@@ -22,6 +22,7 @@ import javax.persistence.Table;
 @Table(name = "orgnization", catalog = "db_expert_robot")
 public class Orgnization implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer orgId;
 	private Orgnization orgnization;
 	private String name;
