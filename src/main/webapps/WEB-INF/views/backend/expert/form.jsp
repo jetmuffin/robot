@@ -21,12 +21,14 @@
 		</label>
 	</div>
 </div>
-<div class="span12 field-box">
-	<label>单位:</label> <input class="span9" name="organization" type="text" />
+<div class="span12 field-box textarea">
+	<label>单位:</label> <input class="span9" name="organization" type="text" /><span
+		class="charactersleft">若属于多个单位,请以英文逗号隔开</span>
 	<div class="span8 notice" id="org-notice"></div>
 </div>
 <div class="span12 field-box">
 	<label>Email:</label> <input class="span9" type="text" name="email"/>
+		<div class="span8 notice" id="email-notice"></div>
 </div>
 <div class="span12 field-box">
 	<label>Phone:</label> <input class="span9" type="text" name="phone" />
@@ -50,8 +52,8 @@
    </div>
 </div>
 <div class="span12 field-box textarea">
-	<label>研究方向:</label> <input class="span9" type="text" name="area"/> <span
-		class="charactersleft">请以逗号隔开</span>
+	<label>研究方向:</label> <input class="span9" type="text" name="topic"/> <span
+		class="charactersleft">若有多个方向,请以英文逗号隔开</span>
 </div>
 <div class="field-box">
    <label>个人履历:</label>
