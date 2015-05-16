@@ -27,7 +27,7 @@
 	<mvc:annotation-driven />
 
 	<!-- Static Resources -->
-	<mvc:resources location="/resources/" mapping="/resources/**" />
+	<mvc:resources location="/WEB-INF/resources/" mapping="/resources/**" />
 
 	<!-- ViewResolver -->
 	<bean
