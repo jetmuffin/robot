@@ -30,32 +30,39 @@ public class BackendExpertController {
 	}
 	
 	@RequestMapping(value = "/edit/{expertId}", method = RequestMethod.GET)
-	public String edit(@PathVariable int expertId,Model model) {
+	public String edit(@PathVariable int expertId, Model model) {
 		Expert expert = expertDao.getById(expertId);
 		model.addAttribute("exeprt", expert);		
 		return "backend/expert/edit";
 	}
 	
 	@RequestMapping(value = "/{expertId}", method = RequestMethod.GET)
-	public String getAll(@PathVariable int expertId, Model model) {
+	public String get(@PathVariable int expertId, Model model) {
 		Expert expert = expertDao.getById(expertId);
 		model.addAttribute("exeprt", expert);
 		return "index";
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addAll(){
+	public String add(){
 		
 		return "index";
 	}
 	
-	@RequestMapping(value = "/{expertId}/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(){
+		
+		return "index";
+	}
+	
+	@RequestMapping(value = "/delete/{expertId}", method = RequestMethod.POST)
 	public String delete(@PathVariable int expertId, RedirectAttributes redirectAttributes){
 		Expert expert = expertDao.getById(expertId);
 		expertDao.deleteExpert(expert);
-		
 		redirectAttributes.addFlashAttribute("deleteMsg", "专家信息已删除!");
 		return "index";
 	}
 
+	
+	
 }
