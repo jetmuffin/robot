@@ -32,7 +32,6 @@
 	<jsp:include page="../common/sidebar.jsp"></jsp:include>
 	<!-- main container -->
     <div class="content">
-
         <div class="container-fluid">
             <!-- upper main stats -->
             <div id="main-stats">

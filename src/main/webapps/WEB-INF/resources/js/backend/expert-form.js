@@ -27,15 +27,24 @@ $(function() {
 		}
 	});
 	
-	$('input[name="organization"]').blur(function() {
+	$('input[name="email"]').blur(function() {
 		var email = $(this).val();
 		if (email=="" || ( email!="" && !/.+@.+\.[a-zA-Z]{2,4}$/.test(email) )) {
 			$('#email-notice').text("请填写正确的Email格式!");
 		} else {
 			$('#email-notice').text("");
-			console.log(123);
 		}
 	});
+	
+	$('input[name="homepage"]').blur(function() {
+		var homepage = $(this).val();
+		if (homepage=="" || ( homepage!="" && !/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(homepage) )) {
+			$('#homepage-notice').text("请填写正确的网址格式!");
+		} else {
+			$('#homepage-notice').text("");
+		}
+	});
+	
 	$('#expert-submit').click(function(){
 		if(!ok1){
 			$("html,body").animate({scrollTop:0},100);

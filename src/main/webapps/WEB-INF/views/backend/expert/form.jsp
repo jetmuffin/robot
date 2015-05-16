@@ -1,40 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <div class="span12 field-box">
 	<label>姓名:</label> 
-	<input name="name" class="span9" type="text" name="name" />
+	<input value="${expert.name}" name="name" class="span9" type="text" name="name" />
 	<div class="span8 notice" id="name-notice"></div>
 </div>
 <div class="span12 field-box">
 	<label>性别:</label>
-	<div class="span8">
+	<c:choose>
+	
+	<c:when test="${empty expert.gender or expert.gender eq 'male'}">
+		<div class="span8">
 		<label class="radio">
 			<div class="radio" id="uniform-optionsRadios1">
 				<span class=""><input type="radio" name="gender"
-					id="gender-male" value="male" checked=""></span>
+					id="gender-male" value="male" checked></span>
 			</div> 男
 		</label> <label class="radio">
 			<div class="radio" id="uniform-optionsRadios2">
 				<span class="checked"><input type="radio" name="gender"
-					id="gender-female" value="female"></span>
+					id="gender-female" value="female" ></span>
 			</div> 女
+	</c:when>
+	<c:otherwise>
+		<div class="span8">
+		<label class="radio">
+				<div class="radio" id="uniform-optionsRadios1">
+				<span class=""><input type="radio" name="gender"
+					id="gender-male" value="male" ></span>
+			</div> 男
+		</label> <label class="radio">
+			<div class="radio" id="uniform-optionsRadios2">
+				<span class="checked"><input type="radio" name="gender"
+					id="gender-female" value="female" checked></span>
+			</div> 女
+	</c:otherwise>
+	</c:choose>
 		</label>
 	</div>
 </div>
-<div class="span12 field-box textarea">
-	<label>单位:</label> <input class="span9" name="organization" type="text" /><span
+<div class="span12 field-box ">
+	<label>单位:</label>
+	 <input value="${organization}"class="span9" name="organization" type="text" /><span
 		class="charactersleft">若属于多个单位,请以英文逗号隔开</span>
 	<div class="span8 notice" id="org-notice"></div>
 </div>
 <div class="span12 field-box">
-	<label>Email:</label> <input class="span9" type="text" name="email"/>
-		<div class="span8 notice" id="email-notice"></div>
+	<label>Email:</label> 
+	<input class="span9" value="${expert.email}" type="text" name="email"/>
+	<div class="span8 notice" id="email-notice"></div>
 </div>
 <div class="span12 field-box">
-	<label>Phone:</label> <input class="span9" type="text" name="phone" />
-</div>
-<div class="span12 field-box">
-	<label>Website:</label> <input class="span9" type="text" name="homepage"/>
+	<label>Website:</label> 
+	<input value="${expert.homepage}" class="span9" type="text" name="homepage"/>
+	<div class="span8 notice" id="homepage-notice"></div>
 </div>
 <div class="span12 field-box">
 	<label>地址:</label>
@@ -51,7 +71,7 @@
    	<textarea id="wysi-info" name="info" class="span12 wysihtml5" rows="6"></textarea>
    </div>
 </div>
-<div class="span12 field-box textarea">
+<div class="span12 field-box ">
 	<label>研究方向:</label> <input class="span9" type="text" name="topic"/> <span
 		class="charactersleft">若有多个方向,请以英文逗号隔开</span>
 </div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -71,7 +72,6 @@
 							<h6>科研成果</h6>
 								<p>主持973课题、国家自然科学基金重点项目等多项科研课题；出版著作《Ensemble Methods: Foundations and Algorithms》[3] 一部，主编文集多部，在计算机领域一流国际期刊和顶级国际会议发表论文100余篇；获发明专利12项。</p>
 							<br />							
-							
 							
 							<!-- recent orders table -->
 							<h6>近期活动</h6>
