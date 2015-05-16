@@ -19,6 +19,7 @@ import javax.persistence.Table;
 @Table(name = "rel_expert_patent", catalog = "db_expert_robot")
 public class RelExpertPatent implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private RelExpertPatentId id;
 	private Expert expert;
 	private Patent patent;

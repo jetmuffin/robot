@@ -21,6 +21,7 @@ import javax.persistence.Table;
 @Table(name = "topic", catalog = "db_expert_robot")
 public class Topic implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer topicId;
 	private String name;
 	private Set<User> users = new HashSet<User>(0);

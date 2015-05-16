@@ -23,6 +23,7 @@ import javax.persistence.Table;
 @Table(name = "paper", catalog = "db_expert_robot")
 public class Paper implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer paperId;
 	private String title;
 	private String abs;

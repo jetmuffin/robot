@@ -24,13 +24,12 @@ import com.dag.robot.entities.RelExpertPatentId;
 import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
-import com.mysql.fabric.xmlrpc.base.Array;
 
 @Repository("expertDao")
 public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 
 	@Override
-	public void saveExpert(Expert expert) {
+	public void addExpert(Expert expert) {
 		save(expert);
 	}
 	
@@ -42,13 +41,14 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	@Override
 	public List<Expert> getByName(String name) {
 		String hql = "from Expert as expert where expert.name = ?";
+		@SuppressWarnings("unchecked")
 		List<Expert> experts = query(hql).setString(0, name).list();
 		return experts;
 	}
 
 	@Override
 	public Expert getById(int expertId) {
-		return (Expert) get(Expert.class, expertId);
+		return get(Expert.class, expertId);
 	}
 
 	@Override
@@ -75,8 +75,6 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			RelExpertPaper relExpertPaper = (RelExpertPaper) iterator.next();
 			delete(relExpertPaper);
 		}
-		
-		
 		
 		Set<RelExpertPatent> relExpertPatents = expert.getRelExpertPatents();
 		iterator = relExpertPatents.iterator();
@@ -195,20 +193,43 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		while(iterator.hasNext()){
 			RelExpertPaper relExpertPaper = iterator.next();
 			Paper paper = relExpertPaper.getPaper();
+			papers.add(paper);
 		}
-		return null;
+		if(papers.size() == 0)
+			return null;
+		return papers;
 	}
 
 	@Override
 	public List<Patent> getPatents(int expertId) {
-		// TODO Auto-generated method stub
-		return null;
+		Expert expert = getById(expertId);
+		List<Patent> patents = new ArrayList<Patent>();
+		Set<RelExpertPatent> relExpertPatents = expert.getRelExpertPatents();
+		Iterator<RelExpertPatent> iterator = relExpertPatents.iterator();
+		while(iterator.hasNext()){
+			RelExpertPatent relExpertPatent = iterator.next();
+			Patent patent = relExpertPatent.getPatent();
+			patents.add(patent);
+		}
+		if(patents.size() == 0)
+			return null;
+		return patents;
 	}
 
 	@Override
 	public List<Orgnization> getOrgs(int expertId) {
-		// TODO Auto-generated method stub
-		return null;
+		Expert expert = getById(expertId);
+		List<Orgnization> orgnizations = new ArrayList<Orgnization>();
+		Set<RelExpertOrg> relExpertOrgs = expert.getRelExpertOrgs();
+		Iterator<RelExpertOrg> iterator = relExpertOrgs.iterator();
+		while(iterator.hasNext()){
+			RelExpertOrg relExpertOrg = iterator.next();
+			Orgnization orgnization = relExpertOrg.getOrgnization();
+			orgnizations.add(orgnization);
+		}
+		if(orgnizations.size() == 0)
+			return null;
+		return orgnizations;
 	}
 
 	

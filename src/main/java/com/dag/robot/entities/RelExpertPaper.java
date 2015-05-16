@@ -19,6 +19,7 @@ import javax.persistence.Table;
 @Table(name = "rel_expert_paper", catalog = "db_expert_robot")
 public class RelExpertPaper implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private RelExpertPaperId id;
 	private Expert expert;
 	private Paper paper;

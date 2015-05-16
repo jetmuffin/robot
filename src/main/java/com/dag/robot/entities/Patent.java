@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 @Table(name = "patent", catalog = "db_expert_robot")
 public class Patent implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int patentId;
 	private String title;
 	private String abs;

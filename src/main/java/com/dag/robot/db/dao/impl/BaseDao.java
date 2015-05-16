@@ -1,6 +1,7 @@
 package com.dag.robot.db.dao.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -59,8 +60,8 @@ public class BaseDao {
 	 * @param arg1 主键
 	 * @return
 	 */
-	public Object get(Class arg0, Serializable arg1){
-		return getSession().get(arg0, arg1);
+	public <T> T get(Class<?> arg0, Serializable arg1){
+		return (T) getSession().get(arg0, arg1);
 	}
 	
 	/**
@@ -78,5 +79,18 @@ public class BaseDao {
 	 */
 	public void delete(Object object){
 		getSession().delete(object);
+	}
+	
+	/**
+	 * 获取某个表的全部信息
+	 * @param entity 表对应实体的类名
+	 * @return 实体List
+	 */
+	public <T> List<T> getAll(String entity){
+		String string = "from " + entity;
+		Query query = query(string);
+		@SuppressWarnings("unchecked")
+		List<T> ts = query.list();
+		return ts;
 	}
 }

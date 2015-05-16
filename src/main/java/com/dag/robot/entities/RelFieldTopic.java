@@ -19,6 +19,7 @@ import javax.persistence.Table;
 @Table(name = "rel_field_topic", catalog = "db_expert_robot")
 public class RelFieldTopic implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private RelFieldTopicId id;
 	private Field field;
 	private Topic topic;

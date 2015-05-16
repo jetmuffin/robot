@@ -21,6 +21,7 @@ import javax.persistence.Table;
 @Table(name = "field", catalog = "db_expert_robot")
 public class Field implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer fieldId;
 	private String name;
 	private String description;
