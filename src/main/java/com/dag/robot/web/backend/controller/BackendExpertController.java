@@ -1,4 +1,4 @@
-package com.dag.robot.web.controller;
+package com.dag.robot.web.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,21 +12,32 @@ import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.entities.Expert;
 
 @Controller
-@RequestMapping("/expert")
-public class ExpertController {
+@RequestMapping("/backend/expert")
+public class BackendExpertController {
 
 	@Autowired
 	@Qualifier("expertDao")
 	ExpertDao expertDao;
 
-	public ExpertController() {
+	public BackendExpertController() {
 		super();
 	}
 
-	@RequestMapping(value = "/expert/getAll/{expertId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{expertId}", method = RequestMethod.GET)
 	public String getAll(@PathVariable int expertId, Model model) {
 		Expert expert = expertDao.getById(expertId);
 		model.addAttribute("exeprt", expert);
+		return "index";
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String addAll(){
+		
+		return "index";
+	}
+	
+	public String delete(){
+		
 		return "index";
 	}
 
