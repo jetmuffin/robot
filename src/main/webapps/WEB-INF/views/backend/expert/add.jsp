@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,9 +50,10 @@
 					<!-- left column -->
 					<div class="span9 with-sidebar">
 						<div class="container">
-						<form class="new_user_form inline-input" action="" method="post" id="expert-form"/>
+						<form  class="new_user_form inline-input" 
+						action="/robot/backend/expert/add" method="post" id="expert-form">
 							<jsp:include page="form.jsp"></jsp:include>
-							</form>
+						<form>
 						</div>
 					</div>
 

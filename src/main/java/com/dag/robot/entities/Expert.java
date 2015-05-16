@@ -4,11 +4,14 @@ package com.dag.robot.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -56,6 +59,21 @@ public class Expert implements java.io.Serializable {
 		this.paperReferedNum = paperReferedNum;
 	}
 	
+	
+	public Expert(String name, String gender, String email, String address,
+			String homepage, String experience, String info,
+			String achievement) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.email = email;
+		this.address = address;
+		this.homepage = homepage;
+		this.experience = experience;
+		this.info = info;
+		this.achievement = achievement;
+	}
+
 	public Expert(String name, String gender, String email, String address,
 			String homepage, int paperNum, int patentNum, int paperReferedNum,
 			String prize, String experience, String info, String achievement,
