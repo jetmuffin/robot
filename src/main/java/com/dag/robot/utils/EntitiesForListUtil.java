@@ -65,6 +65,14 @@ public class EntitiesForListUtil {
 				topicList.add(topic.getName());
 			}
 			paperForList.setTopic(StringMergeUtil.stringMerge(topicList));
+			
+			Set<RelPaperJournal> relPaperJournals = paper.getRelPaperJournals();
+			List<RelPaperJournal> relPaperJournals2 = new ArrayList<RelPaperJournal>();
+			relPaperJournals2.addAll(relPaperJournals);
+			if(relPaperJournals2.size() == 0)
+				paperForList.setJournal(null);
+			else
+				paperForList.setJournal(relPaperJournals2.get(0).getJournal().getName());//论文会议只有一个
 			paperForLists.add(paperForList);
 		}
 		return paperForLists;
