@@ -11,12 +11,15 @@ public class PropertiesUtil {
 	public static String getValue(String key){
 		Properties mProperties = new Properties();
 		try {
-			InputStream in = new BufferedInputStream (new FileInputStream("src/main/webapps/WEB-INF/config/config.properties"));
-			mProperties.load(in);
+			mProperties.load(PropertiesUtil.class.getClassLoader().getResourceAsStream("config/config.properties"));
 			return mProperties.getProperty(key);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(getValue("expertPageSize"));
 	}
 }

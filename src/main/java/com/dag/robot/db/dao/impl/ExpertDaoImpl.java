@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.dag.robot.db.dao.ExpertDao;
@@ -24,6 +25,7 @@ import com.dag.robot.entities.RelExpertPatentId;
 import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.web.bean.Page;
 
 @Repository("expertDao")
 public class ExpertDaoImpl extends BaseDao implements ExpertDao {
@@ -230,6 +232,20 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		if(orgnizations.size() == 0)
 			return null;
 		return orgnizations;
+	}
+
+	@Override
+	public Page<Expert> page(int pageSize, int currenPage) {
+		Query query = query("select count(*) from Expert");
+		Long totalCount =  (Long) query.uniqueResult();
+		Page<Expert> page = new Page<Expert>(currenPage, pageSize, totalCount);
+		page.init();
+		query = query("from Expert");
+		query.setFirstResult((currenPage-1) * pageSize);
+		query.setMaxResults(pageSize);
+		List<Expert> experts = query.list();
+		page.setList(experts);
+		return page;
 	}
 
 	

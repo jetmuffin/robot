@@ -30,8 +30,10 @@ import com.dag.robot.entities.RelExpertOrgId;
 import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.utils.PropertiesUtil;
 import com.dag.robot.utils.StringMerge;
 import com.dag.robot.utils.StringSplit;
+import com.dag.robot.web.bean.Page;
 
 @Controller
 @RequestMapping("/backend/expert")
@@ -56,7 +58,7 @@ public class BackendExpertController {
 	@Autowired
 	@Qualifier("relExpertTopicDao")
 	private RelExpertTopicDao relExpertTopicDao;
-
+	
 	public BackendExpertController() {
 		super();
 	}
@@ -68,6 +70,9 @@ public class BackendExpertController {
 
 	@RequestMapping(value = "/experts", method = RequestMethod.GET)
 	public String list(Model model) {
+		//从配置文件加载每页条数
+		Page<Expert> page = expertDao.page(10, 1);//起始页为1
+		model.addAttribute("page", page);
 		return "backend/expert/list";
 	}
 
@@ -137,7 +142,14 @@ public class BackendExpertController {
 		redirectAttributes.addFlashAttribute("deleteMsg", "专家信息已删除!");
 		return "index";
 	}
-
+	
+	@RequestMapping(value = "/experts/{page}/{pageSize}", method = RequestMethod.GET)
+	public String list(@PathVariable int page, @PathVariable int pageSize,  Model model) {
+		Page<Expert> pageExpert = expertDao.page(pageSize, page);
+		model.addAttribute("page", pageExpert);
+		return "backend/expert/list";
+	}
+	
 	public void add(String name, String gender, String email, String address,
 			String homepage, String experience, String info, String topic,
 			String achievement, String organization) {

@@ -96,8 +96,4 @@ public class BaseDao {
 		return ts;
 	}
 
-	public void addField(Field field) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -8,6 +8,7 @@ import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.web.bean.Page;
 
 public interface ExpertDao {
 	
@@ -115,4 +116,12 @@ public interface ExpertDao {
 	 * @return 组织List
 	 */
 	public List<Orgnization> getOrgs(int expertId);
+	
+	/**
+	 * 分页
+	 * @param pageSize 每页条数
+	 * @param currenPage 当前页码
+	 * @return 
+	 */
+	public Page<Expert> page(int pageSize, int currenPage);
 }

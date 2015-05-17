@@ -10,9 +10,9 @@ public class Page<T> {
 	//每页元素个数
 	private int pageSize;
 	//总页数
-	private int totalPage;
+	private Long totalPage;
 	//总条数
-	private int totalCount;
+	private Long totalCount;
 	//是否有后页
 	private boolean haveNextPage;
 	//是否有前页
@@ -24,7 +24,7 @@ public class Page<T> {
 		super();
 	}
 
-	public Page(int currentPage, int pageSize, int totalCount) {
+	public Page(int currentPage, int pageSize, Long totalCount) {
 		super();
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
@@ -65,11 +65,11 @@ public class Page<T> {
 		this.pageSize = pageSize;
 	}
 
-	public int getTotalPage() {
+	public Long getTotalPage() {
 		return totalPage;
 	}
 
-	public void setTotalPage(int totalPage) {
+	public void setTotalPage(Long totalPage) {
 		this.totalPage = totalPage;
 	}
 
@@ -97,11 +97,11 @@ public class Page<T> {
 		this.list = list;
 	}
 
-	public int getTotalCount() {
+	public Long getTotalCount() {
 		return totalCount;
 	}
 
-	public void setTotalCount(int totalCount) {
+	public void setTotalCount(Long totalCount) {
 		this.totalCount = totalCount;
 	}
 	
