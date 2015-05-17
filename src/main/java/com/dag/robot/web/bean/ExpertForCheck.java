@@ -1,14 +1,14 @@
 package com.dag.robot.web.bean;
 
-public class ExpertBean {
+public class ExpertForCheck {
 
 	private String name;
 	private String org;
-	public ExpertBean() {
+	public ExpertForCheck() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ExpertBean(String name, String org) {
+	public ExpertForCheck(String name, String org) {
 		super();
 		this.name = name;
 		this.org = org;

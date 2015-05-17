@@ -32,9 +32,9 @@ import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.utils.PropertiesUtil;
-import com.dag.robot.utils.StringMerge;
-import com.dag.robot.utils.StringSplit;
-import com.dag.robot.web.bean.ExpertBean;
+import com.dag.robot.utils.StringMergeUtil;
+import com.dag.robot.utils.StringSplitUtil;
+import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.Page;
 
 @Controller
@@ -109,8 +109,8 @@ public class BackendExpertController {
 			Topic topic = relExpertTopic.getTopic();
 			topics.add(topic.getName());
 		}
-		String orgsString = StringMerge.stringMerge(orgnizations);
-		String topicsString = StringMerge.stringMerge(topics);
+		String orgsString = StringMergeUtil.stringMerge(orgnizations);
+		String topicsString = StringMergeUtil.stringMerge(topics);
 		System.out.println(orgsString);
 		System.out.println(topicsString);
 		model.addAttribute("exeprt", expert);
@@ -149,9 +149,9 @@ public class BackendExpertController {
 		redirectAttributes.addFlashAttribute("deleteMsg", "专家信息已删除!");
 		return "index";
 	}
-	@RequestMapping(value = "/check/{expertName}", method = RequestMethod.POST)
-	public @ResponseBody List<ExpertBean> check(@PathVariable String expertName){
-		List<ExpertBean> expertBeans = expertDao.check(expertName);
+	@RequestMapping(value = "/check/{expertName}", method = RequestMethod.GET)
+	public @ResponseBody List<ExpertForCheck> check(@PathVariable String expertName){
+		List<ExpertForCheck> expertBeans = expertDao.check(expertName);
 		return expertBeans;
 	}
 	
@@ -162,7 +162,7 @@ public class BackendExpertController {
 				experience, info, achievement);
 		expertDao.addExpert(expert);
 
-		List<String> orgs = StringSplit.stringSplit(organization);
+		List<String> orgs = StringSplitUtil.stringSplit(organization);
 		for (int i = 0; i < orgs.size(); i++) {
 			Orgnization orgnization = new Orgnization(orgs.get(i));
 			orgnizationDao.addOrgnization(orgnization);
@@ -173,7 +173,7 @@ public class BackendExpertController {
 			relExpertOrgDao.addRelExeprtOrg(relExpertOrg);
 		}
 
-		List<String> topics = StringSplit.stringSplit(topic);
+		List<String> topics = StringSplitUtil.stringSplit(topic);
 		for (int i = 0; i < topics.size(); i++) {
 			Topic topic1 = new Topic(topics.get(i));
 			topicDao.addTopic(topic1);
