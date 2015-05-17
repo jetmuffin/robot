@@ -109,11 +109,12 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
+								<th class="span1 sortable">id</th>
 								<th class="span3 sortable">姓名</th>
 								<th class="span2 sortable"><span class="line"></span>性别</th>
 								<th class="span2 sortable"><span class="line"></span>论文数</th>
 								<th class="span2 sortable"><span class="line"></span>专利数</th>
-								<th class="span3 sortable align-right"><span class="line"></span>Email
+								<th class="span2 sortable align-right"><span class="line"></span>Email
 								</th>
 							</tr>
 						</thead>
@@ -121,6 +122,7 @@
 							<c:forEach items="${pages.list}" var="expert">
 							<!-- row -->
 							 <tr class="first">
+							 <td>${expert.expertId}</td>
 								<td>
 								<img src="/robot/resources/img/backend/user-thumb.png" class="img-circle avatar hidden-phone" /> 
 								<a href="/robot/backend/expert/${expert.expertId}" class="name">${expert.name}</a> <span class="subtext">南京大学</span></td>
@@ -128,8 +130,14 @@
 								<td>${expert.paperNum}</td>
 								<td>${expert.patentNum}</td>
 								<td class="align-right">
-
-								<a href="/robot/backend/expert/${expert.expertId}">${expert.email}</a>
+          				<c:choose>
+                <c:when test="${empty expert.email or expert.email eq ''}">
+                  <a href="/robot/backend/expert/${expert.expertId}">暂未记录Email</a>
+                </c:when>
+                <c:otherwise>
+                  <a href="/robot/backend/expert/${expert.expertId}">${expert.email}</a>
+                </c:otherwise>
+               </c:choose> 
 								</td>
 							</tr>
 							</c:forEach>

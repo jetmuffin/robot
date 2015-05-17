@@ -122,7 +122,7 @@ public class BackendExpertController {
 	@RequestMapping(value = "/{expertId}", method = RequestMethod.GET)
 	public String get(@PathVariable int expertId, Model model) {
 		Expert expert = expertDao.getById(expertId);
-		model.addAttribute("exeprt", expert);
+		model.addAttribute("expert", expert);
 		return "backend/expert/show";
 	}
 
@@ -149,7 +149,7 @@ public class BackendExpertController {
 		redirectAttributes.addFlashAttribute("deleteMsg", "专家信息已删除!");
 		return "index";
 	}
-	@RequestMapping(value = "/check/{expertName}", method = RequestMethod.POST)
+	@RequestMapping(value = "/check/{expertName}.json", method = RequestMethod.GET)
 	public @ResponseBody List<ExpertBean> check(@PathVariable String expertName){
 		List<ExpertBean> expertBeans = expertDao.check(expertName);
 		return expertBeans;

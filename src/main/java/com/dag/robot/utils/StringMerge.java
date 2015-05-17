@@ -15,7 +15,9 @@ public class StringMerge {
 			String string2 = iterator.next();
 			string = string + div + string2;
 		}
+		System.out.println(string);
 		string = string.substring(1, string.length());
+		
 		return string;
 	}
 

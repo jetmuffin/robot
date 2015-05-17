@@ -38,7 +38,7 @@
 				<div class="row-fluid header">
 					<div class="span8">
 						<img src="/robot/resources/img/backend/user-thumb.png" class="avatar img-circle" />
-						<h3 class="name">周志华</h3>
+						<h3 class="name">${expert.name}</h3>
 						<span class="area">南京大学</span>
 					</div>
 					<a class="btn-flat icon pull-right delete-user"
@@ -54,12 +54,14 @@
 						<div class="profile-box">
 							<!-- biography -->
 							<div class="span12 section">
-								<h6>个人简介</h6>
-								<p>周志华，南京大学教授，计算机科学与技术系副主任，软件新技术国家重点实验室常务副主任，机器学习与数据挖掘研究所（LAMDA）所长，校、系学术委员会委员；ACM杰出科学家，IEEE Fellow，IAPR Fellow，中国计算机学会会士；长江学者特聘教授，国家杰出青年基金获得者。</p>
+								<h6>个人简介</h6><p>
+								<c:if test="${empty expert.info or expert.info eq ''}">暂未收录</c:if>
+								${expert.info}</p>
 							</div>
 
-							<h6>个人履历</h6>
-								<p>分别于1996年6月、1998年6月和2000年12月于南京大学计算机科学与技术系获学士、硕士和博士学位。2001年1月起留校任教，2002年3月被破格聘任为副教授，2003年29岁获国家杰出青年科学基金，随后被聘为教授，2004年4月获博士生导师资格，2006年入选教育部长江学者特聘教授，2012年当选IEEE Fellow，2013年当选ACM Distinguished Scientist[1] 。2007年创建南京大学机器学习与数据挖掘研究所（LAMDA），2010年11月任软件新技术国家重点实验室常务副主任，2013年5月任计算机系副主任。</p>
+							<h6>个人履历</h6><p>
+							<c:if test="${empty expert.experience or expert.experience eq ''}">暂未收录</c:if>
+								${expert.experience}</p>
 							<br />
 							
 							<h6>研究方向</h6>
@@ -69,8 +71,9 @@
 							</ul>
 							<br/>
 							
-							<h6>科研成果</h6>
-								<p>主持973课题、国家自然科学基金重点项目等多项科研课题；出版著作《Ensemble Methods: Foundations and Algorithms》[3] 一部，主编文集多部，在计算机领域一流国际期刊和顶级国际会议发表论文100余篇；获发明专利12项。</p>
+							<h6>科研成果</h6><p>
+								<c:if test="${empty expert.achievement or expert.achievement eq ''}">暂未收录</c:if>
+								${expert.achievement}</p>
 							<br />							
 							
 							<!-- recent orders table -->
@@ -114,11 +117,10 @@
 					<div class="span3 address pull-right">
 						<h6>地址</h6>
 						<ul>
-							<li>2301 East Lamar Blvd. Suite 140.</li>
-							<li>City, Arlington. United States,</li>
-							<li>Zip Code, TX 76006.</li>
-							<li class="ico-li"><i class="ico-phone"></i> 1817 274 2933</li>
-							<li class="ico-li"><i class="ico-mail"></i> <a href="#">alejandra@detailcanvas.com</a>
+							<li><c:if test="${empty expert.address or expert.address eq ''}">暂未收录</c:if>${expert.address}</li>
+							<li class="ico-li"><i class="ico-mail"></i> <a href="#">
+							<c:if test="${empty expert.email or expert.email eq ''}">暂未收录</c:if>${expert.email}
+							</a>
 							</li>
 						</ul>
 					</div>
