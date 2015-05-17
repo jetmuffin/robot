@@ -38,7 +38,9 @@ import com.dag.robot.web.bean.Page;
 @Controller
 @RequestMapping("/backend/expert")
 public class BackendExpertController {
-
+	private static int DEFAULT_PAGE = 1;
+	private static int DEFAULT_PAGE_SIZE = 10;
+	
 	@Autowired
 	@Qualifier("expertDao")
 	private ExpertDao expertDao;
@@ -69,10 +71,13 @@ public class BackendExpertController {
 	}
 
 	@RequestMapping(value = "/experts", method = RequestMethod.GET)
-	public String list(Model model) {
+	public String list(Model model,String _page,String _pageSize) {
+		int page = _page == null ? DEFAULT_PAGE : Integer.parseInt(_page);
+		int pageSize = _pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(_pageSize);
+		
 		//从配置文件加载每页条数
-		Page<Expert> page = expertDao.page(10, 1);//起始页为1
-		model.addAttribute("page", page);
+		Page<Expert> pages = expertDao.page(pageSize, page);//起始页为1
+		model.addAttribute("pages", pages);
 		return "backend/expert/list";
 	}
 
@@ -126,7 +131,7 @@ public class BackendExpertController {
 			RedirectAttributes redirectAttributes) {
 		add(name, gender, email, address, homepage, experience, info, topic, achievement, organization);
 		redirectAttributes.addFlashAttribute("addMsg", "专家信息添加成功!");
-		return "redirect:list";
+		return "redirect:experts";
 	}
 
 	@RequestMapping(value = "/edit/{expertId}", method = RequestMethod.POST)
@@ -141,13 +146,6 @@ public class BackendExpertController {
 		expertDao.deleteExpert(expert);
 		redirectAttributes.addFlashAttribute("deleteMsg", "专家信息已删除!");
 		return "index";
-	}
-	
-	@RequestMapping(value = "/experts/{page}/{pageSize}", method = RequestMethod.GET)
-	public String list(@PathVariable int page, @PathVariable int pageSize,  Model model) {
-		Page<Expert> pageExpert = expertDao.page(pageSize, page);
-		model.addAttribute("page", pageExpert);
-		return "backend/expert/list";
 	}
 	
 	public void add(String name, String gender, String email, String address,

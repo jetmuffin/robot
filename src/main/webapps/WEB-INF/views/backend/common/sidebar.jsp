@@ -22,31 +22,39 @@
                 <ul class="submenu">
                     <li><a href="/robot/backend/expert/experts">专家列表</a></li>
                     <li><a href="/robot/backend/expert/add">增加专家</a></li>
-                    <li><a href="/robot/backend/expert/import">文件导入</a></li>
+                    <li><a href="/robot/backend/expert/import">导入专家</a></li>
                 </ul>                
             </li>
             <li>
                 <a class="dropdown-toggle" href="#">
                     <i class="fa fa-book"></i>
-                    <span>文献管理</span>
+                    <span>论文管理</span>
                     <i class="fa fa-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="/robot/backend/paper/papers">论文管理</a></li>
-                    <li><a href="#">专利管理</a></li>
+                    <li><a href="/robot/backend/paper/papers">论文列表</a></li>
+                    <li><a href="/robot/backend/paper/add">添加论文</a></li>
+                    <li><a href="/robot/backend/paper/import">导入论文</a></li>
                 </ul>
             </li>
             <li>
-                <a class="dropdown-toggle ui-elements" href="#">
-                    <i class="fa fa-code-fork"></i>
-                    <span>数据录入</span>
+                <a class="dropdown-toggle" href="#">
+                    <i class="fa fa-file-text-o"></i>
+                    <span>专利管理</span>
                     <i class="fa fa-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="ui-elements.html">UI Elements</a></li>
-                    <li><a href="fa fas.html">fa fas</a></li>
+                    <li><a href="/robot/backend/paper/papers">专利列表</a></li>
+                    <li><a href="/robot/backend/paper/add">添加专利</a></li>
+                    <li><a href="/robot/backend/paper/import">导入专利</a></li>
                 </ul>
-            </li>
+            </li>            
+            <li>
+                <a href="#">
+                    <i class="fa fa-bug"></i>
+                    <span>爬取数据</span>
+                </a>
+            </li>                
             <li>
                 <a href="#">
                     <i class="fa fa-group"></i>
