@@ -25,6 +25,8 @@ import com.dag.robot.entities.RelExpertPatentId;
 import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.utils.StringMerge;
+import com.dag.robot.web.bean.ExpertBean;
 import com.dag.robot.web.bean.Page;
 
 @Repository("expertDao")
@@ -246,6 +248,32 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		List<Expert> experts = query.list();
 		page.setList(experts);
 		return page;
+	}
+
+	@Override
+	public List<ExpertBean> check(String expertName) {
+		List<Expert> experts = getByName(expertName);
+		List<ExpertBean> expertBeans = new ArrayList<ExpertBean>();
+		if(experts.size() == 0)
+			return expertBeans;//表示没有重名
+		
+		for(int i = 0; i < experts.size(); i++){
+			Expert expert = experts.get(i);
+			ExpertBean expertBean = new ExpertBean();
+			expertBean.setName(expert.getName());
+			
+			Set<RelExpertOrg> relExpertOrgs = expert.getRelExpertOrgs();
+			List<String> orgnizations = new ArrayList<String>();
+			Iterator<RelExpertOrg> iterator = relExpertOrgs.iterator();
+			while(iterator.hasNext()){
+				RelExpertOrg relExpertOrg = iterator.next();
+				Orgnization orgnization = relExpertOrg.getOrgnization();
+				orgnizations.add(orgnization.getName());
+			}
+			expertBean.setOrg(StringMerge.stringMerge(orgnizations));
+			expertBeans.add(expertBean);
+		}
+		return expertBeans;
 	}
 
 	

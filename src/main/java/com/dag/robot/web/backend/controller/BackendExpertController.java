@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dag.robot.db.dao.ExpertDao;
@@ -33,6 +34,7 @@ import com.dag.robot.entities.Topic;
 import com.dag.robot.utils.PropertiesUtil;
 import com.dag.robot.utils.StringMerge;
 import com.dag.robot.utils.StringSplit;
+import com.dag.robot.web.bean.ExpertBean;
 import com.dag.robot.web.bean.Page;
 
 @Controller
@@ -146,6 +148,11 @@ public class BackendExpertController {
 		expertDao.deleteExpert(expert);
 		redirectAttributes.addFlashAttribute("deleteMsg", "专家信息已删除!");
 		return "index";
+	}
+	@RequestMapping(value = "/check/{expertName}", method = RequestMethod.POST)
+	public @ResponseBody List<ExpertBean> check(@PathVariable String expertName){
+		List<ExpertBean> expertBeans = expertDao.check(expertName);
+		return expertBeans;
 	}
 	
 	public void add(String name, String gender, String email, String address,
