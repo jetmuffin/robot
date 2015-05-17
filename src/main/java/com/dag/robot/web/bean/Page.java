@@ -81,7 +81,7 @@ public class Page<T> {
 		this.haveNextPage = haveNextPage;
 	}
 
-	public boolean isHavaPrePage() {
+	public boolean isHavePrePage() {
 		return havePrePage;
 	}
 

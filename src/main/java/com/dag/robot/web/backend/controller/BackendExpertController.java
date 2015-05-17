@@ -71,12 +71,12 @@ public class BackendExpertController {
 	}
 
 	@RequestMapping(value = "/experts", method = RequestMethod.GET)
-	public String list(Model model,String _page,String _pageSize) {
-		int page = _page == null ? DEFAULT_PAGE : Integer.parseInt(_page);
-		int pageSize = _pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(_pageSize);
-		
+	public String list(Model model,String page,String pageSize) {
+		int _page = page == null ? DEFAULT_PAGE : Integer.parseInt(page);
+		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(pageSize);
+
 		//从配置文件加载每页条数
-		Page<Expert> pages = expertDao.page(pageSize, page);//起始页为1
+		Page<Expert> pages = expertDao.page(_pageSize, _page);//起始页为1
 		model.addAttribute("pages", pages);
 		return "backend/expert/list";
 	}
@@ -121,7 +121,7 @@ public class BackendExpertController {
 	public String get(@PathVariable int expertId, Model model) {
 		Expert expert = expertDao.getById(expertId);
 		model.addAttribute("exeprt", expert);
-		return "index";
+		return "backend/expert/show";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)

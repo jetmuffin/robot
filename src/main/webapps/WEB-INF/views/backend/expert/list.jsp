@@ -103,6 +103,7 @@
 					</div>
 				</div>
 
+				<h5>系统共有${pages.totalCount}个专家</h5>
 				<!-- Users table -->
 				<div class="row-fluid table">
 					<table class="table table-hover">
@@ -117,23 +118,18 @@
 							</tr>
 						</thead>
 						<tbody>
-							
-							<c:forEach items="${experts}" var="expert">
+							<c:forEach items="${pages.list}" var="expert">
 							<!-- row -->
 							 <tr class="first">
 								<td>
 								<img src="/robot/resources/img/backend/user-thumb.png" class="img-circle avatar hidden-phone" /> 
-								<a href="/robot/backend/expert/${expert.expertId}" class="name">周志华</a> <span class="subtext">南京大学</span></td>
+								<a href="/robot/backend/expert/${expert.expertId}" class="name">${expert.name}</a> <span class="subtext">南京大学</span></td>
 								<td>${expert.gender}</td>
 								<td>${expert.paperNum}</td>
 								<td>${expert.patentNum}</td>
 								<td class="align-right">
-								<c:when test="${empty expert.email}">
-									<a href="/robot/backend/expert/${expert.expertId}">暂未记录Email</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/robot/backend/expert/${expert.expertId}">${expert.email}</a>
-								</c:otherwise>
+
+								<a href="/robot/backend/expert/${expert.expertId}">${expert.email}</a>
 								</td>
 							</tr>
 							</c:forEach>
@@ -141,58 +137,38 @@
 					</table>
 				</div>
 				<div class="pagination pull-right">
+				<ul>
 				<c:choose>
-					<c:when test="${empty param.page or param.page lt 5}">
-							<ul>
-								<c:choose>
-									<c:when test="${param.page eq 1}">	
-									<li class="disabled"><a href="#">&#8249;</a></li>
-										<li ><a class="active" href="#">1</a></li>
-									</c:when>
-									<c:otherwise>
-									
-									<li><a href="/robot/backend/expert/experts?page=${param.page-1}">&#8249;</a></li>
-									<li><a href="/robot/backend/expert/experts?page=1">1</a></li>
-									</c:otherwise>
-								</c:choose>
-								<c:choose>
-									<c:when test="${param.page eq 2}">
-										<li ><a class="active" href="#">2</a></li>
-									</c:when>
-									<c:otherwise>
-										<li><a href="/robot/backend/expert/experts?page=2">2</a></li></c:otherwise>
-								</c:choose>
-								<c:choose>
-									<c:when test="${param.page eq 3}">
-										<li><a class="active" href="#">3</a></li>
-									</c:when>
-									<c:otherwise>
-										<li><a href="/robot/backend/expert/experts?page=3">3</a></li></c:otherwise>
-								</c:choose>
-								<c:choose>
-									<c:when test="${param.page eq 4}">
-										<li><a class="active" href="#">4</a></li>
-									</c:when>
-									<c:otherwise>
-										<li><a href="/robot/backend/expert/experts?page=4">4</a></li></c:otherwise>
-								</c:choose>
-								<li><a href="/robot/backend/expert/experts?page=5">5</a></li>
-								<li><a href="/robot/backend/expert/experts?page=${param.page+1}">&#8250;</a></li>
-							</ul>
-						</c:when>
-						<c:otherwise>
-							<ul>
-								<li><a href="/robot/backend/expert/experts?page=${param.page-1}">&#8249;</a></li>
-								<li><a href="/robot/backend/expert/experts?page=${param.page-2}">${param.page-2}</a></li>
-								<li><a href="/robot/backend/expert/experts?page=${param.page-1}">${param.page-1}</a></li>
-								<li><a class="active" href="#">${param.page}</a></li>
-								<li><a href="/robot/backend/expert/experts?page=${param.page+1}">${param.page+1}</a></li>
-								<li><a href="/robot/backend/expert/experts?page=${param.page+2}">${param.page+2}</a></li>
-								<li><a href="/robot/backend/expert/experts?page=${param.page+1}">&#8250;</a></li>
-							</ul>									
-						</c:otherwise>
+				<c:when test="${not pages.havePrePage}">
+					<li class="disabled"><a href="#">&#8249;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="/robot/backend/expert/experts?page=${pages.currentPage-1}&pageSize=${pages.pageSize}">&#8249;</a></li>
+				</c:otherwise>
 				</c:choose>
 				
+				<c:choose>
+					<c:when test="${pages.totalPage lt 5}">
+						<c:forEach var="item" varStatus="status" begin="1" end="${pages.totalPage}">
+						  	<li ><a <c:if test="${pages.currentPage eq status.index}">class="active"</c:if> href="/robot/backend/expert/experts?page=${status.index}&pageSize=${pages.pageSize}">${status.index}</a></li>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="item" varStatus="status" begin="${pages.currentPage-2}" end="${pages.currentPage+2}">
+						  	<li ><a <c:if test="${pages.currentPage eq status.index}">class="active"</c:if> href="/robot/backend/expert/experts?page=${status.index}&pageSize=${pages.pageSize}">${status.index}</a></li>
+						</c:forEach>						
+					</c:otherwise>
+				</c:choose>
+				
+				<c:choose>
+				<c:when test="${not pages.haveNextPage}">
+					<li class="disabled"><a href="#">&#8250;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="/robot/backend/expert/experts?page=${pages.currentPage+1}&pageSize=${pages.pageSize}">&#8250;</a></li>
+				</c:otherwise>
+				</c:choose>
+				</ul>
 				</div>
 				<!-- end users table -->
 			</div>
