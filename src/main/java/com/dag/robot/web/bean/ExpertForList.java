@@ -66,5 +66,11 @@ public class ExpertForList {
 	public void setPatentNum(int patentNum) {
 		this.patentNum = patentNum;
 	}
+	@Override
+	public String toString() {
+		return "ExpertForList [expertId=" + expertId + ", name=" + name
+				+ ", gender=" + gender + ", email=" + email + ", org=" + org
+				+ ", paperNum=" + paperNum + ", patentNum=" + patentNum + "]";
+	}
 	
 }

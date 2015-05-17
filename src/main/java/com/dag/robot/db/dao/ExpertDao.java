@@ -9,6 +9,7 @@ import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForCheck;
+import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
 
 public interface ExpertDao {
@@ -124,7 +125,7 @@ public interface ExpertDao {
 	 * @param currenPage 当前页码
 	 * @return 
 	 */
-	public Page<Expert> page(int pageSize, int currenPage);
+	public Page<ExpertForList> page(int pageSize, int currenPage);
 	
 	/**
 	 * 名字查重

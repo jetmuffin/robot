@@ -25,8 +25,10 @@ import com.dag.robot.entities.RelExpertPatentId;
 import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.utils.ExpertForListUtil;
 import com.dag.robot.utils.StringMergeUtil;
 import com.dag.robot.web.bean.ExpertForCheck;
+import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
 
 @Repository("expertDao")
@@ -237,16 +239,17 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	}
 
 	@Override
-	public Page<Expert> page(int pageSize, int currenPage) {
+	public Page<ExpertForList> page(int pageSize, int currenPage) {
 		Query query = query("select count(*) from Expert");
 		Long totalCount =  (Long) query.uniqueResult();
-		Page<Expert> page = new Page<Expert>(currenPage, pageSize, totalCount);
+		Page<ExpertForList> page = new Page<ExpertForList>(currenPage, pageSize, totalCount);
 		page.init();
 		query = query("from Expert");
 		query.setFirstResult((currenPage-1) * pageSize);
 		query.setMaxResults(pageSize);
 		List<Expert> experts = query.list();
-		page.setList(experts);
+		List<ExpertForList> expertForLists = ExpertForListUtil.forList(experts);
+		page.setList(expertForLists);
 		return page;
 	}
 

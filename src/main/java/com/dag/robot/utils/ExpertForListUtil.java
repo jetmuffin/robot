@@ -35,6 +35,7 @@ public class ExpertForListUtil {
 				orgs.add(orgnization.getName());
 			}
 			expertForList.setOrg(StringMergeUtil.stringMerge(orgs));
+			expertForLists.add(expertForList);
 		}
 		return expertForLists;
 	}

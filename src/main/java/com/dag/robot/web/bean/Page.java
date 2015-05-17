@@ -104,5 +104,12 @@ public class Page<T> {
 	public void setTotalCount(Long totalCount) {
 		this.totalCount = totalCount;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Page [currentPage=" + currentPage + ", pageSize=" + pageSize
+				+ ", totalPage=" + totalPage + ", totalCount=" + totalCount
+				+ ", haveNextPage=" + haveNextPage + ", havePrePage="
+				+ havePrePage + ", list=" + list + "]";
+	}
 }
