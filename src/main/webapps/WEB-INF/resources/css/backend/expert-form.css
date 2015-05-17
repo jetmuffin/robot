@@ -23,8 +23,8 @@
 
 .new-user .form-wrapper .field-box .notice {
 	position: absolute;
-	left: 15%;
-	color:red;
+	left: 120px;
+	color:#C73131;
 	font-weight:bold;
 }
 

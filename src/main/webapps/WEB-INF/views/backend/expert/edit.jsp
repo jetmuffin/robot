@@ -17,6 +17,7 @@
 <link href="/robot/resources/font/css/font-awesome.min.css"
 	type="text/css" rel="stylesheet" />
 	<link href="/robot/resources/plugin/uniform/css/uniform.default.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="/robot/resources/plugin/wysihtml5/bootstrap-wysihtml5.css" />
 <!-- global styles -->
 <link rel="stylesheet" type="text/css"
 	href="/robot/resources/css/backend/layout.css" />
@@ -28,6 +29,7 @@
 <link rel="stylesheet"
 	href="/robot/resources/css/backend/expert-form.css" type="text/css"
 	media="screen" />
+	<link rel="stylesheet" href="/robot/resources/css/backend/compiled/ui-elements.css" type="text/css" media="screen">
 </head>
 <body>
 	<!-- navbar -->

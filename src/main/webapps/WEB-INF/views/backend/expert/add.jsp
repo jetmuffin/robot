@@ -30,6 +30,7 @@
 <link rel="stylesheet"
 	href="/robot/resources/css/backend/expert-form.css" type="text/css"
 	media="screen" />
+	<link rel="stylesheet" href="/robot/resources/css/backend/compiled/ui-elements.css" type="text/css" media="screen">
 </head>
 <body>
 	<!-- navbar -->
@@ -84,8 +85,6 @@
 	<script src="/robot/resources/js/bootstrap/bootstrap.min.js"></script>
 	<script src="/robot/resources/js/backend/common.js"></script>
 	<script src="/robot/resources/plugin/uniform/js/jquery.uniform.min.js"></script>
-	<script src="/robot/resources/plugin/wysihtml5/wysihtml5-0.3.0.js"></script>
-	<script src="/robot/resources/plugin/wysihtml5/bootstrap-wysihtml5-0.0.2.js"></script>
 	<!-- this page specific scripts -->
 	<script src="/robot/resources/js/backend/expert-form.js"></script>
 </body>
