@@ -80,7 +80,7 @@ public class BackendExpertController {
 	public String input(Model model) {
 		return "backend/expert/import";
 	}
-
+	
 	@RequestMapping(value = "/edit/{expertId}", method = RequestMethod.GET)
 	public String edit(@PathVariable int expertId, Model model) {
 		Expert expert = expertDao.getById(expertId);
@@ -149,6 +149,9 @@ public class BackendExpertController {
 		model.addAttribute("page", pageExpert);
 		return "backend/expert/list";
 	}
+	
+	
+	
 	
 	public void add(String name, String gender, String email, String address,
 			String homepage, String experience, String info, String topic,
