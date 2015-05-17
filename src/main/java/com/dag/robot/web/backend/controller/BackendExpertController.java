@@ -35,6 +35,7 @@ import com.dag.robot.utils.PropertiesUtil;
 import com.dag.robot.utils.StringMergeUtil;
 import com.dag.robot.utils.StringSplitUtil;
 import com.dag.robot.web.bean.ExpertForCheck;
+import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
 
 @Controller
@@ -77,8 +78,8 @@ public class BackendExpertController {
 		int _page = page == null ? DEFAULT_PAGE : Integer.parseInt(page);
 		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(pageSize);
 
-		//从配置文件加载每页条数
-		Page<Expert> pages = expertDao.page(_pageSize, _page);//起始页为1
+		Page<ExpertForList> pages = expertDao.page(_pageSize, _page);//起始页为1
+		System.out.println(pages.toString());
 		model.addAttribute("pages", pages);
 		return "backend/expert/list";
 	}
