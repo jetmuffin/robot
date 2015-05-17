@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+
+.form-wrapper .import-expert-form label {
+	display: inline-block;
+	float: left;
+	font-weight: 600;
+	font-size: 13px;
+	cursor: auto;
+	width: 120px;
+}
+
+.form-wrapper .import-expert-form .field-box {
+	position: relative;
+	margin-bottom: 25px;
+	margin-left: 0;
+	float: left;
+	width: 100%;
+}
+
+.form-wrapper .import-expert-form  span.charactersleft {
+	display: block;
+	color: #9ba0a5;
+	text-align: left;
+	font-size: 13px;
+	font-style: italic;
+}
+.profile-box {
+	border-top: 1px solid #dde2e9;
+	padding-top: 23px;
+	width: 90%;
+}
+#import-console{
+	max-height:400px;
+	overflow-y:scroll;
+}
+.clear{
+	clear:both;
+}

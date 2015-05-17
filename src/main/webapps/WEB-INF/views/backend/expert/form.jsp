@@ -42,7 +42,8 @@
 </div>
 </div>
 <div class="span12 field-box ">
-	<label>单位:</label> <input value="${organization}" class="span9"
+	<label>单位:</label> 
+	<input value="${organization}" class="span9"
 		name="organization" type="text" /><span class="charactersleft">若属于多个单位,请以英文逗号隔开</span>
 	<div class="span8 notice" id="org-notice"></div>
 </div>
