@@ -20,11 +20,17 @@ import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.RelExpertPaper;
+import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
+import com.dag.robot.web.bean.PaperForList;
 
 @Controller
 @RequestMapping("/backend/paper")
 public class BackendPaperController {
+	
+	private static int DEFAULT_PAGE = 1;
+	private static int DEFAULT_PAGE_SIZE = 10;
+	
 	@Autowired
 	@Qualifier("expertDao")
 	private ExpertDao expertDao;
@@ -51,19 +57,12 @@ public class BackendPaperController {
 		return "backend/paper/import";
 	}
 	
-	@RequestMapping(value = "/papers/{expertId}", method = RequestMethod.GET)
-	public String list(@PathVariable int expertId , Model model) {
-		
-		Expert expert = expertDao.getById(expertId);
-		List<Paper> papers = new ArrayList<Paper>();
-		Set<RelExpertPaper> relExpertPapers = expert.getRelExpertPapers();
-		Iterator<RelExpertPaper> iterator = relExpertPapers.iterator();
-		while(iterator.hasNext()){
-			RelExpertPaper relExpertPaper = iterator.next();
-			Paper paper = relExpertPaper.getPaper();
-			papers.add(paper);
-		}
-		model.addAttribute("papers", papers);
+	@RequestMapping(value = "/papers", method = RequestMethod.GET)
+	public String list(Model model,String page,String pageSize) {
+		int _page = page == null ? DEFAULT_PAGE : Integer.parseInt(page);
+		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(pageSize);
+		Page<PaperForList> pages = paperDao.page(_pageSize, _page);//起始页为1
+		model.addAttribute("pages", pages);
 		return "backend/paper/list";
 	}
 }

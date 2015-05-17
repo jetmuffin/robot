@@ -25,7 +25,7 @@ import com.dag.robot.entities.RelExpertPatentId;
 import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
-import com.dag.robot.utils.ExpertForListUtil;
+import com.dag.robot.utils.EntitiesForListUtil;
 import com.dag.robot.utils.StringMergeUtil;
 import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
@@ -248,7 +248,7 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		query.setFirstResult((currenPage-1) * pageSize);
 		query.setMaxResults(pageSize);
 		List<Expert> experts = query.list();
-		List<ExpertForList> expertForLists = ExpertForListUtil.forList(experts);
+		List<ExpertForList> expertForLists = EntitiesForListUtil.expertForLists(experts);
 		page.setList(expertForLists);
 		return page;
 	}

@@ -4,12 +4,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.dag.robot.db.dao.PaperDao;
+import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.RelExpertPaper;
 import com.dag.robot.entities.RelPaperJournal;
+import com.dag.robot.utils.EntitiesForListUtil;
+import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperForList;
 
@@ -60,8 +64,18 @@ public class PaperDaoImpl extends BaseDao implements PaperDao {
 
 	@Override
 	public Page<PaperForList> page(int pageSize, int currenPage) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Query query = query("select count(*) from Paper");
+		Long totalCount =  (Long) query.uniqueResult();
+		Page<PaperForList> page = new Page<PaperForList>(currenPage, pageSize, totalCount);
+		page.init();
+		query = query("from Paper");
+		query.setFirstResult((currenPage-1) * pageSize);
+		query.setMaxResults(pageSize);
+		List<Paper> papers = query.list();
+		List<PaperForList> paperForLists = EntitiesForListUtil.paperForLists(papers);
+		page.setList(paperForLists);
+		return page;
 	}
 	
 }

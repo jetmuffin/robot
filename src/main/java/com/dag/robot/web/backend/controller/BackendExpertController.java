@@ -77,9 +77,7 @@ public class BackendExpertController {
 	public String list(Model model,String page,String pageSize) {
 		int _page = page == null ? DEFAULT_PAGE : Integer.parseInt(page);
 		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(pageSize);
-
 		Page<ExpertForList> pages = expertDao.page(_pageSize, _page);//起始页为1
-		System.out.println(pages.toString());
 		model.addAttribute("pages", pages);
 		return "backend/expert/list";
 	}
