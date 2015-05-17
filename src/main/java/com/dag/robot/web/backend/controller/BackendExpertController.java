@@ -119,7 +119,28 @@ public class BackendExpertController {
 			String address, String homepage, String experience, String info,
 			String topic, String achievement, String organization,
 			RedirectAttributes redirectAttributes) {
+		add(name, gender, email, address, homepage, experience, info, topic, achievement, organization);
+		redirectAttributes.addFlashAttribute("addMsg", "专家信息添加成功!");
+		return "redirect:list";
+	}
 
+	@RequestMapping(value = "/edit/{expertId}", method = RequestMethod.POST)
+	public String edit(@PathVariable int expertId) {
+		return "index";
+	}
+
+	@RequestMapping(value = "/delete/{expertId}", method = RequestMethod.POST)
+	public String delete(@PathVariable int expertId,
+			RedirectAttributes redirectAttributes) {
+		Expert expert = expertDao.getById(expertId);
+		expertDao.deleteExpert(expert);
+		redirectAttributes.addFlashAttribute("deleteMsg", "专家信息已删除!");
+		return "index";
+	}
+
+	public void add(String name, String gender, String email, String address,
+			String homepage, String experience, String info, String topic,
+			String achievement, String organization) {
 		Expert expert = new Expert(name, gender, email, address, homepage,
 				experience, info, achievement);
 		expertDao.addExpert(expert);
@@ -145,22 +166,6 @@ public class BackendExpertController {
 					relExpertTopicId, expert, topic1);
 			relExpertTopicDao.addRelExeprtTopic(relExpertTopic);
 		}
-		redirectAttributes.addFlashAttribute("addMsg", "专家信息添加成功!");
-		return "redirect:list";
-	}
-
-	@RequestMapping(value = "/edit/{expertId}", method = RequestMethod.POST)
-	public String edit(@PathVariable int expertId) {
-		return "index";
-	}
-
-	@RequestMapping(value = "/delete/{expertId}", method = RequestMethod.POST)
-	public String delete(@PathVariable int expertId,
-			RedirectAttributes redirectAttributes) {
-		Expert expert = expertDao.getById(expertId);
-		expertDao.deleteExpert(expert);
-		redirectAttributes.addFlashAttribute("deleteMsg", "专家信息已删除!");
-		return "index";
 	}
 
 }

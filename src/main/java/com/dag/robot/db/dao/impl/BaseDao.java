@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.dag.robot.entities.Field;
+
 /**
  * 封装的dao基类,所有dao的实现类都应继承该类
  * @author sloriac
@@ -92,5 +94,10 @@ public class BaseDao {
 		@SuppressWarnings("unchecked")
 		List<T> ts = query.list();
 		return ts;
+	}
+
+	public void addField(Field field) {
+		// TODO Auto-generated method stub
+		
 	}
 }
