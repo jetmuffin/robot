@@ -1,5 +1,9 @@
 package com.dag.robot.web.bean;
 
+import java.util.List;
+
+import com.dag.robot.entities.Topic;
+
 public class PaperForList {
 	
 	private Integer paperId;
@@ -7,20 +11,22 @@ public class PaperForList {
 	private String abs;
 	private String keywords;
 	private String journal;
-	private String topic;
+	private List<Topic> topics;
 	public PaperForList() {
 		super();
 	}
 	public PaperForList(Integer paperId, String title, String abs,
-			String keywords, String journal, String topic) {
+			String keywords, String journal, List<Topic> topics) {
 		super();
 		this.paperId = paperId;
 		this.title = title;
 		this.abs = abs;
 		this.keywords = keywords;
 		this.journal = journal;
-		this.topic = topic;
+		this.topics = topics;
 	}
+
+
 	public Integer getPaperId() {
 		return paperId;
 	}
@@ -51,11 +57,10 @@ public class PaperForList {
 	public void setJournal(String journal) {
 		this.journal = journal;
 	}
-	public String getTopic() {
-		return topic;
+	public List<Topic> getTopics() {
+		return topics;
 	}
-	public void setTopic(String topic) {
-		this.topic = topic;
+	public void setTopics(List<Topic> topics) {
+		this.topics = topics;
 	}
-
 }

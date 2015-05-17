@@ -279,5 +279,26 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		return exerptForChecks;
 	}
 
+	@Override
+	public void updateExperience(int expertId, String experience) {
+		Expert expert = getById(expertId);
+		expert.setExperience(experience);
+		updateExpert(expert);
+	}
+
+	@Override
+	public void updateInfo(int expertId, String info) {
+		Expert expert = getById(expertId);
+		expert.setInfo(info);
+		updateExpert(expert);
+	}
+
+	@Override
+	public void updateAchievement(int expertId, String achievement) {
+		Expert expert = getById(expertId);
+		expert.setAchievement(achievement);
+		updateExpert(expert);
+	}
+
 	
 }

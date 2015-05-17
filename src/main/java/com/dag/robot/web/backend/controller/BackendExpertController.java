@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +46,7 @@ import com.dag.robot.web.bean.Page;
 public class BackendExpertController {
 	private static int DEFAULT_PAGE = 1;
 	private static int DEFAULT_PAGE_SIZE = 10;
-	
+
 	@Autowired
 	@Qualifier("expertDao")
 	private ExpertDao expertDao;
@@ -65,7 +66,7 @@ public class BackendExpertController {
 	@Autowired
 	@Qualifier("relExpertTopicDao")
 	private RelExpertTopicDao relExpertTopicDao;
-	
+
 	public BackendExpertController() {
 		super();
 	}
@@ -76,10 +77,11 @@ public class BackendExpertController {
 	}
 
 	@RequestMapping(value = "/experts", method = RequestMethod.GET)
-	public String list(Model model,String page,String pageSize) {
+	public String list(Model model, String page, String pageSize) {
 		int _page = page == null ? DEFAULT_PAGE : Integer.parseInt(page);
-		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(pageSize);
-		Page<ExpertForList> pages = expertDao.page(_pageSize, _page);//起始页为1
+		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer
+				.parseInt(pageSize);
+		Page<ExpertForList> pages = expertDao.page(_pageSize, _page);// 起始页为1
 		model.addAttribute("pages", pages);
 		return "backend/expert/list";
 	}
@@ -88,7 +90,7 @@ public class BackendExpertController {
 	public String input(Model model) {
 		return "backend/expert/import";
 	}
-	
+
 	@RequestMapping(value = "/edit/{expertId}", method = RequestMethod.GET)
 	public String edit(@PathVariable int expertId, Model model) {
 		Expert expert = expertDao.getById(expertId);
@@ -133,7 +135,8 @@ public class BackendExpertController {
 			String address, String homepage, String experience, String info,
 			String topic, String achievement, String organization,
 			RedirectAttributes redirectAttributes) {
-		add(name, gender, email, address, homepage, experience, info, topic, achievement, organization);
+		add(name, gender, email, address, homepage, experience, info, topic,
+				achievement, organization);
 		redirectAttributes.addFlashAttribute("addMsg", "专家信息添加成功!");
 		return "redirect:experts";
 	}
@@ -151,12 +154,40 @@ public class BackendExpertController {
 		redirectAttributes.addFlashAttribute("deleteMsg", "专家信息已删除!");
 		return "index";
 	}
+
 	@RequestMapping(value = "/check/{expertName}.json", method = RequestMethod.GET)
-	public @ResponseBody List<ExpertForCheck> check(@PathVariable String expertName){
+	public @ResponseBody List<ExpertForCheck> check(
+			@PathVariable String expertName) {
 		List<ExpertForCheck> expertForChecks = expertDao.check(expertName);
 		return expertForChecks;
 	}
-	
+
+	@RequestMapping(value = "/editExperience/{expertId}/{experience}", method = RequestMethod.POST)
+	public String editExperience(@PathVariable int expertId,
+			@PathVariable String experience,
+			RedirectAttributes redirectAttributes) {
+		expertDao.updateExperience(expertId, experience);
+		redirectAttributes.addAttribute("EditMsg", "信息修改成功！");
+		return "backend/expert/edit/" + expertId;
+	}
+
+	@RequestMapping(value = "/editAchievement/{expertId}/{info}", method = RequestMethod.POST)
+	public String editInfo(@PathVariable int expertId,
+			@PathVariable String info, RedirectAttributes redirectAttributes) {
+		expertDao.updateInfo(expertId, info);
+		redirectAttributes.addAttribute("EditMsg", "信息修改成功！");
+		return "backend/expert/edit/" + expertId;
+	}
+
+	@RequestMapping(value = "/editInfo/{expertId}/{achievement}", method = RequestMethod.POST)
+	public String editAchievement(@PathVariable int expertId,
+			@PathVariable String achievement,
+			RedirectAttributes redirectAttributes) {
+		expertDao.updateAchievement(expertId, achievement);
+		redirectAttributes.addAttribute("EditMsg", "信息修改成功！");
+		return "backend/expert/edit/" + expertId;
+	}
+
 	public void add(String name, String gender, String email, String address,
 			String homepage, String experience, String info, String topic,
 			String achievement, String organization) {

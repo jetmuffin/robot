@@ -11,10 +11,16 @@ import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.PatentDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
+import com.dag.robot.web.bean.Page;
+import com.dag.robot.web.bean.PaperForList;
+import com.dag.robot.web.bean.PatentForList;
 
 @Controller
 @RequestMapping("/backend/patent")
 public class BackendPatentController {
+	
+	private static int DEFAULT_PAGE = 1;
+	private static int DEFAULT_PAGE_SIZE = 10;
 	@Autowired
 	@Qualifier("expertDao")
 	private ExpertDao expertDao;
@@ -41,8 +47,12 @@ public class BackendPatentController {
 		return "backend/patent/import";
 	}
 	
-	@RequestMapping(value = "/patents/{}", method = RequestMethod.GET)
-	public String list(Model model) {
+	@RequestMapping(value = "/patents", method = RequestMethod.GET)
+	public String list(Model model,String page,String pageSize) {
+		int _page = page == null ? DEFAULT_PAGE : Integer.parseInt(page);
+		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(pageSize);
+		Page<PatentForList> pages = patentDao.page(_pageSize, _page);//起始页为1
+		model.addAttribute("pages", pages);
 		return "backend/patent/list";
 	}
 }

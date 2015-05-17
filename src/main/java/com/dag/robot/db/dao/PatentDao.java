@@ -3,6 +3,9 @@ package com.dag.robot.db.dao;
 import java.util.List;
 
 import com.dag.robot.entities.Patent;
+import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.Page;
+import com.dag.robot.web.bean.PatentForList;
 
 public interface PatentDao {
 	
@@ -36,4 +39,12 @@ public interface PatentDao {
 	 * @param patent 领域信息
 	 */
 	public void deletePatent(Patent patent);
+	
+	/**
+	 * 分页
+	 * @param pageSize 每页条数
+	 * @param currenPage 当前页码
+	 * @return 
+	 */
+	public Page<PatentForList> page(int pageSize, int currenPage);
 }

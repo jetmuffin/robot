@@ -9,11 +9,13 @@ import java.util.Set;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
+import com.dag.robot.entities.Patent;
 import com.dag.robot.entities.RelExpertOrg;
 import com.dag.robot.entities.RelPaperJournal;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.PaperForList;
+import com.dag.robot.web.bean.PatentForList;
 
 public class EntitiesForListUtil {
 	
@@ -58,13 +60,13 @@ public class EntitiesForListUtil {
 			paperForList.setTitle(paper.getTitle());
 			
 			Set<Topic> topics = paper.getTopics();
-			List<String> topicList = new ArrayList<String>();
+			List<Topic> topicList = new ArrayList<Topic>();
 			Iterator<Topic> iterator = topics.iterator();
 			while(iterator.hasNext()){
 				Topic topic = iterator.next();
-				topicList.add(topic.getName());
+				topicList.add(topic);
 			}
-			paperForList.setTopic(StringMergeUtil.stringMerge(topicList));
+			paperForList.setTopics(topicList);
 			
 			Set<RelPaperJournal> relPaperJournals = paper.getRelPaperJournals();
 			List<RelPaperJournal> relPaperJournals2 = new ArrayList<RelPaperJournal>();
@@ -76,6 +78,25 @@ public class EntitiesForListUtil {
 			paperForLists.add(paperForList);
 		}
 		return paperForLists;
+	}
+	
+	public static List<PatentForList> patentForLists(List<Patent> patents){
+		List<PatentForList> patentForLists = new ArrayList<PatentForList>();
+		if(patents.size() == 0 || patents == null)
+			return patentForLists;
+		for(int i = 0; i < patents.size(); i++){
+			PatentForList patentForList = new PatentForList();
+			Patent patent = patents.get(i);
+			patentForList.setPatentId(patent.getPatentId());
+			patentForList.setApplicant(patent.getApplicant());
+			patentForList.setDate(patent.getDate());
+			patentForList.setInventor(patent.getInventor());
+			patentForList.setTitle(patent.getTitle());
+			
+			patentForLists.add(patentForList);
+		}
+		
+		return patentForLists;
 	}
 
 }

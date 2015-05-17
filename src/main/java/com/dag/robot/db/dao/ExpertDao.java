@@ -134,4 +134,25 @@ public interface ExpertDao {
 	 */
 	public List<ExpertForCheck> check(String expertName);
 	
+	/**
+	 * 更新专家履历信息
+	 * @param expertId
+	 * @param experience
+	 * @return 
+	 */
+	public void updateExperience(int expertId, String experience);
+	
+	/**
+	 * 更新专家简介信息
+	 * @param expertId
+	 * @param info
+	 */
+	public void updateInfo(int expertId, String info);
+	
+	/**
+	 * 更新专家成果信息
+	 * @param expertId
+	 * @param achievement
+	 */
+	public void updateAchievement(int expertId, String achievement);
 }
