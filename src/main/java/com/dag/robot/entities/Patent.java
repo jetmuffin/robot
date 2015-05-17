@@ -25,7 +25,7 @@ public class Patent implements java.io.Serializable {
 	private int patentId;
 	private String title;
 	private String abs;
-	private Date date;
+	private String date;
 	private String applicant;
 	private String inventor;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
@@ -34,7 +34,7 @@ public class Patent implements java.io.Serializable {
 	public Patent() {
 	}
 
-	public Patent(String title, String abs, Date date,
+	public Patent(String title, String abs, String date,
 			String applicant, String inventor) {
 		this.title = title;
 		this.abs = abs;
@@ -43,7 +43,7 @@ public class Patent implements java.io.Serializable {
 		this.inventor = inventor;
 	}
 
-	public Patent(String title, String abs, Date date,
+	public Patent(String title, String abs, String date,
 			String applicant, String inventor,
 			Set<RelExpertPatent> relExpertPatents) {
 		this.title = title;
@@ -82,13 +82,12 @@ public class Patent implements java.io.Serializable {
 		this.abs = abs;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date", nullable = false, length = 0)
-	public Date getDate() {
+	public String getDate() {
 		return this.date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

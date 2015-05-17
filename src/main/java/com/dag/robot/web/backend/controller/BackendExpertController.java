@@ -31,11 +31,13 @@ import com.dag.robot.entities.RelExpertOrgId;
 import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.utils.PropertiesUtil;
 import com.dag.robot.utils.StringMergeUtil;
 import com.dag.robot.utils.StringSplitUtil;
 import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.Page;
 
 @Controller
@@ -121,7 +123,8 @@ public class BackendExpertController {
 	@RequestMapping(value = "/{expertId}", method = RequestMethod.GET)
 	public String get(@PathVariable int expertId, Model model) {
 		Expert expert = expertDao.getById(expertId);
-		model.addAttribute("expert", expert);
+		ExpertForShow expertForShow = EntitiesForShowUtil.expertForShow(expert);
+		model.addAttribute("expert", expertForShow);
 		return "backend/expert/show";
 	}
 
