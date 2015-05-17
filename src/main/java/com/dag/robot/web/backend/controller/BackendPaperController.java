@@ -20,9 +20,12 @@ import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.RelExpertPaper;
+import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperForList;
+import com.dag.robot.web.bean.PaperForShow;
 
 @Controller
 @RequestMapping("/backend/paper")
@@ -64,5 +67,13 @@ public class BackendPaperController {
 		Page<PaperForList> pages = paperDao.page(_pageSize, _page);//起始页为1
 		model.addAttribute("pages", pages);
 		return "backend/paper/list";
+	}
+	
+	@RequestMapping(value = "/{paperId}", method = RequestMethod.GET)
+	public String get(@PathVariable int paperId, Model model) {
+		Paper paper = paperDao.getById(paperId);
+		PaperForShow paperForShow = EntitiesForShowUtil.paperForShow(paper);
+		model.addAttribute("paper", paperForShow);
+		return "backend/paper/show";
 	}
 }
