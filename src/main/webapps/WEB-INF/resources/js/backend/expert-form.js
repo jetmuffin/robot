@@ -14,7 +14,9 @@ $(function() {
 		$('input[name="name"]').blur(function() {
 		if ($(this).val().length > 0) {
 			$('#name-notice').html("");
+			var name = $(this).val();
 			duplicateName();
+			nameValidate(name);
 			ok1 = true;
 		} else {
 			$('#name-notice').html(notice_icon+" 姓名不能为空!");
@@ -72,18 +74,27 @@ $(function() {
 		
 	function duplicateName(){
 		$('#input-name').popover({
-			  template:'<div id="duplicate-name" class="popover pop-dialog full" role="tooltip"><div class="arrow" style="top: 50%;"></div><div class="body" style="border:none"><div class="settings"><a href="#" class="close-icon" id="close-popover"><i class="fa fa-remove"></i></a><div class="items"><div class="item"><img src="/robot/resources/img/backend/loading.gif" width=30/> 查询重名专家中...</div></div></div></div></div>',
+			  template:'<div id="duplicate-name" class="popover pop-dialog full" role="tooltip"><div class="arrow" style="top: 50%;"></div><div class="body" style="border:none"><div class="settings"><a href="#" class="close-icon" id="close-popover"><i class="fa fa-remove"></i></a><div class="items" id="duplicate-item"><div class="item"><img src="/robot/resources/img/backend/loading.gif" width=30/> 查询重名专家中...</div></div></div></div></div>',
 		  }).popover('show');		
 	}
 	
 	//TODO
 	function nameValidate(name){
+		var dom = '<div class="item"><i class="fa fa-reorder"></i>';
+                                            
 		$.ajax({
-			type : "POST",
-			url : "#",
-			data : "name=23",
-			success : function(msg) {
-				alert("Data Saved: " + msg);
+			type : "GET",
+			url : "/robot/backend/expert/check/" + name + ".json",
+			success : function(data) {
+				console.log(data);
+				$('#duplicate-item').html('');
+				var appendHtml = '';
+				$(data).each(function(i, item) {
+					console.log(typeof(item.org));
+					item.org = typeof(item.org) == "undefined" ?'未知单位':item.org;
+					appendHtml += dom + item.name + '<code>'+item.org+'</code>'+'</div>';
+				});
+				$('#duplicate-item').html(appendHtml);
 			}
 		});
 	}

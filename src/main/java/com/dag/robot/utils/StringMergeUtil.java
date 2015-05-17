@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class StringMerge {
+public class StringMergeUtil {
 	private static String div = ",";
 
 	public static String stringMerge(List<String> list) {
+		if(list.size() == 0 || list == null)
+			return null;
 		String string = "";
 		Iterator<String> iterator = list.iterator();
 		while(iterator.hasNext()){

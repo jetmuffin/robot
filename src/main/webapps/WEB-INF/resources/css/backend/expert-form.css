@@ -137,6 +137,15 @@
 div.radio input {
 	opacity: 1 !important;
 }
+
+.pop-dialog .settings .items .item .fa-reorder {
+color: #d9e4ee;
+font-size: 18px;
+margin-right: 13px;
+}
+.pop-dialog .settings .items .item code{
+	margin-left:5px;
+}
 /* responsive */
 @media ( max-width : 767px) {
 	.new-user .form-wrapper .container {

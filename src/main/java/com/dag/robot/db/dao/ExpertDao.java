@@ -8,7 +8,7 @@ import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
 import com.dag.robot.entities.Topic;
-import com.dag.robot.web.bean.ExpertBean;
+import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.Page;
 
 public interface ExpertDao {
@@ -131,6 +131,6 @@ public interface ExpertDao {
 	 * @param expertName 专家名字
 	 * @return
 	 */
-	public List<ExpertBean> check(String expertName);
+	public List<ExpertForCheck> check(String expertName);
 	
 }

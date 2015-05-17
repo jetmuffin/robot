@@ -3,7 +3,7 @@ package com.dag.robot.utils;
 import java.util.Arrays;
 import java.util.List;
 
-public class StringSplit {
+public class StringSplitUtil {
 	private static String div = ",";
 
 	public static List<String> stringSplit(String string) {
