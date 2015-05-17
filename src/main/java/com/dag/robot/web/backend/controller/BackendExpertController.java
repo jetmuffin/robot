@@ -112,7 +112,7 @@ public class BackendExpertController {
 		String topicsString = StringMergeUtil.stringMerge(topics);
 		System.out.println(orgsString);
 		System.out.println(topicsString);
-		model.addAttribute("exeprt", expert);
+		model.addAttribute("expert", expert);
 		model.addAttribute("orgnizations", orgsString);
 		model.addAttribute("topics", topicsString);
 		return "backend/expert/edit";

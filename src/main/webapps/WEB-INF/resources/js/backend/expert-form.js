@@ -23,14 +23,6 @@ $(function() {
 		}
 	});
 
-	$('input[name="organization"]').blur(function() {
-		if ($(this).val().length > 0) {
-			$('#org-notice').html("");
-			ok2 = true;
-		} else {
-			$('#org-notice').html(notice_icon+" 单位不能为空!");
-		}
-	});
 	
 	$('input[name="email"]').blur(function() {
 		var email = $(this).val();
@@ -50,7 +42,15 @@ $(function() {
 		}
 	});
 	
+	//sumit the form
 	$('#expert-submit').click(function(){
+		var org = $('#tags-org').val();
+		var topic = $('#tags-topic').val();
+		if(org != '')
+			ok2 = true;
+		$('input[name="organization"').val(org);
+		$('input[name="topic"').val(topic);
+		console.log(org);
 		if(!ok1){
 			$("html,body").animate({scrollTop:0},100);
 			$('#name-notice').html(notice_icon+" 姓名不能为空!");
@@ -61,41 +61,61 @@ $(function() {
 			$('#org-notice').html(notice_icon+" 单位不能为空!");
 			return;
 		}
-		var address = $('input[name="city"]').val() + $('input[name="street"]').val()
-		+ $('input[name="province"]').val();
+		var address = $('input[name="city"]').val() +'#'+ $('input[name="street"]').val()
+		+'#'+ $('input[name="province"]').val();
 		$('input[name="address"]').val(address);
+
 		$('#expert-form').submit();
 	});
 	
-	//popover
-	$(function () {
-
-		});
-		
 	function duplicateName(){
 		$('#input-name').popover({
 			  template:'<div id="duplicate-name" class="popover pop-dialog full" role="tooltip"><div class="arrow" style="top: 50%;"></div><div class="body" style="border:none"><div class="settings"><a href="#" class="close-icon" id="close-popover"><i class="fa fa-remove"></i></a><div class="items" id="duplicate-item"><div class="item"><img src="/robot/resources/img/backend/loading.gif" width=30/> 查询重名专家中...</div></div></div></div></div>',
 		  }).popover('show');		
 	}
 	
-	//TODO
+	//check whether the name is duplicate or not
 	function nameValidate(name){
-		var dom = '<div class="item"><i class="fa fa-reorder"></i>';
-                                            
 		$.ajax({
 			type : "GET",
 			url : "/robot/backend/expert/check/" + name + ".json",
 			success : function(data) {
-				console.log(data);
+				
+				if(data.length == 0){
+					$('#input-name').popover('hide');
+				}
 				$('#duplicate-item').html('');
 				var appendHtml = '';
 				$(data).each(function(i, item) {
 					console.log(typeof(item.org));
+
 					item.org = typeof(item.org) == "undefined" ?'未知单位':item.org;
-					appendHtml += dom + item.name + '<code>'+item.org+'</code>'+'</div>';
+					appendHtml += '<a href="/robot/backend/expert/edit/'+item.expertId+
+					'"><div class="item"><i class="fa fa-reorder"></i>'
+						+ item.name + '<code>'+item.org+'</code>'+'</div></a>';
 				});
 				$('#duplicate-item').html(appendHtml);
 			}
 		});
 	}
+	
+	
+	//tagsinput
+	$('#tags-org').tagsinput({
+		  tagClass: 'big label label-info',
+		});
+	
+	$('#tags-topic').tagsinput({
+		tagClass: 'big label label-info'
+	});
+	
+	//address to street-city-province
+	var address = $('input[name="address"]').val();
+	var addr = address.split('#');
+	if(addr.length == 3){
+		$('input[name="street"]').val(addr[0]);
+		$('input[name="city"]').val(addr[1]);
+		$('input[name="province"]').val(addr[2]);
+	}
+	
 });

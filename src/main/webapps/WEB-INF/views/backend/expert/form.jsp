@@ -10,7 +10,6 @@
 <div class="span12 field-box">
 	<label>性别:</label>
 	<c:choose>
-
 		<c:when test="${empty expert.gender or expert.gender eq 'male'}">
 			<div class="span8">
 				<label class="radio">
@@ -43,8 +42,8 @@
 </div>
 <div class="span12 field-box ">
 	<label>单位:</label> 
-	<input value="${organization}" class="span9"
-		name="organization" type="text" /><span class="charactersleft">若属于多个单位,请以英文逗号隔开</span>
+	<input id='tags-org' name="organization" value="${orgnizations}" type='text' class='tags span9'></p>
+		<span class="charactersleft">输入单位后,按","生成标签</span>
 	<div class="span8 notice" id="org-notice"></div>
 </div>
 <div class="span12 field-box">
@@ -63,7 +62,7 @@
 		<input class="span12" type="text" placeholder="街道地址" name="street" />
 		<input class="span12 small" type="text" placeholder="市" name="city" />
 		<input class="span12 small" type="text" placeholder="省"
-			name="province" /> <input type="text" name="address"
+			name="province" /> <input type="text" name="address" value="${expert.address}"
 			style="display: none" />
 	</div>
 </div>
@@ -74,8 +73,9 @@
 	</div>
 </div>
 <div class="span12 field-box ">
-	<label>研究方向:</label> <input class="span9" type="text" name="topic" /> <span
-		class="charactersleft">若有多个方向,请以英文逗号隔开</span>
+	<label>研究方向:</label> 
+	<input id='tags-topic' class="tags span9" type="text" name="topic" value="${topics}"/> <span
+		class="charactersleft">输入研究方向后,按","生成标签</span>
 </div>
 <div class="field-box">
 	<label>个人履历:</label>

@@ -14,7 +14,7 @@
 }
 
 .new-user .form-wrapper .field-box {
-	position: relative ;
+	position: relative;
 	margin-bottom: 25px;
 	margin-left: 0;
 	float: left;
@@ -24,8 +24,8 @@
 .new-user .form-wrapper .field-box .notice {
 	position: absolute;
 	left: 120px;
-	color:#C73131;
-	font-weight:bold;
+	color: #C73131;
+	font-weight: bold;
 }
 
 .new-user .form-wrapper label {
@@ -139,13 +139,51 @@ div.radio input {
 }
 
 .pop-dialog .settings .items .item .fa-reorder {
-color: #d9e4ee;
-font-size: 18px;
-margin-right: 13px;
+	color: #d9e4ee;
+	font-size: 18px;
+	margin-right: 13px;
 }
-.pop-dialog .settings .items .item code{
-	margin-left:5px;
+
+.pop-dialog .settings .items .item code {
+	margin-left: 5px;
 }
+
+div.tagsinput input {
+	width: 80px;
+	margin: 0px;
+	font-family: helvetica;
+	font-size: 13px;
+	border: 1px solid transparent;
+	padding: 5px;
+	background: transparent;
+	color: #000;
+	outline: 0px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+div.tagsinput span.tag {
+	cursor: pointer;
+	padding: 7px 14px;
+	-webkit-transition: all .1s linear;
+	-moz-transition: all .1s linear;
+	transition: all .1s linear;
+	background: #fff;
+	border: 1px solid #d0dde9;
+	color: #777e86;
+	font-size: 12px;
+	margin-right: 5px!important;
+	float: left;
+	font-weight: 500;
+	border-radius: 4px;
+	text-shadow: none;
+	box-shadow: none;
+	background-image: none;
+	display: block;
+margin-bottom:5px;
+	margin: 0;
+	line-height: 15px;
+	vertical-align: middle;
+	}
 /* responsive */
 @media ( max-width : 767px) {
 	.new-user .form-wrapper .container {

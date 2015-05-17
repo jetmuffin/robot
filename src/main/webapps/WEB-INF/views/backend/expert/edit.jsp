@@ -16,6 +16,7 @@
 <!-- libraries -->
 <link href="/robot/resources/font/css/font-awesome.min.css"
 	type="text/css" rel="stylesheet" />
+		<link rel="stylesheet" href="/robot/resources/plugin/tagsinput/bootstrap-tagsinput.css" />
 	<link href="/robot/resources/plugin/uniform/css/uniform.default.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="/robot/resources/plugin/wysihtml5/bootstrap-wysihtml5.css" />
 <!-- global styles -->
@@ -38,8 +39,6 @@
 	<jsp:include page="../common/sidebar.jsp"></jsp:include>
 	<!-- main container -->
 	<div class="content">
-
-
 		<div class="container-fluid">
 			<div id="pad-wrapper" class="new-user">
 				<div class="row-fluid header">
@@ -81,6 +80,7 @@
 	<script src="/robot/resources/js/bootstrap/bootstrap.min.js"></script>
 	<script src="/robot/resources/js/backend/common.js"></script>
 	<script src="/robot/resources/plugin/uniform/js/jquery.uniform.min.js"></script>
+		<script src="/robot/resources/plugin/tagsinput/bootstrap-tagsinput.min.js"></script>
 	<!-- this page specific scripts -->
 	<script src="/robot/resources/js/backend/expert-form.js"></script>
 </body>

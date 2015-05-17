@@ -41,11 +41,11 @@
 						<h3 class="name">${expert.name}</h3>
 						<span class="area">南京大学</span>
 					</div>
-					<a class="btn-flat icon pull-right delete-user"
+					<a class="btn-flat icon pull-right delete-user" href="/robot/backend/expert/delete/${expert.expertId}"
 						data-toggle="tooltip" title="Delete user" data-placement="top">
 						<i class="fa fa-trash"></i>
 					</a> 
-					<a href="/robot/backend/expert/1/edit" class="btn-flat icon large pull-right edit"> 编辑信息 </a>
+					<a href="/robot/backend/expert/edit/${expert.expertId}" class="btn-flat icon large pull-right edit"> 编辑信息 </a>
 				</div>
 
 				<div class="row-fluid profile">
@@ -117,7 +117,7 @@
 					<div class="span3 address pull-right">
 						<h6>地址</h6>
 						<ul>
-							<li><c:if test="${empty expert.address or expert.address eq ''}">暂未收录</c:if>${expert.address}</li>
+							<li id="expert-address"><c:if test="${empty expert.address or expert.address eq ''}">暂未收录</c:if>${expert.address}</li>
 							<li class="ico-li"><i class="ico-mail"></i> <a href="#">
 							<c:if test="${empty expert.email or expert.email eq ''}">暂未收录</c:if>${expert.email}
 							</a>

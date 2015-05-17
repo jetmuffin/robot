@@ -102,7 +102,7 @@
 						</a>
 					</div>
 				</div>
-
+			
 				<h5>系统共有${pages.totalCount}个专家</h5>
 				<!-- Users table -->
 				<div class="row-fluid table">
@@ -125,7 +125,7 @@
 							 <td>${expert.expertId}</td>
 								<td>
 								<img src="/robot/resources/img/backend/user-thumb.png" class="img-circle avatar hidden-phone" /> 
-								<a href="/robot/backend/expert/${expert.expertId}" class="name">${expert.name}</a> <span class="subtext">南京大学</span></td>
+								<a href="/robot/backend/expert/${expert.expertId}" class="name">${expert.name}</a> <span class="subtext list-org">${expert.org}</span></td>
 								<td>${expert.gender}</td>
 								<td>${expert.paperNum}</td>
 								<td>${expert.patentNum}</td>
@@ -189,5 +189,6 @@
 	<script src="/robot/resources/js/jquery/jquery-ui-1.10.2.custom.min.js"></script>
 	<script src="/robot/resources/js/backend/common.js"></script>
 	<!-- this page specific scripts -->
+	<script src="/robot/resources/js/backend/expert-list.js"></script>
 </body>
 </html>
