@@ -10,6 +10,8 @@ import com.dag.robot.db.dao.PaperDao;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.RelExpertPaper;
 import com.dag.robot.entities.RelPaperJournal;
+import com.dag.robot.web.bean.Page;
+import com.dag.robot.web.bean.PaperForList;
 
 @Repository("paperDao")
 public class PaperDaoImpl extends BaseDao implements PaperDao {
@@ -54,6 +56,12 @@ public class PaperDaoImpl extends BaseDao implements PaperDao {
 		}
 		
 		delete(paper);
+	}
+
+	@Override
+	public Page<PaperForList> page(int pageSize, int currenPage) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

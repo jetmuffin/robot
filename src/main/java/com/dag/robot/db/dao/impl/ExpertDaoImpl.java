@@ -256,15 +256,15 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	@Override
 	public List<ExpertForCheck> check(String expertName) {
 		List<Expert> experts = getByName(expertName);
-		List<ExpertForCheck> expertBeans = new ArrayList<ExpertForCheck>();
+		List<ExpertForCheck> exerptForChecks = new ArrayList<ExpertForCheck>();
 		if(experts.size() == 0)
-			return expertBeans;//表示没有重名
+			return exerptForChecks;//表示没有重名
 		
 		for(int i = 0; i < experts.size(); i++){
 			Expert expert = experts.get(i);
-			ExpertForCheck expertBean = new ExpertForCheck();
-			expertBean.setName(expert.getName());
-			
+			ExpertForCheck exerptForCheck = new ExpertForCheck();
+			exerptForCheck.setName(expert.getName());
+			exerptForCheck.setExpertId(expert.getExpertId());
 			Set<RelExpertOrg> relExpertOrgs = expert.getRelExpertOrgs();
 			List<String> orgnizations = new ArrayList<String>();
 			Iterator<RelExpertOrg> iterator = relExpertOrgs.iterator();
@@ -273,10 +273,10 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 				Orgnization orgnization = relExpertOrg.getOrgnization();
 				orgnizations.add(orgnization.getName());
 			}
-			expertBean.setOrg(StringMergeUtil.stringMerge(orgnizations));
-			expertBeans.add(expertBean);
+			exerptForCheck.setOrg(StringMergeUtil.stringMerge(orgnizations));
+			exerptForChecks.add(exerptForCheck);
 		}
-		return expertBeans;
+		return exerptForChecks;
 	}
 
 	

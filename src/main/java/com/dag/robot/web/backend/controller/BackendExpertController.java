@@ -152,8 +152,8 @@ public class BackendExpertController {
 	}
 	@RequestMapping(value = "/check/{expertName}.json", method = RequestMethod.GET)
 	public @ResponseBody List<ExpertForCheck> check(@PathVariable String expertName){
-		List<ExpertForCheck> expertBeans = expertDao.check(expertName);
-		return expertBeans;
+		List<ExpertForCheck> expertForChecks = expertDao.check(expertName);
+		return expertForChecks;
 	}
 	
 	public void add(String name, String gender, String email, String address,

@@ -3,6 +3,9 @@ package com.dag.robot.db.dao;
 import java.util.List;
 
 import com.dag.robot.entities.Paper;
+import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.Page;
+import com.dag.robot.web.bean.PaperForList;
 
 public interface PaperDao {
 	
@@ -36,4 +39,12 @@ public interface PaperDao {
 	 * @param Paper 领域信息
 	 */
 	public void deletePaper(Paper paper);
+	
+	/**
+	 * 分页
+	 * @param pageSize 每页条数
+	 * @param currenPage 当前页码
+	 * @return
+	 */
+	public Page<PaperForList> page(int pageSize, int currenPage);
 }
