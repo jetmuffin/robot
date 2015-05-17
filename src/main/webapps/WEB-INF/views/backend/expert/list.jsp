@@ -185,8 +185,8 @@
 								<li><a href="/robot/backend/expert/experts?page=${param.page-1}">&#8249;</a></li>
 								<li><a href="/robot/backend/expert/experts?page=${param.page-2}">${param.page-2}</a></li>
 								<li><a href="/robot/backend/expert/experts?page=${param.page-1}">${param.page-1}</a></li>
-								<li><a class="active" href="/robot/backend/expert/experts?page=${param.page}">${param.page}</a></li>
-								<li><a href="#">${param.page+1}</a></li>
+								<li><a class="active" href="#">${param.page}</a></li>
+								<li><a href="/robot/backend/expert/experts?page=${param.page+1}">${param.page+1}</a></li>
 								<li><a href="/robot/backend/expert/experts?page=${param.page+2}">${param.page+2}</a></li>
 								<li><a href="/robot/backend/expert/experts?page=${param.page+1}">&#8250;</a></li>
 							</ul>									

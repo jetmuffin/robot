@@ -88,6 +88,6 @@
    </div>
 </div>
 <div class="span11 field-box actions">
-	<input type="submit" id="expert-submit" class="btn-glow primary" value="提交" /> <span>OR</span>
+	<input type="button" id="expert-submit" class="btn-glow primary" value="提交" /> <span>OR</span>
 	<input type="reset" value="取消" class="reset" />
 </div>

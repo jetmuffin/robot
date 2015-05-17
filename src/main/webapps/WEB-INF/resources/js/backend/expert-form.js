@@ -7,6 +7,7 @@ $(function() {
 	// add uniform plugin styles to html elements
 	$("input:checkbox, input:radio").uniform();
 
+	//form validate
 	var ok1 = false;
 	var ok2 = false;
 		$('input[name="name"]').blur(function() {
@@ -61,4 +62,16 @@ $(function() {
 		$('input[name="address"]').val(address);
 		$('#expert-form').submit();
 	});
+	
+	//TODO
+	function nameValidate(name){
+		$.ajax({
+			type : "POST",
+			url : "#",
+			data : "name=23",
+			success : function(msg) {
+				alert("Data Saved: " + msg);
+			}
+		});
+	}
 });
