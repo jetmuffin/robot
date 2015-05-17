@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,7 +39,22 @@
 	<jsp:include page="../common/sidebar.jsp"></jsp:include>
 	<!-- main container -->
 	<div class="content">
-
+		<c:if test="${not empty message}">
+			<c:choose>
+				<c:when test="${message.type eq 'info'}">
+					<div class="alert alert-info">
+						<i class="fa fa-exclamation-circle"></i>
+						${message.content}
+					</div>
+				</c:when>
+				<c:when test="${message.type eq 'error'}">
+					<div class="alert alert-error">
+						<i class="fa fa-exclamation-triangle "></i>
+						${message.content}
+					</div>
+				</c:when>
+			</c:choose>
+		</c:if>
 		<div class="container-fluid">
 			<div id="pad-wrapper" class="users-list">
 				<div class="row-fluid header">
@@ -63,17 +79,17 @@
 									<p class="title">选择查找条件:</p>
 									<div class="form">
 										<select>
-											<option />姓名
-											<option />性别
-											<option />组织
-											<option />Signed up
-											<option />Last seen
+											<option>姓名</option>
+											<option>性别</option>
+											<option>组织</option>
+											<option>Signed up</option>
+											<option>Last seen</option>
 										</select> <select>
-											<option />is equal to
-											<option />is not equal to
-											<option />is greater than
-											<option />starts with
-											<option />contains
+											<option>is equal to</option>
+											<option>is not equal to</option>
+											<option>is greater than</option>
+											<option>starts with</option>
+											<option>contains</option>
 										</select> <input type="text" /> <a class="btn-flat small">Add
 											filter</a>
 									</div>
@@ -101,41 +117,82 @@
 							</tr>
 						</thead>
 						<tbody>
+							
+							<c:forEach items="${experts}" var="expert">
 							<!-- row -->
-							<tr class="first">
+							 <tr class="first">
 								<td>
 								<img src="/robot/resources/img/backend/user-thumb.png" class="img-circle avatar hidden-phone" /> 
-								<a href="/robot/backend/expert/1" class="name">周志华</a> <span class="subtext">南京大学</span></td>
-								<td>男</td>
-								<td>33</td>
-								<td>22</td>
-								<td class="align-right"><a href="#">alejandra@canvas.com</a>
+								<a href="/robot/backend/expert/${expert.expertId}" class="name">周志华</a> <span class="subtext">南京大学</span></td>
+								<td>${expert.gender}</td>
+								<td>${expert.paperNum}</td>
+								<td>${expert.patentNum}</td>
+								<td class="align-right">
+								<c:when test="${empty expert.email}">
+									<a href="/robot/backend/expert/${expert.expertId}">暂未记录Email</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/robot/backend/expert/${expert.expertId}">${expert.email}</a>
+								</c:otherwise>
 								</td>
 							</tr>
-							<!-- row -->
-							<tr class="first">
-								<td>
-								<img src="/robot/resources/img/backend/user-thumb.png" class="img-circle avatar hidden-phone" />
-								<a href="/robot/backend/expert/1" class="name">姚期智</a> <span class="subtext">清华大学</span></td>
-								<td>男</td>
-								<td>33</td>
-								<td>22</td>
-								<td class="align-right"><a href="#">alejandra@canvas.com</a>
-								</td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 				<div class="pagination pull-right">
-					<ul>
-						<li><a href="#">&#8249;</a></li>
-						<li><a class="active" href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">&#8250;</a></li>
-					</ul>
+				<c:choose>
+					<c:when test="${empty param.page or param.page lt 5}">
+							<ul>
+								<c:choose>
+									<c:when test="${param.page eq 1}">	
+									<li class="disabled"><a href="#">&#8249;</a></li>
+										<li ><a class="active" href="#">1</a></li>
+									</c:when>
+									<c:otherwise>
+									
+									<li><a href="/robot/backend/expert/experts?page=${param.page-1}">&#8249;</a></li>
+									<li><a href="/robot/backend/expert/experts?page=1">1</a></li>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${param.page eq 2}">
+										<li ><a class="active" href="#">2</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="/robot/backend/expert/experts?page=2">2</a></li></c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${param.page eq 3}">
+										<li><a class="active" href="#">3</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="/robot/backend/expert/experts?page=3">3</a></li></c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${param.page eq 4}">
+										<li><a class="active" href="#">4</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="/robot/backend/expert/experts?page=4">4</a></li></c:otherwise>
+								</c:choose>
+								<li><a href="/robot/backend/expert/experts?page=5">5</a></li>
+								<li><a href="/robot/backend/expert/experts?page=${param.page+1}">&#8250;</a></li>
+							</ul>
+						</c:when>
+						<c:otherwise>
+							<ul>
+								<li><a href="/robot/backend/expert/experts?page=${param.page-1}">&#8249;</a></li>
+								<li><a href="/robot/backend/expert/experts?page=${param.page-2}">${param.page-2}</a></li>
+								<li><a href="/robot/backend/expert/experts?page=${param.page-1}">${param.page-1}</a></li>
+								<li><a class="active" href="#">${param.page}</a></li>
+								<li><a href="/robot/backend/expert/experts?page=${param.page+1}">${param.page+1}</a></li>
+								<li><a href="/robot/backend/expert/experts?page=${param.page+2}">${param.page+2}</a></li>
+								<li><a href="/robot/backend/expert/experts?page=${param.page+1}">&#8250;</a></li>
+							</ul>									
+						</c:otherwise>
+				</c:choose>
+				
 				</div>
 				<!-- end users table -->
 			</div>

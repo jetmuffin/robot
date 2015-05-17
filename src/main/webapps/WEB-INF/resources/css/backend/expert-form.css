@@ -23,8 +23,8 @@
 
 .new-user .form-wrapper .field-box .notice {
 	position: absolute;
-	left: 15%;
-	color:red;
+	left: 120px;
+	color:#C73131;
 	font-weight:bold;
 }
 
@@ -78,7 +78,7 @@
 	margin-top: 27px;
 }
 
-.new-user .textarea span.charactersleft {
+.new-user  span.charactersleft {
 	display: block;
 	color: #9ba0a5;
 	text-align: left;

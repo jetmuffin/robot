@@ -22,6 +22,7 @@
                 <ul class="submenu">
                     <li><a href="/robot/backend/expert/experts">专家列表</a></li>
                     <li><a href="/robot/backend/expert/add">增加专家</a></li>
+                    <li><a href="/robot/backend/expert/import">文件导入</a></li>
                 </ul>                
             </li>
             <li>

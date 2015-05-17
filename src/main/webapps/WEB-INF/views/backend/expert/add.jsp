@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,6 +30,7 @@
 <link rel="stylesheet"
 	href="/robot/resources/css/backend/expert-form.css" type="text/css"
 	media="screen" />
+	<link rel="stylesheet" href="/robot/resources/css/backend/compiled/ui-elements.css" type="text/css" media="screen">
 </head>
 <body>
 	<!-- navbar -->
@@ -84,8 +85,6 @@
 	<script src="/robot/resources/js/bootstrap/bootstrap.min.js"></script>
 	<script src="/robot/resources/js/backend/common.js"></script>
 	<script src="/robot/resources/plugin/uniform/js/jquery.uniform.min.js"></script>
-	<script src="/robot/resources/plugin/wysihtml5/wysihtml5-0.3.0.js"></script>
-	<script src="/robot/resources/plugin/wysihtml5/bootstrap-wysihtml5-0.0.2.js"></script>
 	<!-- this page specific scripts -->
 	<script src="/robot/resources/js/backend/expert-form.js"></script>
 </body>
