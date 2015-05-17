@@ -39,7 +39,9 @@
 					<div class="span8">
 						<img src="/robot/resources/img/backend/user-thumb.png" class="avatar img-circle" />
 						<h3 class="name">${expert.name}</h3>
-						<span class="area">南京大学</span>
+						<c:forEach items="${expert.orgnizations}" var="organization">
+							<span class="area">${organization.name}</span>
+						</c:forEach>
 					</div>
 					<a class="btn-flat icon pull-right delete-user" href="/robot/backend/expert/delete/${expert.expertId}"
 						data-toggle="tooltip" title="Delete user" data-placement="top">
@@ -54,24 +56,28 @@
 						<div class="profile-box">
 							<!-- biography -->
 							<div class="span12 section">
-								<h6>个人简介</h6><p>
+								<h6>个人简介</h6><a href="" class="edit" type="button" data-toggle="modal" data-target="#info-modal"><i class="fa fa-edit"></i>编辑</a>
+								<p>
 								<c:if test="${empty expert.info or expert.info eq ''}">暂未收录</c:if>
 								${expert.info}</p>
 							</div>
 
-							<h6>个人履历</h6><p>
+							<h6>个人履历</h6><a href="" class="edit" type="button" data-toggle="modal" data-target="#experience-modal"><i class="fa fa-edit"></i>编辑</a>
+							<p>
 							<c:if test="${empty expert.experience or expert.experience eq ''}">暂未收录</c:if>
 								${expert.experience}</p>
 							<br />
 							
 							<h6>研究方向</h6>
 							<ul class="area-labels">
-								<li><label class="btn-flat white">机器学习</label></li>
-								<li><label class="btn-flat white">数据挖掘</label></li>
+								<c:forEach items="${expert.topics}" var="topic">
+								<li><label class="btn-flat white">${topic.name}</label></li>
+								</c:forEach>
 							</ul>
 							<br/>
 							
-							<h6>科研成果</h6><p>
+							<h6>科研成果</h6><a href="" class="edit" type="button" data-toggle="modal" data-target="#achievement-modal"><i class="fa fa-edit"></i>编辑</a>
+							<p>
 								<c:if test="${empty expert.achievement or expert.achievement eq ''}">暂未收录</c:if>
 								${expert.achievement}</p>
 							<br />							
@@ -130,6 +136,69 @@
 	</div>
 	<!-- end main container -->
 
+<!-- modal -->
+<div class="modal fade" id="info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="info-label">编辑信息</h4>
+      </div>
+      <div class="modal-body">
+       				<form action="/robot/backend/expert/editInfo/${expertId}" method="post">
+       								<label for="info-input">个人简介</label>
+       								<textarea  name="info" id="info-input" style="width:95%;" rows="6"></textarea>
+       				</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal -->
+<div class="modal fade" id="experience-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="experience-modal">编辑信息</h4>
+      </div>
+      <div class="modal-body">
+       				<form action="/robot/backend/expert/editExperience/${expertId}" method="post">
+       								<label for="experience-input">个人履历</label>
+       								<textarea  name="experience" id="info-input" style="width:95%;" rows="6"></textarea>
+       				</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal -->
+<div class="modal fade" id="achievement-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="achievement-modal">编辑信息</h4>
+      </div>
+      <div class="modal-body">
+       				<form action="/robot/backend/expert/editAchievement/${expertId}" method="post">
+       								<label for="achievement-input">研究成果</label>
+       								<textarea  name="achievement" id="info-input" style="width:95%;" rows="6"></textarea>
+       				</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
 	<!-- scripts -->
 	<script src="/robot/resources/js/jquery/jquery-2.0.0.min.js"></script>
 	<script src="/robot/resources/js/bootstrap/bootstrap.min.js"></script>

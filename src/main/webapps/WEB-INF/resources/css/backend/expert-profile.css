@@ -56,6 +56,12 @@
 .user-profile .profile .bio h6 {
 	font-weight: 600;
 	font-size: 14px;
+	display: inline-block;
+}
+
+.user-profile .profile .bio .edit{
+	display:inline-block;
+	margin-left:10px;
 }
 
 .user-profile .profile .bio p {
