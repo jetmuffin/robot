@@ -28,8 +28,6 @@ import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.db.dao.impl.RelExpertOrgDaoImpl;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Orgnization;
-import com.dag.robot.entities.RelExpertOrg;
-import com.dag.robot.entities.RelExpertOrgId;
 import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
@@ -187,18 +185,10 @@ public class BackendExpertController {
 			String achievement, String organization) {
 		Expert expert = new Expert(name, gender, email, address, homepage,
 				experience, info, achievement);
+		Orgnization orgnization = new Orgnization(organization);
+		expert.setOrgnization(orgnization);
+		
 		expertDao.addExpert(expert);
-
-		List<String> orgs = StringSplitUtil.stringSplit(organization);
-		for (int i = 0; i < orgs.size(); i++) {
-			Orgnization orgnization = new Orgnization(orgs.get(i));
-			orgnizationDao.addOrgnization(orgnization);
-			RelExpertOrgId relExpertOrgId = new RelExpertOrgId(
-					expert.getExpertId(), orgnization.getOrgId());
-			RelExpertOrg relExpertOrg = new RelExpertOrg(relExpertOrgId,
-					expert, orgnization);
-			relExpertOrgDao.addRelExeprtOrg(relExpertOrg);
-		}
 
 		List<String> topics = StringSplitUtil.stringSplit(topic);
 		for (int i = 0; i < topics.size(); i++) {
@@ -211,6 +201,5 @@ public class BackendExpertController {
 			relExpertTopicDao.addRelExeprtTopic(relExpertTopic);
 		}
 	}
-
 
 }

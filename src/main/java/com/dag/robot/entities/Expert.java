@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
+// Generated 2015-5-18 21:02:56 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -42,7 +42,7 @@ public class Expert implements java.io.Serializable {
 	private String info;
 	private String achievement;
 	private String url;
-	private int rate;
+	private Integer rate;
 	private String job;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
 			0);
@@ -68,7 +68,7 @@ public class Expert implements java.io.Serializable {
 			String email, String address, String homepage, int paperNum,
 			int patentNum, int paperReferedNum, String prize,
 			String experience, String info, String achievement, String url,
-			int rate, String job, Set<RelExpertPatent> relExpertPatents,
+			Integer rate, String job, Set<RelExpertPatent> relExpertPatents,
 			Set<RelExpertTopic> relExpertTopics,
 			Set<RelExpertField> relExpertFields, Set<User> users,
 			Set<Activity> activities, Set<RelExpertPaper> relExpertPapers) {
@@ -97,8 +97,8 @@ public class Expert implements java.io.Serializable {
 	}
 
 	public Expert(String name, String gender, String email, String address,
-			String homepage, String experience, String info,
-			String achievement) {
+			String homepage, String experience, String info, String achievement) {
+		super();
 		this.name = name;
 		this.gender = gender;
 		this.email = email;
@@ -248,11 +248,11 @@ public class Expert implements java.io.Serializable {
 	}
 
 	@Column(name = "rate")
-	public int getRate() {
+	public Integer getRate() {
 		return this.rate;
 	}
 
-	public void setRate(int rate) {
+	public void setRate(Integer rate) {
 		this.rate = rate;
 	}
 
