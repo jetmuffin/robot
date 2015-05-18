@@ -9,6 +9,9 @@ $(function(){
 		  tagClass: 'big label label-info',
 		});
 	
+	//datepicker
+	$("#datepicker").datepicker();
+	
 	//add author
 	var author_num = 1;
 	$('#add-author').click(function(){
@@ -52,19 +55,24 @@ $(function(){
 	$('#paper-submit').click(function(){
 		if(!flag1){
 			$('#title-notice').html(notice_icon+" 标题不能为空!");
+			$("html,body").animate({scrollTop:0},100);
 			return;
 		}
-		var author = $('#tags-author').val();
+		var author = $('#author-input').val();
+		console.log(author);
 		if(author.length == 0){
 			$('#author-notice').html(notice_icon+" 作者不能为空!");
+			$("html,body").animate({scrollTop:0},100);
 			return;
 		}
 		if(!flag2){
 			$('#journal-notice').html(notice_icon+" 期刊不能为空!");
+			$("html,body").animate({scrollTop:0},100);
 			return;
 		}
 		if(!flag3){
 			$('#issue-notice').html(notice_icon+" 刊号不能为空!");
+			$("html,body").animate({scrollTop:0},100);
 			return;
 		}
 		var keywords = $('#tags-keywords').val();
@@ -76,6 +84,10 @@ $(function(){
 		$('#paper-form').submit();
 	});
 	
+	//change type
+	 $("input[name=type]").change(function(){
+		  changeType(this);
+		 });
 });
 
 //check whether the name is duplicate or not
@@ -108,4 +120,15 @@ function duplicateName(selector){
 		  template:'<div id="duplicate-name" class="popover pop-dialog full" role="tooltip"><div class="arrow" style="top: 50%;"></div><div class="body" style="border:none"><div class="settings"><a href="#" class="close-icon" id="close-popover"><i class="fa fa-remove"></i></a><div class="items" id="duplicate-item"><div class="item"><img src="/robot/resources/img/backend/loading.gif" width=30/> 查询重名专家中...</div></div></div></div></div>',
 	  }).popover('show');	
 	nameValidate($(selector).val());
+}
+
+function changeType(selector){
+	var type = $(selector).val();
+	if(type == "journal"){
+		$('#journal-info').show();
+		$('#conference-info').hide();
+	} else {
+		$('#journal-info').hide();
+		$('#conference-info').show();
+	}
 }

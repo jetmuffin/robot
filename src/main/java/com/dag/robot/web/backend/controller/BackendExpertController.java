@@ -171,7 +171,7 @@ public class BackendExpertController {
 		return "redirect:/backend/expert/" + expertId;
 	}
 
-	@RequestMapping(value = "/editAchievement/{expertId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editInfo/{expertId}", method = RequestMethod.POST)
 	public String editInfo(@PathVariable int expertId,
 			String info, RedirectAttributes redirectAttributes) {
 		expertDao.updateInfo(expertId, info);
@@ -179,7 +179,7 @@ public class BackendExpertController {
 		return "redirect:/backend/expert/" + expertId;
 	}
 
-	@RequestMapping(value = "/editInfo/{expertId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editAchievement/{expertId}", method = RequestMethod.POST)
 	public String editAchievement(@PathVariable int expertId,
 			String achievement,
 			RedirectAttributes redirectAttributes) {

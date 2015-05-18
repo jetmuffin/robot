@@ -44,9 +44,9 @@
                     <i class="fa fa-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="/robot/backend/paper/papers">专利列表</a></li>
-                    <li><a href="/robot/backend/paper/add">添加专利</a></li>
-                    <li><a href="/robot/backend/paper/import">导入专利</a></li>
+                    <li><a href="/robot/backend/patent/patents">专利列表</a></li>
+                    <li><a href="/robot/backend/patent/add">添加专利</a></li>
+                    <li><a href="/robot/backend/patent/import">导入专利</a></li>
                 </ul>
             </li>            
             <li>

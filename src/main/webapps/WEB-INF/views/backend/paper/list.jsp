@@ -125,7 +125,6 @@
 								<td>
 								<a href="/robot/backend/paper/${paper.paperId}" class="name">${paper.title}</a> </td>
 								<td>${paper.keywords}</td>
-								<td>${paper.topic}</td>
 							</tr>
 							</c:forEach>
 						</tbody>

@@ -27,6 +27,13 @@
 <div class="span8 notice" id="author-notice"></div>
 
 <div class="field-box">
+	<label>单位:</label>
+	<div class="span9">
+		<input type="text" name="organization" class="span12 " />
+	</div>
+</div>
+
+<div class="field-box">
 	<label>摘要:</label>
 	<div class="span9">
 		<textarea name="abs" class="span12 " rows="6"></textarea>
@@ -40,6 +47,15 @@
 	<span class="charactersleft">输入关键词后,按","生成标签</span>
 </div>
 
+
+
+<div class="span12 field-box">
+	<label>文献类型:</label>
+	<input type="radio" name="type" value="journal" checked/>期刊
+	<input type="radio" name="type" value="conference"/>会议
+</div>
+
+<div id="journal-info">
 <div class="span12 field-box">
 	<label>期刊:</label> <input value="${paper.journal}" name="journal"
 		class="span9" type="text" id="input-journal" />
@@ -51,9 +67,24 @@
 		type="text" id="input-issue" />
 	<div class="span8 notice" id="issue-notice"></div>
 </div>
+</div>
 
+<div id="conference-info" style="display:none">
+	<div class="span12 field-box">
+	<label>会议:</label> 
+	<input value="${paper.journal}" name="conference" class="span9" type="text" id="input-journal" />
+	<div class="span8 notice" id="journal-notice"></div>
+</div>
+
+<div class="span12 field-box">
+	<label>会议时间:</label> 
+	 <input type="text" name="time" id="datepicker"></input>
+	<div class="span8 notice" id="issue-notice"></div>
+</div>
+</div>
 <div class="span11 field-box actions">
 	<input type="button" id="paper-submit" class="btn-glow primary"
 		value="提交" /> <span>OR</span> <input type="reset" value="取消"
 		class="reset" />
 </div>
+

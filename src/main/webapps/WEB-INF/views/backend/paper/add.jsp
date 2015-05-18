@@ -15,6 +15,8 @@
 <link rel="stylesheet"
 	href="/robot/resources/css/bootstrap/bootstrap-overrides.css" />
 <!-- libraries -->
+<link href="/robot/resources/css/backend/lib/bootstrap.datepicker.css"
+	type="text/css" rel="stylesheet">
 <link href="/robot/resources/font/css/font-awesome.min.css"
 	type="text/css" rel="stylesheet" />
 	<link rel="stylesheet" href="/robot/resources/plugin/tagsinput/bootstrap-tagsinput.css" />
@@ -85,6 +87,8 @@
 	<script src="/robot/resources/js/jquery/jquery-2.0.0.min.js"></script>
 	<script src="/robot/resources/js/bootstrap/bootstrap.min.js"></script>
 	<script src="/robot/resources/js/backend/common.js"></script>
+		<script
+		src="/robot/resources/plugin/date-picker/js/bootstrap.datepicker.js"></script>
 	<script src="/robot/resources/plugin/uniform/js/jquery.uniform.min.js"></script>
 	<script src="/robot/resources/plugin/tagsinput/bootstrap-tagsinput.min.js"></script>
 	<!-- this page specific scripts -->
