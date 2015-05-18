@@ -162,30 +162,30 @@ public class BackendExpertController {
 		return expertForChecks;
 	}
 
-	@RequestMapping(value = "/editExperience/{expertId}/{experience}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editExperience/{expertId}", method = RequestMethod.POST)
 	public String editExperience(@PathVariable int expertId,
-			@PathVariable String experience,
+			String experience,
 			RedirectAttributes redirectAttributes) {
 		expertDao.updateExperience(expertId, experience);
 		redirectAttributes.addAttribute("EditMsg", "信息修改成功！");
-		return "backend/expert/edit/" + expertId;
+		return "redirect:/backend/expert/" + expertId;
 	}
 
-	@RequestMapping(value = "/editAchievement/{expertId}/{info}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editAchievement/{expertId}", method = RequestMethod.POST)
 	public String editInfo(@PathVariable int expertId,
-			@PathVariable String info, RedirectAttributes redirectAttributes) {
+			String info, RedirectAttributes redirectAttributes) {
 		expertDao.updateInfo(expertId, info);
-		redirectAttributes.addAttribute("EditMsg", "信息修改成功！");
-		return "backend/expert/edit/" + expertId;
+		redirectAttributes.addFlashAttribute("EditMsg", "信息修改成功！");
+		return "redirect:/backend/expert/" + expertId;
 	}
 
-	@RequestMapping(value = "/editInfo/{expertId}/{achievement}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editInfo/{expertId}", method = RequestMethod.POST)
 	public String editAchievement(@PathVariable int expertId,
-			@PathVariable String achievement,
+			String achievement,
 			RedirectAttributes redirectAttributes) {
 		expertDao.updateAchievement(expertId, achievement);
-		redirectAttributes.addAttribute("EditMsg", "信息修改成功！");
-		return "backend/expert/edit/" + expertId;
+		redirectAttributes.addFlashAttribute("EditMsg", "信息修改成功！");
+		return "redirect:/backend/expert/" + expertId;
 	}
 
 	public void add(String name, String gender, String email, String address,

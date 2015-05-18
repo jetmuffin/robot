@@ -82,6 +82,7 @@
 								${expert.achievement}</p>
 							<br />							
 							
+                
 							<!-- recent orders table -->
 							<h6>近期活动</h6>
 							<br />
@@ -161,20 +162,23 @@
 <div class="modal fade" id="experience-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+    <form action="/robot/backend/expert/editExperience/${expertId}" method="post">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="experience-modal">编辑信息</h4>
       </div>
+      
       <div class="modal-body">
-       				<form action="/robot/backend/expert/editExperience/${expertId}" method="post">
+       				
        								<label for="experience-input">个人履历</label>
        								<textarea  name="experience" id="info-input" style="width:95%;" rows="6"></textarea>
-       				</form>
+       				
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         <button type="submit" class="btn btn-primary">保存</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
