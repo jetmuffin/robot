@@ -50,10 +50,15 @@
                 </ul>
             </li>            
             <li>
-                <a href="#">
+                <a class="dropdown-toggle" href="#">
                     <i class="fa fa-bug"></i>
                     <span>爬取数据</span>
+                    <i class="fa fa-chevron-down"></i>
                 </a>
+                <ul class="submenu">
+                    <li><a href="/robot/backend/crawler/wangfang">万方</a></li>
+                    <li><a href="/robot/backend/crawler/cnki">知网</a></li>
+                </ul>
             </li>                
             <li>
                 <a href="#">
