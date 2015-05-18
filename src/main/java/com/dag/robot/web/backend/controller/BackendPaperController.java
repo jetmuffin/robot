@@ -113,7 +113,12 @@ public class BackendPaperController {
 	public String add(String title,String[] authors,String abs,
 			String keywords,String type,String journal,String issue,
 			String conference,String time,RedirectAttributes redirectAttributes) {
-		//TODO
+		Paper paper = new Paper();
+		paper.setTitle(title);
+		paper.setAbs(abs);
+		paper.setKeywords(keywords);
+		paper.setType(type);
+		
 		if(type.equals("journal")){
 			//TODO
 		} else if(type.equals("conference")){
