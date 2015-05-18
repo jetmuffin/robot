@@ -16,7 +16,7 @@ $(function(){
 	var author_num = 1;
 	$('#add-author').click(function(){
 		author_num ++ ;
-		var input_dom = '<div class="input-group"><label>作者'+author_num+':</label> <input id="tags-author" name="authors['+author_num+']" onblur="duplicateName(this)" value=""  data-toggle="popover" title=" " data-content=" " type="text" class="author-input tags span8"></div>';
+		var input_dom = '<div class="input-group"><label>作者'+author_num+':</label> <input id="tags-author" name="authors" onblur="duplicateName(this)" value=""  data-toggle="popover" title=" " data-content=" " type="text" class="author-input tags span8"></div>';
 		$('#authors').append(input_dom);
 	});
 	
@@ -53,7 +53,7 @@ $(function(){
 	
 	//submit the form
 	$('#paper-submit').click(function(){
-		if(!flag1){
+		if($('input[name="title"]').val().length == 0){
 			$('#title-notice').html(notice_icon+" 标题不能为空!");
 			$("html,body").animate({scrollTop:0},100);
 			return;
@@ -65,12 +65,12 @@ $(function(){
 			$("html,body").animate({scrollTop:0},100);
 			return;
 		}
-		if(!flag2){
+		if($('input[name="journal"]').val().length == 0){
 			$('#journal-notice').html(notice_icon+" 期刊不能为空!");
 			$("html,body").animate({scrollTop:0},100);
 			return;
 		}
-		if(!flag3){
+		if($('input[name="issue"]').val().length == 0){
 			$('#issue-notice').html(notice_icon+" 刊号不能为空!");
 			$("html,body").animate({scrollTop:0},100);
 			return;
