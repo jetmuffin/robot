@@ -34,15 +34,15 @@ public class Expert implements java.io.Serializable {
 	private String email;
 	private String address;
 	private String homepage;
-	private int paperNum;
-	private int patentNum;
-	private int paperReferedNum;
+	private int paperNum = 0;
+	private int patentNum = 0;
+	private int paperReferedNum = 0;
 	private String prize;
 	private String experience;
 	private String info;
 	private String achievement;
 	private String url;
-	private Integer rate;
+	private Integer rate = 0;
 	private String job;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
 			0);

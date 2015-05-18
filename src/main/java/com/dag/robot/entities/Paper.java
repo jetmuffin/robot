@@ -30,7 +30,7 @@ public class Paper implements java.io.Serializable {
 	private String title;
 	private String abs;
 	private String keywords;
-	private int referencedNum;
+	private int referencedNum = 0;
 	private String type;
 	private Set<Topic> topics = new HashSet<Topic>(0);
 	private Set<RelExpertPaper> relExpertPapers = new HashSet<RelExpertPaper>(0);

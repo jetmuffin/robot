@@ -25,7 +25,7 @@ public class Conference implements java.io.Serializable {
 
 	private Integer conferenceId;
 	private String name;
-	private int rate;
+	private int rate = 0;
 	private Date time;
 	private Set<Paper> papers = new HashSet<Paper>(0);
 
