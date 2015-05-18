@@ -18,6 +18,7 @@ import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.FieldDao;
 import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.PaperDao;
+import com.dag.robot.db.dao.PatentDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.db.dao.UserDao;
 import com.dag.robot.entities.Expert;
@@ -47,6 +48,10 @@ public class TestController {
 	@Autowired
 	@Qualifier("paperDao")
 	PaperDao paperDao;
+	
+	@Autowired
+	@Qualifier("patentDao")
+	PatentDao patentDao;
 	
 	@Autowired
 	@Qualifier("userDao")
@@ -82,9 +87,9 @@ public class TestController {
 
 		// Orgnization org = new Orgnization("org");
 		// expertDao.addOrgnization(expert, org, "job");
-
-		 Expert ex = expertDao.getById(4);
-		 System.out.println(ex.getName());
+//
+//		 Expert ex = expertDao.getById(4);
+//		 System.out.println(ex.getName());
 
 //		List<Expert> experts = expertDao.getByName("szq");
 //		System.out.println(experts.size());
@@ -100,6 +105,13 @@ public class TestController {
 		
 //		List<Field> list = expertDao.getFields(6);
 //		System.out.println(list.size());
+		
+//		Expert expert = new Expert("szq", "boy", 1, 1, 1);
+//		expert.setUrl("url");
+//		expertDao.addExpert(expert);
+		Expert expert = expertDao.getById(12);
+		expertDao.deleteExpert(expert);
+		
 		return "test/index";
 
 	}
@@ -144,9 +156,13 @@ public class TestController {
 //		Paper paper = new Paper("timu", "zhaiyao");
 //		paperDao.addPaper(paper);
 		
+//		Paper paper = paperDao.getById(2);
+//		paper.setKeywords("key");
+//		paperDao.updatePaper(paper);
+//		paperDao.updateAbs(2, "sdiasg");
+//		paperDao.updateKeywords(3, "sdhaisdfdg");
 		Paper paper = paperDao.getById(2);
-		paper.setKeywords("key");
-		paperDao.updatePaper(paper);
+		paperDao.deletePaper(paper);
 		
 		return "test/index";
 	}
@@ -171,4 +187,10 @@ public class TestController {
 		return "test/index";
 	}
 	
+	
+	@RequestMapping(value = "/patent", method = RequestMethod.GET)
+	public String patent() {
+		patentDao.updateAbs(0, "afakgakf");
+		return "test/index";
+	}
 }

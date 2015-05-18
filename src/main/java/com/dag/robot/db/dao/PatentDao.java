@@ -47,4 +47,12 @@ public interface PatentDao {
 	 * @return 
 	 */
 	public Page<PatentForList> page(int pageSize, int currenPage);
+	
+	/**
+	 * 修改专利摘要
+	 * @param patentId
+	 * @param abs
+	 */
+	public void updateAbs(int patentId, String abs);
+	
 }

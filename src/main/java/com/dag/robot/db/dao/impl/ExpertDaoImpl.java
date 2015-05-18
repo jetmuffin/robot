@@ -59,43 +59,6 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 
 	@Override
 	public void deleteExpert(Expert expert) {
-		Iterator<?> iterator;
-		
-		Set<RelExpertField> relExpertFields = expert.getRelExpertFields();
-		iterator = relExpertFields.iterator();
-		while (iterator.hasNext()) {
-			RelExpertField relExpertField = (RelExpertField) iterator.next();
-			delete(relExpertField);
-		}
-		
-		Set<RelExpertOrg> relExpertOrgs = expert.getRelExpertOrgs();
-		iterator = relExpertOrgs.iterator();
-		while(iterator.hasNext()){
-			RelExpertOrg relExpertOrg = (RelExpertOrg) iterator.next();
-			delete(relExpertOrg);
-		}
-		
-		Set<RelExpertPaper> relExpertPapers = expert.getRelExpertPapers();
-		iterator = relExpertPapers.iterator();
-		while(iterator.hasNext()){
-			RelExpertPaper relExpertPaper = (RelExpertPaper) iterator.next();
-			delete(relExpertPaper);
-		}
-		
-		Set<RelExpertPatent> relExpertPatents = expert.getRelExpertPatents();
-		iterator = relExpertPatents.iterator();
-		while(iterator.hasNext()){
-			RelExpertPatent relExpertPatent = (RelExpertPatent) iterator.next();
-			delete(relExpertPatent);
-		}
-		
-		Set<RelExpertTopic> relExpertTopics = expert.getRelExpertTopics();
-		iterator = relExpertTopics.iterator();
-		while(iterator.hasNext()){
-			RelExpertTopic relExpertTopic = (RelExpertTopic) iterator.next();
-			delete(relExpertTopic);
-		}
-		
 		delete(expert);
 	}
 
@@ -223,19 +186,10 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	}
 
 	@Override
-	public List<Orgnization> getOrgs(int expertId) {
+	public Orgnization getOrgnization(int expertId) {
 		Expert expert = getById(expertId);
-		List<Orgnization> orgnizations = new ArrayList<Orgnization>();
-		Set<RelExpertOrg> relExpertOrgs = expert.getRelExpertOrgs();
-		Iterator<RelExpertOrg> iterator = relExpertOrgs.iterator();
-		while(iterator.hasNext()){
-			RelExpertOrg relExpertOrg = iterator.next();
-			Orgnization orgnization = relExpertOrg.getOrgnization();
-			orgnizations.add(orgnization);
-		}
-		if(orgnizations.size() == 0)
-			return null;
-		return orgnizations;
+		Orgnization orgnization = expert.getOrgnization();
+		return orgnization;
 	}
 
 	@Override
@@ -262,19 +216,11 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		
 		for(int i = 0; i < experts.size(); i++){
 			Expert expert = experts.get(i);
-			ExpertForCheck exerptForCheck = new ExpertForCheck();
-			exerptForCheck.setName(expert.getName());
-			exerptForCheck.setExpertId(expert.getExpertId());
-			Set<RelExpertOrg> relExpertOrgs = expert.getRelExpertOrgs();
-			List<String> orgnizations = new ArrayList<String>();
-			Iterator<RelExpertOrg> iterator = relExpertOrgs.iterator();
-			while(iterator.hasNext()){
-				RelExpertOrg relExpertOrg = iterator.next();
-				Orgnization orgnization = relExpertOrg.getOrgnization();
-				orgnizations.add(orgnization.getName());
-			}
-			exerptForCheck.setOrg(StringMergeUtil.stringMerge(orgnizations));
-			exerptForChecks.add(exerptForCheck);
+			ExpertForCheck expertForCheck = new ExpertForCheck();
+			expertForCheck.setName(expert.getName());
+			expertForCheck.setExpertId(expert.getExpertId());
+			expertForCheck.setOrg(expert.getOrgnization().getName());
+			exerptForChecks.add(expertForCheck);
 		}
 		return exerptForChecks;
 	}

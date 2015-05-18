@@ -8,6 +8,8 @@ import java.util.Set;
 
 import org.apache.commons.math3.analysis.function.Exp;
 
+import com.dag.robot.entities.Activity;
+import com.dag.robot.entities.CoreJournal;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
@@ -20,7 +22,7 @@ import com.dag.robot.entities.RelPaperJournal;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.ExpertForShow;
-import com.dag.robot.web.bean.PaperForList;
+import com.dag.robot.web.bean.PaperForShow;
 import com.dag.robot.web.bean.PaperForShow;
 
 public class EntitiesForShowUtil {
@@ -29,7 +31,6 @@ public class EntitiesForShowUtil {
 
 		ExpertForShow expertForShow = new ExpertForShow();
 		expertForShow.setAchievement(expert.getAchievement());
-		expertForShow.setActivity(expert.getActivity());
 		expertForShow.setAddress(expert.getAddress());
 		expertForShow.setEmail(expert.getEmail());
 		expertForShow.setExperience(expert.getExperience());
@@ -42,7 +43,9 @@ public class EntitiesForShowUtil {
 		expertForShow.setPatentNum(expert.getPatentNum());
 		expertForShow.setPaperReferedNum(expert.getPaperReferedNum());
 		expertForShow.setPrize(expert.getPrize());
-
+		expertForShow.setRate(expert.getRate());
+		expertForShow.setOrgnization(expert.getOrgnization());
+		
 		Iterator<?> iterator;
 
 		Set<RelExpertPaper> relExpertPapers = expert.getRelExpertPapers();
@@ -75,15 +78,9 @@ public class EntitiesForShowUtil {
 		}
 		expertForShow.setTopics(topics);
 
-		Set<RelExpertOrg> relExpertOrgs = expert.getRelExpertOrgs();
-		List<Orgnization> orgs = new ArrayList<Orgnization>();
-		iterator = relExpertOrgs.iterator();
-		while (iterator.hasNext()) {
-			RelExpertOrg relExpertOrg = (RelExpertOrg) iterator.next();
-			Orgnization org = relExpertOrg.getOrgnization();
-			orgs.add(org);
-		}
-		expertForShow.setOrgnizations(orgs);
+		List<Activity> activities = new ArrayList<Activity>();
+		activities.addAll(expert.getActivities());
+		expertForShow.setActivities(activities);
 
 		return expertForShow;
 	}
@@ -95,34 +92,33 @@ public class EntitiesForShowUtil {
 		paperForShow.setAbs(paper.getAbs());
 		paperForShow.setKeywords(paper.getKeywords());
 		paperForShow.setTitle(paper.getTitle());
-
+		paperForShow.setReferencedNum(paper.getReferencedNum());
+		paperForShow.setType(paper.getType());
+		paperForShow.setConferences(paper.getConference());
+		paperForShow.setJournal(paper.getJournal());
+		
+		List<CoreJournal> coreJournals = new ArrayList<CoreJournal>();
+		coreJournals.addAll(paper.getCoreJournals());
+		paperForShow.setCoreJournals(coreJournals);
+		
 		Set<Topic> topics = paper.getTopics();
 		List<Topic> topicList = new ArrayList<Topic>();
-		Iterator<Topic> iterator1 = topics.iterator();
-		while (iterator1.hasNext()) {
-			Topic topic = iterator1.next();
+		Iterator<Topic> iterator = topics.iterator();
+		while(iterator.hasNext()){
+			Topic topic = iterator.next();
 			topicList.add(topic);
 		}
 		paperForShow.setTopics(topicList);
-
+		
 		Set<RelExpertPaper> relExpertPapers = paper.getRelExpertPapers();
 		List<Expert> experts = new ArrayList<Expert>();
-		Iterator<RelExpertPaper> iterator = relExpertPapers.iterator();
-		while (iterator.hasNext()) {
-			RelExpertPaper relExpertPaper = iterator.next();
+		Iterator<RelExpertPaper> iterator2 = relExpertPapers.iterator();
+		while(iterator.hasNext()){
+			RelExpertPaper relExpertPaper = iterator2.next();
 			Expert expert = relExpertPaper.getExpert();
 			experts.add(expert);
 		}
 		paperForShow.setExperts(experts);
-
-		Set<RelPaperJournal> relPaperJournals = paper.getRelPaperJournals();
-		List<RelPaperJournal> relPaperJournals2 = new ArrayList<RelPaperJournal>();
-		relPaperJournals2.addAll(relPaperJournals);
-		if (relPaperJournals2.size() == 0)
-			paperForShow.setJournal(null);
-		else
-			paperForShow.setJournal(relPaperJournals2.get(0).getJournal()
-					.getName());// 论文会议只有一个
 		return paperForShow;
 	}
 

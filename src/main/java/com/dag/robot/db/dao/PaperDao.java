@@ -5,7 +5,7 @@ import java.util.List;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
-import com.dag.robot.web.bean.PaperForList;
+import com.dag.robot.web.bean.PaperForShow;
 
 public interface PaperDao {
 	
@@ -46,5 +46,20 @@ public interface PaperDao {
 	 * @param currenPage 当前页码
 	 * @return
 	 */
-	public Page<PaperForList> page(int pageSize, int currenPage);
+	public Page<PaperForShow> page(int pageSize, int currenPage);
+	
+	/**
+	 * 修改论文的摘要
+	 * @param paperId
+	 * @param abs
+	 */
+	public void updateAbs(int paperId, String abs);
+	
+	/**
+	 * 修改论文的关键字
+	 * @param paperId
+	 * @param abs
+	 */
+	public void updateKeywords(int paperId, String keywords);
+	
 }

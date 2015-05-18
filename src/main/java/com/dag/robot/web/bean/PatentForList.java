@@ -1,16 +1,18 @@
 package com.dag.robot.web.bean;
 
+import java.util.Date;
+
 public class PatentForList {
 	private int patentId;
 	private String title;
-	private String date;
+	private Date date;
 	private String applicant;
 	private String inventor;
 	
 	public PatentForList() {
 		super();
 	}
-	public PatentForList(int patentId, String title, String date,
+	public PatentForList(int patentId, String title, Date date,
 			String applicant, String inventor) {
 		super();
 		this.patentId = patentId;
@@ -31,10 +33,10 @@ public class PatentForList {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public String getApplicant() {
