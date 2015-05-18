@@ -52,9 +52,7 @@
 						<img src="/robot/resources/img/backend/user-thumb.png"
 							class="avatar img-circle" />
 						<h3 class="name">${expert.name}</h3>
-						<c:forEach items="${expert.orgnizations}" var="organization">
-							<span class="area">${organization.name}</span>
-						</c:forEach>
+							<span class="area">${expert.orgnization.name}</span>
 					</div>
 					<a class="btn-flat icon pull-right delete-user"
 						href="/robot/backend/expert/delete/${expert.expertId}"

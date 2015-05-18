@@ -25,8 +25,6 @@
 <link rel="stylesheet" type="text/css"
 	href="/robot/resources/css/backend/icons.css" />
 <!-- this page specific styles -->
-<link rel="stylesheet" type="text/css"
-	href="/robot/resources/css/code-editor.css" />
 </head>
 <body>
 	<!-- navbar -->
@@ -49,21 +47,21 @@
 			<div id="pad-wrapper">
 				<div class="row-fluid editor-header">
 					<div class="span12">
-						<h4>Ace Code Editor</h4>
+						<h4>爬虫代码</h4>
 					</div>
 				</div>
 				<div class="row-fluid">
 					<div class="span12">
-						<div id="editor">/** * In fact, you're looking at ACE right
-							now. Go ahead and play with it! * * We are currently showing off
-							the JavaScript mode. ACE has support for 45 * language modes and
-							24 color themes! */ function add(x, y) { var resultString =
-							"Hello, ACE! The result of your math is: "; var result = x + y;
-							return resultString + result; } var addResult = add(3, 2);
-							console.log(addResult); // build all tooltips from
-							data-attributes $("[data-toggle='tooltip']").each(function
-							(index, el) { $(el).tooltip({ placement:
-							$(this).data("placement") || 'top' }); });</div>
+						<pre id="editor" style="height:400px;font-size:14px">function foo(items) {
+						    var i;
+						    for (i = 0; i &lt; items.length; i++) {
+						        alert("Ace Rocks " + items[i]);
+						    }
+						}</pre>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<h4>控制台</h4>
 					</div>
 				</div>
 			</div>
@@ -78,9 +76,9 @@
 	<!-- this page specific scripts -->
 	<script src="/robot/resources/plugin/ace/ace.js"></script>
 	    <script type="text/javascript">
-        var editor = ace.edit("editor");
-        // editor.setTheme("ace/theme/github");
-        editor.getSession().setMode("ace/mode/javascript");
+	    var editor = ace.edit("editor");
+	    //editor.setTheme("ace/theme/twilight");
+	    editor.getSession().setMode("ace/mode/python");
     </script>
 </body>
 </html>

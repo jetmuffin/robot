@@ -42,8 +42,7 @@
 </div>
 <div class="span12 field-box ">
 	<label>单位:</label> 
-	<input id='tags-org' name="organization" value="${orgnizations}" type='text' class='tags span9'></p>
-		<span class="charactersleft">输入单位后,按","生成标签</span>
+	<input name="organization" value="${expert.orgnization.name}" type='text' class='tags span9'></p>
 	<div class="span8 notice" id="org-notice"></div>
 </div>
 <div class="span12 field-box">

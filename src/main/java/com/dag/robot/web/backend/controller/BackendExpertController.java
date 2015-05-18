@@ -22,10 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.PaperDao;
-import com.dag.robot.db.dao.RelExpertOrgDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
-import com.dag.robot.db.dao.impl.RelExpertOrgDaoImpl;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.RelExpertTopic;
@@ -53,10 +51,6 @@ public class BackendExpertController {
 	@Autowired
 	@Qualifier("orgnizationDao")
 	private OrgnizationDao orgnizationDao;
-
-	@Autowired
-	@Qualifier("relExpertOrgDao")
-	private RelExpertOrgDao relExpertOrgDao;
 
 	@Autowired
 	@Qualifier("topicDao")
