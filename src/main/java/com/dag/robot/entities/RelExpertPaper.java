@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-13 19:55:40 by Hibernate Tools 4.3.1
+// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -19,7 +19,6 @@ import javax.persistence.Table;
 @Table(name = "rel_expert_paper", catalog = "db_expert_robot")
 public class RelExpertPaper implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private RelExpertPaperId id;
 	private Expert expert;
 	private Paper paper;
@@ -69,12 +68,12 @@ public class RelExpertPaper implements java.io.Serializable {
 	}
 
 	@Column(name = "authorOrder", nullable = false)
-	public int getAuthorNum() {
+	public int getAuthorOrder() {
 		return this.authorOrder;
 	}
 
-	public void setAuthorNum(int authorNum) {
-		this.authorOrder = authorNum;
+	public void setAuthorOrder(int authorOrder) {
+		this.authorOrder = authorOrder;
 	}
 
 }

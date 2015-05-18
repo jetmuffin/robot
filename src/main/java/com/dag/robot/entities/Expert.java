@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-13 19:55:40 by Hibernate Tools 4.3.1
+// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +13,10 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,8 +27,8 @@ import javax.persistence.Table;
 @Table(name = "expert", catalog = "db_expert_robot")
 public class Expert implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private Integer expertId;
+	private Orgnization orgnization;
 	private String name;
 	private String gender;
 	private String email;
@@ -38,13 +41,15 @@ public class Expert implements java.io.Serializable {
 	private String experience;
 	private String info;
 	private String achievement;
-	private String activity;
+	private String url;
+	private int rate;
+	private String job;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
 			0);
 	private Set<RelExpertTopic> relExpertTopics = new HashSet<RelExpertTopic>(0);
 	private Set<RelExpertField> relExpertFields = new HashSet<RelExpertField>(0);
 	private Set<User> users = new HashSet<User>(0);
-	private Set<RelExpertOrg> relExpertOrgs = new HashSet<RelExpertOrg>(0);
+	private Set<Activity> activities = new HashSet<Activity>(0);
 	private Set<RelExpertPaper> relExpertPapers = new HashSet<RelExpertPaper>(0);
 
 	public Expert() {
@@ -58,29 +63,16 @@ public class Expert implements java.io.Serializable {
 		this.patentNum = patentNum;
 		this.paperReferedNum = paperReferedNum;
 	}
-	
-	
-	public Expert(String name, String gender, String email, String address,
-			String homepage, String experience, String info,
-			String achievement) {
-		super();
-		this.name = name;
-		this.gender = gender;
-		this.email = email;
-		this.address = address;
-		this.homepage = homepage;
-		this.experience = experience;
-		this.info = info;
-		this.achievement = achievement;
-	}
 
-	public Expert(String name, String gender, String email, String address,
-			String homepage, int paperNum, int patentNum, int paperReferedNum,
-			String prize, String experience, String info, String achievement,
-			String activity, Set<RelExpertPatent> relExpertPatents,
+	public Expert(Orgnization orgnization, String name, String gender,
+			String email, String address, String homepage, int paperNum,
+			int patentNum, int paperReferedNum, String prize,
+			String experience, String info, String achievement, String url,
+			int rate, String job, Set<RelExpertPatent> relExpertPatents,
 			Set<RelExpertTopic> relExpertTopics,
 			Set<RelExpertField> relExpertFields, Set<User> users,
-			Set<RelExpertOrg> relExpertOrgs, Set<RelExpertPaper> relExpertPapers) {
+			Set<Activity> activities, Set<RelExpertPaper> relExpertPapers) {
+		this.orgnization = orgnization;
 		this.name = name;
 		this.gender = gender;
 		this.email = email;
@@ -93,13 +85,28 @@ public class Expert implements java.io.Serializable {
 		this.experience = experience;
 		this.info = info;
 		this.achievement = achievement;
-		this.activity = activity;
+		this.url = url;
+		this.rate = rate;
+		this.job = job;
 		this.relExpertPatents = relExpertPatents;
 		this.relExpertTopics = relExpertTopics;
 		this.relExpertFields = relExpertFields;
 		this.users = users;
-		this.relExpertOrgs = relExpertOrgs;
+		this.activities = activities;
 		this.relExpertPapers = relExpertPapers;
+	}
+
+	public Expert(String name, String gender, String email, String address,
+			String homepage, String experience, String info,
+			String achievement) {
+		this.name = name;
+		this.gender = gender;
+		this.email = email;
+		this.address = address;
+		this.homepage = homepage;
+		this.experience = experience;
+		this.info = info;
+		this.achievement = achievement;
 	}
 
 	@Id
@@ -111,6 +118,16 @@ public class Expert implements java.io.Serializable {
 
 	public void setExpertId(Integer expertId) {
 		this.expertId = expertId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "orgId")
+	public Orgnization getOrgnization() {
+		return this.orgnization;
+	}
+
+	public void setOrgnization(Orgnization orgnization) {
+		this.orgnization = orgnization;
 	}
 
 	@Column(name = "name", nullable = false, length = 20)
@@ -221,13 +238,31 @@ public class Expert implements java.io.Serializable {
 		this.achievement = achievement;
 	}
 
-	@Column(name = "activity", length = 65535)
-	public String getActivity() {
-		return this.activity;
+	@Column(name = "url", length = 100)
+	public String getUrl() {
+		return this.url;
 	}
 
-	public void setActivity(String activity) {
-		this.activity = activity;
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	@Column(name = "rate")
+	public int getRate() {
+		return this.rate;
+	}
+
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+
+	@Column(name = "job", length = 50)
+	public String getJob() {
+		return this.job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expert")
@@ -266,13 +301,14 @@ public class Expert implements java.io.Serializable {
 		this.users = users;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expert")
-	public Set<RelExpertOrg> getRelExpertOrgs() {
-		return this.relExpertOrgs;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "rel_expert_acvitity", catalog = "db_expert_robot", joinColumns = { @JoinColumn(name = "expertId", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "activityId", nullable = false, updatable = false) })
+	public Set<Activity> getActivities() {
+		return this.activities;
 	}
 
-	public void setRelExpertOrgs(Set<RelExpertOrg> relExpertOrgs) {
-		this.relExpertOrgs = relExpertOrgs;
+	public void setActivities(Set<Activity> activities) {
+		this.activities = activities;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expert")

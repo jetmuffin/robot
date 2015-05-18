@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-13 19:55:40 by Hibernate Tools 4.3.1
+// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,33 +24,44 @@ import javax.persistence.Table;
 @Table(name = "paper", catalog = "db_expert_robot")
 public class Paper implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private Integer paperId;
+	private Conference conference;
+	private Journal journal;
 	private String title;
 	private String abs;
 	private String keywords;
-	private Set<RelPaperJournal> relPaperJournals = new HashSet<RelPaperJournal>(
-			0);
+	private int referencedNum;
+	private String type;
 	private Set<Topic> topics = new HashSet<Topic>(0);
 	private Set<RelExpertPaper> relExpertPapers = new HashSet<RelExpertPaper>(0);
+	private Set<CoreJournal> coreJournals = new HashSet<CoreJournal>(0);
 
 	public Paper() {
 	}
 
-	public Paper(String title, String abs) {
-		this.title = title;
-		this.abs = abs;
-	}
-
-	public Paper(String title, String abs, String keywords,
-			Set<RelPaperJournal> relPaperJournals, Set<Topic> topics,
-			Set<RelExpertPaper> relExpertPapers) {
+	public Paper(String title, String abs, String keywords, int referencedNum,
+			String type) {
 		this.title = title;
 		this.abs = abs;
 		this.keywords = keywords;
-		this.relPaperJournals = relPaperJournals;
+		this.referencedNum = referencedNum;
+		this.type = type;
+	}
+
+	public Paper(Conference conference, Journal journal, String title,
+			String abs, String keywords, int referencedNum, String type,
+			Set<Topic> topics, Set<RelExpertPaper> relExpertPapers,
+			Set<CoreJournal> coreJournals) {
+		this.conference = conference;
+		this.journal = journal;
+		this.title = title;
+		this.abs = abs;
+		this.keywords = keywords;
+		this.referencedNum = referencedNum;
+		this.type = type;
 		this.topics = topics;
 		this.relExpertPapers = relExpertPapers;
+		this.coreJournals = coreJournals;
 	}
 
 	@Id
@@ -61,6 +73,26 @@ public class Paper implements java.io.Serializable {
 
 	public void setPaperId(Integer paperId) {
 		this.paperId = paperId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "conferenceId")
+	public Conference getConference() {
+		return this.conference;
+	}
+
+	public void setConference(Conference conference) {
+		this.conference = conference;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "journalId")
+	public Journal getJournal() {
+		return this.journal;
+	}
+
+	public void setJournal(Journal journal) {
+		this.journal = journal;
 	}
 
 	@Column(name = "title", nullable = false, length = 50)
@@ -81,7 +113,7 @@ public class Paper implements java.io.Serializable {
 		this.abs = abs;
 	}
 
-	@Column(name = "keywords", length = 65535)
+	@Column(name = "keywords", nullable = false, length = 65535)
 	public String getKeywords() {
 		return this.keywords;
 	}
@@ -90,13 +122,22 @@ public class Paper implements java.io.Serializable {
 		this.keywords = keywords;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "paper")
-	public Set<RelPaperJournal> getRelPaperJournals() {
-		return this.relPaperJournals;
+	@Column(name = "referencedNum", nullable = false)
+	public int getReferencedNum() {
+		return this.referencedNum;
 	}
 
-	public void setRelPaperJournals(Set<RelPaperJournal> relPaperJournals) {
-		this.relPaperJournals = relPaperJournals;
+	public void setReferencedNum(int referencedNum) {
+		this.referencedNum = referencedNum;
+	}
+
+	@Column(name = "type", nullable = false, length = 50)
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -116,6 +157,16 @@ public class Paper implements java.io.Serializable {
 
 	public void setRelExpertPapers(Set<RelExpertPaper> relExpertPapers) {
 		this.relExpertPapers = relExpertPapers;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "rel_paper_coreJounal", catalog = "db_expert_robot", joinColumns = { @JoinColumn(name = "paperId", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "coreJournalId", nullable = false, updatable = false) })
+	public Set<CoreJournal> getCoreJournals() {
+		return this.coreJournals;
+	}
+
+	public void setCoreJournals(Set<CoreJournal> coreJournals) {
+		this.coreJournals = coreJournals;
 	}
 
 }

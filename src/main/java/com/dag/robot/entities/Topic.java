@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-13 19:55:40 by Hibernate Tools 4.3.1
+// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,13 +21,12 @@ import javax.persistence.Table;
 @Table(name = "topic", catalog = "db_expert_robot")
 public class Topic implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private Integer topicId;
 	private String name;
-	private Set<User> users = new HashSet<User>(0);
-	private Set<RelExpertTopic> relExpertTopics = new HashSet<RelExpertTopic>(0);
-	private Set<Paper> papers = new HashSet<Paper>(0);
 	private Set<RelFieldTopic> relFieldTopics = new HashSet<RelFieldTopic>(0);
+	private Set<Paper> papers = new HashSet<Paper>(0);
+	private Set<RelExpertTopic> relExpertTopics = new HashSet<RelExpertTopic>(0);
+	private Set<User> users = new HashSet<User>(0);
 
 	public Topic() {
 	}
@@ -36,14 +35,14 @@ public class Topic implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Topic(String name, Set<User> users,
-			Set<RelExpertTopic> relExpertTopics, Set<Paper> papers,
-			Set<RelFieldTopic> relFieldTopics) {
+	public Topic(String name, Set<RelFieldTopic> relFieldTopics,
+			Set<Paper> papers, Set<RelExpertTopic> relExpertTopics,
+			Set<User> users) {
 		this.name = name;
-		this.users = users;
-		this.relExpertTopics = relExpertTopics;
-		this.papers = papers;
 		this.relFieldTopics = relFieldTopics;
+		this.papers = papers;
+		this.relExpertTopics = relExpertTopics;
+		this.users = users;
 	}
 
 	@Id
@@ -66,22 +65,13 @@ public class Topic implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "topics")
-	public Set<User> getUsers() {
-		return this.users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
-	public Set<RelExpertTopic> getRelExpertTopics() {
-		return this.relExpertTopics;
+	public Set<RelFieldTopic> getRelFieldTopics() {
+		return this.relFieldTopics;
 	}
 
-	public void setRelExpertTopics(Set<RelExpertTopic> relExpertTopics) {
-		this.relExpertTopics = relExpertTopics;
+	public void setRelFieldTopics(Set<RelFieldTopic> relFieldTopics) {
+		this.relFieldTopics = relFieldTopics;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "topics")
@@ -94,12 +84,21 @@ public class Topic implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
-	public Set<RelFieldTopic> getRelFieldTopics() {
-		return this.relFieldTopics;
+	public Set<RelExpertTopic> getRelExpertTopics() {
+		return this.relExpertTopics;
 	}
 
-	public void setRelFieldTopics(Set<RelFieldTopic> relFieldTopics) {
-		this.relFieldTopics = relFieldTopics;
+	public void setRelExpertTopics(Set<RelExpertTopic> relExpertTopics) {
+		this.relExpertTopics = relExpertTopics;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "topics")
+	public Set<User> getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 }

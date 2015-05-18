@@ -41,14 +41,6 @@ public class PatentDaoImpl extends BaseDao implements PatentDao {
 
 	@Override
 	public void deletePatent(Patent patent) {
-
-		Set<RelExpertPatent> relExpertPatents = patent.getRelExpertPatents();
-		Iterator<RelExpertPatent> iterator = relExpertPatents.iterator();
-		while (iterator.hasNext()) {
-			RelExpertPatent relExpertPatent = iterator.next();
-			delete(relExpertPatent);
-		}
-
 		delete(patent);
 	}
 
@@ -65,6 +57,13 @@ public class PatentDaoImpl extends BaseDao implements PatentDao {
 		List<PatentForList> patentForLists = EntitiesForListUtil.patentForLists(patents);
 		page.setList(patentForLists);
 		return page;
+	}
+
+	@Override
+	public void updateAbs(int patentId, String abs) {
+		Patent patent = getById(patentId);
+		patent.setAbs(abs);
+		update(patent);
 	}
 
 }

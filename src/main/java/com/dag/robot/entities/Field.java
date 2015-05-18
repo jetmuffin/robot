@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-13 19:55:40 by Hibernate Tools 4.3.1
+// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,13 +21,12 @@ import javax.persistence.Table;
 @Table(name = "field", catalog = "db_expert_robot")
 public class Field implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private Integer fieldId;
 	private String name;
 	private String description;
-	private Set<User> users = new HashSet<User>(0);
-	private Set<RelFieldTopic> relFieldTopics = new HashSet<RelFieldTopic>(0);
 	private Set<RelExpertField> relExpertFields = new HashSet<RelExpertField>(0);
+	private Set<RelFieldTopic> relFieldTopics = new HashSet<RelFieldTopic>(0);
+	private Set<User> users = new HashSet<User>(0);
 
 	public Field() {
 	}
@@ -36,14 +35,14 @@ public class Field implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Field(String name, String description, Set<User> users,
-			Set<RelFieldTopic> relFieldTopics,
-			Set<RelExpertField> relExpertFields) {
+	public Field(String name, String description,
+			Set<RelExpertField> relExpertFields,
+			Set<RelFieldTopic> relFieldTopics, Set<User> users) {
 		this.name = name;
 		this.description = description;
-		this.users = users;
-		this.relFieldTopics = relFieldTopics;
 		this.relExpertFields = relExpertFields;
+		this.relFieldTopics = relFieldTopics;
+		this.users = users;
 	}
 
 	@Id
@@ -75,13 +74,13 @@ public class Field implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "fields")
-	public Set<User> getUsers() {
-		return this.users;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "field")
+	public Set<RelExpertField> getRelExpertFields() {
+		return this.relExpertFields;
 	}
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
+	public void setRelExpertFields(Set<RelExpertField> relExpertFields) {
+		this.relExpertFields = relExpertFields;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "field")
@@ -93,13 +92,13 @@ public class Field implements java.io.Serializable {
 		this.relFieldTopics = relFieldTopics;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "field")
-	public Set<RelExpertField> getRelExpertFields() {
-		return this.relExpertFields;
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "fields")
+	public Set<User> getUsers() {
+		return this.users;
 	}
 
-	public void setRelExpertFields(Set<RelExpertField> relExpertFields) {
-		this.relExpertFields = relExpertFields;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 }

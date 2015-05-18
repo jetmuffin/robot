@@ -14,7 +14,7 @@ import com.dag.robot.db.dao.PatentDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.web.bean.Page;
-import com.dag.robot.web.bean.PaperForList;
+import com.dag.robot.web.bean.PaperForShow;
 import com.dag.robot.web.bean.PatentForList;
 
 @Controller

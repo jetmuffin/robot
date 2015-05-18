@@ -117,7 +117,7 @@ public interface ExpertDao {
 	 * @param expertId 专家id
 	 * @return 组织List
 	 */
-	public List<Orgnization> getOrgs(int expertId);
+	public Orgnization getOrgnization(int expertId);
 	
 	/**
 	 * 分页

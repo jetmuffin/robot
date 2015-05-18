@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-13 19:55:40 by Hibernate Tools 4.3.1
+// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,7 +11,6 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class RelExpertPaperId implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private int expertId;
 	private int paperId;
 

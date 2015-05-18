@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-13 19:55:40 by Hibernate Tools 4.3.1
+// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,12 +22,11 @@ import javax.persistence.Table;
 @Table(name = "orgnization", catalog = "db_expert_robot")
 public class Orgnization implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private Integer orgId;
 	private Orgnization orgnization;
 	private String name;
 	private String address;
-	private Set<RelExpertOrg> relExpertOrgs = new HashSet<RelExpertOrg>(0);
+	private Set<Expert> experts = new HashSet<Expert>(0);
 	private Set<Orgnization> orgnizations = new HashSet<Orgnization>(0);
 
 	public Orgnization() {
@@ -38,11 +37,11 @@ public class Orgnization implements java.io.Serializable {
 	}
 
 	public Orgnization(Orgnization orgnization, String name, String address,
-			Set<RelExpertOrg> relExpertOrgs, Set<Orgnization> orgnizations) {
+			Set<Expert> experts, Set<Orgnization> orgnizations) {
 		this.orgnization = orgnization;
 		this.name = name;
 		this.address = address;
-		this.relExpertOrgs = relExpertOrgs;
+		this.experts = experts;
 		this.orgnizations = orgnizations;
 	}
 
@@ -86,12 +85,12 @@ public class Orgnization implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgnization")
-	public Set<RelExpertOrg> getRelExpertOrgs() {
-		return this.relExpertOrgs;
+	public Set<Expert> getExperts() {
+		return this.experts;
 	}
 
-	public void setRelExpertOrgs(Set<RelExpertOrg> relExpertOrgs) {
-		this.relExpertOrgs = relExpertOrgs;
+	public void setExperts(Set<Expert> experts) {
+		this.experts = experts;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgnization")

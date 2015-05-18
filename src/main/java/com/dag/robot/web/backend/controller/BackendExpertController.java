@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.OrgnizationDao;
+import com.dag.robot.db.dao.PaperDao;
 import com.dag.robot.db.dao.RelExpertOrgDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
@@ -96,17 +97,10 @@ public class BackendExpertController {
 		Expert expert = expertDao.getById(expertId);
 		List<String> orgnizations = new ArrayList<String>();
 		List<String> topics = new ArrayList<String>();
-		Iterator<?> iterator;
-		Set<RelExpertOrg> relExpertOrgs = expert.getRelExpertOrgs();
-		iterator = relExpertOrgs.iterator();
-		while (iterator.hasNext()) {
-			RelExpertOrg relExpertOrg = (RelExpertOrg) iterator.next();
-			Orgnization orgnization = relExpertOrg.getOrgnization();
-			orgnizations.add(orgnization.getName());
-		}
+		String orgString = expert.getOrgnization().getName();
 
 		Set<RelExpertTopic> relExpertTopics = expert.getRelExpertTopics();
-		iterator = relExpertTopics.iterator();
+		Iterator<?> iterator = relExpertTopics.iterator();
 		while (iterator.hasNext()) {
 			RelExpertTopic relExpertTopic = (RelExpertTopic) iterator.next();
 			Topic topic = relExpertTopic.getTopic();
@@ -117,7 +111,7 @@ public class BackendExpertController {
 		System.out.println(orgsString);
 		System.out.println(topicsString);
 		model.addAttribute("expert", expert);
-		model.addAttribute("orgnizations", orgsString);
+		model.addAttribute("orgnization", orgsString);
 		model.addAttribute("topics", topicsString);
 		return "backend/expert/edit";
 	}

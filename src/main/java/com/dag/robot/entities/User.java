@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-13 19:55:40 by Hibernate Tools 4.3.1
+// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,14 +22,13 @@ import javax.persistence.Table;
 @Table(name = "user", catalog = "db_expert_robot")
 public class User implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private Integer userId;
 	private String account;
 	private String password;
 	private String nickname;
 	private int auth;
-	private Set<Topic> topics = new HashSet<Topic>(0);
 	private Set<Expert> experts = new HashSet<Expert>(0);
+	private Set<Topic> topics = new HashSet<Topic>(0);
 	private Set<Field> fields = new HashSet<Field>(0);
 
 	public User() {
@@ -43,13 +42,13 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String account, String password, String nickname, int auth,
-			Set<Topic> topics, Set<Expert> experts, Set<Field> fields) {
+			Set<Expert> experts, Set<Topic> topics, Set<Field> fields) {
 		this.account = account;
 		this.password = password;
 		this.nickname = nickname;
 		this.auth = auth;
-		this.topics = topics;
 		this.experts = experts;
+		this.topics = topics;
 		this.fields = fields;
 	}
 
@@ -101,16 +100,6 @@ public class User implements java.io.Serializable {
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "follow_user_topic", catalog = "db_expert_robot", joinColumns = { @JoinColumn(name = "userId", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "topicId", nullable = false, updatable = false) })
-	public Set<Topic> getTopics() {
-		return this.topics;
-	}
-
-	public void setTopics(Set<Topic> topics) {
-		this.topics = topics;
-	}
-
-	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "follow_user_expert", catalog = "db_expert_robot", joinColumns = { @JoinColumn(name = "userId", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "expertId", nullable = false, updatable = false) })
 	public Set<Expert> getExperts() {
 		return this.experts;
@@ -118,6 +107,16 @@ public class User implements java.io.Serializable {
 
 	public void setExperts(Set<Expert> experts) {
 		this.experts = experts;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "follow_user_topic", catalog = "db_expert_robot", joinColumns = { @JoinColumn(name = "userId", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "topicId", nullable = false, updatable = false) })
+	public Set<Topic> getTopics() {
+		return this.topics;
+	}
+
+	public void setTopics(Set<Topic> topics) {
+		this.topics = topics;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)

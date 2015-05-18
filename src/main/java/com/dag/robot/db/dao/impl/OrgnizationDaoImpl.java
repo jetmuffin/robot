@@ -35,13 +35,6 @@ public class OrgnizationDaoImpl extends BaseDao implements OrgnizationDao {
 
 	@Override
 	public void deleteOrgnization(Orgnization orgnization) {
-		
-		Set<RelExpertOrg> relExpertOrgs = orgnization.getRelExpertOrgs();
-		Iterator<RelExpertOrg> iterator = relExpertOrgs.iterator();
-		while(iterator.hasNext()){
-			RelExpertOrg relExpertOrg = iterator.next();
-			delete(relExpertOrg);
-		}
 		delete(orgnization);
 	}
 	

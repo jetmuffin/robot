@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-13 19:55:40 by Hibernate Tools 4.3.1
+// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -21,11 +21,10 @@ import javax.persistence.TemporalType;
 @Table(name = "patent", catalog = "db_expert_robot")
 public class Patent implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private int patentId;
 	private String title;
 	private String abs;
-	private String date;
+	private Date date;
 	private String applicant;
 	private String inventor;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
@@ -34,8 +33,9 @@ public class Patent implements java.io.Serializable {
 	public Patent() {
 	}
 
-	public Patent(String title, String abs, String date,
+	public Patent(int patentId, String title, String abs, Date date,
 			String applicant, String inventor) {
+		this.patentId = patentId;
 		this.title = title;
 		this.abs = abs;
 		this.date = date;
@@ -43,9 +43,10 @@ public class Patent implements java.io.Serializable {
 		this.inventor = inventor;
 	}
 
-	public Patent(String title, String abs, String date,
+	public Patent(int patentId, String title, String abs, Date date,
 			String applicant, String inventor,
 			Set<RelExpertPatent> relExpertPatents) {
+		this.patentId = patentId;
 		this.title = title;
 		this.abs = abs;
 		this.date = date;
@@ -82,12 +83,13 @@ public class Patent implements java.io.Serializable {
 		this.abs = abs;
 	}
 
-	@Column(name = "date", nullable = false, length = 0)
-	public String getDate() {
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date", nullable = false, length = 10)
+	public Date getDate() {
 		return this.date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
