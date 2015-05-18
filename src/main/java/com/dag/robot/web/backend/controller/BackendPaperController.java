@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.PaperDao;
@@ -75,5 +76,23 @@ public class BackendPaperController {
 		PaperForShow paperForShow = EntitiesForShowUtil.paperForShow(paper);
 		model.addAttribute("paper", paperForShow);
 		return "backend/paper/show";
+	}
+	
+	@RequestMapping(value = "/editAbs/{paperId}", method = RequestMethod.POST)
+	public String editAbs(@PathVariable int paperId,
+			String abs,
+			RedirectAttributes redirectAttributes) {
+		//TODO
+		redirectAttributes.addFlashAttribute("EditMsg", "信息修改成功！");
+		return "redirect:/backend/paper/" + paperId;
+	}
+	
+	@RequestMapping(value = "/editKeywords/{paperId}", method = RequestMethod.POST)
+	public String editKeywords(@PathVariable int paperId,
+			String keywords,
+			RedirectAttributes redirectAttributes) {
+		//TODO
+		redirectAttributes.addFlashAttribute("EditMsg", "信息修改成功！");
+		return "redirect:/backend/paper/" + paperId;
 	}
 }
