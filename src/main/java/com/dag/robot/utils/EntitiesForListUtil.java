@@ -1,21 +1,15 @@
 package com.dag.robot.utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.experimental.theories.PotentialAssignment.CouldNotGenerateValueException;
-
 import com.dag.robot.entities.CoreJournal;
 import com.dag.robot.entities.Expert;
-import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
-import com.dag.robot.entities.RelExpertOrg;
 import com.dag.robot.entities.RelExpertPaper;
-import com.dag.robot.entities.RelPaperJournal;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.PaperForShow;

@@ -16,8 +16,6 @@ import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
 import com.dag.robot.entities.RelExpertField;
 import com.dag.robot.entities.RelExpertFieldId;
-import com.dag.robot.entities.RelExpertOrg;
-import com.dag.robot.entities.RelExpertOrgId;
 import com.dag.robot.entities.RelExpertPaper;
 import com.dag.robot.entities.RelExpertPaperId;
 import com.dag.robot.entities.RelExpertPatent;
@@ -112,13 +110,9 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	@Override
 	public void addOrgnization(Expert expert, Orgnization orgnization,
 			String job) {
+		expert.setOrgnization(orgnization);
+		expert.setJob(job);
 		saveOrUpdate(expert);
-		saveOrUpdate(orgnization);
-		RelExpertOrgId relExpertOrgId = new RelExpertOrgId(expert.getExpertId(),
-				orgnization.getOrgId());
-		RelExpertOrg relExpertOrg = new RelExpertOrg(relExpertOrgId, expert, orgnization,
-				job);
-		saveOrUpdate(relExpertOrg);
 	}
 
 	@Override

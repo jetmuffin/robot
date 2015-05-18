@@ -1,19 +1,13 @@
 package com.dag.robot.db.dao.impl;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.dag.robot.db.dao.PaperDao;
-import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Paper;
-import com.dag.robot.entities.RelExpertPaper;
-import com.dag.robot.entities.RelPaperJournal;
 import com.dag.robot.utils.EntitiesForListUtil;
-import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperForShow;
 

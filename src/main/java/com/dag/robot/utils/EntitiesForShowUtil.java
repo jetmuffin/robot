@@ -11,18 +11,13 @@ import org.apache.commons.math3.analysis.function.Exp;
 import com.dag.robot.entities.Activity;
 import com.dag.robot.entities.CoreJournal;
 import com.dag.robot.entities.Expert;
-import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
-import com.dag.robot.entities.RelExpertOrg;
 import com.dag.robot.entities.RelExpertPaper;
 import com.dag.robot.entities.RelExpertPatent;
 import com.dag.robot.entities.RelExpertTopic;
-import com.dag.robot.entities.RelPaperJournal;
 import com.dag.robot.entities.Topic;
-import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.ExpertForShow;
-import com.dag.robot.web.bean.PaperForShow;
 import com.dag.robot.web.bean.PaperForShow;
 
 public class EntitiesForShowUtil {

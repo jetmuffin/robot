@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.entities.Orgnization;
-import com.dag.robot.entities.RelExpertOrg;
 
 @Repository("orgnizationDao")
 public class OrgnizationDaoImpl extends BaseDao implements OrgnizationDao {
