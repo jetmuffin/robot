@@ -38,10 +38,10 @@
 	<jsp:include page="../common/sidebar.jsp"></jsp:include>
 	<!-- main container -->
 	<div class="content">
-		<c:if test="${not empty EditMsg}">
+		<c:if test="${not empty message}">
 					<div class="alert alert-info">
 						<i class="fa fa-exclamation-circle"></i>
-						${EditMsg}
+						${message}
 					</div>
 		</c:if>
 		<div class="container-fluid">

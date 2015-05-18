@@ -83,7 +83,7 @@ public class BackendPaperController {
 			String abs,
 			RedirectAttributes redirectAttributes) {
 		//TODO
-		redirectAttributes.addFlashAttribute("EditMsg", "信息修改成功！");
+		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/paper/" + paperId;
 	}
 	
@@ -92,7 +92,7 @@ public class BackendPaperController {
 			String keywords,
 			RedirectAttributes redirectAttributes) {
 		//TODO
-		redirectAttributes.addFlashAttribute("EditMsg", "信息修改成功！");
+		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/paper/" + paperId;
 	}
 	
@@ -120,7 +120,20 @@ public class BackendPaperController {
 			//TODO
 		}
 		
-		redirectAttributes.addFlashAttribute("addMsg", "添加论文成功！");
+		redirectAttributes.addFlashAttribute("message", "添加论文成功！");
 		return "redirect:papers";
 	}
+	
+	/**
+	 * 删除论文
+	 * @param paperId 论文ID
+	 * @param redirectAttributes
+	 * @return
+	 */
+	@RequestMapping(value = "/delete/{paperId}", method = RequestMethod.GET)
+	public String delete(@PathVariable int paperId,RedirectAttributes redirectAttributes) {
+		//TODO
+		redirectAttributes.addFlashAttribute("message", "删除论文成功！");
+		return "redirect:patents";
+	}	
 }

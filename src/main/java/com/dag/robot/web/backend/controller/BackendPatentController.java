@@ -58,6 +58,19 @@ public class BackendPatentController {
 		return "backend/patent/list";
 	}
 	
+	/**
+	 * 查看专利
+	 * @param model
+	 * @param patentId 专利ID
+	 * @return
+	 */
+	@RequestMapping(value = "/{patentId}", method = RequestMethod.GET)
+	public String get(Model model,@PathVariable int patentId) {
+		//TODO
+		
+//		model.addAttribute("patent", arg1);
+		return "backend/patent/show";
+	}
 
 	/**
 	 * 修改摘要
@@ -68,7 +81,7 @@ public class BackendPatentController {
 	@RequestMapping(value = "/editAbs/{patentId}", method = RequestMethod.POST)
 	public String editAbs(@PathVariable int patentId,RedirectAttributes redirectAttributes) {
 		//TODO
-		redirectAttributes.addFlashAttribute("addMsg", "添加专利成功！");
+		redirectAttributes.addFlashAttribute("message", "添加专利成功！");
 		return "redirect:/backend/patent/" + patentId;
 	}
 	
@@ -85,7 +98,19 @@ public class BackendPatentController {
 	public String add(String title,String applicant,String abs,String organization
 			,String[] inventors,RedirectAttributes redirectAttributes) {
 		//TODO
-		redirectAttributes.addFlashAttribute("addMsg", "添加专利成功！");
+		redirectAttributes.addFlashAttribute("message", "添加专利成功！");
+		return "redirect:patents";
+	}	
+	
+	/**
+	 * 删除专利
+	 * @param patentId 专利ID
+	 * @return
+	 */
+	@RequestMapping(value = "/delete/{patentId}", method = RequestMethod.GET)
+	public String delete(@PathVariable int patentId,RedirectAttributes redirectAttributes) {
+		//TODO
+		redirectAttributes.addFlashAttribute("message", "删除专利成功！");
 		return "redirect:patents";
 	}	
 }

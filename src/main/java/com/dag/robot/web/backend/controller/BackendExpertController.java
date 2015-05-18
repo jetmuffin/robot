@@ -137,7 +137,7 @@ public class BackendExpertController {
 			RedirectAttributes redirectAttributes) {
 		add(name, gender, email, address, homepage, experience, info, topic,
 				achievement, organization);
-		redirectAttributes.addFlashAttribute("addMsg", "专家信息添加成功!");
+		redirectAttributes.addFlashAttribute("message", "专家信息添加成功!");
 		return "redirect:experts";
 	}
 
@@ -151,7 +151,7 @@ public class BackendExpertController {
 			RedirectAttributes redirectAttributes) {
 		Expert expert = expertDao.getById(expertId);
 		expertDao.deleteExpert(expert);
-		redirectAttributes.addFlashAttribute("deleteMsg", "专家信息已删除!");
+		redirectAttributes.addFlashAttribute("message", "专家信息已删除!");
 		return "index";
 	}
 
@@ -167,7 +167,7 @@ public class BackendExpertController {
 			String experience,
 			RedirectAttributes redirectAttributes) {
 		expertDao.updateExperience(expertId, experience);
-		redirectAttributes.addAttribute("EditMsg", "信息修改成功！");
+		redirectAttributes.addAttribute("message", "信息修改成功！");
 		return "redirect:/backend/expert/" + expertId;
 	}
 
@@ -175,7 +175,7 @@ public class BackendExpertController {
 	public String editInfo(@PathVariable int expertId,
 			String info, RedirectAttributes redirectAttributes) {
 		expertDao.updateInfo(expertId, info);
-		redirectAttributes.addFlashAttribute("EditMsg", "信息修改成功！");
+		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/expert/" + expertId;
 	}
 
@@ -184,7 +184,7 @@ public class BackendExpertController {
 			String achievement,
 			RedirectAttributes redirectAttributes) {
 		expertDao.updateAchievement(expertId, achievement);
-		redirectAttributes.addFlashAttribute("EditMsg", "信息修改成功！");
+		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/expert/" + expertId;
 	}
 
@@ -217,5 +217,6 @@ public class BackendExpertController {
 			relExpertTopicDao.addRelExeprtTopic(relExpertTopic);
 		}
 	}
+
 
 }
