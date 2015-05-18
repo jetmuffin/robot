@@ -36,5 +36,12 @@ public class OrgnizationDaoImpl extends BaseDao implements OrgnizationDao {
 	public void deleteOrgnization(Orgnization orgnization) {
 		delete(orgnization);
 	}
+
+	@Override
+	public List<Orgnization> getByName(String orgnizationName) {
+		String hql = "from Orgnization as org where org.name = ?";
+		List<Orgnization> orgnizations = query(hql).setString(0, orgnizationName).list();
+		return orgnizations;
+	}
 	
 }

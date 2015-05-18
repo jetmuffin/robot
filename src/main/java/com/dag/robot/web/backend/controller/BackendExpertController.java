@@ -179,9 +179,15 @@ public class BackendExpertController {
 			String achievement, String organization) {
 		Expert expert = new Expert(name, gender, email, address, homepage,
 				experience, info, achievement);
-		Orgnization orgnization = new Orgnization(organization);
+		//组织查重
+		List<Orgnization> orgnizations = orgnizationDao.getByName(organization);
+		Orgnization orgnization = new Orgnization();
+		if(orgnizations.size() == 0 || orgnizations == null){
+			orgnization.setName(organization);
+		}else {
+			orgnization = orgnizations.get(0);
+		}
 		expert.setOrgnization(orgnization);
-		
 		expertDao.addExpert(expert);
 
 		List<String> topics = StringSplitUtil.stringSplit(topic);
