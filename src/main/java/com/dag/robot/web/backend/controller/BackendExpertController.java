@@ -184,6 +184,7 @@ public class BackendExpertController {
 		Orgnization orgnization = new Orgnization();
 		if(orgnizations.size() == 0 || orgnizations == null){
 			orgnization.setName(organization);
+			orgnizationDao.addOrgnization(orgnization);
 		}else {
 			orgnization = orgnizations.get(0);
 		}

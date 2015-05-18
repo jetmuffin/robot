@@ -49,7 +49,7 @@ $(function() {
 		if(org != '')
 			ok2 = true;
 		$('input[name="orgnization"]').val(org);
-		$('input[name="topic"').val(topic);
+		$('input[name="topic"]').val(topic);
 		console.log(org);
 		if(!ok1){
 			$("html,body").animate({scrollTop:0},100);
