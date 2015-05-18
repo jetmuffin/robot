@@ -2,3 +2,5 @@ target/*
 .settings/*
 .classpath
 .project
+src/main/webapps/WEB-INF/config/mysql.properties
+/target/
