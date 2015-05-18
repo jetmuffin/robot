@@ -11,7 +11,7 @@
 
 	<div id="authors">
 		<div class="input-group">
-			<label>作者:</label> <input id='author-input' name="authors[0]"
+			<label>作者:</label> <input id='author-input' name="authors"
 				value="" type='text' data-toggle="popover" title=" "
 				data-content=" " class='author-input tags span8' onblur="duplicateName(this)">
 		</div>

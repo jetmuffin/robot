@@ -38,9 +38,9 @@
 	<jsp:include page="../common/sidebar.jsp"></jsp:include>
 	<!-- main container -->
 	<div class="content">
-		<c:if test="${not empty EditMsg}">
+		<c:if test="${not empty message}">
 			<div class="alert alert-info">
-				<i class="fa fa-exclamation-circle"></i> ${EditMsg}
+				<i class="fa fa-exclamation-circle"></i> ${message}
 			</div>
 		</c:if>
 		<div class="container-fluid">
@@ -51,7 +51,7 @@
 						<h3 class="name">${paper.title}</h3>
 					</div>
 					<a class="btn-flat icon pull-right delete-user"
-						href="/robot/backend/expert/delete/${paper.paperId}"
+						href="/robot/backend/paper/delete/${paper.paperId}"
 						data-toggle="tooltip" title="Delete user" data-placement="top">
 						<i class="fa fa-trash"></i>
 					</a> <a href="/robot/backend/paper/edit/${paper.paperId}"

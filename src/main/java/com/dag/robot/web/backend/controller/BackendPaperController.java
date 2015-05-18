@@ -83,7 +83,7 @@ public class BackendPaperController {
 			String abs,
 			RedirectAttributes redirectAttributes) {
 		//TODO
-		redirectAttributes.addFlashAttribute("EditMsg", "信息修改成功！");
+		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/paper/" + paperId;
 	}
 	
@@ -92,7 +92,48 @@ public class BackendPaperController {
 			String keywords,
 			RedirectAttributes redirectAttributes) {
 		//TODO
-		redirectAttributes.addFlashAttribute("EditMsg", "信息修改成功！");
+		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/paper/" + paperId;
 	}
+	
+	/**
+	 * 添加论文
+	 * @param title 标题
+	 * @param authors 作者(数组)
+	 * @param abs 摘要
+	 * @param keywords 关键词 字符串以 ',' 分开
+	 * @param type 类别 journal或conference
+	 * @param journal 期刊名 type为journal时用
+	 * @param issue 收录日期 yyyy年i期 type为conference用
+	 	* @param conference	会议名 type为conference用
+	 	*  @param time 会议时间( 'yyyy年mm月dd日' type为conference用
+	 * @return
+	 */
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String add(String title,String[] authors,String abs,
+			String keywords,String type,String journal,String issue,
+			String conference,String time,RedirectAttributes redirectAttributes) {
+		//TODO
+		if(type.equals("journal")){
+			//TODO
+		} else if(type.equals("conference")){
+			//TODO
+		}
+		
+		redirectAttributes.addFlashAttribute("message", "添加论文成功！");
+		return "redirect:papers";
+	}
+	
+	/**
+	 * 删除论文
+	 * @param paperId 论文ID
+	 * @param redirectAttributes
+	 * @return
+	 */
+	@RequestMapping(value = "/delete/{paperId}", method = RequestMethod.GET)
+	public String delete(@PathVariable int paperId,RedirectAttributes redirectAttributes) {
+		//TODO
+		redirectAttributes.addFlashAttribute("message", "删除论文成功！");
+		return "redirect:patents";
+	}	
 }

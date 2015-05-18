@@ -40,20 +40,10 @@
 	<!-- main container -->
 	<div class="content">
 		<c:if test="${not empty message}">
-			<c:choose>
-				<c:when test="${message.type eq 'info'}">
 					<div class="alert alert-info">
 						<i class="fa fa-exclamation-circle"></i>
-						${message.content}
+						${message}
 					</div>
-				</c:when>
-				<c:when test="${message.type eq 'error'}">
-					<div class="alert alert-error">
-						<i class="fa fa-exclamation-triangle "></i>
-						${message.content}
-					</div>
-				</c:when>
-			</c:choose>
 		</c:if>
 		<div class="container-fluid">
 			<div id="pad-wrapper" class="users-list">
