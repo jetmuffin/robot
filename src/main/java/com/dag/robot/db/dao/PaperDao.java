@@ -47,4 +47,19 @@ public interface PaperDao {
 	 * @return
 	 */
 	public Page<PaperForList> page(int pageSize, int currenPage);
+	
+	/**
+	 * 修改论文的摘要
+	 * @param paperId
+	 * @param abs
+	 */
+	public void updateAbs(int paperId, String abs);
+	
+	/**
+	 * 修改论文的关键字
+	 * @param paperId
+	 * @param abs
+	 */
+	public void updateKeywords(int paperId, String keywords);
+	
 }

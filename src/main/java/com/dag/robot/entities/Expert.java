@@ -39,6 +39,7 @@ public class Expert implements java.io.Serializable {
 	private String info;
 	private String achievement;
 	private String activity;
+	private String url;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
 			0);
 	private Set<RelExpertTopic> relExpertTopics = new HashSet<RelExpertTopic>(0);
@@ -229,7 +230,16 @@ public class Expert implements java.io.Serializable {
 	public void setActivity(String activity) {
 		this.activity = activity;
 	}
+	
+	@Column(name = "url", length = 100)
+	public String getUrl() {
+		return url;
+	}
 
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expert")
 	public Set<RelExpertPatent> getRelExpertPatents() {
 		return this.relExpertPatents;

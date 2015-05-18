@@ -67,4 +67,11 @@ public class PatentDaoImpl extends BaseDao implements PatentDao {
 		return page;
 	}
 
+	@Override
+	public void updateAbs(int patentId, String abs) {
+		Patent patent = getById(patentId);
+		patent.setAbs(abs);
+		update(patent);
+	}
+
 }

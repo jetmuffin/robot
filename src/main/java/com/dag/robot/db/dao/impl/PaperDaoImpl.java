@@ -77,5 +77,19 @@ public class PaperDaoImpl extends BaseDao implements PaperDao {
 		page.setList(paperForLists);
 		return page;
 	}
+
+	@Override
+	public void updateAbs(int paperId, String abs) {
+		Paper paper = getById(paperId);
+		paper.setAbs(abs);
+		update(paper);
+	}
+
+	@Override
+	public void updateKeywords(int paperId, String keywords) {
+		Paper paper = getById(paperId);
+		paper.setKeywords(keywords);
+		update(paper);
+	}
 	
 }
