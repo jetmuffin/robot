@@ -48,7 +48,7 @@ $(function() {
 		var topic = $('#tags-topic').val();
 		if(org != '')
 			ok2 = true;
-		$('input[name="organization"').val(org);
+		$('input[name="orgnization"]').val(org);
 		$('input[name="topic"').val(topic);
 		console.log(org);
 		if(!ok1){
