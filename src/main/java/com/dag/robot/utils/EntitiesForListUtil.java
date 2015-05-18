@@ -6,15 +6,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.experimental.theories.PotentialAssignment.CouldNotGenerateValueException;
+
+import com.dag.robot.entities.CoreJournal;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
 import com.dag.robot.entities.RelExpertOrg;
+import com.dag.robot.entities.RelExpertPaper;
 import com.dag.robot.entities.RelPaperJournal;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForList;
-import com.dag.robot.web.bean.PaperForList;
+import com.dag.robot.web.bean.PaperForShow;
 import com.dag.robot.web.bean.PatentForList;
 
 public class EntitiesForListUtil {
@@ -32,32 +36,32 @@ public class EntitiesForListUtil {
 			expertForList.setGender(expert.getGender());
 			expertForList.setPaperNum(expert.getPaperNum());
 			expertForList.setPatentNum(expert.getPatentNum());
+			expertForList.setOrg(expert.getOrgnization().getName());
 			
-			Set<RelExpertOrg> relExpertOrgs = expert.getRelExpertOrgs();
-			List<String> orgs = new ArrayList<String>();
-			Iterator<RelExpertOrg> iterator = relExpertOrgs.iterator();
-			while(iterator.hasNext()){
-				RelExpertOrg relExpertOrg = iterator.next();
-				Orgnization orgnization = relExpertOrg.getOrgnization();
-				orgs.add(orgnization.getName());
-			}
-			expertForList.setOrg(StringMergeUtil.stringMerge(orgs));
 			expertForLists.add(expertForList);
 		}
 		return expertForLists;
 	}
 	
-	public static List<PaperForList> paperForLists(List<Paper> papers){
-		List<PaperForList> paperForLists = new ArrayList<PaperForList>();
+	public static List<PaperForShow> paperForLists(List<Paper> papers){
+		List<PaperForShow> paperForLists = new ArrayList<PaperForShow>();
 		if(papers == null || papers.size() == 0)
 			return paperForLists;
 		for(int i = 0; i < papers.size(); i++){
 			Paper paper = papers.get(i);
-			PaperForList paperForList = new PaperForList();
+			PaperForShow paperForList = new PaperForShow();
 			paperForList.setPaperId(paper.getPaperId());
 			paperForList.setAbs(paper.getAbs());
 			paperForList.setKeywords(paper.getKeywords());
 			paperForList.setTitle(paper.getTitle());
+			paperForList.setReferencedNum(paper.getReferencedNum());
+			paperForList.setType(paper.getType());
+			paperForList.setConferences(paper.getConference());
+			paperForList.setJournal(paper.getJournal());
+			
+			List<CoreJournal> coreJournals = new ArrayList<CoreJournal>();
+			coreJournals.addAll(paper.getCoreJournals());
+			paperForList.setCoreJournals(coreJournals);
 			
 			Set<Topic> topics = paper.getTopics();
 			List<Topic> topicList = new ArrayList<Topic>();
@@ -68,13 +72,16 @@ public class EntitiesForListUtil {
 			}
 			paperForList.setTopics(topicList);
 			
-			Set<RelPaperJournal> relPaperJournals = paper.getRelPaperJournals();
-			List<RelPaperJournal> relPaperJournals2 = new ArrayList<RelPaperJournal>();
-			relPaperJournals2.addAll(relPaperJournals);
-			if(relPaperJournals2.size() == 0)
-				paperForList.setJournal(null);
-			else
-				paperForList.setJournal(relPaperJournals2.get(0).getJournal().getName());//论文会议只有一个
+			Set<RelExpertPaper> relExpertPapers = paper.getRelExpertPapers();
+			List<Expert> experts = new ArrayList<Expert>();
+			Iterator<RelExpertPaper> iterator2 = relExpertPapers.iterator();
+			while(iterator.hasNext()){
+				RelExpertPaper relExpertPaper = iterator2.next();
+				Expert expert = relExpertPaper.getExpert();
+				experts.add(expert);
+			}
+			paperForList.setExperts(experts);
+
 			paperForLists.add(paperForList);
 		}
 		return paperForLists;

@@ -106,9 +106,11 @@ public class TestController {
 //		List<Field> list = expertDao.getFields(6);
 //		System.out.println(list.size());
 		
-		Expert expert = new Expert("szq", "boy", 1, 1, 1);
-		expert.setUrl("url");
-		expertDao.addExpert(expert);
+//		Expert expert = new Expert("szq", "boy", 1, 1, 1);
+//		expert.setUrl("url");
+//		expertDao.addExpert(expert);
+		Expert expert = expertDao.getById(12);
+		expertDao.deleteExpert(expert);
 		
 		return "test/index";
 
@@ -157,8 +159,11 @@ public class TestController {
 //		Paper paper = paperDao.getById(2);
 //		paper.setKeywords("key");
 //		paperDao.updatePaper(paper);
-		paperDao.updateAbs(2, "sdiasg");
-		paperDao.updateKeywords(3, "sdhaisdfdg");
+//		paperDao.updateAbs(2, "sdiasg");
+//		paperDao.updateKeywords(3, "sdhaisdfdg");
+		Paper paper = paperDao.getById(2);
+		paperDao.deletePaper(paper);
+		
 		return "test/index";
 	}
 	

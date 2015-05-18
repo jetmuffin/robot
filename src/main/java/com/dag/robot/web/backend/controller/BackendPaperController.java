@@ -25,7 +25,7 @@ import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.Page;
-import com.dag.robot.web.bean.PaperForList;
+import com.dag.robot.web.bean.PaperForShow;
 import com.dag.robot.web.bean.PaperForShow;
 
 @Controller
@@ -65,7 +65,7 @@ public class BackendPaperController {
 	public String list(Model model,String page,String pageSize) {
 		int _page = page == null ? DEFAULT_PAGE : Integer.parseInt(page);
 		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(pageSize);
-		Page<PaperForList> pages = paperDao.page(_pageSize, _page);//起始页为1
+		Page<PaperForShow> pages = paperDao.page(_pageSize, _page);//起始页为1
 		model.addAttribute("pages", pages);
 		return "backend/paper/list";
 	}

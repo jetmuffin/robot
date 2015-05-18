@@ -2,6 +2,7 @@ package com.dag.robot.web.bean;
 
 import java.util.List;
 
+import com.dag.robot.entities.Activity;
 import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
@@ -21,11 +22,14 @@ public class ExpertForShow {
 	private String experience;
 	private String info;
 	private String achievement;
-	private String activity;
+	private int rate;
+	private Orgnization orgnization;
+	
+	
 	private List<Paper> papers;
 	private List<Patent> patents;
 	private List<Topic> topics;
-	private List<Orgnization> orgnizations;
+	private List<Activity> activities;
 	public ExpertForShow() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -33,9 +37,9 @@ public class ExpertForShow {
 	public ExpertForShow(Integer expertId, String name, String gender,
 			String email, String address, String homepage, int paperNum,
 			int patentNum, int paperReferedNum, String prize,
-			String experience, String info, String achievement,
-			String activity, List<Paper> papers, List<Patent> patents,
-			List<Topic> topics, List<Orgnization> orgnizations) {
+			String experience, String info, String achievement, int rate,
+			Orgnization orgnization, List<Paper> papers, List<Patent> patents,
+			List<Topic> topics, List<Activity> activities) {
 		super();
 		this.expertId = expertId;
 		this.name = name;
@@ -50,11 +54,22 @@ public class ExpertForShow {
 		this.experience = experience;
 		this.info = info;
 		this.achievement = achievement;
-		this.activity = activity;
+		this.rate = rate;
+		this.orgnization = orgnization;
 		this.papers = papers;
 		this.patents = patents;
 		this.topics = topics;
-		this.orgnizations = orgnizations;
+		this.activities = activities;
+	}
+
+
+
+
+	public List<Activity> getActivities() {
+		return activities;
+	}
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
 	}
 	public Integer getExpertId() {
 		return expertId;
@@ -134,12 +149,6 @@ public class ExpertForShow {
 	public void setAchievement(String achievement) {
 		this.achievement = achievement;
 	}
-	public String getActivity() {
-		return activity;
-	}
-	public void setActivity(String activity) {
-		this.activity = activity;
-	}
 	public List<Paper> getPapers() {
 		return papers;
 	}
@@ -158,10 +167,20 @@ public class ExpertForShow {
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
-	public List<Orgnization> getOrgnizations() {
-		return orgnizations;
+
+	public int getRate() {
+		return rate;
 	}
-	public void setOrgnizations(List<Orgnization> orgnizations) {
-		this.orgnizations = orgnizations;
+
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+
+	public Orgnization getOrgnization() {
+		return orgnization;
+	}
+
+	public void setOrgnization(Orgnization orgnization) {
+		this.orgnization = orgnization;
 	}
 }
