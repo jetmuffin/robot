@@ -49,5 +49,5 @@ public interface JournalDao {
 	 * @param name
 	 * @return
 	 */
-	public List<Journal> check(String name);
+	public Journal check(String name);
 }

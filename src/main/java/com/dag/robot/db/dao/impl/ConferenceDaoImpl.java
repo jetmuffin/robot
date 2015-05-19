@@ -46,9 +46,11 @@ public class ConferenceDaoImpl extends BaseDao implements ConferenceDao{
 	}
 
 	@Override
-	public List<Conference> check(String name) {
+	public Conference check(String name) {
 		List<Conference> conferences = getByName(name); 
-		return conferences;
+		if(conferences.size() == 0 || conferences == null)
+			return null;
+		return conferences.get(0);
 	}
 
 }
