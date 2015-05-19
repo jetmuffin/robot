@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 import com.dag.robot.db.dao.OrgnizationDao;
+import com.dag.robot.entities.Conference;
 import com.dag.robot.entities.Orgnization;
 
 @Repository("orgnizationDao")
@@ -42,6 +43,15 @@ public class OrgnizationDaoImpl extends BaseDao implements OrgnizationDao {
 		String hql = "from Orgnization as org where org.name = ?";
 		List<Orgnization> orgnizations = query(hql).setString(0, orgnizationName).list();
 		return orgnizations;
+	}
+
+	@Override
+	public Orgnization check(String name) {
+		String hql = "from Orgnization as org where org.name = ?";
+		List<Orgnization> orgnizations = query(hql).setString(0, name).list();
+		if(orgnizations.size() == 0)
+			return null;
+		return orgnizations.get(0);
 	}
 	
 }

@@ -5,25 +5,29 @@ import java.util.List;
 
 import com.dag.robot.entities.Expert;
 
-public class PatentForList {
+public class PatentForShow {
 	private int patentId;
 	private String title;
+	private String abs;
 	private Date date;
 	private String applicant;
 	private String inventor;
+	private List<Expert> experts;
 	
-	public PatentForList() {
+	public PatentForShow() {
 		super();
 	}
 
-	public PatentForList(int patentId, String title, Date date,
-			String applicant, String inventor) {
+	public PatentForShow(int patentId, String title, String abs, Date date,
+			String applicant, String inventor, List<Expert> experts) {
 		super();
 		this.patentId = patentId;
 		this.title = title;
+		this.abs = abs;
 		this.date = date;
 		this.applicant = applicant;
 		this.inventor = inventor;
+		this.experts = experts;
 	}
 
 	public int getPatentId() {
@@ -40,6 +44,14 @@ public class PatentForList {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getAbs() {
+		return abs;
+	}
+
+	public void setAbs(String abs) {
+		this.abs = abs;
 	}
 
 	public Date getDate() {
@@ -66,4 +78,12 @@ public class PatentForList {
 		this.inventor = inventor;
 	}
 
+	public List<Expert> getExperts() {
+		return experts;
+	}
+
+	public void setExperts(List<Expert> experts) {
+		this.experts = experts;
+	}
+	
 }

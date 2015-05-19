@@ -77,7 +77,7 @@ $(function(){
 		}
 		var keywords = $('#tags-keywords').val();
 		$('input[name="author"]').val(author);
-		$('input[name="keywords]"').val(keywords);
+		$('input[name="keywords"]').val(keywords);
 		$('.author-input').each(function(){
 			console.log($(this).attr('data-id'));
 		});

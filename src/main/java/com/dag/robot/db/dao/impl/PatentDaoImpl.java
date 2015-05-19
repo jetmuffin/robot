@@ -14,7 +14,7 @@ import com.dag.robot.entities.RelExpertPatent;
 import com.dag.robot.utils.EntitiesForListUtil;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
-import com.dag.robot.web.bean.PatentForList;
+import com.dag.robot.web.bean.PatentForShow;
 
 @Repository("patentDao")
 public class PatentDaoImpl extends BaseDao implements PatentDao {
@@ -45,16 +45,16 @@ public class PatentDaoImpl extends BaseDao implements PatentDao {
 	}
 
 	@Override
-	public Page<PatentForList> page(int pageSize, int currenPage) {
+	public Page<PatentForShow> page(int pageSize, int currenPage) {
 		Query query = query("select count(*) from Patent");
 		Long totalCount =  (Long) query.uniqueResult();
-		Page<PatentForList> page = new Page<PatentForList>(currenPage, pageSize, totalCount);
+		Page<PatentForShow> page = new Page<PatentForShow>(currenPage, pageSize, totalCount);
 		page.init();
 		query = query("from Patent");
 		query.setFirstResult((currenPage-1) * pageSize);
 		query.setMaxResults(pageSize);
 		List<Patent> patents = query.list();
-		List<PatentForList> patentForLists = EntitiesForListUtil.patentForLists(patents);
+		List<PatentForShow> patentForLists = EntitiesForListUtil.patentForLists(patents);
 		page.setList(patentForLists);
 		return page;
 	}

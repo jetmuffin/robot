@@ -29,7 +29,7 @@ public class JournalDaoImpl extends BaseDao implements JournalDao{
 
 	@Override
 	public List<Journal> getByName(String name) {
-		String hql = "from Journal journal con where journal.name = ?";
+		String hql = "from Journal as journal where journal.name = ?";
 		List<Journal> journals = query(hql).setString(0, name).list();
 		return journals;
 	}

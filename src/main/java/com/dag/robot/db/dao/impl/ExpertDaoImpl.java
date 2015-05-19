@@ -240,5 +240,17 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		updateExpert(expert);
 	}
 
+	@Override
+	public Expert checkSame(String name, String OrgName) {
+		List<Expert> experts = getByName(name);
+		if(experts.size() != 0){
+			for(int i = 0; i < experts.size(); i++){
+				if(experts.get(i).getOrgnization().getName().equals(OrgName))
+					return experts.get(i);
+			}
+		}
+		return null;
+	}
+
 	
 }

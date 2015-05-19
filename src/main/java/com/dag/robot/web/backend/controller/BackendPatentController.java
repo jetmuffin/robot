@@ -13,9 +13,11 @@ import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.PatentDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
+import com.dag.robot.entities.Patent;
+import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperForShow;
-import com.dag.robot.web.bean.PatentForList;
+import com.dag.robot.web.bean.PatentForShow;
 
 @Controller
 @RequestMapping("/backend/patent")
@@ -53,7 +55,7 @@ public class BackendPatentController {
 	public String list(Model model,String page,String pageSize) {
 		int _page = page == null ? DEFAULT_PAGE : Integer.parseInt(page);
 		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(pageSize);
-		Page<PatentForList> pages = patentDao.page(_pageSize, _page);//起始页为1
+		Page<PatentForShow> pages = patentDao.page(_pageSize, _page);//起始页为1
 		model.addAttribute("pages", pages);
 		return "backend/patent/list";
 	}
@@ -66,22 +68,23 @@ public class BackendPatentController {
 	 */
 	@RequestMapping(value = "/{patentId}", method = RequestMethod.GET)
 	public String get(Model model,@PathVariable int patentId) {
-		//TODO
-		
-//		model.addAttribute("patent", arg1);
+		Patent patent = patentDao.getById(patentId);
+		PatentForShow patentForShow = EntitiesForShowUtil.patentForShow(patent);
+		model.addAttribute("patent", patentForShow);
 		return "backend/patent/show";
 	}
 
 	/**
 	 * 修改摘要
 	 * @param patentId 专利ID
+	 * @param abs
 	 * @param redirectAttributes 
 	 * @return
 	 */
 	@RequestMapping(value = "/editAbs/{patentId}", method = RequestMethod.POST)
-	public String editAbs(@PathVariable int patentId,RedirectAttributes redirectAttributes) {
-		//TODO
-		redirectAttributes.addFlashAttribute("message", "添加专利成功！");
+	public String editAbs(@PathVariable int patentId,@PathVariable String abs, RedirectAttributes redirectAttributes) {
+		patentDao.updateAbs(patentId, abs);
+		redirectAttributes.addFlashAttribute("message", "修改专利成功！");
 		return "redirect:/backend/patent/" + patentId;
 	}
 	
@@ -97,8 +100,7 @@ public class BackendPatentController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(String title,String applicant,String abs,String organization
 			,String[] inventors,RedirectAttributes redirectAttributes) {
-		//TODO
-		redirectAttributes.addFlashAttribute("message", "添加专利成功！");
+		redirectAttributes.addFlashAttribute("message", "修改专利成功！");
 		return "redirect:patents";
 	}	
 	

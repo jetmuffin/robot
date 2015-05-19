@@ -13,7 +13,7 @@ import com.dag.robot.entities.RelExpertPaper;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.PaperForShow;
-import com.dag.robot.web.bean.PatentForList;
+import com.dag.robot.web.bean.PatentForShow;
 
 public class EntitiesForListUtil {
 	
@@ -81,12 +81,12 @@ public class EntitiesForListUtil {
 		return paperForLists;
 	}
 	
-	public static List<PatentForList> patentForLists(List<Patent> patents){
-		List<PatentForList> patentForLists = new ArrayList<PatentForList>();
+	public static List<PatentForShow> patentForLists(List<Patent> patents){
+		List<PatentForShow> patentForLists = new ArrayList<PatentForShow>();
 		if(patents.size() == 0 || patents == null)
 			return patentForLists;
 		for(int i = 0; i < patents.size(); i++){
-			PatentForList patentForList = new PatentForList();
+			PatentForShow patentForList = new PatentForShow();
 			Patent patent = patents.get(i);
 			patentForList.setPatentId(patent.getPatentId());
 			patentForList.setApplicant(patent.getApplicant());

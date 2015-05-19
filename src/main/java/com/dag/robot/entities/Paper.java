@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-19 14:04:10 by Hibernate Tools 4.3.1
+// Generated 2015-5-19 19:31:02 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,6 +30,7 @@ public class Paper implements java.io.Serializable {
 	private Integer paperId;
 	private Conference conference;
 	private Journal journal;
+	private Orgnization orgnization;
 	private String title;
 	private String abs;
 	private String keywords;
@@ -53,12 +54,14 @@ public class Paper implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public Paper(Conference conference, Journal journal, String title,
-			String abs, String keywords, int referencedNum, String type,
-			Date conferenceDate, String issue, Set<Topic> topics,
-			Set<RelExpertPaper> relExpertPapers, Set<CoreJournal> coreJournals) {
+	public Paper(Conference conference, Journal journal,
+			Orgnization orgnization, String title, String abs, String keywords,
+			int referencedNum, String type, Date conferenceDate, String issue,
+			Set<Topic> topics, Set<RelExpertPaper> relExpertPapers,
+			Set<CoreJournal> coreJournals) {
 		this.conference = conference;
 		this.journal = journal;
+		this.orgnization = orgnization;
 		this.title = title;
 		this.abs = abs;
 		this.keywords = keywords;
@@ -100,6 +103,16 @@ public class Paper implements java.io.Serializable {
 
 	public void setJournal(Journal journal) {
 		this.journal = journal;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "orgId")
+	public Orgnization getOrgnization() {
+		return this.orgnization;
+	}
+
+	public void setOrgnization(Orgnization orgnization) {
+		this.orgnization = orgnization;
 	}
 
 	@Column(name = "title", nullable = false, length = 50)

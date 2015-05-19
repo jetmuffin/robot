@@ -135,6 +135,13 @@ public interface ExpertDao {
 	public List<ExpertForCheck> check(String expertName);
 	
 	/**
+	 * 查询同一个专家
+	 * @param name
+	 * @return
+	 */
+	public Expert checkSame(String name, String OrgName);
+	
+	/**
 	 * 更新专家履历信息
 	 * @param expertId
 	 * @param experience
