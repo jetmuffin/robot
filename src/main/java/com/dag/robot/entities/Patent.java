@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-19 19:31:02 by Hibernate Tools 4.3.1
+// Generated 2015-5-19 21:06:32 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,6 +24,7 @@ import javax.persistence.TemporalType;
 public class Patent implements java.io.Serializable {
 
 	private int patentId;
+	private Orgnization orgnization;
 	private String title;
 	private String abs;
 	private Date date;
@@ -43,10 +46,11 @@ public class Patent implements java.io.Serializable {
 		this.inventor = inventor;
 	}
 
-	public Patent(int patentId, String title, String abs, Date date,
-			String applicant, String inventor,
+	public Patent(int patentId, Orgnization orgnization, String title,
+			String abs, Date date, String applicant, String inventor,
 			Set<RelExpertPatent> relExpertPatents) {
 		this.patentId = patentId;
+		this.orgnization = orgnization;
 		this.title = title;
 		this.abs = abs;
 		this.date = date;
@@ -63,6 +67,16 @@ public class Patent implements java.io.Serializable {
 
 	public void setPatentId(int patentId) {
 		this.patentId = patentId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "orgId")
+	public Orgnization getOrgnization() {
+		return this.orgnization;
+	}
+
+	public void setOrgnization(Orgnization orgnization) {
+		this.orgnization = orgnization;
 	}
 
 	@Column(name = "title", nullable = false, length = 50)
