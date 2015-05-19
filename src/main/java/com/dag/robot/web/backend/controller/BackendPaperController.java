@@ -137,7 +137,8 @@ public class BackendPaperController {
 	 */
 	@RequestMapping(value = "/delete/{paperId}", method = RequestMethod.GET)
 	public String delete(@PathVariable int paperId,RedirectAttributes redirectAttributes) {
-		//TODO
+		Paper paper = paperDao.getById(paperId);
+		paperDao.deletePaper(paper);
 		redirectAttributes.addFlashAttribute("message", "删除论文成功！");
 		return "redirect:patents";
 	}	

@@ -13,44 +13,42 @@ public class ConferenceDaoImpl extends BaseDao implements ConferenceDao{
 
 	@Override
 	public void addConference(Conference conference) {
-		// TODO Auto-generated method stub
-		
+		save(conference);
 	}
 
 	@Override
 	public void updateConference(Conference conference) {
-		// TODO Auto-generated method stub
-		
+		update(conference);
 	}
 
 	@Override
 	public Conference getById(int conferenceId) {
-		// TODO Auto-generated method stub
-		return null;
+		Conference conference = get(Conference.class, conferenceId);
+		return conference;
 	}
 
 	@Override
-	public Conference getByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Conference> getByName(String name) {
+		String hql = "from Conference as con where con.name = ?";
+		List<Conference> conferences = query(hql).setString(0, name).list();
+		return conferences;
 	}
 
 	@Override
 	public List<Conference> getAllConferences() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Conference> conferences = getAll("Conference");
+		return conferences;
 	}
 
 	@Override
 	public void deleteConference(Conference conference) {
-		// TODO Auto-generated method stub
-		
+		delete(conference);
 	}
 
 	@Override
 	public List<Conference> check(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Conference> conferences = getByName(name); 
+		return conferences;
 	}
 
 }

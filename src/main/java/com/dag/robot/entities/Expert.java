@@ -1,17 +1,14 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-18 21:02:56 by Hibernate Tools 4.3.1
+// Generated 2015-5-19 14:04:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -34,15 +31,15 @@ public class Expert implements java.io.Serializable {
 	private String email;
 	private String address;
 	private String homepage;
-	private int paperNum = 0;
-	private int patentNum = 0;
-	private int paperReferedNum = 0;
+	private int paperNum;
+	private int patentNum;
+	private int paperReferedNum;
 	private String prize;
 	private String experience;
 	private String info;
 	private String achievement;
 	private String url;
-	private Integer rate = 0;
+	private Integer rate;
 	private String job;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
 			0);
@@ -108,7 +105,7 @@ public class Expert implements java.io.Serializable {
 		this.info = info;
 		this.achievement = achievement;
 	}
-
+	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "expertId", unique = true, nullable = false)

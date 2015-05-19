@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-18 21:02:56 by Hibernate Tools 4.3.1
+// Generated 2015-5-19 14:04:10 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,7 @@ public class CoreJournal implements java.io.Serializable {
 
 	private Integer coreJournalId;
 	private String name;
-	private int rate = 0;
+	private int rate;
 	private Set<Paper> papers = new HashSet<Paper>(0);
 
 	public CoreJournal() {

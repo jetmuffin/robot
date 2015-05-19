@@ -30,7 +30,7 @@ public interface ConferenceDao {
 	 * @param conferenceId 会议id
 	 * @return
 	 */
-	public Conference getByName(String name);
+	public List<Conference> getByName(String name);
 	
 	/**
 	 * 获得全部会议信息
