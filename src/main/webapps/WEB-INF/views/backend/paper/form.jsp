@@ -29,7 +29,7 @@
 <div class="field-box">
 	<label>单位:</label>
 	<div class="span9">
-		<input type="text" name="organization" class="span12 " />
+		<input type="text" name="orgnization" class="span12 " />
 	</div>
 </div>
 
