@@ -43,4 +43,11 @@ public interface OrgnizationDao {
 	 * @param Orgnization 组织信息
 	 */
 	public void deleteOrgnization(Orgnization orgnization);
+	
+	/**
+	 * 组织查重
+	 * @param name
+	 * @return
+	 */
+	public Orgnization check(String name);
 }

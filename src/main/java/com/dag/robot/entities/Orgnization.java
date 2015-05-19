@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-19 14:04:10 by Hibernate Tools 4.3.1
+// Generated 2015-5-19 19:31:02 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +26,7 @@ public class Orgnization implements java.io.Serializable {
 	private Orgnization orgnization;
 	private String name;
 	private String address;
+	private Set<Paper> papers = new HashSet<Paper>(0);
 	private Set<Expert> experts = new HashSet<Expert>(0);
 	private Set<Orgnization> orgnizations = new HashSet<Orgnization>(0);
 
@@ -37,10 +38,12 @@ public class Orgnization implements java.io.Serializable {
 	}
 
 	public Orgnization(Orgnization orgnization, String name, String address,
-			Set<Expert> experts, Set<Orgnization> orgnizations) {
+			Set<Paper> papers, Set<Expert> experts,
+			Set<Orgnization> orgnizations) {
 		this.orgnization = orgnization;
 		this.name = name;
 		this.address = address;
+		this.papers = papers;
 		this.experts = experts;
 		this.orgnizations = orgnizations;
 	}
@@ -82,6 +85,15 @@ public class Orgnization implements java.io.Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgnization")
+	public Set<Paper> getPapers() {
+		return this.papers;
+	}
+
+	public void setPapers(Set<Paper> papers) {
+		this.papers = papers;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orgnization")

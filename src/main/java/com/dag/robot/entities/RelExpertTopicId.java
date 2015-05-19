@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-19 14:04:10 by Hibernate Tools 4.3.1
+// Generated 2015-5-19 19:31:02 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

@@ -19,14 +19,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.dag.robot.db.dao.ConferenceDao;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.JournalDao;
+import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.PaperDao;
+import com.dag.robot.db.dao.RelExpertPaperDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Conference;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Journal;
+import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.RelExpertPaper;
+import com.dag.robot.entities.RelExpertPaperId;
 import com.dag.robot.utils.DateUtil;
 import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.ExpertForList;
@@ -55,6 +59,10 @@ public class BackendPaperController {
 	private RelExpertTopicDao relExpertTopicDao;
 	
 	@Autowired
+	@Qualifier("relExpertPaperDao")
+	private RelExpertPaperDao relExpertPaperDao;
+	
+	@Autowired
 	@Qualifier("paperDao")
 	private PaperDao paperDao;
 	
@@ -65,6 +73,10 @@ public class BackendPaperController {
 	@Autowired
 	@Qualifier("journalDao")
 	private JournalDao journalDao;
+	
+	@Autowired
+	@Qualifier("orgnizationDao")
+	private OrgnizationDao orgnizationDao;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(Model model) {
@@ -120,14 +132,15 @@ public class BackendPaperController {
 	 * @param type 类别 journal或conference
 	 * @param journal 期刊名 type为journal时用
 	 * @param issue 收录日期 yyyy年i期 type为journal用
-	 	* @param conference	会议名 type为conference用
-	 	*  @param time 会议时间( 'yyyy年mm月dd日' type为conference用
+	 * @param conference	会议名 type为conference用
+	 * @param time 会议时间( 'yyyy年mm月dd日' type为conference用
+	 * @param orgnization 组织名
 	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(String title,String[] authors,String abs,
 			String keywords,String type,String journal,String issue,
-			String conference,String time,RedirectAttributes redirectAttributes) {
+			String conference,String time,String orgnization, RedirectAttributes redirectAttributes) {
 		Paper paper = new Paper();
 		paper.setTitle(title);
 		paper.setAbs(abs);
@@ -158,6 +171,31 @@ public class BackendPaperController {
 				e.printStackTrace();
 			}
 		}
+		//组织查重
+		Orgnization orgnization2 = orgnizationDao.check(orgnization);
+		if(orgnization2 == null){
+			//没有重复
+			orgnization2 = new Orgnization(orgnization);
+			orgnizationDao.addOrgnization(orgnization2);
+		}
+		paper.setOrgnization(orgnization2);
+		
+		paperDao.addPaper(paper);
+		
+		//作者查重 
+		for(int i = 0; i < authors.length; i++){
+			Expert expert = expertDao.checkSame(authors[i], orgnization);
+			if(expert == null){
+				//没有重复
+				expert = new Expert(authors[i], "男", 0, 0, 0);
+				expert.setOrgnization(orgnization2);
+				expertDao.addExpert(expert);
+			}
+			RelExpertPaperId relExpertPaperId = new RelExpertPaperId(expert.getExpertId(), paper.getPaperId());
+			RelExpertPaper relExpertPaper = new RelExpertPaper(relExpertPaperId, expert, paper, i);
+			relExpertPaperDao.addRelExeprtPaper(relExpertPaper);
+		}
+		
 		redirectAttributes.addFlashAttribute("message", "添加论文成功！");
 		return "redirect:papers";
 	}

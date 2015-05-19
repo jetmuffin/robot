@@ -5,7 +5,7 @@ import java.util.List;
 import com.dag.robot.entities.Patent;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
-import com.dag.robot.web.bean.PatentForList;
+import com.dag.robot.web.bean.PatentForShow;
 
 public interface PatentDao {
 	
@@ -46,7 +46,7 @@ public interface PatentDao {
 	 * @param currenPage 当前页码
 	 * @return 
 	 */
-	public Page<PatentForList> page(int pageSize, int currenPage);
+	public Page<PatentForShow> page(int pageSize, int currenPage);
 	
 	/**
 	 * 修改专利摘要
