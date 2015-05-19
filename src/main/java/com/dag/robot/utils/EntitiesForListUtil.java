@@ -52,6 +52,9 @@ public class EntitiesForListUtil {
 			paperForList.setType(paper.getType());
 			paperForList.setConferences(paper.getConference());
 			paperForList.setJournal(paper.getJournal());
+			paperForList.setIssue(paper.getIssue());
+			paperForList.setConferenceDate(paper.getConferenceDate());
+			paperForList.setOrgnization(paper.getOrgnization());
 			
 			List<CoreJournal> coreJournals = new ArrayList<CoreJournal>();
 			coreJournals.addAll(paper.getCoreJournals());
