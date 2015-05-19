@@ -104,17 +104,27 @@
 								<th class="span2 sortable"><span class="line"></span>作者</th>
 								<th class="span2 sortable"><span class="line"></span>单位</th>
 								<th class="span2 sortable"><span class="line"></span>期刊</th>
+								<th class="span2 sortable"><span class="line"></span>期号</th>
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${pages.list}" var="paper">
 							<!-- row -->
+							${paper.experts}
 							 <tr class="first">
 							 <td>${paper.paperId}</td>
-								<td>
-								<a href="/robot/backend/paper/${paper.paperId}" class="name">${paper.title}</a> </td>
-								<td>${paper.keywords}</td>
+								<td> <a href="/robot/backend/paper/${paper.paperId}" class="name">${paper.title}</a> </td>
+								<td><c:forEach items="${paper.experts}" var="expert">${expert.name} </c:forEach></td>
+								<td>${paper.orgnization.name}</td>
+								<c:if test="${paper.type eq 'journal'}">
+									<td>${paper.journal.name}</td>
+									<td>${paper.issue}</td>
+								</c:if>
+								<c:if test="${paper.type eq 'conference'}">
+									<td>${paper.conferences.name}</td>
+									<td>${paper.conferenceDate}</td>
+								</c:if>								
 							</tr>
 							</c:forEach>
 						</tbody>
