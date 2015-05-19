@@ -72,7 +72,7 @@ public class EntitiesForListUtil {
 			Set<RelExpertPaper> relExpertPapers = paper.getRelExpertPapers();
 			List<Expert> experts = new ArrayList<Expert>();
 			Iterator<RelExpertPaper> iterator2 = relExpertPapers.iterator();
-			while(iterator.hasNext()){
+			while(iterator2.hasNext()){
 				RelExpertPaper relExpertPaper = iterator2.next();
 				Expert expert = relExpertPaper.getExpert();
 				experts.add(expert);
