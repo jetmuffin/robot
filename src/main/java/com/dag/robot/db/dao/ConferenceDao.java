@@ -49,5 +49,5 @@ public interface ConferenceDao {
 	 * @param name
 	 * @return
 	 */
-	public List<Conference> check(String name);
+	public Conference check(String name);
 }

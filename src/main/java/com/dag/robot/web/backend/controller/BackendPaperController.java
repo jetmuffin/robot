@@ -1,6 +1,8 @@
 package com.dag.robot.web.backend.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -14,13 +16,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dag.robot.db.dao.ConferenceDao;
 import com.dag.robot.db.dao.ExpertDao;
+import com.dag.robot.db.dao.JournalDao;
 import com.dag.robot.db.dao.PaperDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
+import com.dag.robot.entities.Conference;
 import com.dag.robot.entities.Expert;
+import com.dag.robot.entities.Journal;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.RelExpertPaper;
+import com.dag.robot.utils.DateUtil;
 import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.ExpertForShow;
@@ -50,6 +57,14 @@ public class BackendPaperController {
 	@Autowired
 	@Qualifier("paperDao")
 	private PaperDao paperDao;
+	
+	@Autowired
+	@Qualifier("conferenceDao")
+	private ConferenceDao conferenceDao;
+	
+	@Autowired
+	@Qualifier("journalDao")
+	private JournalDao journalDao;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(Model model) {
@@ -82,7 +97,7 @@ public class BackendPaperController {
 	public String editAbs(@PathVariable int paperId,
 			String abs,
 			RedirectAttributes redirectAttributes) {
-		//TODO
+		paperDao.updateAbs(paperId, abs);
 		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/paper/" + paperId;
 	}
@@ -91,7 +106,7 @@ public class BackendPaperController {
 	public String editKeywords(@PathVariable int paperId,
 			String keywords,
 			RedirectAttributes redirectAttributes) {
-		//TODO
+		paperDao.updateKeywords(paperId, keywords);
 		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/paper/" + paperId;
 	}
@@ -104,7 +119,7 @@ public class BackendPaperController {
 	 * @param keywords 关键词 字符串以 ',' 分开
 	 * @param type 类别 journal或conference
 	 * @param journal 期刊名 type为journal时用
-	 * @param issue 收录日期 yyyy年i期 type为conference用
+	 * @param issue 收录日期 yyyy年i期 type为journal用
 	 	* @param conference	会议名 type为conference用
 	 	*  @param time 会议时间( 'yyyy年mm月dd日' type为conference用
 	 * @return
@@ -118,13 +133,31 @@ public class BackendPaperController {
 		paper.setAbs(abs);
 		paper.setKeywords(keywords);
 		paper.setType(type);
-		
 		if(type.equals("journal")){
-			//TODO
+			Journal journal2 = journalDao.check(journal);
+			//没有重复
+			if(journal2 == null){
+				journal2 = new Journal(journal);
+				journalDao.addJournal(journal2);
+			}
+			//期刊与期刊号
+			paper.setJournal(journal2);
+			paper.setIssue(issue);
 		} else if(type.equals("conference")){
-			//TODO
+			Conference conference2 = conferenceDao.check(conference);
+			//没有重复
+			if(conference2 == null){
+				conference2 = new Conference(conference, 0);
+				conferenceDao.addConference(conference2);
+			}
+			paper.setConference(conference2);
+			try {
+				paper.setConferenceDate(DateUtil.toDate(time));
+			} catch (ParseException e) {
+				paper.setConferenceDate(null);
+				e.printStackTrace();
+			}
 		}
-		
 		redirectAttributes.addFlashAttribute("message", "添加论文成功！");
 		return "redirect:papers";
 	}
