@@ -8,7 +8,6 @@ $(function() {
 	$("input:checkbox, input:radio").uniform();
 
 	//form validate
-	var ok1 = false;
 	var ok2 = false;
 	var notice_icon = '<i class="fa fa-warning"></i>'
 		$('input[name="name"]').blur(function() {
@@ -17,12 +16,20 @@ $(function() {
 			var name = $(this).val();
 			duplicateName();
 			nameValidate(name);
-			ok1 = true;
 		} else {
 			$('#name-notice').html(notice_icon+" 姓名不能为空!");
 		}
 	});
 
+	$('input[name="orgnization"]').blur(function() {
+		var org = $(this).val();
+		if ($(this).val().length > 0) {
+			$('#name-notice').html("");
+			var name = $(this).val();
+		} else {
+			$('#name-notice').html(notice_icon+" 单位不能为空!");
+		}
+	});
 	
 	$('input[name="email"]').blur(function() {
 		var email = $(this).val();
@@ -44,19 +51,12 @@ $(function() {
 	
 	//sumit the form
 	$('#expert-submit').click(function(){
-		var org = $('#tags-org').val();
-		var topic = $('#tags-topic').val();
-		if(org != '')
-			ok2 = true;
-		$('input[name="orgnization"]').val(org);
-		$('input[name="topic"]').val(topic);
-		console.log(org);
-		if(!ok1){
+		if($('input[name="name"]').val().length == 0){
 			$("html,body").animate({scrollTop:0},100);
 			$('#name-notice').html(notice_icon+" 姓名不能为空!");
 			return;
 		}
-		if(!ok2){
+		if($('input[name="orgnization"]').val.length == 0){
 			$("html,body").animate({scrollTop:0},100);
 			$('#org-notice').html(notice_icon+" 单位不能为空!");
 			return;

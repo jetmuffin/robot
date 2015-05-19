@@ -17,11 +17,14 @@
 						<span class=""><input type="radio" name="gender"
 							id="gender-male" value="male" checked></span>
 					</div> 男
-				</label> <label class="radio">
+				</label> 
+				<label class="radio">
 					<div class="radio" id="uniform-optionsRadios2">
 						<span class="checked"><input type="radio" name="gender"
 							id="gender-female" value="female"></span>
 					</div> 女 
+				</label>
+				</div>
 		</c:when>
 		<c:otherwise>
 			<div class="span8">
