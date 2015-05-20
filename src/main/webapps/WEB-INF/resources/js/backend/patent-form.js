@@ -13,6 +13,10 @@ $(function(){
 		}
 	});
 	
+	$('#datepicker').datepicker({
+		format: "yyyy月mm日dd",
+	});
+	
 	$('input[name="applicant"]').blur(function() {
 		if ($(this).val().length > 0) {
 			$('#applicant-notice').html("");

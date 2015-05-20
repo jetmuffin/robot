@@ -14,6 +14,10 @@ ol, ul, menu {
 	list-style: none outside none;
 }
 
+a{
+	text-decoration: none !important;
+}
+
 #footer .f-nav, #topbar .nav-menu, .filling-box, .filling-box .tab-search-box .search-menu,
 	.filling-box .tab-search-box .input, .filling-box .tab-search-box .input .dropdown-box li,
 	.filling-box .focus-cont .q-cont, .func ul, .rela-report, .rela-report .mod-block .hd,
@@ -369,6 +373,7 @@ rotateY
 	text-align: center;
 	padding-top: 80px;
 	padding-bottom: 80px;
+	background: #f8f8f8;
 }
 
 #divider .fa {
@@ -619,7 +624,8 @@ footer {
 /* filling-box */
 #search {
 	background: url("/robot/resources/img/index/bg.png") no-repeat center
-		top;;
+		top;
+		background-position-y: -220px;
 }
 
 .grid {
@@ -632,11 +638,10 @@ footer {
 
 .filling-box {
 	position: relative;
-	top: 50px;
-	margin: 0 auto 105px;
-	height: 547px;
+	top: -50px;
 	/*background: url(images/bg_filling_box.png) repeat-x*/;
 	background:#fff;
+	height: 260px;
 	border: 1px solid #dbe3f2;
 	border-radius: 8px
 }

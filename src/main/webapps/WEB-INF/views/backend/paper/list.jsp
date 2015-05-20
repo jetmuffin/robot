@@ -111,7 +111,6 @@
 						<tbody>
 							<c:forEach items="${pages.list}" var="paper">
 							<!-- row -->
-							${paper.experts}
 							 <tr class="first">
 							 <td>${paper.paperId}</td>
 								<td> <a href="/robot/backend/paper/${paper.paperId}" class="name">${paper.title}</a> </td>

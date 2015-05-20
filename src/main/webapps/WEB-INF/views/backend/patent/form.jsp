@@ -48,6 +48,13 @@
 	</div>
 </div>
 
+<div class="field-box">
+	<label>申请时间:</label>
+	<div class="span9">
+		<input type="text" name="date" id="datepicker"/>
+	</div>
+</div>
+
 <div class="span11 field-box actions">
 	<input type="button" id="patent-submit" class="btn-glow primary"
 		value="提交" /> <span>OR</span> <input type="reset" value="取消"
