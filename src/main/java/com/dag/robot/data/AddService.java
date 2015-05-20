@@ -159,7 +159,7 @@ public class AddService {
 				expertDao.addExpert(expert);
 			}
 			RelExpertPaperId relExpertPaperId = new RelExpertPaperId(expert.getExpertId(), paper.getPaperId());
-			RelExpertPaper relExpertPaper = new RelExpertPaper(relExpertPaperId, expert, paper, i);
+			RelExpertPaper relExpertPaper = new RelExpertPaper(relExpertPaperId, expert, paper, i+1);
 			relExpertPaperDao.addRelExeprtPaper(relExpertPaper);
 		}
 	}
@@ -195,7 +195,7 @@ public class AddService {
 				expertDao.addExpert(expert);
 			}
 			RelExpertPatentId relExpertPatentId = new RelExpertPatentId(expert.getExpertId(), patent.getPatentId()); 
-			RelExpertPatent relExpertPatent = new RelExpertPatent(relExpertPatentId, expert, patent, i);
+			RelExpertPatent relExpertPatent = new RelExpertPatent(relExpertPatentId, expert, patent, i+1);
 			relExpertPatentDao.addRelExeprtPatent(relExpertPatent);
 		}
 	}

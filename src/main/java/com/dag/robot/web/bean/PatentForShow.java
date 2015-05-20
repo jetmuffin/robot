@@ -34,8 +34,6 @@ public class PatentForShow {
 		this.orgnization = orgnization;
 	}
 
-
-
 	public int getPatentId() {
 		return patentId;
 	}

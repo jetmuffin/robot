@@ -136,7 +136,6 @@ public class EntitiesForShowUtil {
 			Expert expert = relExpertPatent.getExpert();
 			experts.add(expert);
 		}
-		
 		patentForShow.setExperts(experts);
 		return patentForShow;
 		
