@@ -1,5 +1,7 @@
 package com.dag.robot.web.backend.controller;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,10 +12,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dag.robot.db.dao.ExpertDao;
+import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.PatentDao;
+import com.dag.robot.db.dao.RelExpertPatentDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
+import com.dag.robot.entities.Expert;
+import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Patent;
+import com.dag.robot.entities.RelExpertPaper;
+import com.dag.robot.entities.RelExpertPaperId;
+import com.dag.robot.entities.RelExpertPatent;
+import com.dag.robot.entities.RelExpertPatentId;
+import com.dag.robot.utils.DateUtil;
 import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperForShow;
@@ -40,6 +51,14 @@ public class BackendPatentController {
 	@Autowired
 	@Qualifier("patentDao")
 	private PatentDao patentDao;
+	
+	@Autowired
+	@Qualifier("orgnizationDao")
+	private OrgnizationDao orgnizationDao;
+	
+	@Autowired
+	@Qualifier("relExpertPatentDao")
+	private RelExpertPatentDao relExpertPatentDao;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(Model model) {
@@ -96,11 +115,42 @@ public class BackendPatentController {
 	 * @param organization 组织(第一申请人单位)
 	 * @param inventors 发明人(数组)
 	 * @return
+	 * @throws ParseException 
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(String title,String applicant,String abs,String organization
-			,String[] inventors,RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("message", "修改专利成功！");
+			,String[] inventors,String date, String orgnization, RedirectAttributes redirectAttributes) throws ParseException {
+		
+		Patent patent = new Patent();
+		patent.setTitle(title);
+		patent.setAbs(abs);
+		patent.setApplicant(applicant);
+		patent.setDate(DateUtil.toDate(date));
+		
+		//组织查重
+		Orgnization orgnization2 = orgnizationDao.check(orgnization);
+		if(orgnization2 == null){
+			//没有重复
+			orgnization2 = new Orgnization(orgnization);
+			orgnizationDao.addOrgnization(orgnization2);
+		}
+		patent.setOrgnization(orgnization2);
+		
+		patentDao.addPatent(patent);
+		//作者查重 
+		for(int i = 0; i < inventors.length; i++){
+			Expert expert = expertDao.checkSame(inventors[i], orgnization);
+			if(expert == null){
+				//没有重复
+				expert = new Expert(inventors[i], "男", 0, 0, 0);
+				expert.setOrgnization(orgnization2);
+				expertDao.addExpert(expert);
+			}
+			RelExpertPatentId relExpertPatentId = new RelExpertPatentId(expert.getExpertId(), patent.getPatentId()); 
+			RelExpertPatent relExpertPatent = new RelExpertPatent(relExpertPatentId, expert, patent, i);
+			relExpertPatentDao.addRelExeprtPatent(relExpertPatent);
+		}
+		redirectAttributes.addFlashAttribute("message", "添加专利成功！");
 		return "redirect:patents";
 	}	
 	
@@ -111,7 +161,8 @@ public class BackendPatentController {
 	 */
 	@RequestMapping(value = "/delete/{patentId}", method = RequestMethod.GET)
 	public String delete(@PathVariable int patentId,RedirectAttributes redirectAttributes) {
-		//TODO
+		Patent patent = patentDao.getById(patentId);
+		patentDao.deletePatent(patent);
 		redirectAttributes.addFlashAttribute("message", "删除专利成功！");
 		return "redirect:patents";
 	}	
