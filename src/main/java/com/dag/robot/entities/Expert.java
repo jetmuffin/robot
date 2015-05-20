@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-19 21:06:32 by Hibernate Tools 4.3.1
+// Generated 2015-5-20 18:46:20 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -92,7 +92,7 @@ public class Expert implements java.io.Serializable {
 		this.activities = activities;
 		this.relExpertPapers = relExpertPapers;
 	}
-
+	
 	public Expert(String name2, String gender2, String email2, String address2,
 			String homepage2, String experience2, String info2,
 			String achievement2) {
@@ -105,7 +105,7 @@ public class Expert implements java.io.Serializable {
 		this.info = info2;
 		this.achievement = achievement2;
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "expertId", unique = true, nullable = false)

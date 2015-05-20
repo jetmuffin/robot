@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dag.robot.data.AddService;
 import com.dag.robot.db.dao.ConferenceDao;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.JournalDao;
@@ -77,6 +78,9 @@ public class BackendPaperController {
 	@Autowired
 	@Qualifier("orgnizationDao")
 	private OrgnizationDao orgnizationDao;
+	
+	@Autowired
+	private AddService addService;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(Model model) {
@@ -141,61 +145,8 @@ public class BackendPaperController {
 	public String add(String title,String[] authors,String abs,
 			String keywords,String type,String journal,String issue,
 			String conference,String time,String orgnization, RedirectAttributes redirectAttributes) {
-		Paper paper = new Paper();
-		paper.setTitle(title);
-		paper.setAbs(abs);
-		paper.setKeywords(keywords);
-		paper.setType(type);
-		if(type.equals("journal")){
-			Journal journal2 = journalDao.check(journal);
-			//没有重复
-			if(journal2 == null){
-				journal2 = new Journal(journal);
-				journalDao.addJournal(journal2);
-			}
-			//期刊与期刊号
-			paper.setJournal(journal2);
-			paper.setIssue(issue);
-		} else if(type.equals("conference")){
-			Conference conference2 = conferenceDao.check(conference);
-			//没有重复
-			if(conference2 == null){
-				conference2 = new Conference(conference, 0);
-				conferenceDao.addConference(conference2);
-			}
-			paper.setConference(conference2);
-			try {
-				paper.setConferenceDate(DateUtil.toDate(time, "yyyy年mm月dd日"));
-			} catch (ParseException e) {
-				paper.setConferenceDate(null);
-				e.printStackTrace();
-			}
-		}
-		//组织查重
-		Orgnization orgnization2 = orgnizationDao.check(orgnization);
-		if(orgnization2 == null){
-			//没有重复
-			orgnization2 = new Orgnization(orgnization);
-			orgnizationDao.addOrgnization(orgnization2);
-		}
-		paper.setOrgnization(orgnization2);
 		
-		paperDao.addPaper(paper);
-		
-		//作者查重 
-		for(int i = 0; i < authors.length; i++){
-			Expert expert = expertDao.checkSame(authors[i], orgnization);
-			if(expert == null){
-				//没有重复
-				expert = new Expert(authors[i], "男", 0, 0, 0);
-				expert.setOrgnization(orgnization2);
-				expertDao.addExpert(expert);
-			}
-			RelExpertPaperId relExpertPaperId = new RelExpertPaperId(expert.getExpertId(), paper.getPaperId());
-			RelExpertPaper relExpertPaper = new RelExpertPaper(relExpertPaperId, expert, paper, i);
-			relExpertPaperDao.addRelExeprtPaper(relExpertPaper);
-		}
-		
+		addService.addPaper(title, authors, abs, keywords, type, journal, issue, conference, time, orgnization);
 		redirectAttributes.addFlashAttribute("message", "添加论文成功！");
 		return "redirect:papers";
 	}

@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-19 21:06:32 by Hibernate Tools 4.3.1
+// Generated 2015-5-20 18:46:20 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,7 +25,7 @@ import javax.persistence.TemporalType;
 @Table(name = "patent", catalog = "db_expert_robot")
 public class Patent implements java.io.Serializable {
 
-	private int patentId;
+	private Integer patentId;
 	private Orgnization orgnization;
 	private String title;
 	private String abs;
@@ -36,9 +38,8 @@ public class Patent implements java.io.Serializable {
 	public Patent() {
 	}
 
-	public Patent(int patentId, String title, String abs, Date date,
-			String applicant, String inventor) {
-		this.patentId = patentId;
+	public Patent(String title, String abs, Date date, String applicant,
+			String inventor) {
 		this.title = title;
 		this.abs = abs;
 		this.date = date;
@@ -46,10 +47,9 @@ public class Patent implements java.io.Serializable {
 		this.inventor = inventor;
 	}
 
-	public Patent(int patentId, Orgnization orgnization, String title,
-			String abs, Date date, String applicant, String inventor,
+	public Patent(Orgnization orgnization, String title, String abs, Date date,
+			String applicant, String inventor,
 			Set<RelExpertPatent> relExpertPatents) {
-		this.patentId = patentId;
 		this.orgnization = orgnization;
 		this.title = title;
 		this.abs = abs;
@@ -60,12 +60,13 @@ public class Patent implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "patentId", unique = true, nullable = false)
-	public int getPatentId() {
+	public Integer getPatentId() {
 		return this.patentId;
 	}
 
-	public void setPatentId(int patentId) {
+	public void setPatentId(Integer patentId) {
 		this.patentId = patentId;
 	}
 

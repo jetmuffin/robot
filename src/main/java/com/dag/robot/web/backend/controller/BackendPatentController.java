@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dag.robot.data.AddService;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.PatentDao;
@@ -59,6 +60,9 @@ public class BackendPatentController {
 	@Autowired
 	@Qualifier("relExpertPatentDao")
 	private RelExpertPatentDao relExpertPatentDao;
+	
+	@Autowired
+	private AddService addService;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(Model model) {
@@ -121,36 +125,7 @@ public class BackendPatentController {
 	public String add(String title,String applicant,String abs,String organization
 			,String[] inventors,String date, String orgnization, RedirectAttributes redirectAttributes) throws ParseException {
 		
-		Patent patent = new Patent();
-		patent.setTitle(title);
-		patent.setAbs(abs);
-		patent.setApplicant(applicant);
-		patent.setInventor(inventors[0]);
-		patent.setDate(DateUtil.toDate(date, "yyyy/mm/dd"));
-		
-		//组织查重
-		Orgnization orgnization2 = orgnizationDao.check(orgnization);
-		if(orgnization2 == null){
-			//没有重复
-			orgnization2 = new Orgnization(orgnization);
-			orgnizationDao.addOrgnization(orgnization2);
-		}
-		patent.setOrgnization(orgnization2);
-		
-		patentDao.addPatent(patent);
-		//作者查重 
-		for(int i = 0; i < inventors.length; i++){
-			Expert expert = expertDao.checkSame(inventors[i], orgnization);
-			if(expert == null){
-				//没有重复
-				expert = new Expert(inventors[i], "男", 0, 0, 0);
-				expert.setOrgnization(orgnization2);
-				expertDao.addExpert(expert);
-			}
-			RelExpertPatentId relExpertPatentId = new RelExpertPatentId(expert.getExpertId(), patent.getPatentId()); 
-			RelExpertPatent relExpertPatent = new RelExpertPatent(relExpertPatentId, expert, patent, i);
-			relExpertPatentDao.addRelExeprtPatent(relExpertPatent);
-		}
+		addService.addPatent(title, applicant, abs, organization, inventors, date, orgnization);
 		redirectAttributes.addFlashAttribute("message", "添加专利成功！");
 		return "redirect:patents";
 	}	
