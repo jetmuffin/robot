@@ -17,11 +17,14 @@
 						<span class=""><input type="radio" name="gender"
 							id="gender-male" value="male" checked></span>
 					</div> 男
-				</label> <label class="radio">
+				</label> 
+				<label class="radio">
 					<div class="radio" id="uniform-optionsRadios2">
 						<span class="checked"><input type="radio" name="gender"
 							id="gender-female" value="female"></span>
 					</div> 女 
+				</label>
+				</div>
 		</c:when>
 		<c:otherwise>
 			<div class="span8">
@@ -42,8 +45,7 @@
 </div>
 <div class="span12 field-box ">
 	<label>单位:</label> 
-	<input id='tags-org' name="organization" value="${orgnizations}" type='text' class='tags span9'></p>
-		<span class="charactersleft">输入单位后,按","生成标签</span>
+	<input name="organization" value="${expert.orgnization.name}" type='text' class='tags span9'></p>
 	<div class="span8 notice" id="org-notice"></div>
 </div>
 <div class="span12 field-box">

@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
+// Generated 2015-5-19 21:06:32 by Hibernate Tools 4.3.1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;

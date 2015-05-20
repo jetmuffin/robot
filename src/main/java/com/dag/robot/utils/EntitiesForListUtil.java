@@ -1,25 +1,19 @@
 package com.dag.robot.utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.experimental.theories.PotentialAssignment.CouldNotGenerateValueException;
-
 import com.dag.robot.entities.CoreJournal;
 import com.dag.robot.entities.Expert;
-import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
-import com.dag.robot.entities.RelExpertOrg;
 import com.dag.robot.entities.RelExpertPaper;
-import com.dag.robot.entities.RelPaperJournal;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.PaperForShow;
-import com.dag.robot.web.bean.PatentForList;
+import com.dag.robot.web.bean.PatentForShow;
 
 public class EntitiesForListUtil {
 	
@@ -58,6 +52,9 @@ public class EntitiesForListUtil {
 			paperForList.setType(paper.getType());
 			paperForList.setConferences(paper.getConference());
 			paperForList.setJournal(paper.getJournal());
+			paperForList.setIssue(paper.getIssue());
+			paperForList.setConferenceDate(paper.getConferenceDate());
+			paperForList.setOrgnization(paper.getOrgnization());
 			
 			List<CoreJournal> coreJournals = new ArrayList<CoreJournal>();
 			coreJournals.addAll(paper.getCoreJournals());
@@ -75,7 +72,7 @@ public class EntitiesForListUtil {
 			Set<RelExpertPaper> relExpertPapers = paper.getRelExpertPapers();
 			List<Expert> experts = new ArrayList<Expert>();
 			Iterator<RelExpertPaper> iterator2 = relExpertPapers.iterator();
-			while(iterator.hasNext()){
+			while(iterator2.hasNext()){
 				RelExpertPaper relExpertPaper = iterator2.next();
 				Expert expert = relExpertPaper.getExpert();
 				experts.add(expert);
@@ -87,12 +84,12 @@ public class EntitiesForListUtil {
 		return paperForLists;
 	}
 	
-	public static List<PatentForList> patentForLists(List<Patent> patents){
-		List<PatentForList> patentForLists = new ArrayList<PatentForList>();
+	public static List<PatentForShow> patentForLists(List<Patent> patents){
+		List<PatentForShow> patentForLists = new ArrayList<PatentForShow>();
 		if(patents.size() == 0 || patents == null)
 			return patentForLists;
 		for(int i = 0; i < patents.size(); i++){
-			PatentForList patentForList = new PatentForList();
+			PatentForShow patentForList = new PatentForShow();
 			Patent patent = patents.get(i);
 			patentForList.setPatentId(patent.getPatentId());
 			patentForList.setApplicant(patent.getApplicant());

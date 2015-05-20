@@ -22,14 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.PaperDao;
-import com.dag.robot.db.dao.RelExpertOrgDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
-import com.dag.robot.db.dao.impl.RelExpertOrgDaoImpl;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Orgnization;
-import com.dag.robot.entities.RelExpertOrg;
-import com.dag.robot.entities.RelExpertOrgId;
 import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
@@ -55,10 +51,6 @@ public class BackendExpertController {
 	@Autowired
 	@Qualifier("orgnizationDao")
 	private OrgnizationDao orgnizationDao;
-
-	@Autowired
-	@Qualifier("relExpertOrgDao")
-	private RelExpertOrgDao relExpertOrgDao;
 
 	@Autowired
 	@Qualifier("topicDao")
@@ -187,18 +179,17 @@ public class BackendExpertController {
 			String achievement, String organization) {
 		Expert expert = new Expert(name, gender, email, address, homepage,
 				experience, info, achievement);
-		expertDao.addExpert(expert);
-
-		List<String> orgs = StringSplitUtil.stringSplit(organization);
-		for (int i = 0; i < orgs.size(); i++) {
-			Orgnization orgnization = new Orgnization(orgs.get(i));
+		//组织查重
+		List<Orgnization> orgnizations = orgnizationDao.getByName(organization);
+		Orgnization orgnization = new Orgnization();
+		if(orgnizations.size() == 0 || orgnizations == null){
+			orgnization.setName(organization);
 			orgnizationDao.addOrgnization(orgnization);
-			RelExpertOrgId relExpertOrgId = new RelExpertOrgId(
-					expert.getExpertId(), orgnization.getOrgId());
-			RelExpertOrg relExpertOrg = new RelExpertOrg(relExpertOrgId,
-					expert, orgnization);
-			relExpertOrgDao.addRelExeprtOrg(relExpertOrg);
+		}else {
+			orgnization = orgnizations.get(0);
 		}
+		expert.setOrgnization(orgnization);
+		expertDao.addExpert(expert);
 
 		List<String> topics = StringSplitUtil.stringSplit(topic);
 		for (int i = 0; i < topics.size(); i++) {
@@ -211,6 +202,5 @@ public class BackendExpertController {
 			relExpertTopicDao.addRelExeprtTopic(relExpertTopic);
 		}
 	}
-
 
 }

@@ -10,13 +10,15 @@ $(function(){
 		});
 	
 	//datepicker
-	$("#datepicker").datepicker();
+	$('#datepicker').datepicker({
+		format: "yyyy/mm/dd",
+	});
 	
 	//add author
 	var author_num = 1;
 	$('#add-author').click(function(){
 		author_num ++ ;
-		var input_dom = '<div class="input-group"><label>作者'+author_num+':</label> <input id="tags-author" name="authors" onblur="duplicateName(this)" value=""  data-toggle="popover" title=" " data-content=" " type="text" class="author-input tags span8"></div>';
+		var input_dom = '<div class="input-group"><label>作者'+author_num+':</label> <input id="tags-author" name="authors"  value=""  data-toggle="popover" title=" " data-content=" " type="text" class="author-input tags span8"></div>';
 		$('#authors').append(input_dom);
 	});
 	
@@ -35,7 +37,6 @@ $(function(){
 	$('input[name="journal"]').blur(function() {
 		if ($(this).val().length > 0) {
 			$('#journal-notice').html("");
-			flag2 = true;
 		} else {
 			$('#journal-notice').html(notice_icon+" 期刊不能为空!");
 		}
@@ -59,7 +60,6 @@ $(function(){
 			return;
 		}
 		var author = $('#author-input').val();
-		console.log(author);
 		if(author.length == 0){
 			$('#author-notice').html(notice_icon+" 作者不能为空!");
 			$("html,body").animate({scrollTop:0},100);
@@ -77,7 +77,7 @@ $(function(){
 		}
 		var keywords = $('#tags-keywords').val();
 		$('input[name="author"]').val(author);
-		$('input[name="keywords]"').val(keywords);
+		$('input[name="keywords"]').val(keywords);
 		$('.author-input').each(function(){
 			console.log($(this).attr('data-id'));
 		});
@@ -116,8 +116,9 @@ function selectExpert(selector){
 	$(selector).parents(".input-group").children("input").attr("data-id",id);
 }
 function duplicateName(selector){
+	console.log(selector);
 	$(selector).popover({
-		  template:'<div id="duplicate-name" class="popover pop-dialog full" role="tooltip"><div class="arrow" style="top: 50%;"></div><div class="body" style="border:none"><div class="settings"><a href="#" class="close-icon" id="close-popover"><i class="fa fa-remove"></i></a><div class="items" id="duplicate-item"><div class="item"><img src="/robot/resources/img/backend/loading.gif" width=30/> 查询重名专家中...</div></div></div></div></div>',
+		  template:'<div id="duplicate-name" class="popover pop-dialog full" role="tooltip"><div class="arrow" style="top: 50%;"></div><div class="body" style="border:none"><div class="settings"><a href="#" class="close-icon" id="close-popover"><i class="fa fa-remove"></i></a><div class="items" id="duplicate-item"><div class="item"><img src="/robot/resources/img/backend/loading.gif" width=30/> 查询已有期刊中...</div></div></div></div></div>',
 	  }).popover('show');	
 	nameValidate($(selector).val());
 }

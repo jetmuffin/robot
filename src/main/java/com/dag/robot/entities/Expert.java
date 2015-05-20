@@ -1,17 +1,14 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-18 19:36:10 by Hibernate Tools 4.3.1
+// Generated 2015-5-19 21:06:32 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -42,7 +39,7 @@ public class Expert implements java.io.Serializable {
 	private String info;
 	private String achievement;
 	private String url;
-	private int rate;
+	private Integer rate;
 	private String job;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
 			0);
@@ -68,7 +65,7 @@ public class Expert implements java.io.Serializable {
 			String email, String address, String homepage, int paperNum,
 			int patentNum, int paperReferedNum, String prize,
 			String experience, String info, String achievement, String url,
-			int rate, String job, Set<RelExpertPatent> relExpertPatents,
+			Integer rate, String job, Set<RelExpertPatent> relExpertPatents,
 			Set<RelExpertTopic> relExpertTopics,
 			Set<RelExpertField> relExpertFields, Set<User> users,
 			Set<Activity> activities, Set<RelExpertPaper> relExpertPapers) {
@@ -96,19 +93,19 @@ public class Expert implements java.io.Serializable {
 		this.relExpertPapers = relExpertPapers;
 	}
 
-	public Expert(String name, String gender, String email, String address,
-			String homepage, String experience, String info,
-			String achievement) {
-		this.name = name;
-		this.gender = gender;
-		this.email = email;
-		this.address = address;
-		this.homepage = homepage;
-		this.experience = experience;
-		this.info = info;
-		this.achievement = achievement;
+	public Expert(String name2, String gender2, String email2, String address2,
+			String homepage2, String experience2, String info2,
+			String achievement2) {
+		this.name = name2;
+		this.gender = gender2;
+		this.email = email2;
+		this.address =address2;
+		this.homepage = homepage2;
+		this.experience = experience2;
+		this.info = info2;
+		this.achievement = achievement2;
 	}
-
+	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "expertId", unique = true, nullable = false)
@@ -248,11 +245,11 @@ public class Expert implements java.io.Serializable {
 	}
 
 	@Column(name = "rate")
-	public int getRate() {
+	public Integer getRate() {
 		return this.rate;
 	}
 
-	public void setRate(int rate) {
+	public void setRate(Integer rate) {
 		this.rate = rate;
 	}
 

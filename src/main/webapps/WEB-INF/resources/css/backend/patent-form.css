@@ -1,0 +1,232 @@
+@CHARSET "UTF-8";
+.new-patent {
+	/* form sidebar*/
+	
+}
+
+.new-patent .form-wrapper .with-sidebar {
+	border-right: 1px solid #edeef1;
+	box-shadow: 4px 0px 3px -1px rgba(226, 226, 226, 0.1);
+}
+
+.new-patent .form-wrapper .container {
+	width: 90%;
+	float: left;
+}
+
+.new-patent .form-wrapper .field-box {
+	position: relative;
+	margin-bottom: 25px;
+	margin-left: 0;
+	float: left;
+	width: 100%;
+}
+
+.new-patent .form-wrapper .field-box .notice {
+	position: absolute;
+	left: 120px;
+	color: #C73131;
+	font-weight: bold;
+}
+
+.new-patent .form-wrapper label {
+	display: inline-block;
+	float: left;
+	font-weight: 600;
+	font-size: 13px;
+	cursor: auto;
+	width: 120px;
+}
+
+.new-patent .form-wrapper input[type="text"] {
+	margin: 0;
+	padding: 3px 6px;
+}
+
+.new-patent .form-wrapper .address-fields {
+	margin-left: 0px;
+	float: left;
+	width: 75%;
+}
+
+.new-patent .form-wrapper input.small {
+	width: 30%;
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+.new-patent .form-wrapper input.last {
+	margin-right: 0;
+}
+
+.new-patent .form-wrapper input:-moz-placeholder {
+	font-style: italic;
+}
+
+.new-patent .form-wrapper input:-ms-input-placeholder {
+	font-style: italic;
+}
+
+.new-patent .form-wrapper input::-webkit-input-placeholder {
+	font-style: italic;
+}
+
+.new-patent .form-wrapper textarea {
+	height: 88px;
+}
+
+.new-patent .textarea {
+	margin-top: 27px;
+}
+
+.new-patent  span.charactersleft {
+	display: block;
+	color: #9ba0a5;
+	text-align: left;
+	margin-left: 18%;
+	font-size: 13px;
+	font-style: italic;
+}
+
+.new-patent .actions {
+	margin-top: 30px;
+	text-align: right;
+	padding-right: 40px;
+}
+
+.new-patent .actions span {
+	text-transform: uppercase;
+	color: #7e91aa;
+	font-weight: 600;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 2px 0 8px;
+}
+
+.new-patent .actions input.reset {
+	color: #7e91aa;
+	font-weight: 500;
+}
+
+.new-patent .form-sidebar .alert {
+	margin: 20px 0px 60px 0px;
+}
+
+.new-patent .form-sidebar .alert i {
+	margin-bottom: 40px;
+}
+
+.new-patent .form-sidebar h6 {
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.new-patent .form-sidebar p {
+	color: #777e86;
+}
+
+.new-patent .form-sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.new-patent .form-sidebar ul a {
+	text-decoration: underline;
+}
+
+div.radio input {
+	opacity: 1 !important;
+}
+
+.pop-dialog .settings .items .item .fa-reorder {
+	color: #d9e4ee;
+	font-size: 18px;
+	margin-right: 13px;
+}
+
+.pop-dialog .settings .items .item code {
+	margin-left: 5px;
+}
+
+div.tagsinput input {
+	width: 80px;
+	margin: 0px;
+	font-family: helvetica;
+	font-size: 13px;
+	border: 1px solid transparent;
+	padding: 5px;
+	background: transparent;
+	color: #000;
+	outline: 0px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+div.tagsinput span.tag {
+	cursor: pointer;
+	padding: 7px 14px;
+	-webkit-transition: all .1s linear;
+	-moz-transition: all .1s linear;
+	transition: all .1s linear;
+	background: #fff;
+	border: 1px solid #d0dde9;
+	color: #777e86;
+	font-size: 12px;
+	margin-right: 5px!important;
+	float: left;
+	font-weight: 500;
+	border-radius: 4px;
+	text-shadow: none;
+	box-shadow: none;
+	background-image: none;
+	display: block;
+margin-bottom:5px;
+	margin: 0;
+	line-height: 15px;
+	vertical-align: middle;
+	}
+/* responsive */
+@media ( max-width : 767px) {
+	.new-patent .form-wrapper .container {
+		width: 100%;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #edeef1;
+		box-shadow: 0px 4px 3px -1px rgba(226, 226, 226, 0.1);
+	}
+	.new-patent .form-wrapper .with-sidebar {
+		border-right: 0 none;
+		box-shadow: none;
+	}
+	.new-patent .form-wrapper label {
+		margin: 0;
+	}
+	.new-patent .form-wrapper .textarea label {
+		width: 100%;
+		text-align: left;
+		margin-bottom: 10px;
+	}
+	.new-patent .form-wrapper .textarea textarea {
+		width: 97%;
+	}
+	.new-patent .textarea span.charactersleft {
+		display: inline-block;
+		margin-left: 0;
+	}
+	.new-patent .actions {
+		margin-top: 0;
+	}
+	.new-patent .form-sidebar {
+		margin-top: 40px;
+	}
+}
+
+@media ( max-width : 979px) {
+	.new-patent .form-wrapper .address-fields {
+		margin-top: 30px;
+		width: 100%;
+	}
+	.new-patent .form-wrapper input.small {
+		width: inherit;
+		margin: 20px 0px 0px 0px;
+	}
+}

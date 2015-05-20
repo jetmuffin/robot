@@ -1,11 +1,13 @@
 package com.dag.robot.web.bean;
 
+import java.util.Date;
 import java.util.List;
 
 import com.dag.robot.entities.Conference;
 import com.dag.robot.entities.CoreJournal;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Journal;
+import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Topic;
 
 public class PaperForShow {
@@ -18,7 +20,9 @@ public class PaperForShow {
 	private String type;
 	private Conference conferences;
 	private Journal journal;
-	
+	private Orgnization orgnization;
+	private Date conferenceDate;
+	private String issue;
 	private List<Topic> topics;
 	private List<Expert> experts;
 	private List<CoreJournal> coreJournals;
@@ -29,7 +33,8 @@ public class PaperForShow {
 
 	public PaperForShow(Integer paperId, String title, String abs,
 			String keywords, int referencedNum, String type,
-			Conference conferences, Journal journal, List<Topic> topics,
+			Conference conferences, Journal journal, Orgnization orgnization,
+			Date conferenceDate, String issue, List<Topic> topics,
 			List<Expert> experts, List<CoreJournal> coreJournals) {
 		super();
 		this.paperId = paperId;
@@ -40,6 +45,9 @@ public class PaperForShow {
 		this.type = type;
 		this.conferences = conferences;
 		this.journal = journal;
+		this.orgnization = orgnization;
+		this.conferenceDate = conferenceDate;
+		this.issue = issue;
 		this.topics = topics;
 		this.experts = experts;
 		this.coreJournals = coreJournals;
@@ -109,6 +117,30 @@ public class PaperForShow {
 		this.journal = journal;
 	}
 
+	public Orgnization getOrgnization() {
+		return orgnization;
+	}
+
+	public void setOrgnization(Orgnization orgnization) {
+		this.orgnization = orgnization;
+	}
+
+	public Date getConferenceDate() {
+		return conferenceDate;
+	}
+
+	public void setConferenceDate(Date conferenceDate) {
+		this.conferenceDate = conferenceDate;
+	}
+
+	public String getIssue() {
+		return issue;
+	}
+
+	public void setIssue(String issue) {
+		this.issue = issue;
+	}
+
 	public List<Topic> getTopics() {
 		return topics;
 	}
@@ -132,4 +164,5 @@ public class PaperForShow {
 	public void setCoreJournals(List<CoreJournal> coreJournals) {
 		this.coreJournals = coreJournals;
 	}
+
 }

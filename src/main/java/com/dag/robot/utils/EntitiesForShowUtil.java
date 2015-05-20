@@ -11,19 +11,16 @@ import org.apache.commons.math3.analysis.function.Exp;
 import com.dag.robot.entities.Activity;
 import com.dag.robot.entities.CoreJournal;
 import com.dag.robot.entities.Expert;
-import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
-import com.dag.robot.entities.RelExpertOrg;
 import com.dag.robot.entities.RelExpertPaper;
 import com.dag.robot.entities.RelExpertPatent;
 import com.dag.robot.entities.RelExpertTopic;
-import com.dag.robot.entities.RelPaperJournal;
 import com.dag.robot.entities.Topic;
-import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.PaperForShow;
-import com.dag.robot.web.bean.PaperForShow;
+import com.dag.robot.web.bean.PatentForList;
+import com.dag.robot.web.bean.PatentForShow;
 
 public class EntitiesForShowUtil {
 
@@ -120,6 +117,30 @@ public class EntitiesForShowUtil {
 		}
 		paperForShow.setExperts(experts);
 		return paperForShow;
+	}
+	
+	public static PatentForShow patentForShow(Patent patent){
+		
+		PatentForShow patentForShow = new PatentForShow();
+		patentForShow.setPatentId(patent.getPatentId());
+		patentForShow.setAbs(patent.getAbs());
+		patentForShow.setApplicant(patent.getApplicant());
+		patentForShow.setDate(patent.getDate());
+		patentForShow.setInventor(patent.getInventor());
+		patentForShow.setTitle(patent.getTitle());
+		
+		Set<RelExpertPatent> relExpertPatents = patent.getRelExpertPatents();
+		List<Expert> experts = new ArrayList<Expert>();
+		Iterator<RelExpertPatent> iterator = relExpertPatents.iterator();
+		while(iterator.hasNext()){
+			RelExpertPatent relExpertPatent = iterator.next();
+			Expert expert = relExpertPatent.getExpert();
+			experts.add(expert);
+		}
+		
+		patentForShow.setExperts(experts);
+		return patentForShow;
+		
 	}
 
 }
