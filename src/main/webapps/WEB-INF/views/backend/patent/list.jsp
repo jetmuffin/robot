@@ -103,6 +103,7 @@
 								<th class="span3 sortable">标题</th>
 								<th class="span2 sortable"><span class="line"></span>申请人</th>
 								<th class="span2 sortable"><span class="line"></span>申请时间</th>
+								<th class="span2 sortable"><span class="line"></span>申请单位</th>
 								</th>
 							</tr>
 						</thead>
@@ -114,6 +115,7 @@
 								<td> <a href="/robot/backend/patent/${patent.patentId}" class="name">${patent.title}</a> </td>
 								<td>${patent.applicant}</td>
 								<td>${patent.date}</td>
+								<td>${patent.orgnization.name}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
