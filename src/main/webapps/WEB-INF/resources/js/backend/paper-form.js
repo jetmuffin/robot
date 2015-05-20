@@ -10,13 +10,15 @@ $(function(){
 		});
 	
 	//datepicker
-	$("#datepicker").datepicker();
+	$('#datepicker').datepicker({
+		format: "yyyy/mm/dd",
+	});
 	
 	//add author
 	var author_num = 1;
 	$('#add-author').click(function(){
 		author_num ++ ;
-		var input_dom = '<div class="input-group"><label>作者'+author_num+':</label> <input id="tags-author" name="authors" onblur="duplicateName(this)" value=""  data-toggle="popover" title=" " data-content=" " type="text" class="author-input tags span8"></div>';
+		var input_dom = '<div class="input-group"><label>作者'+author_num+':</label> <input id="tags-author" name="authors"  value=""  data-toggle="popover" title=" " data-content=" " type="text" class="author-input tags span8"></div>';
 		$('#authors').append(input_dom);
 	});
 	
@@ -35,7 +37,6 @@ $(function(){
 	$('input[name="journal"]').blur(function() {
 		if ($(this).val().length > 0) {
 			$('#journal-notice').html("");
-			duplicateName($(this));
 		} else {
 			$('#journal-notice').html(notice_icon+" 期刊不能为空!");
 		}
@@ -59,7 +60,6 @@ $(function(){
 			return;
 		}
 		var author = $('#author-input').val();
-		console.log(author);
 		if(author.length == 0){
 			$('#author-notice').html(notice_icon+" 作者不能为空!");
 			$("html,body").animate({scrollTop:0},100);
