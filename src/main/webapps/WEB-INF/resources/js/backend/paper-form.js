@@ -35,7 +35,6 @@ $(function(){
 	$('input[name="journal"]').blur(function() {
 		if ($(this).val().length > 0) {
 			$('#journal-notice').html("");
-			duplicateName($(this));
 		} else {
 			$('#journal-notice').html(notice_icon+" 期刊不能为空!");
 		}
@@ -59,7 +58,6 @@ $(function(){
 			return;
 		}
 		var author = $('#author-input').val();
-		console.log(author);
 		if(author.length == 0){
 			$('#author-notice').html(notice_icon+" 作者不能为空!");
 			$("html,body").animate({scrollTop:0},100);
