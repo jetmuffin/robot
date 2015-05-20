@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-20 18:46:20 by Hibernate Tools 4.3.1
+// Generated 2015-5-20 21:09:50 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,6 +41,8 @@ public class Expert implements java.io.Serializable {
 	private String url;
 	private Integer rate;
 	private String job;
+	private Integer age;
+	private String area;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
 			0);
 	private Set<RelExpertTopic> relExpertTopics = new HashSet<RelExpertTopic>(0);
@@ -65,7 +67,8 @@ public class Expert implements java.io.Serializable {
 			String email, String address, String homepage, int paperNum,
 			int patentNum, int paperReferedNum, String prize,
 			String experience, String info, String achievement, String url,
-			Integer rate, String job, Set<RelExpertPatent> relExpertPatents,
+			Integer rate, String job, Integer age, String area,
+			Set<RelExpertPatent> relExpertPatents,
 			Set<RelExpertTopic> relExpertTopics,
 			Set<RelExpertField> relExpertFields, Set<User> users,
 			Set<Activity> activities, Set<RelExpertPaper> relExpertPapers) {
@@ -85,6 +88,8 @@ public class Expert implements java.io.Serializable {
 		this.url = url;
 		this.rate = rate;
 		this.job = job;
+		this.age = age;
+		this.area = area;
 		this.relExpertPatents = relExpertPatents;
 		this.relExpertTopics = relExpertTopics;
 		this.relExpertFields = relExpertFields;
@@ -105,6 +110,7 @@ public class Expert implements java.io.Serializable {
 		this.info = info2;
 		this.achievement = achievement2;
 	}
+
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -260,6 +266,24 @@ public class Expert implements java.io.Serializable {
 
 	public void setJob(String job) {
 		this.job = job;
+	}
+
+	@Column(name = "age")
+	public Integer getAge() {
+		return this.age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	@Column(name = "area", length = 50)
+	public String getArea() {
+		return this.area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expert")
