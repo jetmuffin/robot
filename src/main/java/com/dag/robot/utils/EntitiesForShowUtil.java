@@ -19,7 +19,6 @@ import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.PaperForShow;
-import com.dag.robot.web.bean.PatentForList;
 import com.dag.robot.web.bean.PatentForShow;
 
 public class EntitiesForShowUtil {
@@ -128,7 +127,7 @@ public class EntitiesForShowUtil {
 		patentForShow.setDate(patent.getDate());
 		patentForShow.setInventor(patent.getInventor());
 		patentForShow.setTitle(patent.getTitle());
-		
+		patentForShow.setOrgnization(patent.getOrgnization());
 		Set<RelExpertPatent> relExpertPatents = patent.getRelExpertPatents();
 		List<Expert> experts = new ArrayList<Expert>();
 		Iterator<RelExpertPatent> iterator = relExpertPatents.iterator();

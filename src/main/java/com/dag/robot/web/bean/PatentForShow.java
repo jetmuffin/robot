@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.dag.robot.entities.Expert;
+import com.dag.robot.entities.Orgnization;
 
 public class PatentForShow {
 	private int patentId;
@@ -13,13 +14,15 @@ public class PatentForShow {
 	private String applicant;
 	private String inventor;
 	private List<Expert> experts;
+	private Orgnization orgnization;
 	
 	public PatentForShow() {
 		super();
 	}
 
 	public PatentForShow(int patentId, String title, String abs, Date date,
-			String applicant, String inventor, List<Expert> experts) {
+			String applicant, String inventor, List<Expert> experts,
+			Orgnization orgnization) {
 		super();
 		this.patentId = patentId;
 		this.title = title;
@@ -28,7 +31,10 @@ public class PatentForShow {
 		this.applicant = applicant;
 		this.inventor = inventor;
 		this.experts = experts;
+		this.orgnization = orgnization;
 	}
+
+
 
 	public int getPatentId() {
 		return patentId;
@@ -84,6 +90,14 @@ public class PatentForShow {
 
 	public void setExperts(List<Expert> experts) {
 		this.experts = experts;
+	}
+
+	public Orgnization getOrgnization() {
+		return orgnization;
+	}
+
+	public void setOrgnization(Orgnization orgnization) {
+		this.orgnization = orgnization;
 	}
 	
 }
