@@ -165,7 +165,7 @@ public class BackendPaperController {
 			}
 			paper.setConference(conference2);
 			try {
-				paper.setConferenceDate(DateUtil.toDate(time));
+				paper.setConferenceDate(DateUtil.toDate(time, "yyyy年mm月dd日"));
 			} catch (ParseException e) {
 				paper.setConferenceDate(null);
 				e.printStackTrace();

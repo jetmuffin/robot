@@ -12,9 +12,9 @@ public class DateUtil {
 	 * @return
 	 * @throws ParseException 
 	 */
-	public static Date toDate(String string) throws ParseException{
-		DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日");
-		Date date = dateFormat.parse(string);
+	public static Date toDate(String string, String dateFormat) throws ParseException{
+		DateFormat dateFormat1 = new SimpleDateFormat(dateFormat);
+		Date date = dateFormat1.parse(string);
 		return date;
 	}
 	

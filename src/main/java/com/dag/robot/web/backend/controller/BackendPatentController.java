@@ -125,7 +125,8 @@ public class BackendPatentController {
 		patent.setTitle(title);
 		patent.setAbs(abs);
 		patent.setApplicant(applicant);
-		patent.setDate(DateUtil.toDate(date));
+		patent.setInventor(inventors[0]);
+		patent.setDate(DateUtil.toDate(date, "yyyy/mm/dd"));
 		
 		//组织查重
 		Orgnization orgnization2 = orgnizationDao.check(orgnization);
