@@ -26,6 +26,13 @@ public interface TopicDao {
 	public Topic getById(int topicId);
 	
 	/**
+	 * 根据话题名称检索话题
+	 * @param name
+	 * @return
+	 */
+	public Topic getByName(String name);
+	
+	/**
 	 * 获得全部领域信息
 	 * @return 领域List
 	 */

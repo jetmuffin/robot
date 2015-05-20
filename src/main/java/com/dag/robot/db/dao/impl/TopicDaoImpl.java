@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 import com.dag.robot.db.dao.TopicDao;
+import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.RelFieldTopic;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.entities.RelExpertTopic;
@@ -54,6 +55,16 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 		}
 		
 		delete(topic);
+	}
+
+	@Override
+	public Topic getByName(String name) {
+		String hql = "from Topic as topic where topic.name = ?";
+		@SuppressWarnings("unchecked")
+		List<Topic> topics = query(hql).setString(0, name).list();
+		if(topics.size() == 0)
+			return null;
+		return topics.get(0);//重名的只有一个
 	}
 	
 }

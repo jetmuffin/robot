@@ -14,7 +14,7 @@ $(function(){
 	});
 	
 	$('#datepicker').datepicker({
-		format: "yyyy月mm日dd",
+		format: "yyyy/mm/dd",
 	});
 	
 	$('input[name="applicant"]').blur(function() {
@@ -25,7 +25,7 @@ $(function(){
 		}
 	});
 	
-	$('input[name="organization"]').blur(function() {
+	$('input[name="orgnization"]').blur(function() {
 		if ($(this).val().length > 0) {
 			$('#organization-notice').html("");
 		} else {
@@ -54,7 +54,7 @@ $(function(){
 			$("html,body").animate({scrollTop:0},100);
 			return;
 		}
-		if($('input[name="organization"]').val().length == 0){
+		if($('input[name="orgnization"]').val().length == 0){
 			$('#organization-notice').html(notice_icon+" 单位不能为空!");
 			$("html,body").animate({scrollTop:0},100);
 			return;

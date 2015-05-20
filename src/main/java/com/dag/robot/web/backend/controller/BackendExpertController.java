@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dag.robot.data.AddService;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.PaperDao;
@@ -59,6 +60,9 @@ public class BackendExpertController {
 	@Autowired
 	@Qualifier("relExpertTopicDao")
 	private RelExpertTopicDao relExpertTopicDao;
+	
+	@Autowired
+	private AddService addService;
 
 	public BackendExpertController() {
 		super();
@@ -121,7 +125,7 @@ public class BackendExpertController {
 			String address, String homepage, String experience, String info,
 			String topic, String achievement, String organization,
 			RedirectAttributes redirectAttributes) {
-		add(name, gender, email, address, homepage, experience, info, topic,
+		addService.addExpert(name, gender, email, address, homepage, experience, info, topic,
 				achievement, organization);
 		redirectAttributes.addFlashAttribute("message", "专家信息添加成功!");
 		return "redirect:experts";
@@ -172,35 +176,6 @@ public class BackendExpertController {
 		expertDao.updateAchievement(expertId, achievement);
 		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/expert/" + expertId;
-	}
-
-	public void add(String name, String gender, String email, String address,
-			String homepage, String experience, String info, String topic,
-			String achievement, String organization) {
-		Expert expert = new Expert(name, gender, email, address, homepage,
-				experience, info, achievement);
-		//组织查重
-		List<Orgnization> orgnizations = orgnizationDao.getByName(organization);
-		Orgnization orgnization = new Orgnization();
-		if(orgnizations.size() == 0 || orgnizations == null){
-			orgnization.setName(organization);
-			orgnizationDao.addOrgnization(orgnization);
-		}else {
-			orgnization = orgnizations.get(0);
-		}
-		expert.setOrgnization(orgnization);
-		expertDao.addExpert(expert);
-
-		List<String> topics = StringSplitUtil.stringSplit(topic);
-		for (int i = 0; i < topics.size(); i++) {
-			Topic topic1 = new Topic(topics.get(i));
-			topicDao.addTopic(topic1);
-			RelExpertTopicId relExpertTopicId = new RelExpertTopicId(
-					expert.getExpertId(), topic1.getTopicId());
-			RelExpertTopic relExpertTopic = new RelExpertTopic(
-					relExpertTopicId, expert, topic1);
-			relExpertTopicDao.addRelExeprtTopic(relExpertTopic);
-		}
 	}
 
 }

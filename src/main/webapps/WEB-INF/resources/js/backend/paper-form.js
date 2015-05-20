@@ -10,13 +10,15 @@ $(function(){
 		});
 	
 	//datepicker
-	$("#datepicker").datepicker();
+	$('#datepicker').datepicker({
+		format: "yyyy/mm/dd",
+	});
 	
 	//add author
 	var author_num = 1;
 	$('#add-author').click(function(){
 		author_num ++ ;
-		var input_dom = '<div class="input-group"><label>作者'+author_num+':</label> <input id="tags-author" name="authors" onblur="duplicateName(this)" value=""  data-toggle="popover" title=" " data-content=" " type="text" class="author-input tags span8"></div>';
+		var input_dom = '<div class="input-group"><label>作者'+author_num+':</label> <input id="tags-author" name="authors"  value=""  data-toggle="popover" title=" " data-content=" " type="text" class="author-input tags span8"></div>';
 		$('#authors').append(input_dom);
 	});
 	
