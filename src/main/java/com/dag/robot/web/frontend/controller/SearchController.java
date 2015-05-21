@@ -6,16 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/index")
-public class FrontendIndexController {
-	
+@RequestMapping("/search")
+public class SearchController {
+
 	/**
-	 * 前台首页
+	 * 搜索页面
 	 * @param model
+	 * @param searchType 搜索类型 expert or topic or field
+	 * @param searchKey 搜索key
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(Model model){
-		return "index/index";
+	public String search(Model model,String searchType,String searchKey){
+		return "search/result";
 	}
 }

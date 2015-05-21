@@ -16,6 +16,7 @@ ol, ul, menu {
 
 a{
 	text-decoration: none !important;
+	cursor:pointer;
 }
 
 #footer .f-nav, #topbar .nav-menu, .filling-box, .filling-box .tab-search-box .search-menu,
@@ -351,7 +352,6 @@ rotateY
 	background: url('../../img/index/home-bg.jpg') no-repeat;
 	background-size: cover;
 	color: #fff;
-	margin-top: 70px;
 	text-align: center;
 	width: 100%;
 }
@@ -667,7 +667,8 @@ footer {
 	margin-right: 2px;
 	background: #f2f4f8;
 	color: #828282;
-	text-align: center
+	text-align: center;
+	cursor:pointer;
 }
 
 .filling-box .tab-search-box .search-menu li a.cur {

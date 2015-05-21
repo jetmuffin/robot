@@ -64,19 +64,23 @@
 							<!-- biography -->
 							<div class="span12 section">
 								<h6>作者:</h6>
+								${patent.experts}
 								<p>
+								<c:forEach items="${patent.experts}" var="expert">${expert.name} </c:forEach>
 								</p>
 							</div>		
 							
 							<div class="span12 section">
 								<h6>申请人:</h6>
 								<p>
+								${patent.applicant}
 								</p>
 							</div>		
 							
 						<div class="span12 section">
 								<h6>发明人:</h6>
 								<p>
+								${patent.inventor}
 								</p>
 							</div>				
 							<div class="span12 section">
@@ -91,12 +95,14 @@
 							<div class="span12 section">
 								<h6>单位:</h6>
 								<p>
+								${patent.orgnization.name}
 								</p>
 							</div>
 							
 								<div class="span12 section">
 								<h6>申请日期:</h6>
 								<p>
+								${patent.date}
 								</p>
 							</div>															
 						</div>

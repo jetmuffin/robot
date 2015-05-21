@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="/robot/resources/css/bootstrapv3/bootstrap.min.css">
 		<!-- font-awesome -->
 		<link rel="stylesheet" href="/robot/resources/font/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/robot/resources/css/common/common.css" />
 		<!-- custom css -->
 		<link rel="stylesheet" href="/robot/resources/css/index/index.css">
 </head>
@@ -42,16 +43,16 @@
 			<div class="tab-search-box">
 				<div class="tab-hd">
 					<ul class="search-menu">
-						<li><a href="#" v="expert" class="cur">专家</a></li>
-						<li><a v="topic" href="#" class="">研究方向</a></li>
-						<li><a v="field" href="#" class="">研究领域</a></li>
+						<li><a  v="expert" class="cur">专家</a></li>
+						<li><a v="topic"  class="">研究方向</a></li>
+						<li><a v="field"  class="">研究领域</a></li>
 					</ul>
 					<div class="clear"></div>
 				</div>
 				<div class="tab-bd">
 					<div class="input">
 						<input id="searchInput" type="text" placeholder="请输入您想了解的专家名称">
-						<a href="#" class="btn-search">深入分析</a>
+						<a class="btn-search">深入分析</a>
 						<ul class="dropdown-box"></ul>
 					<div class="clear"></div>
 					</div>

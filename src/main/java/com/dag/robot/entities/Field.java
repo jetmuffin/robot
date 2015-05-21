@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-19 21:06:32 by Hibernate Tools 4.3.1
+// Generated 2015-5-21 18:43:44 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,9 +24,9 @@ public class Field implements java.io.Serializable {
 	private Integer fieldId;
 	private String name;
 	private String description;
-	private Set<RelExpertField> relExpertFields = new HashSet<RelExpertField>(0);
 	private Set<RelFieldTopic> relFieldTopics = new HashSet<RelFieldTopic>(0);
 	private Set<User> users = new HashSet<User>(0);
+	private Set<Expert> experts = new HashSet<Expert>(0);
 
 	public Field() {
 	}
@@ -36,13 +36,13 @@ public class Field implements java.io.Serializable {
 	}
 
 	public Field(String name, String description,
-			Set<RelExpertField> relExpertFields,
-			Set<RelFieldTopic> relFieldTopics, Set<User> users) {
+			Set<RelFieldTopic> relFieldTopics, Set<User> users,
+			Set<Expert> experts) {
 		this.name = name;
 		this.description = description;
-		this.relExpertFields = relExpertFields;
 		this.relFieldTopics = relFieldTopics;
 		this.users = users;
+		this.experts = experts;
 	}
 
 	@Id
@@ -75,15 +75,6 @@ public class Field implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "field")
-	public Set<RelExpertField> getRelExpertFields() {
-		return this.relExpertFields;
-	}
-
-	public void setRelExpertFields(Set<RelExpertField> relExpertFields) {
-		this.relExpertFields = relExpertFields;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "field")
 	public Set<RelFieldTopic> getRelFieldTopics() {
 		return this.relFieldTopics;
 	}
@@ -99,6 +90,15 @@ public class Field implements java.io.Serializable {
 
 	public void setUsers(Set<User> users) {
 		this.users = users;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "field")
+	public Set<Expert> getExperts() {
+		return this.experts;
+	}
+
+	public void setExperts(Set<Expert> experts) {
+		this.experts = experts;
 	}
 
 }

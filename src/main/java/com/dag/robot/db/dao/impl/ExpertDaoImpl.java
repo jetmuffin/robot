@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.math3.analysis.function.Exp;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +25,7 @@ import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.RelExpertTopicId;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.utils.EntitiesForListUtil;
+import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.utils.StringMergeUtil;
 import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
@@ -116,19 +118,10 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	}
 
 	@Override
-	public List<Field> getFields(int expertId) {
+	public Field getField(int expertId) {
 		Expert expert = getById(expertId);
-		List<Field> fields = new ArrayList<Field>();
-		Set<RelExpertField> relExpertFields = expert.getRelExpertFields();
-		Iterator<RelExpertField> iterator = relExpertFields.iterator();
-		while(iterator.hasNext()){
-			RelExpertField relExpertField = iterator.next();
-			Field field = relExpertField.getField();
-			fields.add(field);
-		}
-		if(fields.size() == 0)
-			return null;
-		return fields;
+		Field field = expert.getField();
+		return field;
 	}
 
 	@Override
@@ -250,6 +243,16 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<ExpertForList> getByField(String field, int num) {
+		String hql = "from Expert as expert where expert.field.name = ?";
+		Query query = query(hql);
+		query.setMaxResults(num);
+		query.setString(0, field);
+		List<Expert> experts = query.list();
+		return EntitiesForListUtil.expertForLists(experts);
 	}
 
 	

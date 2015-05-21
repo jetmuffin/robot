@@ -19,6 +19,7 @@ import com.dag.robot.db.dao.FieldDao;
 import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.PaperDao;
 import com.dag.robot.db.dao.PatentDao;
+import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.db.dao.UserDao;
 import com.dag.robot.entities.Expert;
@@ -28,6 +29,7 @@ import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.RelExpertField;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.entities.User;
+import com.dag.robot.web.bean.ExpertForList;
 
 @Controller
 @RequestMapping("/test")
@@ -60,6 +62,10 @@ public class TestController {
 	@Autowired
 	@Qualifier("topicDao")
 	TopicDao topicDao;
+	
+	@Autowired
+	@Qualifier("relExpertTopicDao")
+	RelExpertTopicDao relExpertTopicDao;
 
 	public TestController() {
 		super();
@@ -191,6 +197,15 @@ public class TestController {
 	@RequestMapping(value = "/patent", method = RequestMethod.GET)
 	public String patent() {
 		patentDao.updateAbs(0, "afakgakf");
+		return "test/index";
+	}
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+		
+		List<ExpertForList> expertForLists = expertDao.getByField("cs", 1);
+		System.out.println(expertForLists.size());
+		
 		return "test/index";
 	}
 }

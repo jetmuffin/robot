@@ -96,7 +96,7 @@ public class EntitiesForListUtil {
 			patentForList.setDate(patent.getDate());
 			patentForList.setInventor(patent.getInventor());
 			patentForList.setTitle(patent.getTitle());
-			
+			patentForList.setOrgnization(patent.getOrgnization());
 			patentForLists.add(patentForList);
 		}
 		
