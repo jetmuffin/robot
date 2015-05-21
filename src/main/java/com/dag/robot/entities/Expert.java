@@ -1,14 +1,17 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-21 16:15:36 by Hibernate Tools 4.3.1
+// Generated 2015-5-21 18:43:44 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -32,27 +35,28 @@ public class Expert implements java.io.Serializable {
 	private String email;
 	private String address;
 	private String homepage;
-	private int paperNum = 0;
-	private int patentNum = 0;
-	private int paperReferedNum = 0;
+	private int paperNum;
+	private int patentNum;
+	private int paperReferedNum;
 	private String prize;
 	private String experience;
 	private String info;
 	private String achievement;
 	private String url;
-	private Integer rate = 0;
+	private Integer rate;
 	private String job;
-	private Integer age = 0;
+	private Integer age;
 	private String area;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
 			0);
 	private Set<RelExpertTopic> relExpertTopics = new HashSet<RelExpertTopic>(0);
-	private Set<RelExpertField> relExpertFields = new HashSet<RelExpertField>(0);
 	private Set<User> users = new HashSet<User>(0);
 	private Set<Activity> activities = new HashSet<Activity>(0);
 	private Set<RelExpertPaper> relExpertPapers = new HashSet<RelExpertPaper>(0);
 
+
 	public Expert() {
+		super();
 	}
 
 	public Expert(String name, String gender, int paperNum, int patentNum,
@@ -70,8 +74,7 @@ public class Expert implements java.io.Serializable {
 			String experience, String info, String achievement, String url,
 			Integer rate, String job, Integer age, String area,
 			Set<RelExpertPatent> relExpertPatents,
-			Set<RelExpertTopic> relExpertTopics,
-			Set<RelExpertField> relExpertFields, Set<User> users,
+			Set<RelExpertTopic> relExpertTopics, Set<User> users,
 			Set<Activity> activities, Set<RelExpertPaper> relExpertPapers) {
 		this.field = field;
 		this.orgnization = orgnization;
@@ -94,25 +97,23 @@ public class Expert implements java.io.Serializable {
 		this.area = area;
 		this.relExpertPatents = relExpertPatents;
 		this.relExpertTopics = relExpertTopics;
-		this.relExpertFields = relExpertFields;
 		this.users = users;
 		this.activities = activities;
 		this.relExpertPapers = relExpertPapers;
 	}
-	
+
 	public Expert(String name2, String gender2, String email2, String address2,
 			String homepage2, String experience2, String info2,
 			String achievement2) {
 		this.name = name2;
 		this.gender = gender2;
 		this.email = email2;
-		this.address =address2;
+		this.address = address2;
 		this.homepage = homepage2;
 		this.experience = experience2;
 		this.info = info2;
 		this.achievement = achievement2;
 	}
-
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -314,15 +315,6 @@ public class Expert implements java.io.Serializable {
 
 	public void setRelExpertTopics(Set<RelExpertTopic> relExpertTopics) {
 		this.relExpertTopics = relExpertTopics;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expert")
-	public Set<RelExpertField> getRelExpertFields() {
-		return this.relExpertFields;
-	}
-
-	public void setRelExpertFields(Set<RelExpertField> relExpertFields) {
-		this.relExpertFields = relExpertFields;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "experts")

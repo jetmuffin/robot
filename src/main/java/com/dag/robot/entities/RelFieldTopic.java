@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-21 16:15:36 by Hibernate Tools 4.3.1
+// Generated 2015-5-21 18:43:44 by Hibernate Tools 4.3.1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -22,7 +22,7 @@ public class RelFieldTopic implements java.io.Serializable {
 	private RelFieldTopicId id;
 	private Field field;
 	private Topic topic;
-	private Integer relationType = 0;
+	private Integer relationType;
 
 	public RelFieldTopic() {
 	}

@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-21 16:15:36 by Hibernate Tools 4.3.1
+// Generated 2015-5-21 18:43:44 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,7 +34,7 @@ public class Paper implements java.io.Serializable {
 	private String title;
 	private String abs;
 	private String keywords;
-	private int referencedNum = 0;
+	private int referencedNum;
 	private String type;
 	private Date conferenceDate;
 	private String issue;

@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-21 16:15:36 by Hibernate Tools 4.3.1
+// Generated 2015-5-21 18:43:44 by Hibernate Tools 4.3.1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -22,7 +22,7 @@ public class RelExpertPatent implements java.io.Serializable {
 	private RelExpertPatentId id;
 	private Expert expert;
 	private Patent patent;
-	private int authorOrder = 0;
+	private int authorOrder;
 
 	public RelExpertPatent() {
 	}

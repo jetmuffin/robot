@@ -36,23 +36,6 @@ public class FieldDaoImpl extends BaseDao implements FieldDao {
 
 	@Override
 	public void deleteField(Field field) {
-		
-		Iterator<?> iterator;
-
-		Set<RelExpertField> relExpertFields = field.getRelExpertFields();		
-		iterator = relExpertFields.iterator();
-		while(iterator.hasNext()){
-			RelExpertField relExpertField = (RelExpertField) iterator.next();
-			delete(relExpertField);
-		}
-		
-		Set<RelFieldTopic> relFieldTopics = field.getRelFieldTopics();
-		iterator = relFieldTopics.iterator();
-		while(iterator.hasNext()){
-			RelFieldTopic relFieldTopic = (RelFieldTopic) iterator.next();
-			delete(relFieldTopic);
-		}
-		
 		delete(field);
 	}
 
