@@ -7,6 +7,7 @@ public enum LabelTypes implements Label {
 	Topic,
 	Expert,
 	Paper,
+	Patent,
 	Organization,
 	KNOWLAGE
 }

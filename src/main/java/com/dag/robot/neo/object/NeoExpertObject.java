@@ -14,9 +14,9 @@ import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import com.dag.robot.neo.type.*;
 
 public class NeoExpertObject {
-	private String DB_PATH="";
-	private GraphDatabaseService graphDb=null;
-	private Transaction transaction = null;
+	protected String DB_PATH="";
+	protected GraphDatabaseService graphDb=null;
+	protected Transaction transaction = null;
 	
 	public NeoExpertObject(){
 		
@@ -53,17 +53,6 @@ public class NeoExpertObject {
 		return graphDb.getRelationshipById(relationId);
 	}
 	
-	public GraphDatabaseService getGraphDb(){
-		return this.graphDb;
-	}
-	public Transaction getTransaction(){
-		return this.transaction;
-	}
-	public String getNodeString(long nid){
-		Node node = graphDb.getNodeById(nid);
-		String string = node.getId() + ":" + node.getProperty("name");
-		return string ;
-	}
 	/**
 	 * 根据 Label 查找节点，返回所有节点链表
 	 * @param label	节点属性
@@ -78,7 +67,7 @@ public class NeoExpertObject {
 		return ids;
 	}	
 	/**
-	 * 根据Lebel 及 属性来查找节点，返回符合条件的id的列表
+	 * 根据Label 及 属性来查找节点，返回符合条件的id的列表
 	 * @param label		待查找节点的Label
 	 * @param property	待查找节点的属性名称
 	 * @param value		待查找节点的属性值
@@ -93,45 +82,54 @@ public class NeoExpertObject {
 		}
 		return ids;
 	}
+	public List<Long> findNodes(LabelTypes label,String property,int value){
+		ArrayList<Long> ids = new ArrayList<Long>();
+		ResourceIterable<Node> nodes = this.graphDb.findNodesByLabelAndProperty(label, property, value);
+		for(Node iNode : nodes){
+			ids.add(iNode.getId());
+		}
+		return ids;
+	}
 	
 	/**
-	 * 输入五元组，创建一个有向关系
-	 * @param label1	起点Label
-	 * @param property1	起点键值属性名称
-	 * @param value1	起点键值属性值
+	 * 输入十一元组，创建一个有向关系
+	 * @param labela	起点Label
+	 * @param ida		起点键值属性名称
+	 * @param valueIda	起点键值属性值
+	 * @param namea		起点名称参数
+	 * @param valueNamea	起点名称值
 	 * @param relTypes	关系类型
-	 * @param label2	终点Label
-	 * @param property2	终点键值属性名称
-	 * @param value2	终点键值属性值
+	 * @param labelb	终点Label
+	 * @param idb		终点键值属性名称
+	 * @param valueIdb	终点键值属性值
+	 * @param nameb		终点名称参数
+	 * @param valueNameb	终点名称值
 	 */
-	public void createLine(String label1,String property1,String value1
-			,String relTypes
-			,String label2,String property2,String value2){
-		
-		LabelTypes aLabel = LabelTypes.valueOf(label1);
-		LabelTypes bLabel = LabelTypes.valueOf(label2);
-		RelTypes relTypes0 = RelTypes.valueOf(relTypes);
-		
+	public void createLine(LabelTypes labela,String ida,int valueIda,String namea,String valueNamea
+			,RelTypes relTypes
+			,LabelTypes labelb,String idb,int valueIdb,String nameb,String valueNameb){
 		
 		Node aNode = null;
 		Node bNode = null;
 		
 		
-		List<Long> ids = findNodes(aLabel, property1, value1);
+		List<Long> ids = findNodes(labela, ida, valueIda);
 		if(ids.size() == 0){
-			aNode = graphDb.createNode(aLabel);
-			aNode.setProperty(property1, value1);
+			aNode = graphDb.createNode(labela);
+			aNode.setProperty(ida, valueIda);
+			aNode.setProperty(namea, valueNamea);
 		}else{
 			aNode = getNode(ids.get(0));
 		}
-		ids = findNodes(bLabel, property2, value2);
+		ids = findNodes(labelb, idb, valueIdb);
 		if(ids.size() == 0){
-			bNode = graphDb.createNode(bLabel);
-			bNode.setProperty(property2, value2);
+			bNode = graphDb.createNode(labelb);
+			bNode.setProperty(idb, valueIdb);
+			bNode.setProperty(nameb, valueNameb);
 		}else{
 			bNode = getNode(ids.get(0));
 		}
-		System.out.println(aNode.getId() + " " + bNode.getId());
-		aNode.createRelationshipTo(bNode, relTypes0);
+		aNode.createRelationshipTo(bNode, relTypes);
 	}
+	
 }
