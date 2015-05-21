@@ -80,6 +80,9 @@ public class NeoSearchObject {
 		traverser = traversalDescription.traverse(node);
 	}
 	
+	/**
+	 * 输出搜索的结果
+	 */
 	public void printSearch(){
 		for(Path path : traverser){
 			System.out.println(path.startNode().getProperty("name")+" =( "+path.length()+ " )=> "+path.endNode().getProperty("name"));
@@ -88,14 +91,27 @@ public class NeoSearchObject {
 	
 	/**
 	 * 获得搜索结果节点的id和权值
-	 * @return
+	 * @return	结点id和权值的map
 	 */
 	public Map<Long, Integer> getSearch() {
 		Map<Long, Integer> idsMap = new HashMap<Long, Integer>();
 		for(Path path : traverser){
-			//ids.add(path.endNode().getId());
 			idsMap.put(path.endNode().getId(),path.length());
 		}
 		return idsMap;
+	}
+	
+	public long getRootNode(Node aNode){
+		setTraversalDescription();
+		addRelationships(RelTypes.INCLUDE, Direction.INCOMING);
+		setTraverser(aNode);
+		
+		long rid = -1;
+		
+		for(Path path : traverser){
+			rid = path.endNode().getId();
+		}
+		return rid;
+		
 	}
 }
