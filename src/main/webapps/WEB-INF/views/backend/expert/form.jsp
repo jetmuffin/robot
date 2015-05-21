@@ -74,6 +74,12 @@
 		<textarea id="wysi-info" name="info" class="span12 wysihtml5" rows="6"></textarea>
 	</div>
 </div>
+<div class="field-box">
+	<label>研究领域:</label>
+	<div class="wysi-column span9">
+		<input id="wysi-info" name="field" class="span12 wysihtml5" />
+	</div>
+</div>
 <div class="span12 field-box ">
 	<label>研究方向:</label> 
 	<input id='tags-topic' class="tags span9" type="text" name="topic" value="${topics}"/> <span

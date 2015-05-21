@@ -22,7 +22,7 @@
 	<jsp:include page="../common/navbar.jsp"></jsp:include>
 	<section id="main">
 	<div class="left-side">
-		<div class="total">共找到2个结果</div>
+		<div class="total">共找到<strong>2</strong>个结果</div>
 		<div class="filter">
 			<div class="filter-all">
 				<div class="des">选择搜索类型</div>
@@ -48,28 +48,32 @@
 
 	<div class="right-side">
 		<div class="search-input">
-			<form method="get" action="/search" >
-					<fieldset>
-								<div class="selectui search-field" data-maxheight="200"
-									data-dock="false">
-									<div class="selectui-head">
-										<input type="hidden" name="searchField" value="3"
-											data-ui="SelectUI">
-										<div class="selectui-result">全文</div>
-										<div class="selectui-drop" data-name="searchField"></div>
-									</div>
-								</div>
-							<div class="float-left relative">
-								<button type="submit" >
-									<i class="icon-32-nd icon-32-find"></i>搜索
-								</button>
-								<input maxlength="100" type="text" data-selector="keyword"
-									data-synonym-key="4" class="keyword input-large " name="key"
-									size="20" placeholder="输入专家名，如：周志华" >
-								<div class="sojob-suggest" data-selector="sojob-suggest">
-								</div>
-							</div>
-					</fieldset>
+			<form method="get" action="/robot/search">
+				<fieldset>
+					<div class="selectui search-field" data-maxheight="200"
+						data-dock="false">
+						<div class="selectui-head">
+							<div class="selectui-result">专家</div>
+							<div class="selectui-drop"  data-name="searchField" data-toggle="dropdown"></div>
+							<ul class="dropdown-menu" role="menu" id="search-menu">
+						    <li class="current" data-key="expert"><a href="#">专家</a></li>
+						    <li data-key="field"><a href="#">研究领域</a></li>
+						    <li data-key="topic"><a href="#">研究方向</a></li>
+						  </ul>
+						</div>
+
+					</div>
+					<div class="float-left relative">
+						<button type="submit">
+							<i class="icon-32-nd icon-32-find"></i>搜索
+						</button>
+						<input maxlength="100" type="text" data-selector="keyword"
+							data-synonym-key="4" class="keyword input-large " name="searchKey"
+							size="20" placeholder="输入专家名，如：周志华"  id="keyInput">
+						<input type="text" style="display:none" name="searchType" id="typeInput"/>
+						<div class="sojob-suggest" data-selector="sojob-suggest"></div>
+					</div>
+				</fieldset>
 			</form>
 		</div>
 
@@ -81,7 +85,7 @@
 							src="/robot/resources/img/common/user-thumb.png" alt="" /></a>
 					</div>
 					<div class="expert-info info-item">
-						<a class="expert-name info-item" href="#">周志华</a>
+						<a class="expert-name info-item" href="/robot/expert/15">周志华</a>
 						<div class="expert-org info-item">南京大学</div>
 						<div class="expert-field info-item">
 							研究领域 :<span>计算机</span>
@@ -121,7 +125,11 @@
 	</div>
 	<div class="clear"></div>
 	</section>
+	
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 <script src="/robot/resources/js/jquery/jquery-2.0.0.min.js"></script>
 <script src="/robot/resources/js/bootstrapv3/bootstrap.min.js"></script>
+<!-- custom javascript -->
+<script src="/robot/resources/js/search/result.js"></script>
 </html>
