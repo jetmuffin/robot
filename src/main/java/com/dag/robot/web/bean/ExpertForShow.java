@@ -3,6 +3,7 @@ package com.dag.robot.web.bean;
 import java.util.List;
 
 import com.dag.robot.entities.Activity;
+import com.dag.robot.entities.Field;
 import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
@@ -23,8 +24,10 @@ public class ExpertForShow {
 	private String info;
 	private String achievement;
 	private int rate;
+	private Integer age;
+	private String area;
 	private Orgnization orgnization;
-	
+	private Field field;
 	
 	private List<Paper> papers;
 	private List<Patent> patents;
@@ -38,8 +41,9 @@ public class ExpertForShow {
 			String email, String address, String homepage, int paperNum,
 			int patentNum, int paperReferedNum, String prize,
 			String experience, String info, String achievement, int rate,
-			Orgnization orgnization, List<Paper> papers, List<Patent> patents,
-			List<Topic> topics, List<Activity> activities) {
+			Integer age, String area, Orgnization orgnization, Field field,
+			List<Paper> papers, List<Patent> patents, List<Topic> topics,
+			List<Activity> activities) {
 		super();
 		this.expertId = expertId;
 		this.name = name;
@@ -55,20 +59,13 @@ public class ExpertForShow {
 		this.info = info;
 		this.achievement = achievement;
 		this.rate = rate;
+		this.age = age;
+		this.area = area;
 		this.orgnization = orgnization;
+		this.field = field;
 		this.papers = papers;
 		this.patents = patents;
 		this.topics = topics;
-		this.activities = activities;
-	}
-
-
-
-
-	public List<Activity> getActivities() {
-		return activities;
-	}
-	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
 	}
 	public Integer getExpertId() {
@@ -149,6 +146,36 @@ public class ExpertForShow {
 	public void setAchievement(String achievement) {
 		this.achievement = achievement;
 	}
+	public int getRate() {
+		return rate;
+	}
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	public Orgnization getOrgnization() {
+		return orgnization;
+	}
+	public void setOrgnization(Orgnization orgnization) {
+		this.orgnization = orgnization;
+	}
+	public Field getField() {
+		return field;
+	}
+	public void setField(Field field) {
+		this.field = field;
+	}
 	public List<Paper> getPapers() {
 		return papers;
 	}
@@ -167,20 +194,11 @@ public class ExpertForShow {
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
 	}
-
-	public int getRate() {
-		return rate;
+	public List<Activity> getActivities() {
+		return activities;
 	}
-
-	public void setRate(int rate) {
-		this.rate = rate;
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
 	}
-
-	public Orgnization getOrgnization() {
-		return orgnization;
-	}
-
-	public void setOrgnization(Orgnization orgnization) {
-		this.orgnization = orgnization;
-	}
+	
 }

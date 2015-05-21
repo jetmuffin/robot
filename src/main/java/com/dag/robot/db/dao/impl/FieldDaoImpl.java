@@ -55,5 +55,14 @@ public class FieldDaoImpl extends BaseDao implements FieldDao {
 		
 		delete(field);
 	}
+
+	@Override
+	public Field getByName(String name) {
+		String hql = "from Field as field where field.name = ?";
+		List<Field> fields = query(hql).setString(0, name).list();
+		if(fields.size() == 0 || fields == null)
+			return null;
+		return fields.get(0);
+	}
 	
 }

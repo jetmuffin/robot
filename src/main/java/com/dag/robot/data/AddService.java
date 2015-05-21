@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.dag.robot.db.dao.ConferenceDao;
 import com.dag.robot.db.dao.ExpertDao;
+import com.dag.robot.db.dao.FieldDao;
 import com.dag.robot.db.dao.JournalDao;
 import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.PaperDao;
@@ -19,6 +20,7 @@ import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Conference;
 import com.dag.robot.entities.Expert;
+import com.dag.robot.entities.Field;
 import com.dag.robot.entities.Journal;
 import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
@@ -75,12 +77,30 @@ public class AddService {
 	@Autowired
 	@Qualifier("relExpertPatentDao")
 	private RelExpertPatentDao relExpertPatentDao;
+	
+	@Autowired
+	@Qualifier("fieldDao")
+	private FieldDao fieldDao;
 
 	public void addExpert(String name, String gender, String email, String address,
 			String homepage, String experience, String info, String topic,
-			String achievement, String organization) {
+			String achievement, String organization, int age, String area, String field) {
+		//必要资料信息
 		Expert expert = new Expert(name, gender, email, address, homepage,
 				experience, info, achievement);
+		//可空信息
+		expert.setAge(age);
+		expert.setArea(area);
+		
+		//领域查重
+		Field field2 = fieldDao.getByName(field);
+		if(field2 == null){
+			//没有重名的
+			field2 = new Field(field);
+			fieldDao.addField(field2);
+		}
+		expert.setField(field2);
+		
 		//组织查重
 		List<Orgnization> orgnizations = orgnizationDao.getByName(organization);
 		Orgnization orgnization = new Orgnization();
