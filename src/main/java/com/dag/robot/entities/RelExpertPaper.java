@@ -22,7 +22,7 @@ public class RelExpertPaper implements java.io.Serializable {
 	private RelExpertPaperId id;
 	private Expert expert;
 	private Paper paper;
-	private int authorOrder;
+	private int authorOrder = 0;
 
 	public RelExpertPaper() {
 	}

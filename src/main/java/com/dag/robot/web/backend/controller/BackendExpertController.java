@@ -123,7 +123,7 @@ public class BackendExpertController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(Model model, String name, String gender, String email,
 			String address, String homepage, String experience, String info,
-			String topic, String achievement, String organization, int age,
+			String topic, String achievement, String organization, Integer age,
 			String area, String field, RedirectAttributes redirectAttributes) {
 		addService.addExpert(name, gender, email, address, homepage,
 				experience, info, topic, achievement, organization, age, area, field);

@@ -84,22 +84,25 @@ public class AddService {
 
 	public void addExpert(String name, String gender, String email, String address,
 			String homepage, String experience, String info, String topic,
-			String achievement, String organization, int age, String area, String field) {
+			String achievement, String organization, Integer age, String area, String field) {
 		//必要资料信息
 		Expert expert = new Expert(name, gender, email, address, homepage,
 				experience, info, achievement);
 		//可空信息
-		expert.setAge(age);
-		expert.setArea(area);
-		
-		//领域查重
-		Field field2 = fieldDao.getByName(field);
-		if(field2 == null){
-			//没有重名的
-			field2 = new Field(field);
-			fieldDao.addField(field2);
+		if(age != null)
+			expert.setAge(age);
+		if(area != null)
+			expert.setArea(area);
+		if(field != null){
+			//领域查重
+			Field field2 = fieldDao.getByName(field);
+			if(field2 == null){
+				//没有重名的
+				field2 = new Field(field);
+				fieldDao.addField(field2);
+			}
+			expert.setField(field2);
 		}
-		expert.setField(field2);
 		
 		//组织查重
 		List<Orgnization> orgnizations = orgnizationDao.getByName(organization);

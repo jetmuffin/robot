@@ -22,7 +22,7 @@ public class RelExpertField implements java.io.Serializable {
 	private RelExpertFieldId id;
 	private Expert expert;
 	private Field field;
-	private Integer weight;
+	private Integer weight = 0;
 
 	public RelExpertField() {
 	}

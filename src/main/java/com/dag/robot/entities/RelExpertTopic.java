@@ -22,7 +22,7 @@ public class RelExpertTopic implements java.io.Serializable {
 	private RelExpertTopicId id;
 	private Expert expert;
 	private Topic topic;
-	private Integer weight;
+	private Integer weight = 0;
 
 	public RelExpertTopic() {
 	}

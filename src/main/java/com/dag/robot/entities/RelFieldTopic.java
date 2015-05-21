@@ -22,7 +22,7 @@ public class RelFieldTopic implements java.io.Serializable {
 	private RelFieldTopicId id;
 	private Field field;
 	private Topic topic;
-	private Integer relationType;
+	private Integer relationType = 0;
 
 	public RelFieldTopic() {
 	}

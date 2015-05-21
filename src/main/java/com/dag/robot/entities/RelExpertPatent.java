@@ -22,7 +22,7 @@ public class RelExpertPatent implements java.io.Serializable {
 	private RelExpertPatentId id;
 	private Expert expert;
 	private Patent patent;
-	private int authorOrder;
+	private int authorOrder = 0;
 
 	public RelExpertPatent() {
 	}

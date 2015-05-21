@@ -34,7 +34,7 @@ public class Paper implements java.io.Serializable {
 	private String title;
 	private String abs;
 	private String keywords;
-	private int referencedNum;
+	private int referencedNum = 0;
 	private String type;
 	private Date conferenceDate;
 	private String issue;
