@@ -10,33 +10,33 @@ import com.dag.robot.entities.User;
 public interface UserDao {
 	
 	/**
-	 * 添加领域
-	 * @param user 领域信息
+	 * 添加用户
+	 * @param user 用户信息
 	 */
 	public void addUser(User user);
 	
 	/**
-	 * 更新领域信息
-	 * @param user 领域信息
+	 * 更新用户信息
+	 * @param user 用户信息
 	 */
 	public void updateUser(User user);
 	
 	/**
-	 * 根据主键检索领域
-	 * @param userId 领域id
+	 * 根据主键检索用户
+	 * @param userId 用户id
 	 * @return
 	 */
 	public User getById(int userId);
 	
 	/**
-	 * 获得全部领域信息
-	 * @return 领域List
+	 * 获得全部用户信息
+	 * @return 用户List
 	 */
 	public List<User> getAllUsers();
 	
 	/**
-	 * 删除领域
-	 * @param user 领域信息
+	 * 删除用户
+	 * @param user 用户信息
 	 */
 	public void deleteUser(User user);
 	
@@ -48,9 +48,9 @@ public interface UserDao {
 	public List<Expert> getFollowedExperts(int userId);
 	
 	/**
-	 * 检索用户关注的领域信息
+	 * 检索用户关注的用户信息
 	 * @param userId 用户id
-	 * @return 领域List
+	 * @return 用户List
 	 */
 	public List<Field> getFollowedFields(int userId);
 	
@@ -60,4 +60,26 @@ public interface UserDao {
 	 * @return 话题List
 	 */
 	public List<Topic> getFollowedTopics(int userId);
+	
+	/**
+	 * 存储用户关注专家
+	 * @param user
+	 * @param expert
+	 */
+	public void followExpert(User user, Expert expert);
+	
+	/**
+	 * 存储用户关注话题
+	 * @param user
+	 * @param topic
+	 */
+	public void followTopic(User user, Topic topic);
+	
+	/**
+	 * 存储用户关注领域
+	 * @param user
+	 * @param field
+	 */
+	public void followField(User user, Field field);
+	
 }

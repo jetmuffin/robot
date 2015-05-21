@@ -68,5 +68,23 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 			return null;
 		return topics;
 	}
-	
+
+	@Override
+	public void followExpert(User user, Expert expert) {
+		user.getExperts().add(expert);
+		update(user);
+	}
+
+	@Override
+	public void followTopic(User user, Topic topic) {
+		user.getTopics().add(topic);
+		update(topic);
+	}
+
+	@Override
+	public void followField(User user, Field field) {
+		user.getFields().add(field);
+		update(field);
+	}
+
 }

@@ -1,4 +1,4 @@
-package com.dag.robot.data;
+package com.dag.robot.data.add;
 
 public class AddToNeo {
 
