@@ -574,14 +574,6 @@ rotateY
 }
 /* end contact */
 
-/* start footer */
-footer {
-	background: #fff;
-	font-weight: 400;
-	text-align: center;
-	padding: 20px;
-}
-/* end footer */
 @media screen and ( max-width: 991px ) {
 	.templatemo-box {
 		margin-bottom: 30px;

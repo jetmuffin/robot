@@ -32,7 +32,7 @@ header {
 	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
 	-moz-box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
 	box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
-		position: fixed;
+	position: fixed;
 	width: 100%;
 }
 
@@ -58,120 +58,6 @@ header .container:after, header .wrap:after {
 	clear: both
 }
 
-{
-margin-bottom
-
-
-:
-
-
-20
-px
-;
-
-
-  
-
-position
-
-
-:relative
-
-
-;
-z-index
-
-
-:
-
-
-200;
--webkit-box-shadow
-
-
-:
-
-
-0
-2
-px
-
- 
-
-5
-px
-
- 
-
-rgba
-
-
-(0
-,
-0,0,
-.2
-
-
-);
--moz-box-shadow
-
-
-:
-
-
-0
-2
-px
-
-
-5
-px
-
-
-rgba
-(
-
-
-0
-,
-0
-,
-0
-,
-.2
-
-
-);
-box-shadow
-
-
-:
-
-
-0
-2
-px
-
-
-5
-px
-
-
-rgba
-(
-
-
-0
-,
-0
-,
-0
-,
-.2
-
-
-)
-}
 .header {
 	background-color: #303a40;
 	position: relative;
@@ -302,3 +188,13 @@ rgba
 .clear {
 	clear: both
 }
+
+
+/* start footer */
+footer {
+	background: #fff;
+	font-weight: 400;
+	text-align: center;
+	padding: 20px;
+}
+/* end footer */

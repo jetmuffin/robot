@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.entities.Expert;
+import com.dag.robot.utils.EntitiesForShowUtil;
+import com.dag.robot.web.bean.ExpertForShow;
 
 @Controller
 @RequestMapping("/expert")
@@ -24,10 +26,11 @@ public class ExpertController {
 	}
 
 	@RequestMapping(value = "/{expertId}", method = RequestMethod.GET)
-	public String getAll(@PathVariable int expertId, Model model) {
+	public String get(@PathVariable int expertId, Model model) {
 		Expert expert = expertDao.getById(expertId);
-		model.addAttribute("exeprt", expert);
-		return "index";
+		ExpertForShow expertForShow = EntitiesForShowUtil.expertForShow(expert);
+		model.addAttribute("expert", expertForShow);
+		return "expert/show";
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)

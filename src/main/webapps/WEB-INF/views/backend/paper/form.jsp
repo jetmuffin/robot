@@ -47,7 +47,12 @@
 	<span class="charactersleft">输入关键词后,按","生成标签</span>
 </div>
 
-
+<div class="field-box">
+	<label>所属领域:</label>
+	<div class="span9">
+		<input type="text" name="field" class="span12 " />
+	</div>
+</div>
 
 <div class="span12 field-box">
 	<label>文献类型:</label>

@@ -104,15 +104,7 @@
 		</section>
 		<!-- end feature -->
 	
-	<!-- start footer -->
-		<footer>
-			<div class="container">
-				<div class="row">
-					<p>Copyright © 2015 - 4ever DAG | Expert Robot </p>
-				</div>
-			</div>
-		</footer>
-		<!-- end footer -->
+		<jsp:include page="../common/footer.jsp"></jsp:include>
 		<script src="/robot/resources/js/jquery/jquery-2.0.0.min.js"></script>
 		<script src="/robot/resources/js/bootstrapv3/bootstrap.min.js"></script>
 		<script src="/robot/resources/js/common/wow.min.js"></script>
