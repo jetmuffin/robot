@@ -15,7 +15,7 @@ import com.dag.robot.neo.type.RelTypes;
 
 public class KnowlageTest {
 
-	String dB_PATH = "/home/innerac/workspace/neoDB";
+	String dB_PATH = "/home/Sloriac/Workspace/neoDB";
 	@SuppressWarnings("resource")
 	@Test
 	public void buildKnowlageTest(){
@@ -25,7 +25,7 @@ public class KnowlageTest {
 		
 		String s = null;
 		try {
-			FileInputStream is=new FileInputStream("/home/innerac/Desktop/wikipedia/list_chs");
+			FileInputStream is=new FileInputStream("/home/Sloriac/Desktop/wikipedia/list_chs");
 			InputStreamReader ir=new InputStreamReader(is);
 	        BufferedReader in =new BufferedReader(ir);
 	        while((s=in.readLine()) !=null){
