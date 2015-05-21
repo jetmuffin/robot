@@ -18,42 +18,6 @@ public class NeoExpertObject {
 	private GraphDatabaseService graphDb=null;
 	private Transaction transaction = null;
 	
-//	public enum Experts {
-//		name("name"),
-//		age("age"),
-//		sex("sex");
-//		private String value;
-//		private Experts(String string){
-//			value = string;
-//		}
-//		public String getValue(){
-//			return value;
-//		}
-//	}
-//	
-//	public enum Papers {
-//		name("name"),
-//		year("year"),
-//		author("author");
-//		private String value;
-//		private Papers(String string){
-//			value = string;
-//		}
-//		public String getValue(){
-//			return value;
-//		}
-//	}
-//	
-//	public enum Topics {
-//		name("name");
-//		private String value;
-//		private Topics(String string){
-//			value = string;
-//		}
-//		public String getValue(){
-//			return value;
-//		}
-//	}	
 	public NeoExpertObject(){
 		
 	}
