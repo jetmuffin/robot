@@ -60,7 +60,7 @@ public class BackendExpertController {
 	@Autowired
 	@Qualifier("relExpertTopicDao")
 	private RelExpertTopicDao relExpertTopicDao;
-	
+
 	@Autowired
 	private AddService addService;
 
@@ -123,10 +123,10 @@ public class BackendExpertController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(Model model, String name, String gender, String email,
 			String address, String homepage, String experience, String info,
-			String topic, String achievement, String organization,
-			RedirectAttributes redirectAttributes) {
-		addService.addExpert(name, gender, email, address, homepage, experience, info, topic,
-				achievement, organization);
+			String topic, String achievement, String organization, Integer age,
+			String area, String field, RedirectAttributes redirectAttributes) {
+		addService.addExpert(name, gender, email, address, homepage,
+				experience, info, topic, achievement, organization, age, area, field);
 		redirectAttributes.addFlashAttribute("message", "专家信息添加成功!");
 		return "redirect:experts";
 	}
@@ -153,8 +153,7 @@ public class BackendExpertController {
 	}
 
 	@RequestMapping(value = "/editExperience/{expertId}", method = RequestMethod.POST)
-	public String editExperience(@PathVariable int expertId,
-			String experience,
+	public String editExperience(@PathVariable int expertId, String experience,
 			RedirectAttributes redirectAttributes) {
 		expertDao.updateExperience(expertId, experience);
 		redirectAttributes.addAttribute("message", "信息修改成功！");
@@ -162,8 +161,8 @@ public class BackendExpertController {
 	}
 
 	@RequestMapping(value = "/editInfo/{expertId}", method = RequestMethod.POST)
-	public String editInfo(@PathVariable int expertId,
-			String info, RedirectAttributes redirectAttributes) {
+	public String editInfo(@PathVariable int expertId, String info,
+			RedirectAttributes redirectAttributes) {
 		expertDao.updateInfo(expertId, info);
 		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/expert/" + expertId;
@@ -171,8 +170,7 @@ public class BackendExpertController {
 
 	@RequestMapping(value = "/editAchievement/{expertId}", method = RequestMethod.POST)
 	public String editAchievement(@PathVariable int expertId,
-			String achievement,
-			RedirectAttributes redirectAttributes) {
+			String achievement, RedirectAttributes redirectAttributes) {
 		expertDao.updateAchievement(expertId, achievement);
 		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/expert/" + expertId;

@@ -29,6 +29,7 @@ import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.RelExpertField;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.entities.User;
+import com.dag.robot.web.bean.ExpertForList;
 
 @Controller
 @RequestMapping("/test")
@@ -202,10 +203,8 @@ public class TestController {
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
 		
-		List<Expert> experts = relExpertTopicDao.searchExpertsByTopics("data", 2);
-		for(int i = 0; i < experts.size(); i++){
-			System.out.println(experts.get(i).getName());
-		}
+		List<ExpertForList> expertForLists = expertDao.getByField("cs", 1);
+		System.out.println(expertForLists.size());
 		
 		return "test/index";
 	}

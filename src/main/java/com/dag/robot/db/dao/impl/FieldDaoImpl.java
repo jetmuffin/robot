@@ -36,24 +36,16 @@ public class FieldDaoImpl extends BaseDao implements FieldDao {
 
 	@Override
 	public void deleteField(Field field) {
-		
-		Iterator<?> iterator;
-
-		Set<RelExpertField> relExpertFields = field.getRelExpertFields();		
-		iterator = relExpertFields.iterator();
-		while(iterator.hasNext()){
-			RelExpertField relExpertField = (RelExpertField) iterator.next();
-			delete(relExpertField);
-		}
-		
-		Set<RelFieldTopic> relFieldTopics = field.getRelFieldTopics();
-		iterator = relFieldTopics.iterator();
-		while(iterator.hasNext()){
-			RelFieldTopic relFieldTopic = (RelFieldTopic) iterator.next();
-			delete(relFieldTopic);
-		}
-		
 		delete(field);
+	}
+
+	@Override
+	public Field getByName(String name) {
+		String hql = "from Field as field where field.name = ?";
+		List<Field> fields = query(hql).setString(0, name).list();
+		if(fields.size() == 0 || fields == null)
+			return null;
+		return fields.get(0);
 	}
 	
 }

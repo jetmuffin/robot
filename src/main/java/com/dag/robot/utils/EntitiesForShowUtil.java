@@ -41,6 +41,9 @@ public class EntitiesForShowUtil {
 		expertForShow.setPrize(expert.getPrize());
 		expertForShow.setRate(expert.getRate());
 		expertForShow.setOrgnization(expert.getOrgnization());
+		expertForShow.setAge(expert.getAge());
+		expertForShow.setArea(expert.getArea());
+		expertForShow.setField(expert.getField());
 		
 		Iterator<?> iterator;
 

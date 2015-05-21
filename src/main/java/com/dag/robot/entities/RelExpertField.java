@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-20 21:09:50 by Hibernate Tools 4.3.1
+// Generated 2015-5-21 16:15:36 by Hibernate Tools 4.3.1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -22,7 +22,7 @@ public class RelExpertField implements java.io.Serializable {
 	private RelExpertFieldId id;
 	private Expert expert;
 	private Field field;
-	private Integer weight;
+	private Integer weight = 0;
 
 	public RelExpertField() {
 	}

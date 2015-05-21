@@ -26,6 +26,13 @@ public interface FieldDao {
 	public Field getById(int fieldId);
 	
 	/**
+	 * 根据name检索领域
+	 * @param name
+	 * @return
+	 */
+	public Field getByName(String name);
+	
+	/**
 	 * 获得全部领域信息
 	 * @return 领域List
 	 */

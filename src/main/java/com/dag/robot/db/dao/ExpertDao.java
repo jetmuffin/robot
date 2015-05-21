@@ -87,9 +87,9 @@ public interface ExpertDao {
 	/**
 	 * 检索专家领域信息
 	 * @param expertId 专家id
-	 * @return 领域List
+	 * @return 领域
 	 */
-	public List<Field> getFields(int expertId);
+	public Field getField(int expertId);
 	
 	/**
 	 * 检索专家话题信息
@@ -162,4 +162,13 @@ public interface ExpertDao {
 	 * @param achievement
 	 */
 	public void updateAchievement(int expertId, String achievement);
+	
+	/**
+	 * 根据研究领域检索专家
+	 * @param field
+	 * @param num
+	 * @return
+	 */
+	public List<ExpertForList> getByField(String field, int num);
+	
 }
