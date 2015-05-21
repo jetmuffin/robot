@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="/robot/resources/css/bootstrapv3/bootstrap.min.css">
 		<!-- font-awesome -->
 		<link rel="stylesheet" href="/robot/resources/font/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/robot/resources/css/common/common.css" />
 		<!-- custom css -->
 		<link rel="stylesheet" href="/robot/resources/css/index/index.css">
 </head>

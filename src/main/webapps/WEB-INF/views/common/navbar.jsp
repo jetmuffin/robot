@@ -5,27 +5,21 @@
 		<div class="preloader">
 			<div class="sk-spinner sk-spinner-rotating-plane"></div>
     	 </div>
-		<!-- end preloader -->
-		<!-- start navigation -->
-		<nav class="navbar navbar-default navbar-fixed-top templatemo-nav" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="icon icon-bar"></span>
-						<span class="icon icon-bar"></span>
-						<span class="icon icon-bar"></span>
-					</button>
-					<a href="#" class="navbar-brand">DAG.HHU</a>
-				</div>
-				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav navbar-right text-uppercase">
-						<li><a href="#home">首页</a></li>
-						<li><a href="#feature">查专家</a></li>
-						<li><a href="#pricing">查领域</a></li>
-						<li><a href="#download">专家机器人</a></li>
-						<li><a href="#contact">联系</a></li>
-					</ul>
-				</div>
+
+<header>
+	<div class="header">
+		<div class="wrap">
+			<div class="logo">
+	<a href="#"><img alt="logo" class="pngfix" src="" width="110" height="40"></a>
 			</div>
-		</nav>
-		<!-- end navigation -->
+			<nav>
+				<ul>
+					<li data-name="home"><a href="/robot/index">首页</a></li>
+					<li data-name="expert" class="active"><a href="#">查专家</a></li>
+					<li data-name="field"><a href="#">查研究领域</a></li>
+					<li data-name="topic"><a href="#">查研究方向</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>

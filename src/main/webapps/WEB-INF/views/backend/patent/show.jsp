@@ -95,7 +95,7 @@
 							<div class="span12 section">
 								<h6>单位:</h6>
 								<p>
-								${patent.orgnization}
+								${patent.orgnization.name}
 								</p>
 							</div>
 							

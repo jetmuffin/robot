@@ -1,1 +1,283 @@
 @CHARSET "UTF-8";
+
+.clear {
+	clear: both;
+}
+
+#main {
+	margin: 0 auto;
+	width: 1000px;
+	padding-top: 70px;
+}
+
+#main .total {
+	color: #666;
+	margin: 15px 0 5px 15px;
+}
+
+#main .filter {
+	float: left;
+	margin: 0 40px 0 15px;
+	width: 175px;
+}
+
+#main .filter .filter-all {
+	margin-top: 10px;
+	border: 1px solid #e1e1e1;
+	border-width: 1px 0;
+	padding: 5px 0;
+}
+
+#main .filter .filter-all li {
+	width: 80px;
+	height: 24px;
+	margin-bottom: 4px;
+	line-height: 24px;
+}
+
+#main .filter .filter-all li:hover, .search-main .filter .filter-all li.hover
+	{
+	background: #49d;
+}
+
+#main .filter .filter-all .des {
+	color: #666;
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+
+#main .filter .filter-all li a {
+	display: block;
+	float: right;
+	width: 60px;
+	font-size: 14px;
+	color: #666;
+	line-height: 24px;
+	height: 24px;
+}
+
+#main .filter .filter-all li:hover a, .search-main .filter .filter-all li.hover a
+	{
+	color: #fff;
+}
+
+#main .filter .filter-all li:hover a, #main .filter .filter-all li.hover a
+	{
+	color: #fff;
+}
+
+#main .filter .filter-all li:hover, #main .filter .filter-all li.hover {
+	background: #49d;
+}
+
+#main .filter .filter-item {
+	border-bottom: 1px solid #e1e1e1;
+	padding-bottom: 10px;
+}
+
+#main .filter .filter-item .item {
+	cursor: pointer;
+	color: #666;
+	width: 175px;
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+}
+
+#main .filter .filter-item .item-hd {
+	font-size: 14px;
+	font-weight: bolder;
+	padding: 10px 0;
+}
+
+#main .filter .filter-item .item .name {
+	float: left;
+	margin-left: 5px;
+	display: inline-block;
+	vertical-align: middle;
+	overflow: hidden;
+	width: 112px;
+	white-space: pre;
+	text-overflow: ellipsis;
+}
+
+#main .right-side {
+	float: left;
+}
+
+#main .left-side {
+	float: left;
+}
+
+#main .search-input {
+	
+}
+
+/* result */
+#main .result {
+	width: 770px;
+}
+
+#main .result ul li {
+	line-height: 16px;
+	padding: 20px 0 20px 10px;
+	border-bottom: 1px solid #e1e1e1;
+}
+
+#main .result ul li:hover {
+	background: #eee;
+}
+
+#main .result .expert-avatar {
+	float: left;
+}
+
+#main .result .expert-avatar img {
+	padding: 3px;
+	border: 1px solid #ccc;
+}
+
+#main .result .expert-info {
+	float: left;
+	padding: 0 10px 3px 20px;
+}
+
+#main .result .expert-info .info-item {
+	padding-bottom: 5px;
+}
+
+#main .result .expert-info .expert-name {
+	font-size: 16px;
+	color: #0474ae;
+	margin-bottom: 3px;
+	display: block;
+}
+
+#main .result .expert-info .expert-org {
+	color: gray;
+}
+
+#main .result .expert-info span {
+	margin: 0 3px
+}
+
+/* search input */
+#main .search-input fieldset {
+	margin-bottom: 0;
+	border: 2px solid #3d9ccc;
+	border-radius: 3px;
+	background: #fff;
+}
+
+#main .search-input fieldset .search-field {
+	width: 80px;
+	float: left;
+}
+
+#main .search-input fieldset .search-field  .selectui-head {
+	border: none;
+	padding: 7px 0;
+	position: relative;
+}
+
+#main .search-input fieldset .selectui .selectui-head .selectui-result {
+	padding: 0 10px;
+	margin-right: 20px;
+}
+
+#main .search-input fieldset .search-field .selectui-drop {
+	height: 34px;
+}
+
+#main .search-input fieldset .search-field ul {
+	width: 78px;
+	top: 34px;
+}
+
+#main .search-input fieldset .selectui ul li {
+	line-height: 0;
+	font-size: 0;
+}
+
+#main .search-input fieldset .selectui ul a:link {
+	color: #454545;
+}
+
+#main .search-input fieldset .selectui ul a:link {
+	color: #454545;
+}
+
+#main .search-input fieldset .selectui ul li a {
+	padding: 0 27px 0 10px;
+	line-height: 28px;
+	font-size: 12px;
+}
+
+#main .search-input fieldset button {
+	border-radius: 0;
+	float: right;
+}
+
+#main .search-input fieldset button {
+	width: 88px;
+	white-space: nowrap;
+	padding: 1px 9px;
+	border: none;
+	border-radius: 3px;
+	background: #3d9ccc;
+	color: #fff;
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	border-radius: 0; float : right;
+	line-height: 32px;
+	float: right;
+}
+
+#main .search-input fieldset button .icon-32-find {
+	margin: 0 2px 0 0;
+	float: left;
+}
+
+#main .search-input fieldset .icon-32-find {
+	background-position: 0 0;
+}
+
+#main .search-input fieldset .icon-32-nd {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	margin-top: 1px;
+	margin-right: .3em;
+	line-height: 16px;
+	vertical-align: text-top;
+	background-image: url('/robot/resources/img/common/search.png');
+	background-position: 32px 32px;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
+#main .search-input fieldset .keyword {
+	width: 598px;
+	float: left;
+	background: 0 0;
+	border: 1px solid #e6e6e6;
+	border-width: 0 0 0 1px;
+	outline: 0 none;
+}
+
+.selectui .selectui-head .selectui-drop {
+position: absolute;
+cursor: pointer;
+right: 0;
+width: 26px;
+top: 0;
+background: url('/robot/resources/img/common/dropdown-gray.png');
+}
+
+.input-large {
+	height: 34px;
+	padding: 4px 6px;
+	font-size: 14px;
+	line-height: 26px;
+}
