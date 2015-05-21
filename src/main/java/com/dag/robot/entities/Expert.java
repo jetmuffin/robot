@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-20 21:09:50 by Hibernate Tools 4.3.1
+// Generated 2015-5-21 16:15:36 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +25,7 @@ import javax.persistence.Table;
 public class Expert implements java.io.Serializable {
 
 	private Integer expertId;
+	private Field field;
 	private Orgnization orgnization;
 	private String name;
 	private String gender;
@@ -63,15 +64,16 @@ public class Expert implements java.io.Serializable {
 		this.paperReferedNum = paperReferedNum;
 	}
 
-	public Expert(Orgnization orgnization, String name, String gender,
-			String email, String address, String homepage, int paperNum,
-			int patentNum, int paperReferedNum, String prize,
+	public Expert(Field field, Orgnization orgnization, String name,
+			String gender, String email, String address, String homepage,
+			int paperNum, int patentNum, int paperReferedNum, String prize,
 			String experience, String info, String achievement, String url,
 			Integer rate, String job, Integer age, String area,
 			Set<RelExpertPatent> relExpertPatents,
 			Set<RelExpertTopic> relExpertTopics,
 			Set<RelExpertField> relExpertFields, Set<User> users,
 			Set<Activity> activities, Set<RelExpertPaper> relExpertPapers) {
+		this.field = field;
 		this.orgnization = orgnization;
 		this.name = name;
 		this.gender = gender;
@@ -121,6 +123,16 @@ public class Expert implements java.io.Serializable {
 
 	public void setExpertId(Integer expertId) {
 		this.expertId = expertId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fieldId")
+	public Field getField() {
+		return this.field;
+	}
+
+	public void setField(Field field) {
+		this.field = field;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
