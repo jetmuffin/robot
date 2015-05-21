@@ -22,7 +22,7 @@ public class CoreJournal implements java.io.Serializable {
 
 	private Integer coreJournalId;
 	private String name;
-	private int rate;
+	private int rate = 0;
 	private Set<Paper> papers = new HashSet<Paper>(0);
 
 	public CoreJournal() {

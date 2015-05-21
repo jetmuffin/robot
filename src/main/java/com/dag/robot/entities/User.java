@@ -26,7 +26,7 @@ public class User implements java.io.Serializable {
 	private String account;
 	private String password;
 	private String nickname;
-	private int auth;
+	private int auth = 0;
 	private Set<Expert> experts = new HashSet<Expert>(0);
 	private Set<Topic> topics = new HashSet<Topic>(0);
 	private Set<Field> fields = new HashSet<Field>(0);
