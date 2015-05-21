@@ -56,7 +56,6 @@ public class Expert implements java.io.Serializable {
 
 
 	public Expert() {
-		super();
 	}
 
 	public Expert(String name, String gender, int paperNum, int patentNum,
