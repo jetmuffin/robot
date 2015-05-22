@@ -1,8 +1,10 @@
 package com.dag.robot.neo.test;
 
 import org.junit.Test;
+import org.neo4j.graphdb.Node;
 
 import com.dag.robot.data.add.AddToNeo;
+import com.dag.robot.neo.type.LabelTypes;
 
 
 public class ExpertTest {
@@ -19,7 +21,7 @@ public class ExpertTest {
 	int patentId = 3;
 	String orgName = "组织";
 	int orgId = 4;
-	String expertName = "专利";
+	String expertName = "专家";
 	int expertId = 5;
 	
 	@Test
@@ -31,8 +33,15 @@ public class ExpertTest {
 		ato.addExpertPaper(expertId, expertName, paperId, paperName);
 		ato.addExpertPatent(expertId, expertName, patentId, patentName);
 		ato.addExpertTopic(expertId, expertName, topicId, topicName);
+		ato.addTopicField(topicId, topicName, fieldId, fieldName);
 		
-		ato.success();
-		ato.finish();
+
+		
+		ato.success();	
+		ato.finish();	
+		ato.begin();
+		
+		Node node = ato.getNeoObject().findNode(LabelTypes.Expert, "mainKey", 5);
+		System.out.println("id = "+node.getId());
 	}
 }
