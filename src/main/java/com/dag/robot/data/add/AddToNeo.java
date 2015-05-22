@@ -1,13 +1,19 @@
 package com.dag.robot.data.add;
 
+import org.springframework.stereotype.Service;
+
 import com.dag.robot.neo.object.NeoExpertObject;
 import com.dag.robot.neo.type.LabelTypes;
 import com.dag.robot.neo.type.RelTypes;
 
+@Service
 public class AddToNeo extends NeoExpertObject{
 
 	private String MAIN_KEY = "mainKey";
 	private String NAME = "name";
+	
+	public AddToNeo(){
+	}
 	
 	public AddToNeo(String db_path) {
 		super(db_path);

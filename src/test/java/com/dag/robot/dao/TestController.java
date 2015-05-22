@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dag.robot.data.input.InputFromJson;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.FieldDao;
 import com.dag.robot.db.dao.OrgnizationDao;
@@ -66,6 +67,8 @@ public class TestController {
 	@Autowired
 	@Qualifier("relExpertTopicDao")
 	RelExpertTopicDao relExpertTopicDao;
+	@Autowired
+	InputFromJson inputFromJson;
 
 	public TestController() {
 		super();
@@ -202,10 +205,7 @@ public class TestController {
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
-		
-		List<ExpertForList> expertForLists = expertDao.getByField("cs", 1);
-		System.out.println(expertForLists.size());
-		
+		inputFromJson.inputExpert();
 		return "test/index";
 	}
 }
