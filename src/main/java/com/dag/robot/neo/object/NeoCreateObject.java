@@ -36,6 +36,12 @@ public class NeoCreateObject{
 		neoObject.finish();
 	}
 
+	public Node findNode(LabelTypes label, String property, String value){
+		return neoObject.findNode(label, property, value);
+	}
+	public Node findNode(LabelTypes label, String property, int value){
+		return neoObject.findNode(label, property, value);
+	}
 	/**
 	 * 输入十一元组，创建一个有向关系
 	 * @param labela	起点Label
