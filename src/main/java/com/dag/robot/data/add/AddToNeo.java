@@ -1,14 +1,18 @@
 package com.dag.robot.data.add;
 
-import com.dag.robot.neo.object.NeoExpertObject;
+import com.dag.robot.neo.object.NeoCreateObject;
+import com.dag.robot.neo.object.NeoObject;
 import com.dag.robot.neo.type.LabelTypes;
 import com.dag.robot.neo.type.RelTypes;
 
-public class AddToNeo extends NeoExpertObject{
+public class AddToNeo extends NeoCreateObject{
 
 	private String MAIN_KEY = "mainKey";
 	private String NAME = "name";
 	
+	public AddToNeo(){
+		
+	}
 	public AddToNeo(String db_path) {
 		super(db_path);
 	}

@@ -17,8 +17,9 @@ import com.dag.robot.neo.type.RelTypes;
 @SuppressWarnings("deprecation")
 public class NeoSearchObject {
 
-	TraversalDescription traversalDescription = null;
-	Traverser traverser = null;
+	protected NeoObject neoObject = null;
+	protected TraversalDescription traversalDescription = null;
+	protected Traverser traverser = null;
 	
 	public NeoSearchObject() {
 	}
@@ -30,8 +31,6 @@ public class NeoSearchObject {
 		traversalDescription = Traversal.description().breadthFirst();
 	}
 	
-	public void addRelationships(){
-	}
 	public void addRelationships(RelTypes reltype){
 		traversalDescription = traversalDescription.relationships(reltype);
 	}
