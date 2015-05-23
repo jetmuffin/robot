@@ -19,6 +19,10 @@ import org.neo4j.kernel.Traversal;
 import com.dag.robot.neo.type.LabelTypes;
 import com.dag.robot.neo.type.RelTypes;
 
+/**
+ * @author innerac
+ *
+ */
 @SuppressWarnings("deprecation")
 public class NeoSearchObject {
 
@@ -38,18 +42,28 @@ public class NeoSearchObject {
 		neoObject.begin();
 	}
 	
+	/**
+	 * 进行查找之前，需要先启动事务
+	 */
 	public void begin(){
 		neoObject.begin();
 	}
 	public void success(){
 		neoObject.success();
 	}
+	
+	/**
+	 * 事务结束后，记得关闭呦 
+	 */
 	public void finish(){
 		neoObject.finish();
 	}
 	
 	public Node findNodeById(long nodeId){
 		return neoObject.getNode(nodeId);
+	}
+	public Node findExpertByMainKey(int mainKey){
+		return neoObject.findNode(LabelTypes.Expert, "mainKey", mainKey);
 	}
 	public Node findNode(LabelTypes label, String property, String value){
 		return neoObject.findNode(label, property, value);
