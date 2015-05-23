@@ -183,7 +183,7 @@ public interface ExpertDao {
 	 * 所有专家论文数量平均值
 	 * @return
 	 */
-	public int getPaperAvg();
+	public String getPaperAvg();
 	
 	/**
 	 * 专家论文数量排名百分比
@@ -197,6 +197,16 @@ public interface ExpertDao {
 	 */
 	public Map<String, Integer> getKey();
 	
+	/**
+	 * 解决内存中多个同名引用问题
+	 * @param object
+	 */
 	public void merge(Object object);
+	
+	/**
+	 * 得到专家数量
+	 * @return
+	 */
+	public long getExpertNum();
 	
 }

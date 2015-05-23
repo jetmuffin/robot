@@ -39,7 +39,7 @@ public class ExpertTest {
 	int expertIdFie = 10;
 	@Test
 	public void test(){
-		AddToNeo ato = new AddToNeo(db_path);
+		AddToNeo ato = new AddToNeo();
 		
 		ato.addExpertField(expertId, expertName, fieldId, fieldName);
 		ato.addExpertOrg(expertId, expertName, orgId, orgName);

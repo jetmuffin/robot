@@ -43,7 +43,7 @@ import com.dag.robot.utils.StringSplitUtil;
 public class AddService {
 
 	private static String dbPath = "/home/sloriac/neoOut";
-	
+
 	@Autowired
 	private SessionDao sessionDao;
 
@@ -102,73 +102,81 @@ public class AddService {
 			String address, String homepage, String experience, String info,
 			String topic, String achievement, String orgnization, Integer age,
 			String area, String field) {
-		// 必要资料信息
-		Expert expert = new Expert(name, gender, email, address, homepage,
-				experience, info, achievement);
-		// 可空信息
-		if (age != null)
-			expert.setAge(age);
-		if (area != null)
-			expert.setArea(area);
 
-		// 领域查重
-		Field field2 = fieldDao.getByName(field);
-		if (field2 == null) {
-			// 没有重名的
-			field2 = new Field(field);
-			fieldDao.addField(field2);
-		}
-		expert.setField(field2);
+		Expert expert = expertDao.checkSame(name, orgnization);
+		if (expert == null) {//没有重复
+			// 必要资料信息
+			expert = new Expert(name, gender, email, address, homepage,
+					experience, info, achievement);
 
-		// 组织查重
-		List<Orgnization> orgnizations = orgnizationDao.getByName(orgnization);
-		Orgnization orgnization1 = new Orgnization();
-		if (orgnizations.size() == 0 || orgnizations == null) {
-			orgnization1.setName(orgnization);
-			orgnizationDao.addOrgnization(orgnization1);
-		} else {
-			orgnization1 = orgnizations.get(0);
-		}
-		expert.setOrgnization(orgnization1);
-		expertDao.addExpert(expert);
+			// 可空信息
+			if (age != null)
+				expert.setAge(age);
+			if (area != null)
+				expert.setArea(area);
 
-		addToNeo.begin();
-
-		// 将关系写入neo4j
-		addToNeo.addExpertField(expert.getExpertId(), expert.getName(),
-				field2.getFieldId(), field2.getName());
-		// 将关系写入neo4j
-		addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
-				orgnization1.getOrgId(), orgnization1.getName());
-
-		List<String> topics = StringSplitUtil.stringSplit(topic);
-		for (int i = 0; i < topics.size(); i++) {
-			Topic topic1 = topicDao.getByName(topics.get(i));
-			if (topic1 == null) {
-				topic1 = new Topic(topics.get(i));
-				topicDao.addTopic(topic1);
+			// 领域查重
+			Field field2 = fieldDao.getByName(field);
+			if (field2 == null) {
+				// 没有重名的
+				field2 = new Field(field);
+				fieldDao.addField(field2);
 			}
-			RelExpertTopicId relExpertTopicId = new RelExpertTopicId(
-					expert.getExpertId(), topic1.getTopicId());
-			RelExpertTopic relExpertTopic = new RelExpertTopic(
-					relExpertTopicId, expert, topic1);
-			relExpertTopicDao.addRelExeprtTopic(relExpertTopic);
+			expert.setField(field2);
 
-			RelFieldTopicId relFieldTopicId = new RelFieldTopicId(
-					field2.getFieldId(), topic1.getTopicId());
-			RelFieldTopic relFieldTopic = new RelFieldTopic(relFieldTopicId,
-					field2, topic1);
-			relFieldTopicDao.addRelFieldTopic(relFieldTopic);
-			sessionDao.evict(topic1);
-			sessionDao.evict(field2);
-			sessionDao.evict(expert);
-			sessionDao.evict(relFieldTopic);
-			// 保存关系到图数据库
-			addToNeo.addExpertTopic(expert.getExpertId(), expert.getName(),
-					topic1.getTopicId(), topic1.getName());
+			// 组织查重
+			List<Orgnization> orgnizations = orgnizationDao
+					.getByName(orgnization);
+			Orgnization orgnization1 = new Orgnization();
+			if (orgnizations.size() == 0 || orgnizations == null) {
+				orgnization1.setName(orgnization);
+				orgnizationDao.addOrgnization(orgnization1);
+			} else {
+				orgnization1 = orgnizations.get(0);
+			}
+			expert.setOrgnization(orgnization1);
+			expertDao.addExpert(expert);
 
-			addToNeo.addTopicField(topic1.getTopicId(), topic1.getName(),
+			addToNeo.begin();
+
+			// 将关系写入neo4j
+			addToNeo.addExpertField(expert.getExpertId(), expert.getName(),
 					field2.getFieldId(), field2.getName());
+			// 将关系写入neo4j
+			addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
+					orgnization1.getOrgId(), orgnization1.getName());
+
+			List<String> topics = StringSplitUtil.stringSplit(topic);
+			for (int i = 0; i < topics.size(); i++) {
+				Topic topic1 = topicDao.getByName(topics.get(i));
+				if (topic1 == null) {
+					topic1 = new Topic(topics.get(i));
+					topicDao.addTopic(topic1);
+				}
+				RelExpertTopicId relExpertTopicId = new RelExpertTopicId(
+						expert.getExpertId(), topic1.getTopicId());
+				RelExpertTopic relExpertTopic = new RelExpertTopic(
+						relExpertTopicId, expert, topic1);
+				relExpertTopicDao.addRelExeprtTopic(relExpertTopic);
+
+				RelFieldTopicId relFieldTopicId = new RelFieldTopicId(
+						field2.getFieldId(), topic1.getTopicId());
+				RelFieldTopic relFieldTopic = new RelFieldTopic(
+						relFieldTopicId, field2, topic1);
+				relFieldTopicDao.addRelFieldTopic(relFieldTopic);
+				sessionDao.evict(topic1);
+				sessionDao.evict(field2);
+				sessionDao.evict(expert);
+				sessionDao.evict(relFieldTopic);
+				// 保存关系到图数据库
+				addToNeo.addExpertTopic(expert.getExpertId(), expert.getName(),
+						topic1.getTopicId(), topic1.getName());
+
+				addToNeo.addTopicField(topic1.getTopicId(), topic1.getName(),
+						field2.getFieldId(), field2.getName());
+				// 关闭连接
+				addToNeo.finish();
+			}
 		}
 	}
 
@@ -180,7 +188,7 @@ public class AddService {
 		paper.setAbs(abs);
 		paper.setKeywords(keywords);
 		paper.setType(type);
-		addToNeo.setDB_PATH(dbPath);
+		addToNeo.begin();
 		if (type.equals("journal")) {
 			Journal journal2 = journalDao.check(journal);
 			// 没有重复
@@ -234,6 +242,8 @@ public class AddService {
 
 			addToNeo.addExpertPaper(expert.getExpertId(), expert.getName(),
 					paper.getPaperId(), paper.getTitle());
+
+			addToNeo.finish();
 		}
 	}
 
@@ -272,9 +282,10 @@ public class AddService {
 			RelExpertPatent relExpertPatent = new RelExpertPatent(
 					relExpertPatentId, expert, patent, i + 1);
 			relExpertPatentDao.addRelExeprtPatent(relExpertPatent);
-			addToNeo.setDB_PATH(dbPath);
+			addToNeo.begin();
 			addToNeo.addExpertPatent(expert.getExpertId(), expert.getName(),
 					patent.getPatentId(), patent.getTitle());
+			addToNeo.finish();
 		}
 	}
 }

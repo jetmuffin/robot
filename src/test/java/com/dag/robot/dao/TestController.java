@@ -205,7 +205,7 @@ public class TestController {
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
-		inputFromJson.inputExpert();
+		System.out.println(expertDao.getPaperAvg());
 		return "test/index";
 	}
 }

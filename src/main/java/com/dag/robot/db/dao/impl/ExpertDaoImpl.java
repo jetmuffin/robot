@@ -1,5 +1,6 @@
 package com.dag.robot.db.dao.impl;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -257,9 +258,19 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	}
 
 	@Override
-	public int getPaperAvg() {
-		// TODO Auto-generated method stub
-		return 0;
+	public String getPaperAvg() {
+		long expertNum = getExpertNum();
+		Query query = query("select sum(expert.paperNum) from Expert as expert");
+		long paperNum = (long)query.iterate().next();
+		double expertNum1 = (double)expertNum;
+		double paperNum1 = (double)paperNum;
+		double res = paperNum1 / expertNum1;
+		DecimalFormat decimalFormat = new DecimalFormat("#.0");
+		String result = decimalFormat.format(res);
+		if(res < 1.0){
+			result = "0" + result;
+		}
+		return result;
 	}
 
 	@Override
@@ -285,5 +296,13 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		getSession().merge(object);
 	}
 
+	@Override
+	public long getExpertNum() {
+		Query query = query("select count(*) from Expert");
+		Long totalCount =  (Long) query.uniqueResult();
+		return totalCount;
+	}
+
+	
 	
 }

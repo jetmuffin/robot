@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.dag.robot.data.add.AddService;
+import com.dag.robot.utils.PropertiesUtil;
 
 @Service
 public class InputFromJson {
@@ -23,12 +24,18 @@ public class InputFromJson {
 	@Autowired
 	private AddService addService;
 
-	private String expertFilePath = "/home/sloriac/data/expertData.txt";
-	private String paperFilePath = "/home/sloriac/data/paperData.txt";
-	private String patentFilePath = "/home/sloriac/data/patentData.txt";
+	private String expertFilePath;
+	private String paperFilePath;
+	private String patentFilePath;
+	
+	public InputFromJson() {
+		this.expertFilePath = PropertiesUtil.getValue("expertFilePath");
+		this.paperFilePath = PropertiesUtil.getValue("paperFilePath");
+		this.patentFilePath = PropertiesUtil.getValue("patentFilePath");
+	}
 
-	public void inputExpert() {
-		String string = readFile(expertFilePath);
+	public void inputExpert(String fileName) {
+		String string = readFile(expertFilePath, fileName);
 		JSONObject jsonObject;
 		try {
 			jsonObject = new JSONObject(string);
@@ -60,12 +67,12 @@ public class InputFromJson {
 
 	}
 	
-	public void inputPaper(String path){
-		String string = readFile(path);
-		
+	public void inputPaper(String fileName){
+		String string = readFile(paperFilePath, fileName);
 	}
 
-	public String readFile(String path) {
+	public String readFile(String path, String fileName) {
+		path = path + "/" + fileName;
 		File file = new File(path);
 		FileReader fileReader = null;
 		BufferedReader bufferedReader = null;
