@@ -2,6 +2,7 @@ package com.dag.robot.db.dao.impl;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import com.dag.robot.entities.Topic;
 import com.dag.robot.utils.EntitiesForListUtil;
 import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.utils.StringMergeUtil;
+import com.dag.robot.utils.StringSplitUtil;
 import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
@@ -286,9 +288,27 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	}
 
 	@Override
-	public Map<String, Integer> getKey() {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Integer> getPaperKey(int expertId) {
+		Map<String, Integer> keywordsMap = new HashMap<String, Integer>();
+		List<Paper> papers = getPapers(expertId);
+		for(int i = 0; i < papers.size(); i++){
+			Paper paper = papers.get(i);
+			String keyword = paper.getKeywords();
+			List<String> keywords = StringSplitUtil.stringSplit(keyword);
+			for(int j = 0; j < keywords.size(); j++){
+				String key = keywords.get(j);
+				//如果包含key,value加1
+				if(keywordsMap.containsKey(key)){
+					int value = keywordsMap.get(key);
+					value = value + 1;
+					keywordsMap.put(key, value);
+				}else {
+					//第一次出现
+					keywordsMap.put(key, 1);
+				}
+			}
+		}
+		return keywordsMap;
 	}
 
 	@Override

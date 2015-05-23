@@ -4,9 +4,11 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.aspectj.weaver.patterns.OrSignaturePattern;
+import org.neo4j.register.Register.Int;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -203,9 +205,22 @@ public class TestController {
 		return "test/index";
 	}
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test() {
+	@RequestMapping(value = "/testPaperAvg", method = RequestMethod.GET)
+	public String test1() {
 		System.out.println(expertDao.getPaperAvg());
+		return "test/index";
+	}
+	
+	@RequestMapping(value = "/testPaperKey", method = RequestMethod.GET)
+	public String test2() {
+		Map<String, Integer> map = expertDao.getPaperKey(59);
+		Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
+		while(iterator.hasNext()){
+			Map.Entry<String, Integer> entry = iterator.next();
+			String key = entry.getKey();
+			Integer value = entry.getValue();
+			System.out.println(key + " : " + value);
+		}
 		return "test/index";
 	}
 }

@@ -195,7 +195,7 @@ public interface ExpertDao {
 	 * 获取专家论文关键字的出现次数
 	 * @return
 	 */
-	public Map<String, Integer> getKey();
+	public Map<String, Integer> getPaperKey(int expertId);
 	
 	/**
 	 * 解决内存中多个同名引用问题
