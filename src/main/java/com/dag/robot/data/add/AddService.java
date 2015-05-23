@@ -19,6 +19,7 @@ import com.dag.robot.db.dao.RelExpertPatentDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.RelFieldTopicDao;
 import com.dag.robot.db.dao.TopicDao;
+import com.dag.robot.db.dao.impl.SessionDao;
 import com.dag.robot.entities.Conference;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Field;
@@ -42,6 +43,9 @@ import com.dag.robot.utils.StringSplitUtil;
 public class AddService {
 
 	private static String dbPath = "/home/sloriac/neoOut";
+	
+	@Autowired
+	private SessionDao sessionDao;
 
 	@Autowired
 	private AddToNeo addToNeo;
@@ -128,7 +132,7 @@ public class AddService {
 		expert.setOrgnization(orgnization1);
 		expertDao.addExpert(expert);
 
-		addToNeo.setDB_PATH(dbPath);
+		addToNeo.begin();
 
 		// 将关系写入neo4j
 		addToNeo.addExpertField(expert.getExpertId(), expert.getName(),
@@ -155,6 +159,10 @@ public class AddService {
 			RelFieldTopic relFieldTopic = new RelFieldTopic(relFieldTopicId,
 					field2, topic1);
 			relFieldTopicDao.addRelFieldTopic(relFieldTopic);
+			sessionDao.evict(topic1);
+			sessionDao.evict(field2);
+			sessionDao.evict(expert);
+			sessionDao.evict(relFieldTopic);
 			// 保存关系到图数据库
 			addToNeo.addExpertTopic(expert.getExpertId(), expert.getName(),
 					topic1.getTopicId(), topic1.getName());

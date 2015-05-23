@@ -3,6 +3,7 @@ package com.dag.robot.db.dao.impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.math3.analysis.function.Exp;
@@ -253,6 +254,35 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		query.setString(0, field);
 		List<Expert> experts = query.list();
 		return EntitiesForListUtil.expertForLists(experts);
+	}
+
+	@Override
+	public int getPaperAvg() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getPaperRate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Paper> getPapersOrderByRefNum(int expertId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Integer> getKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void merge(Object object) {
+		getSession().merge(object);
 	}
 
 	

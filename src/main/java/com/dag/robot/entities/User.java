@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-21 18:43:44 by Hibernate Tools 4.3.1
+// Generated 2015-5-22 21:30:54 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +26,7 @@ public class User implements java.io.Serializable {
 	private String account;
 	private String password;
 	private String nickname;
-	private int auth = 0;
+	private int auth;
 	private Set<Expert> experts = new HashSet<Expert>(0);
 	private Set<Topic> topics = new HashSet<Topic>(0);
 	private Set<Field> fields = new HashSet<Field>(0);

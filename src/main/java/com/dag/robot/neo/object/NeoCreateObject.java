@@ -2,23 +2,26 @@ package com.dag.robot.neo.object;
 
 
 import org.neo4j.graphdb.Node;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dag.robot.neo.type.*;
 
 public class NeoCreateObject{
 	
-	protected NeoObject neoObject = null;
-	
-	public NeoObject getNeoObject(){
-		return neoObject;
-	}
+	@Autowired
+	protected NeoObject neoObject;
 	
 	public NeoCreateObject(){
-		neoObject = new NeoObject();
 	}
+	
 	public NeoCreateObject(String db_path){
 		neoObject = new NeoObject(db_path);
 		neoObject.begin();
+	}
+
+	
+	public NeoObject getNeoObject(){
+		return neoObject;
 	}
 
 	public void setDB_PATH(String dB_PATH) {

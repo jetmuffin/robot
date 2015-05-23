@@ -24,6 +24,7 @@ public class NeoObject {
 
 	public NeoObject(){
 	}
+	
 	public NeoObject(String db_path){
 		setDB_PATH(db_path);
 	}

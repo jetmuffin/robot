@@ -1,6 +1,6 @@
 package com.dag.robot.entities;
 
-// Generated 2015-5-21 18:43:44 by Hibernate Tools 4.3.1
+// Generated 2015-5-22 21:30:54 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import java.util.HashSet;
