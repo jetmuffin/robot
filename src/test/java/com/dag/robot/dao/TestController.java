@@ -223,4 +223,11 @@ public class TestController {
 		}
 		return "test/index";
 	}
+	
+	@RequestMapping(value = "/testInput", method = RequestMethod.GET)
+	public String test3() {
+//		inputFromJson.inputPaper("paperData.txt");
+		inputFromJson.inputPatent("patentData.txt");
+		return "test/index";
+	}
 }

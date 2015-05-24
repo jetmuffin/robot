@@ -104,7 +104,7 @@ public class AddService {
 			String area, String field) {
 
 		Expert expert = expertDao.checkSame(name, orgnization);
-		if (expert == null) {//没有重复
+		if (expert == null) {// 没有重复
 			// 必要资料信息
 			expert = new Expert(name, gender, email, address, homepage,
 					experience, info, achievement);
@@ -136,15 +136,15 @@ public class AddService {
 			}
 			expert.setOrgnization(orgnization1);
 			expertDao.addExpert(expert);
-//
-//			addToNeo.begin();
-//
-//			// 将关系写入neo4j
-//			addToNeo.addExpertField(expert.getExpertId(), expert.getName(),
-//					field2.getFieldId(), field2.getName());
-//			// 将关系写入neo4j
-//			addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
-//					orgnization1.getOrgId(), orgnization1.getName());
+			//
+			// addToNeo.begin();
+			//
+			// // 将关系写入neo4j
+			// addToNeo.addExpertField(expert.getExpertId(), expert.getName(),
+			// field2.getFieldId(), field2.getName());
+			// // 将关系写入neo4j
+			// addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
+			// orgnization1.getOrgId(), orgnization1.getName());
 
 			List<String> topics = StringSplitUtil.stringSplit(topic);
 			for (int i = 0; i < topics.size(); i++) {
@@ -168,14 +168,15 @@ public class AddService {
 				sessionDao.evict(field2);
 				sessionDao.evict(expert);
 				sessionDao.evict(relFieldTopic);
-//				// 保存关系到图数据库
-//				addToNeo.addExpertTopic(expert.getExpertId(), expert.getName(),
-//						topic1.getTopicId(), topic1.getName());
-//
-//				addToNeo.addTopicField(topic1.getTopicId(), topic1.getName(),
-//						field2.getFieldId(), field2.getName());
-//				// 关闭连接
-//				addToNeo.finish();
+				// // 保存关系到图数据库
+				// addToNeo.addExpertTopic(expert.getExpertId(),
+				// expert.getName(),
+				// topic1.getTopicId(), topic1.getName());
+				//
+				// addToNeo.addTopicField(topic1.getTopicId(), topic1.getName(),
+				// field2.getFieldId(), field2.getName());
+				// // 关闭连接
+				// addToNeo.finish();
 			}
 		}
 	}
@@ -188,7 +189,7 @@ public class AddService {
 		paper.setAbs(abs);
 		paper.setKeywords(keywords);
 		paper.setType(type);
-//		addToNeo.begin();
+		// addToNeo.begin();
 		if (type.equals("journal")) {
 			Journal journal2 = journalDao.check(journal);
 			// 没有重复
@@ -233,29 +234,29 @@ public class AddService {
 				expert.setOrgnization(orgnization2);
 				expertDao.addExpert(expert);
 			}
-			//论文数量加1
+			// 论文数量加1
 			int paperNum = expert.getPaperNum();
 			paperNum = paperNum + 1;
 			expert.setPaperNum(paperNum);
 			expertDao.updateExpert(expert);
-			
-			//专家论文关联
+
+			// 专家论文关联
 			RelExpertPaperId relExpertPaperId = new RelExpertPaperId(
 					expert.getExpertId(), paper.getPaperId());
 			RelExpertPaper relExpertPaper = new RelExpertPaper(
 					relExpertPaperId, expert, paper, i + 1);
 			relExpertPaperDao.addRelExeprtPaper(relExpertPaper);
 
-//			addToNeo.addExpertPaper(expert.getExpertId(), expert.getName(),
-//					paper.getPaperId(), paper.getTitle());
-//
-//			addToNeo.finish();
+			// addToNeo.addExpertPaper(expert.getExpertId(), expert.getName(),
+			// paper.getPaperId(), paper.getTitle());
+			//
+			// addToNeo.finish();
 		}
 	}
 
 	public void addPatent(String title, String applicant, String abs,
-			String organization, String[] inventors, String date,
-			String orgnization) throws ParseException {
+			String[] inventors, String date, String orgnization)
+			throws ParseException {
 
 		Patent patent = new Patent();
 		patent.setTitle(title);
@@ -283,21 +284,21 @@ public class AddService {
 				expert.setOrgnization(orgnization2);
 				expertDao.addExpert(expert);
 			}
-			//专利数量加1
+			// 专利数量加1
 			int patentNum = expert.getPatentNum();
 			patentNum = patentNum + 1;
 			expert.setPatentNum(patentNum);
 			expertDao.updateExpert(expert);
-			
+
 			RelExpertPatentId relExpertPatentId = new RelExpertPatentId(
 					expert.getExpertId(), patent.getPatentId());
 			RelExpertPatent relExpertPatent = new RelExpertPatent(
 					relExpertPatentId, expert, patent, i + 1);
 			relExpertPatentDao.addRelExeprtPatent(relExpertPatent);
-//			addToNeo.begin();
-//			addToNeo.addExpertPatent(expert.getExpertId(), expert.getName(),
-//					patent.getPatentId(), patent.getTitle());
-//			addToNeo.finish();
+			// addToNeo.begin();
+			// addToNeo.addExpertPatent(expert.getExpertId(), expert.getName(),
+			// patent.getPatentId(), patent.getTitle());
+			// addToNeo.finish();
 		}
 	}
 }

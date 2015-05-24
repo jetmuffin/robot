@@ -175,7 +175,7 @@ public interface ExpertDao {
 	 * 根据研究领域检索专家
 	 * @param field
 	 * @param num
-	 * @return
+	 * @return 
 	 */
 	public List<ExpertForList> getByField(String field, int num);
 	

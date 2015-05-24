@@ -277,13 +277,12 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 
 	@Override
 	public String getPaperRate() {
-		// TODO Auto-generated method stub
+		Query query = query("from Expert as expert order by expert.paperNum");
 		return null;
 	}
 
 	@Override
 	public List<Paper> getPapersOrderByRefNum(int expertId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

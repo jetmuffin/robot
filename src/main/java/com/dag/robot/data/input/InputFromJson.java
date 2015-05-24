@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
@@ -27,7 +28,7 @@ public class InputFromJson {
 	private String expertFilePath;
 	private String paperFilePath;
 	private String patentFilePath;
-	
+
 	public InputFromJson() {
 		this.expertFilePath = PropertiesUtil.getValue("expertFilePath");
 		this.paperFilePath = PropertiesUtil.getValue("paperFilePath");
@@ -57,8 +58,8 @@ public class InputFromJson {
 				String area = jObject.getString("area");
 				String field = jObject.getString("field");
 				addService.addExpert(name, gender, email, address, homepage,
-						experience, info, topic, achievement, orgnization,
-						age, area, field);
+						experience, info, topic, achievement, orgnization, age,
+						area, field);
 			}
 
 		} catch (JSONException e) {
@@ -66,9 +67,68 @@ public class InputFromJson {
 		}
 
 	}
-	
-	public void inputPaper(String fileName){
+
+	public void inputPaper(String fileName) {
 		String string = readFile(paperFilePath, fileName);
+		JSONObject jsonObject;
+		try {
+			jsonObject = new JSONObject(string);
+			JSONArray jsonArray = jsonObject.getJSONArray("paper");
+
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jObject = jsonArray.getJSONObject(i);
+				String title = jObject.getString("title");
+				JSONArray jArray = jObject.getJSONArray("authors");
+				String authors[] = new String[jArray.length()];
+				for (int j = 0; j < jArray.length(); j++) {
+					String author = jArray.getJSONObject(j).getString("name");
+					authors[j] = author;
+				}
+				String abs = jObject.getString("abs");
+				String keywords = jObject.getString("keywords");
+				String type = jObject.getString("type");
+				String issue = jObject.getString("issue");
+				String journal = jObject.getString("journal");
+				String conference = jObject.getString("conference");
+				String time = jObject.getString("time");
+				String orgnization = jObject.getString("orgnization");
+				addService.addPaper(title, authors, abs, keywords, type,
+						journal, issue, conference, time, orgnization);
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void inputPatent(String fileName) {
+		String string = readFile(patentFilePath, fileName);
+		JSONObject jsonObject;
+		try {
+			jsonObject = new JSONObject(string);
+			JSONArray jsonArray = jsonObject.getJSONArray("patent");
+
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jObject = jsonArray.getJSONObject(i);
+				String title = jObject.getString("title");
+				JSONArray jArray = jObject.getJSONArray("inventors");
+				String inventors[] = new String[jArray.length()];
+				for (int j = 0; j < jArray.length(); j++) {
+					String author = jArray.getJSONObject(j).getString("name");
+					inventors[j] = author;
+				}
+				String abs = jObject.getString("abs");
+				String applicant = jObject.getString("applicant");
+				String date = jObject.getString("date");
+				String orgnization = jObject.getString("orgnization");
+				addService.addPatent(title, applicant, abs, inventors, date,
+						orgnization);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public String readFile(String path, String fileName) {
