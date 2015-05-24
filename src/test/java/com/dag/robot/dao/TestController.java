@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.math3.analysis.function.Exp;
 import org.aspectj.weaver.patterns.OrSignaturePattern;
 import org.neo4j.register.Register.Int;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ import com.dag.robot.entities.RelExpertField;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.entities.User;
 import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.PaperKeyword;
 
 @Controller
 @RequestMapping("/test")
@@ -213,21 +215,27 @@ public class TestController {
 	
 	@RequestMapping(value = "/testPaperKey", method = RequestMethod.GET)
 	public String test2() {
-		Map<String, Integer> map = expertDao.getPaperKey(59);
-		Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
-		while(iterator.hasNext()){
-			Map.Entry<String, Integer> entry = iterator.next();
-			String key = entry.getKey();
-			Integer value = entry.getValue();
-			System.out.println(key + " : " + value);
-		}
+	List<PaperKeyword> paperKeywords = expertDao.getPaperKey(59);
+		System.out.println(paperKeywords);
 		return "test/index";
 	}
 	
 	@RequestMapping(value = "/testInput", method = RequestMethod.GET)
 	public String test3() {
 //		inputFromJson.inputPaper("paperData.txt");
-		inputFromJson.inputPatent("patentData.txt");
+//		inputFromJson.inputPatent("patentData.txt");
+		return "test/index";
+	}
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test4() {
+//		inputFromJson.inputPaper("paperData.txt");
+//		inputFromJson.inputPatent("patentData.txt");
+//		System.out.println(expertDao.getPaperRefInfo(59));
+		List<Expert> experts = expertDao.getByFuzzyName("ex");
+		for(int i = 0; i < experts.size(); i++){
+			System.out.println(experts.get(i).getName());
+		}
 		return "test/index";
 	}
 }
