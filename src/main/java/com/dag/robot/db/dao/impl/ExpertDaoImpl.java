@@ -2,6 +2,7 @@ package com.dag.robot.db.dao.impl;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder.In;
 
 import org.apache.commons.math3.analysis.function.Exp;
 import org.hibernate.Query;
+import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.stereotype.Repository;
 
 import com.dag.robot.db.dao.ExpertDao;
@@ -40,6 +42,8 @@ import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperKeyword;
+import com.dag.robot.web.bean.PaperNumTenYears;
+import com.dag.robot.web.bean.PaperRefGrade;
 
 @Repository("expertDao")
 public class ExpertDaoImpl extends BaseDao implements ExpertDao {
@@ -365,5 +369,70 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		map.put("unRefNum", unRefNum);
 		return map;
 	}
+	
+	@Override
+	public PaperRefGrade getPaperRefGrade(int expertId){
+		List<Paper> papers = getPapers(expertId);
+		int g1 = 0;
+		int g2 = 0;
+		int g3 = 0;
+		int g4 = 0;
+		int g5 = 0;
+		for(int i = 0; i < papers.size(); i++){
+			int refNum = papers.get(i).getReferencedNum();
+			if( refNum == 0){
+				g1 = g1 + 1;
+			}
+			else if (refNum < 11) {
+				g2 = g2 + 1;
+			}
+			else if (refNum < 51) {
+				g3 = g3 + 1;
+			}
+			else if (refNum < 101) {
+				g4 = g4 + 1;
+			}
+			else {
+				g5 = g5 + 1;
+			}
+		}
+		PaperRefGrade refGrade = new PaperRefGrade(g1, g2, g3, g4, g5);
+		return refGrade;
+	}
 
+	@Override
+	public int[] getPaperNumTenYears(int expertId) {
+		List<Paper> papers = getPapers(expertId);
+		Calendar calendar = Calendar.getInstance();
+		//获取当前年份
+		int nowYear = calendar.get(Calendar.YEAR);
+		int res[] = new int[10];
+		for(int i = 0; i < papers.size(); i++){
+			Paper paper = papers.get(i);
+			int year = 0;
+			if(paper.getType().equals("journal")){
+				year = Integer.parseInt(paper.getIssue().substring(0, 4));
+			}else {
+				year = paper.getConferenceDate().getYear();
+			}
+			for(int j = 0; j < 10; j++){
+				if(year == nowYear - j){
+					res[j] = res[j] + 1;
+				}
+			}
+			
+		}
+		return res;
+		
+	}
+
+	@Override
+	public List<Expert> getByFuzzyName(String name) {
+		String hql = "from Expert as expert where expert.name like ?";
+		Query query = query(hql);
+		query.setString(0, "%"+name+"%");
+		List<Expert> experts = query.list();
+		return experts;
+		
+	}
 }

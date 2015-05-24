@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.math3.analysis.function.Exp;
 import org.aspectj.weaver.patterns.OrSignaturePattern;
 import org.neo4j.register.Register.Int;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -226,12 +227,15 @@ public class TestController {
 		return "test/index";
 	}
 	
-	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test4() {
 //		inputFromJson.inputPaper("paperData.txt");
 //		inputFromJson.inputPatent("patentData.txt");
-		System.out.println(expertDao.getPaperRefInfo(59));
+//		System.out.println(expertDao.getPaperRefInfo(59));
+		List<Expert> experts = expertDao.getByFuzzyName("ex");
+		for(int i = 0; i < experts.size(); i++){
+			System.out.println(experts.get(i).getName());
+		}
 		return "test/index";
 	}
 }

@@ -3,6 +3,8 @@ package com.dag.robot.db.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
+
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Field;
 import com.dag.robot.entities.Orgnization;
@@ -13,6 +15,8 @@ import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperKeyword;
+import com.dag.robot.web.bean.PaperNumTenYears;
+import com.dag.robot.web.bean.PaperRefGrade;
 
 public interface ExpertDao {
 	
@@ -216,5 +220,26 @@ public interface ExpertDao {
 	 */
 	public Map<String, Integer> getPaperRefInfo(int expertId);
 	
+	
+	/**
+	 * 获取论文被引用次数的分级
+	 * @param expertId
+	 * @return
+	 */
+	public PaperRefGrade getPaperRefGrade(int expertId);
+	
+	/**
+	 * 获得近十年论文发表数量对比
+	 * @param expertId
+	 * @return
+	 */
+	public int[] getPaperNumTenYears(int expertId);
+	
+	/**
+	 * 根据姓名模糊检索
+	 * @param name
+	 * @return
+	 */
+	public List<Expert> getByFuzzyName(String name);
 	
 }
