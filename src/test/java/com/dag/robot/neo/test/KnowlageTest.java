@@ -5,11 +5,13 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 import org.junit.Test;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 
 import com.dag.robot.neo.object.KnowlageObject;
 import com.dag.robot.neo.object.NeoSearchObject;
+import com.dag.robot.neo.type.RelTypes;
 
 public class KnowlageTest {
 
@@ -53,10 +55,12 @@ public class KnowlageTest {
 		NeoSearchObject nso = new NeoSearchObject();
 		
 		KnowlageObject ko = new KnowlageObject(dB_PATH);
-		Node aNode = ko.getFirstNode("全球资讯网");
+		Node aNode = ko.getFirstNode("P2P");
+//		Node aNode = ko.getFirstNode("全球资讯网");
 		
 		nso.setTraversalDescription();
-		nso.setDeepth(5);
+		nso.addRelationships(RelTypes.INCLUDE, Direction.INCOMING);
+//		nso.setDeepth(5);
 		nso.setTraverser(aNode);
 		
 		nso.printSearch();

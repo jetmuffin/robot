@@ -7,20 +7,20 @@ import com.dag.robot.entities.Topic;
 public interface TopicDao {
 	
 	/**
-	 * 添加领域
-	 * @param topic 领域信息
+	 * 添加话题
+	 * @param topic 话题信息
 	 */
 	public void addTopic(Topic topic);
 	
 	/**
-	 * 更新领域信息
-	 * @param topic 领域信息
+	 * 更新话题信息
+	 * @param topic 话题信息
 	 */
 	public void updateTopic(Topic topic);
 	
 	/**
-	 * 根据主键检索领域
-	 * @param topicId 领域id
+	 * 根据主键检索话题
+	 * @param topicId 话题id
 	 * @return
 	 */
 	public Topic getById(int topicId);
@@ -33,14 +33,14 @@ public interface TopicDao {
 	public Topic getByName(String name);
 	
 	/**
-	 * 获得全部领域信息
-	 * @return 领域List
+	 * 获得全部话题信息
+	 * @return 话题List
 	 */
 	public List<Topic> getAllTopics();
 	
 	/**
-	 * 删除领域
-	 * @param topic 领域信息
+	 * 删除话题
+	 * @param topic 话题信息
 	 */
 	public void deleteTopic(Topic topic);
 }

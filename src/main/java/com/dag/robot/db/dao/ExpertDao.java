@@ -1,6 +1,7 @@
 package com.dag.robot.db.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Field;
@@ -106,6 +107,13 @@ public interface ExpertDao {
 	public List<Paper> getPapers(int expertId);
 	
 	/**
+	 * 检索专家论文,按照被引用数量降序排列
+	 * @param expertId
+	 * @return
+	 */
+	public List<Paper> getPapersOrderByRefNum(int expertId);
+	
+	/**
 	 * 检索专家专利信息
 	 * @param expertId 专家id
 	 * @return 专利List
@@ -167,8 +175,38 @@ public interface ExpertDao {
 	 * 根据研究领域检索专家
 	 * @param field
 	 * @param num
-	 * @return
+	 * @return 
 	 */
 	public List<ExpertForList> getByField(String field, int num);
+	
+	/**
+	 * 所有专家论文数量平均值
+	 * @return
+	 */
+	public String getPaperAvg();
+	
+	/**
+	 * 专家论文数量排名百分比
+	 * @return
+	 */
+	public String getPaperRate();
+	
+	/**
+	 * 获取专家论文关键字的出现次数
+	 * @return
+	 */
+	public Map<String, Integer> getPaperKey(int expertId);
+	
+	/**
+	 * 解决内存中多个同名引用问题
+	 * @param object
+	 */
+	public void merge(Object object);
+	
+	/**
+	 * 得到专家数量
+	 * @return
+	 */
+	public long getExpertNum();
 	
 }

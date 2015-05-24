@@ -4,9 +4,11 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.aspectj.weaver.patterns.OrSignaturePattern;
+import org.neo4j.register.Register.Int;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dag.robot.data.input.InputFromJson;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.FieldDao;
 import com.dag.robot.db.dao.OrgnizationDao;
@@ -66,6 +69,8 @@ public class TestController {
 	@Autowired
 	@Qualifier("relExpertTopicDao")
 	RelExpertTopicDao relExpertTopicDao;
+	@Autowired
+	InputFromJson inputFromJson;
 
 	public TestController() {
 		super();
@@ -200,12 +205,29 @@ public class TestController {
 		return "test/index";
 	}
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test() {
-		
-		List<ExpertForList> expertForLists = expertDao.getByField("cs", 1);
-		System.out.println(expertForLists.size());
-		
+	@RequestMapping(value = "/testPaperAvg", method = RequestMethod.GET)
+	public String test1() {
+		System.out.println(expertDao.getPaperAvg());
+		return "test/index";
+	}
+	
+	@RequestMapping(value = "/testPaperKey", method = RequestMethod.GET)
+	public String test2() {
+		Map<String, Integer> map = expertDao.getPaperKey(59);
+		Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
+		while(iterator.hasNext()){
+			Map.Entry<String, Integer> entry = iterator.next();
+			String key = entry.getKey();
+			Integer value = entry.getValue();
+			System.out.println(key + " : " + value);
+		}
+		return "test/index";
+	}
+	
+	@RequestMapping(value = "/testInput", method = RequestMethod.GET)
+	public String test3() {
+//		inputFromJson.inputPaper("paperData.txt");
+		inputFromJson.inputPatent("patentData.txt");
 		return "test/index";
 	}
 }
