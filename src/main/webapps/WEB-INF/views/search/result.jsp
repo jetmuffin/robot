@@ -85,7 +85,7 @@
 							src="/robot/resources/img/common/user-thumb.png" alt="" /></a>
 					</div>
 					<div class="expert-info info-item">
-						<a class="expert-name info-item" href="/robot/expert/15">周志华</a>
+						<a class="expert-name info-item" href="/robot/expert/30">周志华</a>
 						<div class="expert-org info-item">南京大学</div>
 						<div class="expert-field info-item">
 							研究领域 :<span>计算机</span>

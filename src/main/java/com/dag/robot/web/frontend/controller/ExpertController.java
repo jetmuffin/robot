@@ -25,18 +25,39 @@ public class ExpertController {
 		super();
 	}
 
-	@RequestMapping(value = "/{expertId}", method = RequestMethod.GET)
+	@RequestMapping(value = {"/{expertId}","/basic/{expertId}"}, method = RequestMethod.GET)
 	public String get(@PathVariable int expertId, Model model) {
 		Expert expert = expertDao.getById(expertId);
 		ExpertForShow expertForShow = EntitiesForShowUtil.expertForShow(expert);
 		model.addAttribute("expert", expertForShow);
-		return "expert/show";
-	}
-	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addAll(){
-		
-		return "index";
+		model.addAttribute("module", "专家");
+		return "expert/basic";
 	}
 
+	@RequestMapping(value = "/paper/{expertId}", method = RequestMethod.GET)
+	public String paper(@PathVariable int expertId, Model model) {
+		Expert expert = expertDao.getById(expertId);
+		ExpertForShow expertForShow = EntitiesForShowUtil.expertForShow(expert);
+		model.addAttribute("expert", expertForShow);
+		model.addAttribute("module", "专家");
+		return "expert/paper";
+	}
+	
+	@RequestMapping(value = "/patent/{expertId}", method = RequestMethod.GET)
+	public String patent(@PathVariable int expertId, Model model) {
+		Expert expert = expertDao.getById(expertId);
+		ExpertForShow expertForShow = EntitiesForShowUtil.expertForShow(expert);
+		model.addAttribute("expert", expertForShow);
+		model.addAttribute("module", "专家");
+		return "expert/patent";
+	}
+	
+	@RequestMapping(value = "/relation/{expertId}", method = RequestMethod.GET)
+	public String relation(@PathVariable int expertId, Model model) {
+		Expert expert = expertDao.getById(expertId);
+		ExpertForShow expertForShow = EntitiesForShowUtil.expertForShow(expert);
+		model.addAttribute("expert", expertForShow);
+		model.addAttribute("module", "专家");
+		return "expert/patent";
+	}
 }
