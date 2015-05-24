@@ -231,7 +231,7 @@ public interface ExpertDao {
 	/**
 	 * 获得近十年论文发表数量对比
 	 * @param expertId
-	 * @return
+	 * @return 返回数组第0个是今年的，第1个是去年的，以此类推
 	 */
 	public int[] getPaperNumTenYears(int expertId);
 	

@@ -420,7 +420,6 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 					res[j] = res[j] + 1;
 				}
 			}
-			
 		}
 		return res;
 		
