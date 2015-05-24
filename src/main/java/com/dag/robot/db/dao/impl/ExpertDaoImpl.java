@@ -418,6 +418,7 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			for(int j = 0; j < 10; j++){
 				if(year == nowYear - j){
 					res[j] = res[j] + 1;
+					break;
 				}
 			}
 		}
