@@ -210,6 +210,11 @@ public interface ExpertDao {
 	 */
 	public long getExpertNum();
 	
+	/**
+	 * 获得专家论文被引用与未被引用数量对比
+	 * @return
+	 */
+	public Map<String, Integer> getPaperRefInfo(int expertId);
 	
 	
 }

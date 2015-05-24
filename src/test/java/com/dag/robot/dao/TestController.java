@@ -222,7 +222,16 @@ public class TestController {
 	@RequestMapping(value = "/testInput", method = RequestMethod.GET)
 	public String test3() {
 //		inputFromJson.inputPaper("paperData.txt");
-		inputFromJson.inputPatent("patentData.txt");
+//		inputFromJson.inputPatent("patentData.txt");
+		return "test/index";
+	}
+	
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test4() {
+//		inputFromJson.inputPaper("paperData.txt");
+//		inputFromJson.inputPatent("patentData.txt");
+		System.out.println(expertDao.getPaperRefInfo(59));
 		return "test/index";
 	}
 }

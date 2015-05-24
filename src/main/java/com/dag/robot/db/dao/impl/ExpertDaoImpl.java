@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
+
 import org.apache.commons.math3.analysis.function.Exp;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
@@ -343,6 +345,25 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		Query query = query("select count(*) from Expert");
 		Long totalCount = (Long) query.uniqueResult();
 		return totalCount;
+	}
+
+	@Override
+	public Map<String, Integer> getPaperRefInfo(int expertId) {
+		List<Paper> papers = getPapers(expertId);
+		int refNum = 0;
+		int unRefNum = 0;
+		for(int i = 0; i < papers.size(); i++){
+			if(papers.get(i).getReferencedNum() == 0){
+				unRefNum = unRefNum + 1;
+			}
+			else {
+				refNum = refNum + 1;
+			}
+		}
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("refNum", refNum);
+		map.put("unRefNum", unRefNum);
+		return map;
 	}
 
 }
