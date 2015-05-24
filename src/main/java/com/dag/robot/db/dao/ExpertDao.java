@@ -12,6 +12,7 @@ import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
+import com.dag.robot.web.bean.PaperKeyword;
 
 public interface ExpertDao {
 	
@@ -195,7 +196,7 @@ public interface ExpertDao {
 	 * 获取专家论文关键字的出现次数
 	 * @return
 	 */
-	public Map<String, Integer> getPaperKey(int expertId);
+	public List<PaperKeyword> getPaperKey(int expertId);
 	
 	/**
 	 * 解决内存中多个同名引用问题
@@ -208,5 +209,7 @@ public interface ExpertDao {
 	 * @return
 	 */
 	public long getExpertNum();
+	
+	
 	
 }

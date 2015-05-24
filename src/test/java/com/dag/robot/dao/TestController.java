@@ -33,6 +33,7 @@ import com.dag.robot.entities.RelExpertField;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.entities.User;
 import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.PaperKeyword;
 
 @Controller
 @RequestMapping("/test")
@@ -213,14 +214,8 @@ public class TestController {
 	
 	@RequestMapping(value = "/testPaperKey", method = RequestMethod.GET)
 	public String test2() {
-		Map<String, Integer> map = expertDao.getPaperKey(59);
-		Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
-		while(iterator.hasNext()){
-			Map.Entry<String, Integer> entry = iterator.next();
-			String key = entry.getKey();
-			Integer value = entry.getValue();
-			System.out.println(key + " : " + value);
-		}
+	List<PaperKeyword> paperKeywords = expertDao.getPaperKey(59);
+		System.out.println(paperKeywords);
 		return "test/index";
 	}
 	
