@@ -263,5 +263,10 @@ public class TestController {
 		return topicDao.getExpertOrgDatas("data", 2);
 	}
 	
+	@RequestMapping(value = "/getExpertAreaDatas", method = RequestMethod.GET)
+	public @ResponseBody List<JsonData> getExpertAreaDatas() {
+		return topicDao.getExpertAreaDatas("data");
+	}
+	
 	
 }
