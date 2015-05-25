@@ -136,15 +136,15 @@ public class AddService {
 			}
 			expert.setOrgnization(orgnization1);
 			expertDao.addExpert(expert);
-			//
-			// addToNeo.begin();
-			//
-			// // 将关系写入neo4j
-			// addToNeo.addExpertField(expert.getExpertId(), expert.getName(),
-			// field2.getFieldId(), field2.getName());
-			// // 将关系写入neo4j
-			// addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
-			// orgnization1.getOrgId(), orgnization1.getName());
+
+			addToNeo.begin();
+
+			// 将关系写入neo4j
+			addToNeo.addExpertField(expert.getExpertId(), expert.getName(),
+					field2.getFieldId(), field2.getName());
+			// 将关系写入neo4j
+			addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
+					orgnization1.getOrgId(), orgnization1.getName());
 
 			List<String> topics = StringSplitUtil.stringSplit(topic);
 			for (int i = 0; i < topics.size(); i++) {
@@ -168,15 +168,15 @@ public class AddService {
 				sessionDao.evict(field2);
 				sessionDao.evict(expert);
 				sessionDao.evict(relFieldTopic);
-				// // 保存关系到图数据库
-				// addToNeo.addExpertTopic(expert.getExpertId(),
-				// expert.getName(),
-				// topic1.getTopicId(), topic1.getName());
-				//
-				// addToNeo.addTopicField(topic1.getTopicId(), topic1.getName(),
-				// field2.getFieldId(), field2.getName());
-				// // 关闭连接
-				// addToNeo.finish();
+				// 保存关系到图数据库
+				addToNeo.addExpertTopic(expert.getExpertId(), expert.getName(),
+						topic1.getTopicId(), topic1.getName());
+
+				addToNeo.addTopicField(topic1.getTopicId(), topic1.getName(),
+						field2.getFieldId(), field2.getName());
+				// 关闭连接
+				addToNeo.success();
+				addToNeo.finish();
 			}
 		}
 	}
@@ -189,7 +189,7 @@ public class AddService {
 		paper.setAbs(abs);
 		paper.setKeywords(keywords);
 		paper.setType(type);
-		// addToNeo.begin();
+		addToNeo.begin();
 		if (type.equals("journal")) {
 			Journal journal2 = journalDao.check(journal);
 			// 没有重复
@@ -247,10 +247,11 @@ public class AddService {
 					relExpertPaperId, expert, paper, i + 1);
 			relExpertPaperDao.addRelExeprtPaper(relExpertPaper);
 
-			// addToNeo.addExpertPaper(expert.getExpertId(), expert.getName(),
-			// paper.getPaperId(), paper.getTitle());
-			//
-			// addToNeo.finish();
+			addToNeo.addExpertPaper(expert.getExpertId(), expert.getName(),
+					paper.getPaperId(), paper.getTitle());
+
+			addToNeo.success();
+			addToNeo.finish();
 		}
 	}
 
@@ -295,10 +296,11 @@ public class AddService {
 			RelExpertPatent relExpertPatent = new RelExpertPatent(
 					relExpertPatentId, expert, patent, i + 1);
 			relExpertPatentDao.addRelExeprtPatent(relExpertPatent);
-			// addToNeo.begin();
-			// addToNeo.addExpertPatent(expert.getExpertId(), expert.getName(),
-			// patent.getPatentId(), patent.getTitle());
-			// addToNeo.finish();
+			addToNeo.begin();
+			addToNeo.addExpertPatent(expert.getExpertId(), expert.getName(),
+					patent.getPatentId(), patent.getTitle());
+			addToNeo.success();
+			addToNeo.finish();
 		}
 	}
 }

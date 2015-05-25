@@ -224,6 +224,7 @@ public class TestController {
 	public String test3() {
 //		inputFromJson.inputPaper("paperData.txt");
 //		inputFromJson.inputPatent("patentData.txt");
+		inputFromJson.inputExpert("expertData.txt");
 		return "test/index";
 	}
 	

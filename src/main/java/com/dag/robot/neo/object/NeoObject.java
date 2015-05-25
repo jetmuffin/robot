@@ -36,9 +36,11 @@ public class NeoObject {
 		transaction = graphDb.beginTx();
 	}
 	public void success() {
+		System.out.println("success");
 		transaction.success();
 	}
 	public void finish(){
+		System.out.println("finish");
 		transaction.close();
 	}
 	
