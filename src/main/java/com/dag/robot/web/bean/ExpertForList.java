@@ -7,8 +7,10 @@ public class ExpertForList {
 	private String gender;
 	private String email;
 	private String org;
-	private int paperNum;
-	private int patentNum;
+	private int paperNum = 0;
+	private int patentNum = 0;
+	private int paperReferedNum = 0;
+	private int rate = 0;
 	public ExpertForList() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -66,11 +68,17 @@ public class ExpertForList {
 	public void setPatentNum(int patentNum) {
 		this.patentNum = patentNum;
 	}
-	@Override
-	public String toString() {
-		return "ExpertForList [expertId=" + expertId + ", name=" + name
-				+ ", gender=" + gender + ", email=" + email + ", org=" + org
-				+ ", paperNum=" + paperNum + ", patentNum=" + patentNum + "]";
+	public int getPaperReferedNum() {
+		return paperReferedNum;
+	}
+	public void setPaperReferedNum(int paperReferedNum) {
+		this.paperReferedNum = paperReferedNum;
+	}
+	public int getRate() {
+		return rate;
+	}
+	public void setRate(int rate) {
+		this.rate = rate;
 	}
 	
 }
