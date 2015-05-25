@@ -14,10 +14,10 @@
 			</div>
 			<nav>
 				<ul>
-					<li data-name="home" <c:if test="${module eq 'index'}">class="active"</c:if>><a href="/robot/index">首页</a></li>
-					<li data-name="expert"><a href="#">查专家</a></li>
-					<li data-name="field"><a href="#">查研究领域</a></li>
-					<li data-name="topic"><a href="#">查研究方向</a></li>
+					<li data-name="home" <c:if test="${module eq 'index'}">class="active"</c:if> ><a href="/robot/index">首页</a></li>
+					<li data-name="expert" <c:if test="${module eq 'searchExpert'}">class="active"</c:if> ><a href="#">查专家</a></li>
+					<li data-name="field" <c:if test="${module eq 'searchField'}">class="active"</c:if> ><a href="#">查研究领域</a></li>
+					<li data-name="topic" <c:if test="${module eq 'searchTopic'}">class="active"</c:if> ><a href="#">查研究方向</a></li>
 				</ul>
 			</nav>
 		</div>

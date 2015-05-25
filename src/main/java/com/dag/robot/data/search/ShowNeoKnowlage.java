@@ -13,12 +13,14 @@ import org.neo4j.graphdb.ResourceIterable;
 import com.dag.robot.neo.object.KnowlageObject;
 import com.dag.robot.neo.object.NeoSearchObject;
 import com.dag.robot.neo.type.RelTypes;
+import com.dag.robot.utils.PropertiesUtil;
 import com.dag.robot.web.bean.JsonShowList;
 import com.dag.robot.web.bean.LinkBean;
 import com.dag.robot.web.bean.NodeBean;
 
 public class ShowNeoKnowlage extends NeoSearchObject {
 
+	private String path; 
 	KnowlageObject kObject = null;
 	ResourceIterable<Node> nodes = null;
 	
@@ -31,7 +33,8 @@ public class ShowNeoKnowlage extends NeoSearchObject {
 	int nowType = 0;
 	
 	public ShowNeoKnowlage(){
-		
+		path = PropertiesUtil.getValue("neoDataPath");
+		kObject = new KnowlageObject(path);
 	}
 	
 	public ShowNeoKnowlage(String db_path){
