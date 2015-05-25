@@ -3,11 +3,13 @@ package com.dag.robot.data.add;
 import java.text.ParseException;
 import java.util.List;
 
+import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.dag.robot.db.dao.ConferenceDao;
+import com.dag.robot.db.dao.CoreJournalDao;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.FieldDao;
 import com.dag.robot.db.dao.JournalDao;
@@ -21,6 +23,7 @@ import com.dag.robot.db.dao.RelFieldTopicDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.db.dao.impl.SessionDao;
 import com.dag.robot.entities.Conference;
+import com.dag.robot.entities.CoreJournal;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Field;
 import com.dag.robot.entities.Journal;
@@ -97,6 +100,10 @@ public class AddService {
 	@Autowired
 	@Qualifier("relFieldTopicDao")
 	private RelFieldTopicDao relFieldTopicDao;
+
+	@Autowired
+	@Qualifier("coreJournalDao")
+	private CoreJournalDao coreJournalDao;
 
 	public void addExpert(String name, String gender, String email,
 			String address, String homepage, String experience, String info,
@@ -183,7 +190,8 @@ public class AddService {
 
 	public void addPaper(String title, String[] authors, String abs,
 			String keywords, String type, String journal, String issue,
-			String conference, String time, String orgnization) {
+			String conference, String time, String orgnization,
+			String coreJournal) {
 		Paper paper = new Paper();
 		paper.setTitle(title);
 		paper.setAbs(abs);
@@ -225,6 +233,20 @@ public class AddService {
 		paper.setOrgnization(orgnization2);
 		paperDao.addPaper(paper);
 
+		int rate = 0;
+
+		// 核心期刊计算
+		List<String> list = StringSplitUtil.stringSplit(coreJournal);
+		for (int i = 0; i < list.size(); i++) {
+			String core = list.get(i);
+			CoreJournal coreJournal2 = coreJournalDao.getByName(core);
+			if (coreJournal2 == null) {
+				coreJournal2 = new CoreJournal(core, 1);
+				coreJournalDao.addCoreJournal(coreJournal2);
+			}
+			rate = rate + coreJournal2.getRate();
+		}
+
 		// 作者查重
 		for (int i = 0; i < authors.length; i++) {
 			Expert expert = expertDao.checkSame(authors[i], orgnization);
@@ -238,6 +260,9 @@ public class AddService {
 			int paperNum = expert.getPaperNum();
 			paperNum = paperNum + 1;
 			expert.setPaperNum(paperNum);
+			// 设置专家评级
+			expert.setRate(rate + expert.getRate());
+			// 更新专家信息
 			expertDao.updateExpert(expert);
 
 			// 专家论文关联

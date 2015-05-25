@@ -8,7 +8,7 @@ import com.dag.robot.db.dao.CoreJournalDao;
 import com.dag.robot.entities.CoreJournal;
 
 
-@Repository("CoreJournalDao")
+@Repository("coreJournalDao")
 public class CoreJournalDaoImpl extends BaseDao implements CoreJournalDao{
 
 	@Override
@@ -28,10 +28,12 @@ public class CoreJournalDaoImpl extends BaseDao implements CoreJournalDao{
 	}
 
 	@Override
-	public List<CoreJournal> getByName(String name) {
+	public CoreJournal getByName(String name) {
 		String hql = "from CoreJournal as cj where cj.name = ?";
-		List<CoreJournal> CoreJournals = query(hql).setString(0, name).list();
-		return CoreJournals;
+		List<CoreJournal> coreJournals = query(hql).setString(0, name).list();
+		if(coreJournals != null)
+			return null;
+		return coreJournals.get(0);
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public interface CoreJournalDao {
 	 * @param coreJournalId 期刊id
 	 * @return
 	 */
-	public List<CoreJournal> getByName(String name);
+	public CoreJournal getByName(String name);
 	
 	/**
 	 * 获得全部期刊信息

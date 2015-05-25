@@ -40,6 +40,7 @@ import com.dag.robot.utils.StringMergeUtil;
 import com.dag.robot.utils.StringSplitUtil;
 import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.JsonData;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperKeyword;
 import com.dag.robot.web.bean.PaperNumTenYears;
@@ -352,7 +353,7 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	}
 
 	@Override
-	public Map<String, Integer> getPaperRefInfo(int expertId) {
+	public List<JsonData> getPaperRefInfo(int expertId) {
 		List<Paper> papers = getPapers(expertId);
 		int refNum = 0;
 		int unRefNum = 0;
@@ -364,14 +365,16 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 				refNum = refNum + 1;
 			}
 		}
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("refNum", refNum);
-		map.put("unRefNum", unRefNum);
-		return map;
+		List<JsonData> jsonDatas = new ArrayList<JsonData>();
+		JsonData jsonData1 = new JsonData("引用", refNum);
+		JsonData jsonData2 = new JsonData("未引用", unRefNum);
+		jsonDatas.add(jsonData1);
+		jsonDatas.add(jsonData2);
+		return jsonDatas;
 	}
 	
 	@Override
-	public PaperRefGrade getPaperRefGrade(int expertId){
+	public int[] getPaperRefGrade(int expertId){
 		List<Paper> papers = getPapers(expertId);
 		int g1 = 0;
 		int g2 = 0;
@@ -396,8 +399,8 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 				g5 = g5 + 1;
 			}
 		}
-		PaperRefGrade refGrade = new PaperRefGrade(g1, g2, g3, g4, g5);
-		return refGrade;
+		int num[] = new int[]{g1, g2, g3, g4, g5};
+		return num;
 	}
 
 	@Override
@@ -417,7 +420,7 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			}
 			for(int j = 0; j < 10; j++){
 				if(year == nowYear - j){
-					res[j] = res[j] + 1;
+					res[9-j] = res[9-j] + 1;
 					break;
 				}
 			}
@@ -433,6 +436,35 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		query.setString(0, "%"+name+"%");
 		List<Expert> experts = query.list();
 		return experts;
-		
 	}
+
+	@Override
+	public List<Expert> getByField(String field) {
+		String hql = "from Expert as expert where expert.fieldName = ?";
+		Query query = query(hql);
+		query.setString(0, field);
+		List<Expert> experts = query.list();
+		return experts;
+	}
+
+	@Override
+	public Map<String, Integer> getAreaByField(String field) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		List<Expert> experts = getByField(field);
+		for(int i = 0; i < experts.size(); i++){
+			Expert expert = experts.get(i);
+			String area = expert.getArea();
+			if(map.containsKey(area)){
+				int val = map.get(area);
+				val = val + 1;
+				map.put(area, val);
+			}else {
+				map.put(area, 1);
+			}
+		}
+		return map;
+	}
+	
+	
+	
 }

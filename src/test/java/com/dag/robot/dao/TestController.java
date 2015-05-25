@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dag.robot.data.input.InputFromJson;
 import com.dag.robot.db.dao.ExpertDao;
@@ -31,9 +33,11 @@ import com.dag.robot.entities.Field;
 import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.RelExpertField;
+import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.entities.User;
 import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.JsonData;
 import com.dag.robot.web.bean.PaperKeyword;
 
 @Controller
@@ -222,9 +226,9 @@ public class TestController {
 	
 	@RequestMapping(value = "/testInput", method = RequestMethod.GET)
 	public String test3() {
-//		inputFromJson.inputPaper("paperData.txt");
+		inputFromJson.inputPaper("paperData.txt");
 //		inputFromJson.inputPatent("patentData.txt");
-		inputFromJson.inputExpert("expertData.txt");
+//		inputFromJson.inputExpert("expertData.txt");
 		return "test/index";
 	}
 	
@@ -239,4 +243,25 @@ public class TestController {
 		}
 		return "test/index";
 	}
+	
+	@RequestMapping(value = "/topic", method = RequestMethod.GET)
+	public String test5() {
+		Topic topic = topicDao.getByName("data");
+		Set<RelExpertTopic> relExpertTopics = topic.getRelExpertTopics();
+		Iterator<RelExpertTopic> iterator = relExpertTopics.iterator();
+		while(iterator.hasNext()){
+			RelExpertTopic relExpertTopic = iterator.next();
+			Expert expert = relExpertTopic.getExpert();
+			System.out.println(expert.getName());
+		}
+		
+		return "test/index";
+	}
+	
+	@RequestMapping(value = "/getTopicExpertDataInfo", method = RequestMethod.GET)
+	public @ResponseBody List<JsonData> getTopicExpertOrgInfo() {
+		return topicDao.getExpertOrgDatas("data", 2);
+	}
+	
+	
 }

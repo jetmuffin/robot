@@ -37,18 +37,19 @@ public class Expert implements java.io.Serializable {
 	private String email;
 	private String address;
 	private String homepage;
-	private int paperNum;
-	private int patentNum;
-	private int paperReferedNum;
+	private int paperNum = 0;
+	private int patentNum = 0;
+	private int paperReferedNum = 0;
 	private String prize;
 	private String experience;
 	private String info;
 	private String achievement;
 	private String url;
-	private Integer rate;
+	private Integer rate = 0;
 	private String job;
-	private Integer age;
+	private Integer age = 0;
 	private String area;
+	private String fieldName;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
 			0);
 	private Set<RelExpertTopic> relExpertTopics = new HashSet<RelExpertTopic>(0);
@@ -345,4 +346,15 @@ public class Expert implements java.io.Serializable {
 		this.relExpertPapers = relExpertPapers;
 	}
 
+	@Column(name = "fieldName", length = 50)
+	public String getFieldName() {
+		return fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
+	}
+
+	
+	
 }

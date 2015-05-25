@@ -144,9 +144,9 @@ public class BackendPaperController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(String title,String[] authors,String abs,
 			String keywords,String type,String journal,String issue,
-			String conference,String time,String orgnization, RedirectAttributes redirectAttributes) {
+			String conference,String time,String orgnization, String coreJournal, RedirectAttributes redirectAttributes) {
 		
-		addService.addPaper(title, authors, abs, keywords, type, journal, issue, conference, time, orgnization);
+		addService.addPaper(title, authors, abs, keywords, type, journal, issue, conference, time, orgnization, coreJournal);
 		redirectAttributes.addFlashAttribute("message", "添加论文成功！");
 		return "redirect:papers";
 	}
