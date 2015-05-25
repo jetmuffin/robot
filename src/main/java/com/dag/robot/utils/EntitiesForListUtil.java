@@ -37,7 +37,8 @@ public class EntitiesForListUtil {
 			expertForList.setPaperNum(expert.getPaperNum());
 			expertForList.setPatentNum(expert.getPatentNum());
 			expertForList.setOrg(expert.getOrgnization().getName());
-
+			expertForList.setPaperReferedNum(expert.getPaperReferedNum());
+			expertForList.setRate(expert.getRate());
 			expertForLists.add(expertForList);
 		}
 		return expertForLists;

@@ -63,7 +63,7 @@ public class SearchController {
 		}
 		else if(searchType.equals("field")){
 			return "search/field";
-			
+			 
 		}else {
 			List<Topic> topics = topicDao.getTopicByFuzzyName(searchKey);
 			model.addAttribute("topics", EntitiesForListUtil.topicForShows(topics));

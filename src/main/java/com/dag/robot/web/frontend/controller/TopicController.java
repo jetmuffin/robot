@@ -15,6 +15,7 @@ import com.dag.robot.data.search.ShowNeoKnowlage;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.JsonData;
 import com.dag.robot.web.bean.JsonShowList;
 
@@ -54,19 +55,25 @@ public class TopicController {
 		return "topic/knowledge";
 	}
 	
-	@RequestMapping(value = "/getTopicExpertDataInfo/{topicName}", method = RequestMethod.GET)
-	public @ResponseBody List<JsonData> getTopicExpertOrgInfo(@PathVariable String topicName) {
-		return topicDao.getExpertOrgDatas(topicName, 10);
+	@RequestMapping(value = "/getTopicExpertDataInfo/{topicId}", method = RequestMethod.GET)
+	public @ResponseBody List<JsonData> getTopicExpertOrgInfo(@PathVariable int topicId) {
+		return topicDao.getExpertOrgDatas(topicId, 10);
 	}
 	
-	@RequestMapping(value = "/getExpertAreaDatas/{topicName}", method = RequestMethod.GET)
-	public @ResponseBody List<JsonData> getExpertAreaDatas(@PathVariable String topicName) {
-		return topicDao.getExpertAreaDatas(topicName);
+	@RequestMapping(value = "/getExpertAreaDatas/{topicId}", method = RequestMethod.GET)
+	public @ResponseBody List<JsonData> getExpertAreaDatas(@PathVariable int topicId) {
+		return topicDao.getExpertAreaDatas(topicId);
 	}
 	
-	@RequestMapping(value = "/getTopicGraph/{topicName}/{depth}", method = RequestMethod.GET)
-	public @ResponseBody JsonShowList getTopicGraph(@PathVariable String topicName, @PathVariable int depth){
+	@RequestMapping(value = "/getTopicGraph/{topicId}/{depth}", method = RequestMethod.GET)
+	public @ResponseBody JsonShowList getTopicGraph(@PathVariable int topicId, @PathVariable int depth){
 		ShowNeoKnowlage snk = new ShowNeoKnowlage();
-		return snk.getGraphJSON(topicName, depth);
+//		return snk.getGraphJSON(topicId, depth);
+		return null;
+	}
+	
+	@RequestMapping(value = "/getTopTen/{topicId}", method = RequestMethod.GET)
+	public @ResponseBody List<ExpertForList> getTopTen(@PathVariable int topicId){
+		return topicDao.getTopTen(topicId);
 	}
 }
