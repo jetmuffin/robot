@@ -18,6 +18,7 @@ import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.utils.EntitiesForListUtil;
 import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.ExpertForShow;
 
@@ -65,7 +66,7 @@ public class SearchController {
 			
 		}else {
 			List<Topic> topics = topicDao.getTopicByFuzzyName(searchKey);
-			model.addAttribute("topics", topics);
+			model.addAttribute("topics", EntitiesForListUtil.topicForShows(topics));
 			return "search/topic";
 		}
 	}
