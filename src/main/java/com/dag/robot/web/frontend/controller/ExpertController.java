@@ -100,9 +100,5 @@ public class ExpertController {
 	public @ResponseBody List<JsonData> paperReferedPercent(@PathVariable int expertId){
 		return expertDao.getPaperRefInfo(expertId);
 	}
-	
-	@RequestMapping(value = "/getExpertArea/{field}.json", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Integer> getExpertArea(@PathVariable String field) {
-		return expertDao.getAreaByField(field);
-	}
+
 }
