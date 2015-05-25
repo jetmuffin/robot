@@ -55,7 +55,7 @@
 							论文关键词分布
 						</div>
 						<div class="static-item row">
-							<div id="topicKeywords" class="col-md-12" style="height:400px;"></div>
+							<div id="topicKeywords" class="col-md-12" style="height:400px;" data-id="${expert.expertId}"></div>
 						</div>
 					</div>
 				</div>
@@ -65,6 +65,7 @@
 	</section>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script src="/robot/resources/plugin/echarts/dist/echarts.js"></script>
+	<script src="/robot/resources/js/jquery/jquery-2.0.0.min.js"></script>
 	<script src="/robot/resources/js/expert/topics.js"></script>
 </body>
 </html>

@@ -54,18 +54,19 @@ public class SearchController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String search(Model model,String searchType,String searchKey) throws UnsupportedEncodingException{
 		searchKey = new String(searchKey.getBytes("ISO-8859-1"),"utf-8");
+		model.addAttribute("searchKey", searchKey);
 		if(searchType.equals("expert")){
 			List<ExpertForShow> experts = expertDao.getByFuzzyName(searchKey);
 			model.addAttribute("experts", experts);
-			model.addAttribute("searchKey", searchKey);
-			System.out.println(searchKey);
-			System.out.println(experts.size());
 			return "search/expert";
 		}
-		else if(searchType.equals("field"))
+		else if(searchType.equals("field")){
+			
+			
 			return "search/field";
-		else 
+		}else {
 			return "search/topic";
+		}
 	}
 	
 	@RequestMapping(value = "/fuzzyTopic/{topic}", method = RequestMethod.GET)

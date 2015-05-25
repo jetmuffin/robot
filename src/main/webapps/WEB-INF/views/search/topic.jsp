@@ -32,13 +32,13 @@
 				<ul>
 					<li
 						<c:if test="${param.searchType eq 'expert'}">class="hover"</c:if>><a
-						href="/robot/search?searchKey=${param.searchKey}&searchType=expert">专家</a></li>
+						href="/robot/search?searchKey=${searchKey}&searchType=expert">专家</a></li>
 					<li
 						<c:if test="${param.searchType eq 'field'}">class="hover"</c:if>><a
-						href="/robot/search?searchKey=${param.searchKey}&searchType=field">研究领域</a></li>
+						href="/robot/search?searchKey=${searchKey}&searchType=field">研究领域</a></li>
 					<li
 						<c:if test="${param.searchType eq 'topic'}">class="hover"</c:if>><a
-						href="/robot/search?searchKey=${param.searchKey}&searchType=topic">研究方向</a></li>
+						href="/robot/search?searchKey=${searchKey}&searchType=topic">研究方向</a></li>
 				</ul>
 			</div>
 			<div class="filter-item">
@@ -84,8 +84,8 @@
 						<input maxlength="100" type="text" data-selector="keyword"
 							data-synonym-key="4" class="keyword input-large "
 							name="searchKey" size="20" placeholder="输入专家名，如：周志华"
-							value="${param.searchKey}" id="keyInput"> <input
-							type="text" style="display: none" name="searchType"
+							value="${searchKey}" id="keyInput"> <input
+							type="text" style="display: none" value="${param.searchType}" name="searchType"
 							id="typeInput" />
 						<div class="sojob-suggest" data-selector="sojob-suggest"></div>
 					</div>
