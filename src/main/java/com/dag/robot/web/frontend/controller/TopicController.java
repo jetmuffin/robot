@@ -27,6 +27,9 @@ public class TopicController {
 	@Qualifier("topicDao")
 	TopicDao topicDao;
 	
+	@Autowired
+	ShowNeoKnowlage snk;
+	
 	@RequestMapping(value = {"/{topicId}","/basic/{topicId}"}, method = RequestMethod.GET)
 	public String get(@PathVariable int topicId, Model model) {
 		model.addAttribute("module", "研究领域");
@@ -63,7 +66,7 @@ public class TopicController {
 	
 	@RequestMapping(value = "/getTopicGraph/{topicName}/{depth}", method = RequestMethod.GET)
 	public @ResponseBody JsonShowList getTopicGraph(@PathVariable String topicName, @PathVariable int depth){
-		ShowNeoKnowlage snk = new ShowNeoKnowlage();
-		return snk.getGraphJSON(topicName, depth);
+		JsonShowList jsList = snk.getGraphJSON(topicName, depth);
+		return jsList;
 	}
 }

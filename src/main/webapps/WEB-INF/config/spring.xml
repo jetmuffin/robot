@@ -76,7 +76,7 @@
 		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
 	<bean id="noeObject" class="com.dag.robot.neo.object.NeoObject">
-		<constructor-arg value="/home/sloriac/neoOut" />
+		<constructor-arg value="/home/innerac/neoOut" />
 	</bean>
 
 </beans>

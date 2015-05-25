@@ -76,5 +76,4 @@ public class SearchFromNeo extends NeoSearchObject {
 		
 		return idsList;
 	}
-	
 }
