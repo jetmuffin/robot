@@ -61,19 +61,13 @@ public class SearchController {
 			return "search/expert";
 		}
 		else if(searchType.equals("field")){
-			
-			
 			return "search/field";
+			
 		}else {
+			List<Topic> topics = topicDao.getTopicByFuzzyName(searchKey);
+			model.addAttribute("topics", topics);
 			return "search/topic";
 		}
 	}
 	
-	@RequestMapping(value = "/fuzzyTopic/{topic}", method = RequestMethod.GET)
-	public String paper(@PathVariable String topic, Model model) {
-		List<Topic> topics = topicDao.getTopicByFuzzyName(topic);
-		model.addAttribute("topics", topics);
-		//返回需要修改！！！
-		return "expert/paper";
-	}
 }

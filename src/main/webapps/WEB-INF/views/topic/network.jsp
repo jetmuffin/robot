@@ -73,6 +73,7 @@
 									<th>论文引用数</th>
 									<th>专利数</th>
 									<th>核心论文数</th>
+									<th>评分</th>
 								</tr>
 							</thead>
 							<tbody>
