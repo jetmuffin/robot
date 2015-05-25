@@ -59,6 +59,14 @@
 							</div>
 					</div>
 				</div>
+				<div class="profile-block">
+					<div class="block-title">关联专家列表</div>
+					<div class="block-content">
+							<div class="static-title">相关专家</div>
+							<div class="static-item row">
+							</div>
+					</div>
+				</div>				
 			</div>
 		</div>
 	</div>

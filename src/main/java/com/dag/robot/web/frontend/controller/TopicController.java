@@ -32,6 +32,9 @@ public class TopicController {
 	
 	@RequestMapping(value = {"/{topicId}","/basic/{topicId}"}, method = RequestMethod.GET)
 	public String get(@PathVariable int topicId, Model model) {
+		Topic topic = topicDao.getById(topicId);
+		model.addAttribute("topic", topic);
+		
 		model.addAttribute("module", "研究领域");
 		return "topic/basic";
 	}

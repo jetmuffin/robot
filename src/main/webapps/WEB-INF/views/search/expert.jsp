@@ -23,14 +23,14 @@
 	<jsp:include page="../common/navbar.jsp"></jsp:include>
 	<section id="main">
 	<div class="left-side">
-		<div class="total">共找到<strong>2</strong>个结果</div>
+		<div class="total">共找到<strong>${experts.size()}</strong>个结果</div>
 		<div class="filter">
 			<div class="filter-all">
 				<div class="des">选择搜索类型</div>
 				<ul>
-					<li <c:if test="${param.searchType eq 'expert'}">class="hover"</c:if> ><a href="/robot/search?searchKey=${param.searchKey}&searchType=expert">专家</a></li>
-					<li <c:if test="${param.searchType eq 'field'}">class="hover"</c:if> ><a href="/robot/search?searchKey=${param.searchKey}&searchType=field">研究领域</a></li>
-					<li <c:if test="${param.searchType eq 'topic'}">class="hover"</c:if> ><a href="/robot/search?searchKey=${param.searchKey}&searchType=topic">研究方向</a></li>
+					<li <c:if test="${param.searchType eq 'expert'}">class="hover"</c:if> ><a href="/robot/search?searchKey=${searchKey}&searchType=expert">专家</a></li>
+					<li <c:if test="${param.searchType eq 'field'}">class="hover"</c:if> ><a href="/robot/search?searchKey=${searchKey}&searchType=field">研究领域</a></li>
+					<li <c:if test="${param.searchType eq 'topic'}">class="hover"</c:if> ><a href="/robot/search?searchKey=${searchKey}&searchType=topic">研究方向</a></li>
 				</ul>
 			</div>
 			<div class="filter-item">
@@ -75,8 +75,7 @@
 						<input maxlength="100" type="text" data-selector="keyword"
 							data-synonym-key="4" class="keyword input-large " name="searchKey"
 							size="20" placeholder="输入专家名，如：周志华"  value="${searchKey}" id="keyInput">
-						<input type="text" style="display:none" name="searchType" id="typeInput"/>
-						<div class="sojob-suggest" data-selector="sojob-suggest"></div>
+						<input type="text" style="display:none" value="${param.searchType}" name="searchType" id="typeInput"/>
 					</div>
 				</fieldset>
 			</form>
@@ -91,12 +90,13 @@
 							src="/robot/resources/img/common/user-thumb.png" alt="" /></a>
 					</div>
 					<div class="expert-info info-item">
-						<a class="expert-name info-item" href="/robot/expert/${expert.expertId}">周志华</a>
+						<a class="expert-name info-item" href="/robot/expert/${expert.expertId}">${expert.name}</a>
 						<div class="expert-org info-item">${expert.orgnization.name}</div>
 						<div class="expert-field info-item">
-							研究领域 :<span>${expert.field.name}</span>
+							研究领域 :<c:if test="${empty expert.field}">暂未收录</c:if><span>${expert.field.name}</span>
 						</div>
 						<div class="expert-topic info-item">
+			  			研究方向 :<c:if test="${empty expert.topics}">暂未收录</c:if><c:forEach items="${expert.topics}" var="topic"><span>${topic.name}</span></c:forEach>			
 						</div>
 						<div class="expert-paper info-item">
 							发表文章: <span>${expert.paperNum}</span> 被引用: <span>${expert.paperReferedNum}</span> 专利数: <span>${expert.patentNum}</span>
@@ -105,46 +105,6 @@
 					<div class="clear"></div>
 				</li>				
 				</c:forEach>
-				<li>
-					<div class="expert-avatar">
-						<a href="#"><img
-							src="/robot/resources/img/common/user-thumb.png" alt="" /></a>
-					</div>
-					<div class="expert-info info-item">
-						<a class="expert-name info-item" href="/robot/expert/32">周志华</a>
-						<div class="expert-org info-item">南京大学</div>
-						<div class="expert-field info-item">
-							研究领域 :<span>计算机</span>
-						</div>
-						<div class="expert-topic info-item">
-							研究方向 :<span>机器学习</span><span>人工智能</span>
-						</div>
-						<div class="expert-paper info-item">
-							发表文章: <span>30</span> 被引用: <span>18</span> 专利数: <span>9</span>
-						</div>
-					</div>
-					<div class="clear"></div>
-				</li>
-				<li>
-					<div class="expert-avatar">
-						<a href="#"><img
-							src="/robot/resources/img/common/user-thumb.png" alt="" /></a>
-					</div>
-					<div class="expert-info">
-						<a class="expert-name info-item" href="#">姚期智</a>
-						<div class="expert-org info-item">清华大学</div>
-						<div class="expert-field info-item">
-							研究领域 :<span>计算机</span>
-						</div>
-						<div class="expert-topic info-item">
-							研究方向 :<span>计算机理论</span>
-						</div>
-						<div class="expert-paper info-item">
-							发表文章: <span>30</span> 被引用: <span>18</span> 专利数: <span>9</span>
-						</div>
-					</div>
-					<div class="clear"></div>
-				</li>
 			</ul>
 		</div>
 

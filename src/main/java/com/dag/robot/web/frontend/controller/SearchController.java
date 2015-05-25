@@ -18,6 +18,7 @@ import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.utils.EntitiesForListUtil;
 import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.ExpertForShow;
 
@@ -54,25 +55,20 @@ public class SearchController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String search(Model model,String searchType,String searchKey) throws UnsupportedEncodingException{
 		searchKey = new String(searchKey.getBytes("ISO-8859-1"),"utf-8");
+		model.addAttribute("searchKey", searchKey);
 		if(searchType.equals("expert")){
 			List<ExpertForShow> experts = expertDao.getByFuzzyName(searchKey);
 			model.addAttribute("experts", experts);
-			model.addAttribute("searchKey", searchKey);
-			System.out.println(searchKey);
-			System.out.println(experts.size());
 			return "search/expert";
 		}
-		else if(searchType.equals("field"))
+		else if(searchType.equals("field")){
 			return "search/field";
-		else 
+			
+		}else {
+			List<Topic> topics = topicDao.getTopicByFuzzyName(searchKey);
+			model.addAttribute("topics", EntitiesForListUtil.topicForShows(topics));
 			return "search/topic";
+		}
 	}
 	
-	@RequestMapping(value = "/fuzzyTopic/{topic}", method = RequestMethod.GET)
-	public String paper(@PathVariable String topic, Model model) {
-		List<Topic> topics = topicDao.getTopicByFuzzyName(topic);
-		model.addAttribute("topics", topics);
-		//返回需要修改！！！
-		return "expert/paper";
-	}
 }

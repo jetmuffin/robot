@@ -4,32 +4,32 @@ import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 
 public class PaperKeyword {
 	
-	private String keyword;
-	private int num;
+	private String name;
+	private int value;
 	public PaperKeyword() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public PaperKeyword(String keyword, int num) {
+	public PaperKeyword(String name, int value) {
 		super();
-		this.keyword = keyword;
-		this.num = num;
+		this.name = name;
+		this.value = value;
 	}
-	public String getKeyword() {
-		return keyword;
+	public String getname() {
+		return name;
 	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
+	public void setname(String name) {
+		this.name = name;
 	}
-	public int getNum() {
-		return num;
+	public int getvalue() {
+		return value;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setvalue(int value) {
+		this.value = value;
 	}
 	@Override
 	public String toString() {
-		return "PaperKeyword [keyword=" + keyword + ", num=" + num + "]";
+		return "Papername [name=" + name + ", value=" + value + "]";
 	}
 	
 }
