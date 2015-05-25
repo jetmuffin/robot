@@ -74,7 +74,7 @@
 						</button>
 						<input maxlength="100" type="text" data-selector="keyword"
 							data-synonym-key="4" class="keyword input-large " name="searchKey"
-							size="20" placeholder="输入专家名，如：周志华"  value="${param.searchKey}" id="keyInput">
+							size="20" placeholder="输入专家名，如：周志华"  value="${searchKey}" id="keyInput">
 						<input type="text" style="display:none" name="searchType" id="typeInput"/>
 						<div class="sojob-suggest" data-selector="sojob-suggest"></div>
 					</div>
@@ -84,6 +84,27 @@
 
 		<div class="result">
 			<ul>
+				<c:forEach items="${experts}" var="expert">
+					<li>
+					<div class="expert-avatar">
+						<a href="#"><img
+							src="/robot/resources/img/common/user-thumb.png" alt="" /></a>
+					</div>
+					<div class="expert-info info-item">
+						<a class="expert-name info-item" href="/robot/expert/${expert.expertId}">周志华</a>
+						<div class="expert-org info-item">${expert.orgnization.name}</div>
+						<div class="expert-field info-item">
+							研究领域 :<span>${expert.field.name}</span>
+						</div>
+						<div class="expert-topic info-item">
+						</div>
+						<div class="expert-paper info-item">
+							发表文章: <span>${expert.paperNum}</span> 被引用: <span>${expert.paperReferedNum}</span> 专利数: <span>${expert.patentNum}</span>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</li>				
+				</c:forEach>
 				<li>
 					<div class="expert-avatar">
 						<a href="#"><img

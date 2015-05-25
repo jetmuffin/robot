@@ -26,13 +26,15 @@ $(function() {
     searchInput.keydown(function(event){
     		if(event.keyCode == 13){
     			var searchKey = searchInput.val();
-    			window.open('/robot/search?searchKey='+searchKey+'&searchType='+searchType );
+    			window.open('/robot/search?searchKey='+urlencode(searchKey)+'&searchType='+searchType );
     		}
     	}	);
     $('.btn-search').click(function(){
     			var searchKey = searchInput.val();
     			if(searchKey.length != 0)
-    				window.open('/robot/search?searchKey='+searchKey+'&searchType='+searchType );
+    				var url = '/robot/search?searchKey='+urlencode(searchKey)+'&searchType='+searchType;
+    					console.log(url);
+    			window.open(url);
     		});
     
     /* Hide mobile menu after clicking on a link
@@ -42,3 +44,9 @@ $(function() {
     });
 });
 
+function urlencode (str) {  
+    str = (str + '').toString();   
+
+    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').  
+    replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');  
+} 
