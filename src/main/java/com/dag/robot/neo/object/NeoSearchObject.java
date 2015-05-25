@@ -168,6 +168,13 @@ public class NeoSearchObject {
 
 		return idsList;
 	}
+	public Map<String, String> getLink() {
+		Map<String, String> idsMap = new HashMap<String, String>();
+		for(Path path : traverser){
+			idsMap.put(path.startNode().getProperty("name").toString(),path.endNode().getProperty("name").toString());
+		}
+		return idsMap;
+	}
 	public ResourceIterable<Node> getTmpNodes() {
 //		Map<Long, Integer> idsMap = new HashMap<Long, Integer>();
 		return traverser.nodes();
