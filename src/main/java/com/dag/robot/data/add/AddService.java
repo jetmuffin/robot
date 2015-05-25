@@ -40,12 +40,13 @@ import com.dag.robot.entities.RelFieldTopic;
 import com.dag.robot.entities.RelFieldTopicId;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.utils.DateUtil;
+import com.dag.robot.utils.PropertiesUtil;
 import com.dag.robot.utils.StringSplitUtil;
 
 @Service
 public class AddService {
 
-	private static String dbPath = "/home/innerac/workspace/neoDB";
+	private static String dbPath;
 
 	@Autowired
 	private SessionDao sessionDao;
@@ -104,6 +105,13 @@ public class AddService {
 	@Autowired
 	@Qualifier("coreJournalDao")
 	private CoreJournalDao coreJournalDao;
+
+	
+	
+	public AddService() {
+		super();
+		dbPath = PropertiesUtil.getValue("dbPath");
+	}
 
 	public void addExpert(String name, String gender, String email,
 			String address, String homepage, String experience, String info,
