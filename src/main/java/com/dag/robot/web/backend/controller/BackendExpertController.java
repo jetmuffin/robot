@@ -188,29 +188,4 @@ public class BackendExpertController {
 		return list;
 	}
 	
-	@RequestMapping(value = "/getPaperRefGrade/{expertId}", method = RequestMethod.GET)
-	public @ResponseBody int[] getPaperRefGrade(@PathVariable int expertId) {
-		return expertDao.getPaperRefGrade(expertId);
-	}
-	
-	@RequestMapping(value = "/getPaperRefTenYears/{expertId}", method = RequestMethod.GET)
-	public @ResponseBody int[] getPaperTenYears(@PathVariable int expertId) {
-		return expertDao.getPaperNumTenYears(expertId);
-	}
-	
-	@RequestMapping(value = "/getPaperKey/{expertId}", method = RequestMethod.GET)
-	public @ResponseBody List<PaperKeyword> getPaperKey(@PathVariable int expertId) {
-		return expertDao.getPaperKey(expertId);
-	}
-	
-	@RequestMapping(value = "/getPaperAvg", method = RequestMethod.GET)
-	public @ResponseBody String getPaperAvg() {
-		return expertDao.getPaperAvg();
-	}
-	
-	@RequestMapping(value = "/getExpertArea/{field}", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Integer> getExpertArea(@PathVariable String field) {
-		return expertDao.getAreaByField(field);
-	}
-	
 }

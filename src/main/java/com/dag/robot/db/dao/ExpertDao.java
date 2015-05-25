@@ -13,6 +13,7 @@ import com.dag.robot.entities.Patent;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.JsonData;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperKeyword;
@@ -241,7 +242,7 @@ public interface ExpertDao {
 	 * @param name
 	 * @return
 	 */
-	public List<Expert> getByFuzzyName(String name);
+	public List<ExpertForShow> getByFuzzyName(String name);
 	
 	/**
 	 * 根据领域检索
