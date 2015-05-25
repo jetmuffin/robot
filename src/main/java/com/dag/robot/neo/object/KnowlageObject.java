@@ -27,16 +27,26 @@ public class KnowlageObject {
 	private String DB_PATH="";
 	private GraphDatabaseService graphDb=null;
 	private Transaction transaction = null;
+	
+	public KnowlageObject(){
+		
+	}
 	public KnowlageObject(String db_path){
 		this.DB_PATH = db_path;
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );
+	}
+	public void begin(){
+		System.out.println("begin->");
 		transaction = graphDb.beginTx();
+		System.out.println("begin<-");
 	}
 	public void success() {
 		transaction.success();
 	}
 	public void finish(){
+		System.out.println("finish->");
 		transaction.close();
+		System.out.println("finish<-");
 	}
 	
 	/**

@@ -9,20 +9,29 @@ import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 import org.neo4j.graphdb.ResourceIterable;
+import org.neo4j.graphdb.traversal.Evaluator;
+import org.neo4j.graphdb.traversal.Evaluators;
+import org.neo4j.graphdb.traversal.TraversalDescription;
+import org.neo4j.graphdb.traversal.Traverser;
+import org.neo4j.kernel.Traversal;
+import org.springframework.stereotype.Service;
 
 import com.dag.robot.neo.object.KnowlageObject;
-import com.dag.robot.neo.object.NeoSearchObject;
 import com.dag.robot.neo.type.RelTypes;
 import com.dag.robot.utils.PropertiesUtil;
 import com.dag.robot.web.bean.JsonShowList;
 import com.dag.robot.web.bean.LinkBean;
 import com.dag.robot.web.bean.NodeBean;
 
-public class ShowNeoKnowlage extends NeoSearchObject {
+@Service
+public class ShowNeoKnowlage {
 
 	private String path; 
 	KnowlageObject kObject = null;
 	ResourceIterable<Node> nodes = null;
+	
+	protected TraversalDescription traversalDescription = null;
+	protected Traverser traverser = null;
 	
 	List<NodeBean> nc = new ArrayList<NodeBean>();
 	List<LinkBean> lc = new ArrayList<LinkBean>();
@@ -41,10 +50,17 @@ public class ShowNeoKnowlage extends NeoSearchObject {
 		kObject = new KnowlageObject(db_path);
 	}
 	
-	public void close(){
+	public void begin(){
+		kObject.begin();
+	}
+	public void finish(){
 		kObject.finish();
 	}
+	
 	public JsonShowList getGraphJSON(String rootName,int deepth){
+		
+		begin();
+		
 		nodes = kObject.getNodes(rootName);
 		
 		nc.clear();
@@ -71,12 +87,16 @@ public class ShowNeoKnowlage extends NeoSearchObject {
 		{
 			JsonShowList jsList = new JsonShowList();
 			jsList.setNodes(nc);
-			jsList.setLinks(lc);
+			jsList.setLinks(lc);			
+			
+			finish();
 			
 			return jsList;
 			
 		}
 	}
+
+
 
 	private void findSubNodes(ResourceIterable<Node> nodes){
 		
@@ -97,5 +117,52 @@ public class ShowNeoKnowlage extends NeoSearchObject {
 		}
 	}
 	
+	private ResourceIterable<Node> getTmpNodes() {
+		return traverser.nodes();
+	}
+	/**
+	 * 创建搜索描述，默认为宽搜
+	 */
+	@SuppressWarnings("deprecation")
+	private void setTraversalDescription(){
+		traversalDescription = Traversal.description().breadthFirst();
+	}
+	
+	/**
+	 * 增加搜索关系
+	 * @param reltype	关系	
+	 * @param direction	搜索方向
+	 */
+	private void addRelationships(RelTypes reltype, Direction direction){
+		traversalDescription = traversalDescription.relationships(reltype,direction);
+	}
+	
+	/**
+	 * 搜索时排除当前节点
+	 */
+	private void excludeStartPosition(){
+		traversalDescription = traversalDescription.evaluator(Evaluators.excludeStartPosition());
+	}
+	/**
+	 * 设置搜索长度
+	 * @param deepth	搜索长度，默认为全部搜索
+	 */
+	private void setDeepth(int deepth){
+		traversalDescription = traversalDescription.evaluator(Evaluators.toDepth(deepth));
+	}
+	/**
+	 * 设置起始节点组
+	 * @param nodes
+	 */
+	private void setTraverser(Iterable<Node> nodes){
+		traverser = traversalDescription.traverse(nodes);
+	}
+	/**
+	 * 设置起始节点
+	 * @param node
+	 */
+	private void setTraverser(Node node){
+		traverser = traversalDescription.traverse(node);
+	}
 	
 }

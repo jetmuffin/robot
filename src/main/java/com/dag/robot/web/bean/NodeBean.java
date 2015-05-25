@@ -11,12 +11,14 @@ public class NodeBean {
 		category = iCategory;
 		name = iName;
 		value = 10 - iDepth;
+		depth = iDepth;
 	}
 	public NodeBean(long iId,int iCategory,String iName,int iDepth){
 		id = (int) iId;
 		category = iCategory;
 		name = iName;
 		value = 10 - iDepth;
+		depth = iDepth;
 	}
 	public int getId() {
 		return id;

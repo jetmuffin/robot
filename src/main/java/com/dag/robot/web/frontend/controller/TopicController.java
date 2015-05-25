@@ -28,6 +28,9 @@ public class TopicController {
 	@Qualifier("topicDao")
 	TopicDao topicDao;
 	
+	@Autowired
+	ShowNeoKnowlage snk;
+	
 	@RequestMapping(value = {"/{topicId}","/basic/{topicId}"}, method = RequestMethod.GET)
 	public String get(@PathVariable int topicId, Model model) {
 		Topic topic = topicDao.getById(topicId);
