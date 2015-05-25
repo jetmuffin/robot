@@ -58,15 +58,15 @@ public class SearchController {
 		if(searchType.equals("expert")){
 			List<ExpertForShow> experts = expertDao.getByFuzzyName(searchKey);
 			model.addAttribute("experts", experts);
-			return "search/expert";
+			return "result/expert";
 		}
 		else if(searchType.equals("field")){
-			return "search/field";
+			return "result/field";
 			
 		}else {
 			List<Topic> topics = topicDao.getTopicByFuzzyName(searchKey);
 			model.addAttribute("topics", topics);
-			return "search/topic";
+			return "result/topic";
 		}
 	}
 	
