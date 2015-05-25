@@ -1,6 +1,7 @@
 package com.dag.robot.db.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 
@@ -98,4 +99,6 @@ public interface TopicDao {
 	 * @return
 	 */
 	public List<ExpertForList> getTopTen(int topicId);
+
+	Map<String, Integer> getAreaByField(int topicId);
 }

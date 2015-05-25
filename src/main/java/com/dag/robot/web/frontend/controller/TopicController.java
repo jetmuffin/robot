@@ -1,6 +1,7 @@
 package com.dag.robot.web.frontend.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -80,5 +81,16 @@ public class TopicController {
 	@RequestMapping(value = "/getTopTen/{topicId}.json", method = RequestMethod.GET)
 	public @ResponseBody List<ExpertForList> getTopTen(@PathVariable int topicId){
 		return topicDao.getTopTen(topicId);
+	}
+	
+	
+	/**
+	 * 获取专家地域分布
+	 * @param field
+	 * @return
+	 */
+	@RequestMapping(value = "/getExpertArea/{topicId}.json", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Integer> getExpertArea(@PathVariable int topicId) {
+		return topicDao.getAreaByField(topicId);
 	}
 }
