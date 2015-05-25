@@ -39,14 +39,10 @@
 				<li><h2>
 						<span>目录</span>
 					</h2></li>
-		<!--  	<li class="selected"><a
+  			<li><a
 					href="/robot/topic/basic/${topic.topicId}">基本概况</a></li>
-				<li><a href="/robot/topic/network/${topic.topicId}">专家网络</a></li>
-				<li><a href="/robot/topic/knowledge/${topic.topicId}">知识图谱</a></li>-->	
-					<li><a
-					href="/robot/topic/basic/3">基本概况</a></li>
-				<li class="selected"><a href="/robot/topic/network/3">专家网络</a></li>
-				<li><a href="/robot/topic/knowledge/3">知识图谱</a></li>
+				<li class="selected"><a href="/robot/topic/network/${topic.topicId}">专家网络</a></li>
+				<li><a href="/robot/topic/knowledge/${topic.topicId}">知识图谱</a></li>
 			</ul>
 
 			<div class="profile-bd">
@@ -58,11 +54,51 @@
 								<div class="static-title">专家关联网络</div>
 								<div class="static-graph col-md-12">
 									<div id="expertNetwork" style="height:400px">
-										
 									</div>
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+				
+				<div class="profile-block">
+					<div class="block-title">核心专家</div>
+					<div class="block-content">
+												<div class="table-title static-title">最近发表论文</div>
+						<table class="table table-hover paper-table">
+							<thead>
+								<tr>
+									<th>专家</th>
+									<th>发表论文数</th>
+									<th>论文引用数</th>
+									<th>专利数</th>
+									<th>核心论文数</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${expert.papers}" var="paper">
+								<tr>
+									<td>${paper.title}</td>
+									<c:choose>
+										<c:when test="${paper.type eq 'journal'}">
+											<td>${paper.journal.name}</td>
+											<td>${paper.issue}</td>
+										</c:when>
+										<c:otherwise>
+											<td>${paper.conference}</td>
+											<td>${paper.date}</td>
+										</c:otherwise>
+									</c:choose>
+									<td>
+									<!--  <span title="被中信所《中国科技期刊引证报告》收录">ISTIC</span>-->
+									<span title="被EI收录">EI</span>
+									<span title="被SCI收录">SCI</span>
+									<span title="被北京大学《中文核心期刊要目总览》收录">PKU</span>
+									</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

@@ -39,14 +39,10 @@
 				<li><h2>
 						<span>目录</span>
 					</h2></li>
-		<!--  	<li class="selected"><a
+	  	<li><a
 					href="/robot/topic/basic/${topic.topicId}">基本概况</a></li>
 				<li><a href="/robot/topic/network/${topic.topicId}">专家网络</a></li>
-				<li><a href="/robot/topic/knowledge/${topic.topicId}">知识图谱</a></li>-->	
-					<li><a
-					href="/robot/topic/basic/3">基本概况</a></li>
-				<li><a href="/robot/topic/network/3">专家网络</a></li>
-				<li class="selected"><a href="/robot/topic/knowledge/3">知识图谱</a></li>
+				<li class="selected"><a href="/robot/topic/knowledge/${topic.topicId}">知识图谱</a></li>
 			</ul>
 
 			<div class="profile-bd">

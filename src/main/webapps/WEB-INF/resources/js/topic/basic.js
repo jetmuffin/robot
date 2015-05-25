@@ -56,6 +56,10 @@ require([ 'echarts', 'echarts/theme/macarons', 'echarts/chart/pie',
 			};
 
 			option_bar = {
+					title:{
+						text:'本方向专家组织分布',
+						x:'center'
+					},
 				tooltip : {
 					trigger : 'axis'
 				},
@@ -172,6 +176,10 @@ require([ 'echarts', 'echarts/theme/macarons', 'echarts/chart/pie',
 			option_prov = {
 					tooltip : {
 						trigger: 'item'
+					},
+					title:{
+						text: '本方向专家分布',
+						x: 'center'
 					},
 				series : [ {
 					name : 'Map',

@@ -15,8 +15,6 @@ public class NeoCreateObject{
 	}
 	
 	public NeoCreateObject(String db_path){
-		neoObject = new NeoObject(db_path);
-		neoObject.begin();
 	}
 
 	

@@ -39,14 +39,10 @@
 				<li><h2>
 						<span>目录</span>
 					</h2></li>
-		<!--  	<li class="selected"><a
+		  	<li class="selected"><a
 					href="/robot/topic/basic/${topic.topicId}">基本概况</a></li>
 				<li><a href="/robot/topic/network/${topic.topicId}">专家网络</a></li>
-				<li><a href="/robot/topic/knowledge/${topic.topicId}">知识图谱</a></li>-->	
-					<li class="selected"><a
-					href="/robot/topic/basic/3">基本概况</a></li>
-				<li><a href="/robot/topic/network/3">专家网络</a></li>
-				<li><a href="/robot/topic/knowledge/3">知识图谱</a></li>
+				<li><a href="/robot/topic/knowledge/${topic.topicId}">知识图谱</a></li>
 			</ul>
 
 			<div class="profile-bd">
@@ -83,20 +79,24 @@
 									<div class="static-desc">多数研究该方向的是男专家</div>
 								</div>
 								<div class="static-item col-md-12">
-									<div class="static-title">专家组织</div>
 									<div class="static-graph">
 										<div id="expertLocation" style="height: 400px;"></div>
 									</div>
 								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="profile-block">
+					<div class="block-title">专家地区分布</div>
+					<div class="block-content">
 								<div class="static-item col-md-12">
-									<div class="static-title">专家地区分布</div>
 									<div class="static-graph">
 										<div id="expertProv" style="height:600px"></div>
 									</div>
 								</div>
-							</div>
-						</div>
-					</div>
+					</div>				
 				</div>
 			</div>
 		</div>
