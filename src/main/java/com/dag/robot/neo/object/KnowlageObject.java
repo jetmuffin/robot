@@ -67,6 +67,9 @@ public class KnowlageObject {
 			node = nodes.iterator().next();
 		return node;
 	}
+	public ResourceIterable<Node> getNodes(String value){
+		return this.graphDb.findNodesByLabelAndProperty(LabelTypes.KNOWLAGE, "name", value);
+	}
 	
 	/**
 	 * 获取两个结点之间的关系，aNode -> bNode
