@@ -3,6 +3,7 @@ package com.dag.robot.web.backend.controller;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import scala.Int;
 
 import com.dag.robot.data.add.AddService;
 import com.dag.robot.db.dao.ExpertDao;
@@ -38,6 +41,8 @@ import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.Page;
+import com.dag.robot.web.bean.PaperKeyword;
+import com.dag.robot.web.bean.PaperRefGrade;
 
 @Controller
 @RequestMapping("/backend/expert")
@@ -176,4 +181,31 @@ public class BackendExpertController {
 		return "redirect:/backend/expert/" + expertId;
 	}
 
+	@RequestMapping(value = "/getPaperRefNum/{expertId}", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Integer> getPaperRef(@PathVariable int expertId) {
+		Map<String, Integer> map =  expertDao.getPaperRefInfo(expertId);
+		return map;
+	}
+	
+	@RequestMapping(value = "/getPaperRefGrade/{expertId}", method = RequestMethod.POST)
+	public @ResponseBody PaperRefGrade getPaperRefGrade(@PathVariable int expertId) {
+		PaperRefGrade paperRefGrade = expertDao.getPaperRefGrade(expertId);
+		return paperRefGrade;
+	}
+	
+	@RequestMapping(value = "/getPaperRefTenYears/{expertId}", method = RequestMethod.POST)
+	public @ResponseBody int[] getPaperTenYears(@PathVariable int expertId) {
+		return expertDao.getPaperNumTenYears(expertId);
+	}
+	
+	@RequestMapping(value = "/getPaperKey/{expertId}", method = RequestMethod.POST)
+	public @ResponseBody List<PaperKeyword> getPaperKey(@PathVariable int expertId) {
+		return expertDao.getPaperKey(expertId);
+	}
+	
+	@RequestMapping(value = "/getPaperAvg", method = RequestMethod.POST)
+	public @ResponseBody String getPaperAvg() {
+		return expertDao.getPaperAvg();
+	}
+	
 }
