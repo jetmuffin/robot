@@ -93,8 +93,11 @@ public class InputFromJson {
 				String time = jObject.getString("time");
 				String orgnization = jObject.getString("orgnization");
 				String coreJournal = jObject.getString("coreJournal");
+				int referencedNum = Integer.parseInt(jObject
+						.getString("referencedNum"));
 				addService.addPaper(title, authors, abs, keywords, type,
-						journal, issue, conference, time, orgnization,coreJournal);
+						journal, issue, conference, time, orgnization,
+						coreJournal, referencedNum);
 			}
 
 		} catch (JSONException e) {

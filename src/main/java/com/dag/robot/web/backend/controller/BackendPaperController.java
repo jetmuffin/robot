@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -43,10 +44,10 @@ import com.dag.robot.web.bean.PaperForShow;
 @Controller
 @RequestMapping("/backend/paper")
 public class BackendPaperController {
-	
+
 	private static int DEFAULT_PAGE = 1;
 	private static int DEFAULT_PAGE_SIZE = 10;
-	
+
 	@Autowired
 	@Qualifier("expertDao")
 	private ExpertDao expertDao;
@@ -58,49 +59,50 @@ public class BackendPaperController {
 	@Autowired
 	@Qualifier("relExpertTopicDao")
 	private RelExpertTopicDao relExpertTopicDao;
-	
+
 	@Autowired
 	@Qualifier("relExpertPaperDao")
 	private RelExpertPaperDao relExpertPaperDao;
-	
+
 	@Autowired
 	@Qualifier("paperDao")
 	private PaperDao paperDao;
-	
+
 	@Autowired
 	@Qualifier("conferenceDao")
 	private ConferenceDao conferenceDao;
-	
+
 	@Autowired
 	@Qualifier("journalDao")
 	private JournalDao journalDao;
-	
+
 	@Autowired
 	@Qualifier("orgnizationDao")
 	private OrgnizationDao orgnizationDao;
-	
+
 	@Autowired
 	private AddService addService;
-	
+
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(Model model) {
 		return "backend/paper/add";
 	}
-	
+
 	@RequestMapping(value = "/import", method = RequestMethod.GET)
 	public String input(Model model) {
 		return "backend/paper/import";
 	}
-	
+
 	@RequestMapping(value = "/papers", method = RequestMethod.GET)
-	public String list(Model model,String page,String pageSize) {
+	public String list(Model model, String page, String pageSize) {
 		int _page = page == null ? DEFAULT_PAGE : Integer.parseInt(page);
-		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer.parseInt(pageSize);
-		Page<PaperForShow> pages = paperDao.page(_pageSize, _page);//起始页为1
+		int _pageSize = pageSize == null ? DEFAULT_PAGE_SIZE : Integer
+				.parseInt(pageSize);
+		Page<PaperForShow> pages = paperDao.page(_pageSize, _page);// 起始页为1
 		model.addAttribute("pages", pages);
 		return "backend/paper/list";
 	}
-	
+
 	@RequestMapping(value = "/{paperId}", method = RequestMethod.GET)
 	public String get(@PathVariable int paperId, Model model) {
 		Paper paper = paperDao.getById(paperId);
@@ -108,60 +110,75 @@ public class BackendPaperController {
 		model.addAttribute("paper", paperForShow);
 		return "backend/paper/show";
 	}
-	
+
 	@RequestMapping(value = "/editAbs/{paperId}", method = RequestMethod.POST)
-	public String editAbs(@PathVariable int paperId,
-			String abs,
+	public String editAbs(@PathVariable int paperId, String abs,
 			RedirectAttributes redirectAttributes) {
 		paperDao.updateAbs(paperId, abs);
 		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/paper/" + paperId;
 	}
-	
+
 	@RequestMapping(value = "/editKeywords/{paperId}", method = RequestMethod.POST)
-	public String editKeywords(@PathVariable int paperId,
-			String keywords,
+	public String editKeywords(@PathVariable int paperId, String keywords,
 			RedirectAttributes redirectAttributes) {
 		paperDao.updateKeywords(paperId, keywords);
 		redirectAttributes.addFlashAttribute("message", "信息修改成功！");
 		return "redirect:/backend/paper/" + paperId;
 	}
-	
+
 	/**
 	 * 添加论文
-	 * @param title 标题
-	 * @param authors 作者(数组)
-	 * @param abs 摘要
-	 * @param keywords 关键词 字符串以 ',' 分开
-	 * @param type 类别 journal或conference
-	 * @param journal 期刊名 type为journal时用
-	 * @param issue 收录日期 yyyy年i期 type为journal用
-	 * @param conference	会议名 type为conference用
-	 * @param time 会议时间( 'yyyy年mm月dd日' type为conference用
-	 * @param orgnization 组织名
+	 * 
+	 * @param title
+	 *            标题
+	 * @param authors
+	 *            作者(数组)
+	 * @param abs
+	 *            摘要
+	 * @param keywords
+	 *            关键词 字符串以 ',' 分开
+	 * @param type
+	 *            类别 journal或conference
+	 * @param journal
+	 *            期刊名 type为journal时用
+	 * @param issue
+	 *            收录日期 yyyy年i期 type为journal用
+	 * @param conference
+	 *            会议名 type为conference用
+	 * @param time
+	 *            会议时间( 'yyyy年mm月dd日' type为conference用
+	 * @param orgnization
+	 *            组织名
 	 * @return
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String add(String title,String[] authors,String abs,
-			String keywords,String type,String journal,String issue,
-			String conference,String time,String orgnization, String coreJournal, RedirectAttributes redirectAttributes) {
-		
-		addService.addPaper(title, authors, abs, keywords, type, journal, issue, conference, time, orgnization, coreJournal);
+	public String add(String title, String[] authors, String abs,
+			String keywords, String type, String journal, String issue,
+			String conference, String time, String orgnization,
+			String coreJournal, int referencedNum,
+			RedirectAttributes redirectAttributes) {
+
+		addService.addPaper(title, authors, abs, keywords, type, journal,
+				issue, conference, time, orgnization, coreJournal, referencedNum);
 		redirectAttributes.addFlashAttribute("message", "添加论文成功！");
 		return "redirect:papers";
 	}
-	
+
 	/**
 	 * 删除论文
-	 * @param paperId 论文ID
+	 * 
+	 * @param paperId
+	 *            论文ID
 	 * @param redirectAttributes
 	 * @return
 	 */
 	@RequestMapping(value = "/delete/{paperId}", method = RequestMethod.GET)
-	public String delete(@PathVariable int paperId,RedirectAttributes redirectAttributes) {
+	public String delete(@PathVariable int paperId,
+			RedirectAttributes redirectAttributes) {
 		Paper paper = paperDao.getById(paperId);
 		paperDao.deletePaper(paper);
 		redirectAttributes.addFlashAttribute("message", "删除论文成功！");
 		return "redirect:patents";
-	}	
+	}
 }

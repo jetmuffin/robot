@@ -189,12 +189,13 @@ public class AddService {
 	public void addPaper(String title, String[] authors, String abs,
 			String keywords, String type, String journal, String issue,
 			String conference, String time, String orgnization,
-			String coreJournal) {
+			String coreJournal, int referencedNum) {
 		Paper paper = new Paper();
 		paper.setTitle(title);
 		paper.setAbs(abs);
 		paper.setKeywords(keywords);
 		paper.setType(type);
+		paper.setReferencedNum(referencedNum);
 		addToNeo.begin();
 		if (type.equals("journal")) {
 			Journal journal2 = journalDao.check(journal);
@@ -258,6 +259,12 @@ public class AddService {
 			int paperNum = expert.getPaperNum();
 			paperNum = paperNum + 1;
 			expert.setPaperNum(paperNum);
+			
+			//引用次数
+			int refNum = expert.getPaperReferedNum();
+			refNum = refNum + referencedNum;
+			expert.setPaperReferedNum(refNum);
+			
 			// 设置专家评级
 			expert.setRate(rate + expert.getRate());
 			// 更新专家信息
