@@ -93,10 +93,10 @@
 						<a class="expert-name info-item" href="/robot/expert/${expert.expertId}">${expert.name}</a>
 						<div class="expert-org info-item">${expert.orgnization.name}</div>
 						<div class="expert-field info-item">
-							研究领域 :<span>${expert.field.name}</span>
+							研究领域 :<c:if test="${empty expert.field}">暂未收录</c:if><span>${expert.field.name}</span>
 						</div>
 						<div class="expert-topic info-item">
-			  			研究方向 :<c:forEach items="${expert.topics}" var="topic"><span>${topic.name}</span></c:forEach>			
+			  			研究方向 :<c:if test="${empty expert.topics}">暂未收录</c:if><c:forEach items="${expert.topics}" var="topic"><span>${topic.name}</span></c:forEach>			
 						</div>
 						<div class="expert-paper info-item">
 							发表文章: <span>${expert.paperNum}</span> 被引用: <span>${expert.paperReferedNum}</span> 专利数: <span>${expert.patentNum}</span>

@@ -1,5 +1,8 @@
 package com.dag.robot.web.frontend.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -7,11 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.ExpertForShow;
+import com.dag.robot.web.bean.JsonData;
+import com.dag.robot.web.bean.PaperKeyword;
 
 @Controller
 @RequestMapping("/expert")
@@ -68,5 +74,35 @@ public class ExpertController {
 		model.addAttribute("expert", expertForShow);
 		model.addAttribute("module", "专家");
 		return "expert/topics";
+	}
+	
+	@RequestMapping(value = "/getPaperRefGrade/{expertId}.json", method = RequestMethod.GET)
+	public @ResponseBody int[] getPaperRefGrade(@PathVariable int expertId) {
+		return expertDao.getPaperRefGrade(expertId);
+	}
+	
+	@RequestMapping(value = "/getPaperRefTenYears/{expertId}.json", method = RequestMethod.GET)
+	public @ResponseBody int[] getPaperTenYears(@PathVariable int expertId) {
+		return expertDao.getPaperNumTenYears(expertId);
+	}
+	
+	@RequestMapping(value = "/getPaperKey/{expertId}.json", method = RequestMethod.GET)
+	public @ResponseBody List<PaperKeyword> getPaperKey(@PathVariable int expertId) {
+		return expertDao.getPaperKey(expertId);
+	}
+	
+	@RequestMapping(value = "/getPaperAvg", method = RequestMethod.GET)
+	public @ResponseBody String getPaperAvg() {
+		return expertDao.getPaperAvg();
+	}
+	
+	@RequestMapping(value = "/paperReferedPercent/{expertId}.json", method = RequestMethod.GET)
+	public @ResponseBody List<JsonData> paperReferedPercent(@PathVariable int expertId){
+		return expertDao.getPaperRefInfo(expertId);
+	}
+	
+	@RequestMapping(value = "/getExpertArea/{field}.json", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Integer> getExpertArea(@PathVariable String field) {
+		return expertDao.getAreaByField(field);
 	}
 }
