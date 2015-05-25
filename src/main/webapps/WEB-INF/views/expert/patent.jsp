@@ -44,7 +44,7 @@
 				<li><a href="/robot/expert/paper/${expert.expertId}">论文信息</a></li>
 				<li class="selected"><a href="/robot/expert/patent/${expert.expertId}">专利信息</a></li>
 				<li><a href="/robot/expert/relation/${expert.expertId}">关联专家</a></li>
-				<li><a href="/robot/expert/activity/${expert.expertId}">科研活动</a></li>
+				<li><a href="/robot/expert/topics/${expert.expertId}">研究方向</a></li>
 			</ul>
 
 			<div class="profile-bd">

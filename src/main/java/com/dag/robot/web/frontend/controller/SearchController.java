@@ -18,6 +18,12 @@ public class SearchController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String search(Model model,String searchType,String searchKey){
-		return "search/result";
+		
+		if(searchType.equals("expert"))
+			return "search/expert";
+		else if(searchType.equals("field"))
+			return "search/field";
+		else 
+			return "search/topic";
 	}
 }

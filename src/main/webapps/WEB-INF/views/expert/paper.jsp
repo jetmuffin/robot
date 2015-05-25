@@ -46,8 +46,7 @@
 					href="/robot/expert/paper/${expert.expertId}">论文信息</a></li>
 				<li><a href="/robot/expert/patent/${expert.expertId}">专利信息</a></li>
 				<li><a href="/robot/expert/relation/${expert.expertId}">关联专家</a></li>
-				<li><a href="/robot/expert/activity/${expert.expertId}">科研活动</a></li>
-				
+				<li><a href="/robot/expert/topics/${expert.expertId}">研究方向</a></li>
 			</ul>
 
 			<div class="profile-bd">
@@ -82,6 +81,7 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${expert.papers}" var="paper">
+								<tr>
 									<td>${paper.title}</td>
 									<c:choose>
 										<c:when test="${paper.type eq 'journal'}">
@@ -94,11 +94,12 @@
 										</c:otherwise>
 									</c:choose>
 									<td>
-									<span title="被中信所《中国科技期刊引证报告》收录">ISTIC</span>
+									<!--  <span title="被中信所《中国科技期刊引证报告》收录">ISTIC</span>-->
 									<span title="被EI收录">EI</span>
 									<span title="被SCI收录">SCI</span>
 									<span title="被北京大学《中文核心期刊要目总览》收录">PKU</span>
 									</td>
+									</tr>
 								</c:forEach>
 							</tbody>
 						</table>

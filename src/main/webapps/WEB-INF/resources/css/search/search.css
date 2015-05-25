@@ -312,3 +312,14 @@ padding:0;
 	font-size: 14px;
 	line-height: 26px;
 }
+
+.result ul li .topic-name {
+font-size: 16px;
+color: #0474ae;
+}
+
+.result ul li .ind {
+margin: 8px 0;
+color: #666;
+font-size: 12px;
+}

@@ -58,6 +58,15 @@ public class ExpertController {
 		ExpertForShow expertForShow = EntitiesForShowUtil.expertForShow(expert);
 		model.addAttribute("expert", expertForShow);
 		model.addAttribute("module", "专家");
-		return "expert/patent";
+		return "expert/relation";
+	}
+	
+	@RequestMapping(value = "/topics/{expertId}", method = RequestMethod.GET)
+	public String topics(@PathVariable int expertId, Model model) {
+		Expert expert = expertDao.getById(expertId);
+		ExpertForShow expertForShow = EntitiesForShowUtil.expertForShow(expert);
+		model.addAttribute("expert", expertForShow);
+		model.addAttribute("module", "专家");
+		return "expert/topics";
 	}
 }

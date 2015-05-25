@@ -45,7 +45,7 @@ require([ 'echarts', 'echarts/chart/pie', 'echarts/chart/bar','echarts/chart/lin
 			},
 			data : [ {
 				value : 38,
-				name : '被引用'
+				name : '引用'
 			}, {
 				value : 12,
 				name : '未被引用'
