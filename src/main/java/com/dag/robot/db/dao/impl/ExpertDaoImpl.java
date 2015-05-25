@@ -40,6 +40,8 @@ import com.dag.robot.utils.StringMergeUtil;
 import com.dag.robot.utils.StringSplitUtil;
 import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.ExpertForShow;
+import com.dag.robot.web.bean.JsonData;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperKeyword;
 import com.dag.robot.web.bean.PaperNumTenYears;
@@ -352,87 +354,117 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	}
 
 	@Override
-	public Map<String, Integer> getPaperRefInfo(int expertId) {
+	public List<JsonData> getPaperRefInfo(int expertId) {
 		List<Paper> papers = getPapers(expertId);
 		int refNum = 0;
 		int unRefNum = 0;
-		for(int i = 0; i < papers.size(); i++){
-			if(papers.get(i).getReferencedNum() == 0){
+		for (int i = 0; i < papers.size(); i++) {
+			if (papers.get(i).getReferencedNum() == 0) {
 				unRefNum = unRefNum + 1;
-			}
-			else {
+			} else {
 				refNum = refNum + 1;
 			}
 		}
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("refNum", refNum);
-		map.put("unRefNum", unRefNum);
-		return map;
+		List<JsonData> jsonDatas = new ArrayList<JsonData>();
+		JsonData jsonData1 = new JsonData("引用", refNum);
+		JsonData jsonData2 = new JsonData("未引用", unRefNum);
+		jsonDatas.add(jsonData1);
+		jsonDatas.add(jsonData2);
+		return jsonDatas;
 	}
-	
+
 	@Override
-	public PaperRefGrade getPaperRefGrade(int expertId){
+	public int[] getPaperRefGrade(int expertId) {
 		List<Paper> papers = getPapers(expertId);
 		int g1 = 0;
 		int g2 = 0;
 		int g3 = 0;
 		int g4 = 0;
 		int g5 = 0;
-		for(int i = 0; i < papers.size(); i++){
+		for (int i = 0; i < papers.size(); i++) {
 			int refNum = papers.get(i).getReferencedNum();
-			if( refNum == 0){
+			if (refNum == 0) {
 				g1 = g1 + 1;
-			}
-			else if (refNum < 11) {
+			} else if (refNum < 11) {
 				g2 = g2 + 1;
-			}
-			else if (refNum < 51) {
+			} else if (refNum < 51) {
 				g3 = g3 + 1;
-			}
-			else if (refNum < 101) {
+			} else if (refNum < 101) {
 				g4 = g4 + 1;
-			}
-			else {
+			} else {
 				g5 = g5 + 1;
 			}
 		}
-		PaperRefGrade refGrade = new PaperRefGrade(g1, g2, g3, g4, g5);
-		return refGrade;
+		int num[] = new int[] { g1, g2, g3, g4, g5 };
+		return num;
 	}
 
 	@Override
 	public int[] getPaperNumTenYears(int expertId) {
 		List<Paper> papers = getPapers(expertId);
 		Calendar calendar = Calendar.getInstance();
-		//获取当前年份
+		// 获取当前年份
 		int nowYear = calendar.get(Calendar.YEAR);
 		int res[] = new int[10];
-		for(int i = 0; i < papers.size(); i++){
+		for (int i = 0; i < papers.size(); i++) {
 			Paper paper = papers.get(i);
 			int year = 0;
-			if(paper.getType().equals("journal")){
+			if (paper.getType().equals("journal")) {
 				year = Integer.parseInt(paper.getIssue().substring(0, 4));
-			}else {
+			} else {
 				year = paper.getConferenceDate().getYear();
 			}
-			for(int j = 0; j < 10; j++){
-				if(year == nowYear - j){
-					res[j] = res[j] + 1;
+			for (int j = 0; j < 10; j++) {
+				if (year == nowYear - j) {
+					res[9 - j] = res[9 - j] + 1;
 					break;
 				}
 			}
 		}
 		return res;
-		
+
 	}
 
 	@Override
-	public List<Expert> getByFuzzyName(String name) {
+	public List<ExpertForShow> getByFuzzyName(String name) {
 		String hql = "from Expert as expert where expert.name like ?";
 		Query query = query(hql);
-		query.setString(0, "%"+name+"%");
+		query.setString(0, "%" + name + "%");
+		List<Expert> experts = query.list();
+		List<ExpertForShow> expertForShows = new ArrayList<ExpertForShow>();
+		for (int i = 0; i < experts.size(); i++) {
+			ExpertForShow expertForShow = EntitiesForShowUtil
+					.expertForShow(experts.get(i));
+			expertForShows.add(expertForShow);
+		}
+		return expertForShows;
+	}
+
+	@Override
+	public List<Expert> getByField(String field) {
+		String hql = "from Expert as expert where expert.fieldName = ?";
+		Query query = query(hql);
+		query.setString(0, field);
 		List<Expert> experts = query.list();
 		return experts;
-		
 	}
+
+	@Override
+	public Map<String, Integer> getAreaByField(String field) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		List<Expert> experts = getByField(field);
+		for (int i = 0; i < experts.size(); i++) {
+			Expert expert = experts.get(i);
+			String area = expert.getArea();
+			if (map.containsKey(area)) {
+				int val = map.get(area);
+				val = val + 1;
+				map.put(area, val);
+			} else {
+				map.put(area, 1);
+			}
+		}
+		return map;
+	}
+
 }

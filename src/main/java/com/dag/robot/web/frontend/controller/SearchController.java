@@ -16,6 +16,7 @@ import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Expert;
+import com.dag.robot.web.bean.ExpertForShow;
 
 @Controller
 @RequestMapping("/search")
@@ -52,7 +53,7 @@ public class SearchController {
 		searchKey = new String(searchKey.getBytes("ISO-8859-1"),"utf-8");
 		System.out.println(searchKey);
 		if(searchType.equals("expert")){
-			List<Expert> experts = expertDao.getByFuzzyName(searchKey);
+			List<ExpertForShow> experts = expertDao.getByFuzzyName(searchKey);
 			model.addAttribute("experts", experts);
 			model.addAttribute("searchKey", searchKey);
 			System.out.println(experts.size());

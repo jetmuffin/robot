@@ -1,16 +1,30 @@
 package com.dag.robot.db.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
+import org.apache.commons.math3.analysis.function.Exp;
+import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.stereotype.Repository;
+
+import scala.Int;
 
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Expert;
+import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.RelFieldTopic;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.entities.RelExpertTopic;
+import com.dag.robot.web.bean.JsonData;
+import com.mysql.fabric.xmlrpc.base.Array;
+import com.sun.tools.classfile.Annotation.element_value;
 
 @Repository("topicDao")
 public class TopicDaoImpl extends BaseDao implements TopicDao {
@@ -27,7 +41,7 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 
 	@Override
 	public Topic getById(int topicId) {
-		return get(Topic.class,topicId);
+		return get(Topic.class, topicId);
 	}
 
 	@Override
@@ -37,23 +51,23 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 
 	@Override
 	public void deleteTopic(Topic topic) {
-		
+
 		Iterator<?> iterator;
 
-		Set<RelExpertTopic> relExpertTopics = topic.getRelExpertTopics();		
+		Set<RelExpertTopic> relExpertTopics = topic.getRelExpertTopics();
 		iterator = relExpertTopics.iterator();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			RelExpertTopic relExpertTopic = (RelExpertTopic) iterator.next();
 			delete(relExpertTopic);
 		}
-		
+
 		Set<RelFieldTopic> relFieldTopics = topic.getRelFieldTopics();
 		iterator = relFieldTopics.iterator();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			RelFieldTopic relFieldTopic = (RelFieldTopic) iterator.next();
 			delete(relFieldTopic);
 		}
-		
+
 		delete(topic);
 	}
 
@@ -62,9 +76,103 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 		String hql = "from Topic as topic where topic.name = ?";
 		@SuppressWarnings("unchecked")
 		List<Topic> topics = query(hql).setString(0, name).list();
-		if(topics.size() == 0)
+		if (topics.size() == 0)
 			return null;
-		return topics.get(0);//重名的只有一个
+		return topics.get(0);// 重名的只有一个
 	}
-	
+
+	@Override
+	public List<Expert> getExperts(String topicName) {
+		Topic topic = getByName(topicName);
+		Set<RelExpertTopic> relExpertTopics = topic.getRelExpertTopics();
+		Iterator<RelExpertTopic> iterator = relExpertTopics.iterator();
+		List<Expert> experts = new ArrayList<Expert>();
+		while (iterator.hasNext()) {
+			RelExpertTopic relExpertTopic = iterator.next();
+			Expert expert = relExpertTopic.getExpert();
+			experts.add(expert);
+		}
+		return experts;
+	}
+
+	@Override
+	public List<JsonData> getExpertGenderDatas(String topic) {
+		List<Expert> experts = getExperts(topic);
+		int man = 0;
+		int women = 0;
+		for (int i = 0; i < experts.size(); i++) {
+			if (experts.get(i).getGender().equals("男")) {
+				man = man + 1;
+			} else {
+				women = women + 1;
+			}
+		}
+		List<JsonData> jsonDatas = new ArrayList<JsonData>();
+		JsonData j1 = new JsonData("男", man);
+		JsonData j2 = new JsonData("女", women);
+		jsonDatas.add(j1);
+		jsonDatas.add(j2);
+		return jsonDatas;
+	}
+
+	@Override
+	public List<JsonData> getExpertOrgDatas(String topic, int num) {
+		List<Expert> experts = getExperts(topic);
+		Map<String, Integer> map = new TreeMap<String, Integer>();
+		for (int i = 0; i < experts.size(); i++) {
+			Expert expert = experts.get(i);
+			Orgnization orgnization = expert.getOrgnization();
+			String org = orgnization.getName();
+			if (map.containsKey(org)) {
+				int value = map.get(org);
+				value = value + 1;
+				map.put(org, value);
+			} else {
+				map.put(org, 1);
+			}
+		}
+		List<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(
+				map.entrySet());
+		// 排序
+		Collections.sort(entries, new Comparator<Map.Entry<String, Integer>>() {
+			public int compare(Map.Entry<String, Integer> o1,
+					Map.Entry<String, Integer> o2) {
+				return (o2.getValue() - o1.getValue());
+			}
+		});
+
+		List<JsonData> jsonDatas = new ArrayList<JsonData>();
+		for (int i = 0; i < entries.size(); i++) {
+			Map.Entry<String, Integer> entry = entries.get(i);
+			JsonData jsonData = new JsonData(entry.getKey(), entry.getValue());
+			jsonDatas.add(jsonData);
+		}
+		return jsonDatas;
+	}
+
+	@Override
+	public List<JsonData> getExpertAreaDatas(String topic) {
+		List<Expert> experts = getExperts(topic);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for (int i = 0; i < experts.size(); i++) {
+			Expert expert = experts.get(i);
+			String area = expert.getArea();
+			if (map.containsKey(area)) {
+				int value = map.get(area);
+				value = value + 1;
+				map.put(area, value);
+			} else {
+				map.put(area, 1);
+			}
+		}
+		List<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(
+				map.entrySet());
+		List<JsonData> jsonDatas = new ArrayList<JsonData>();
+		for (int i = 0; i < entries.size(); i++) {
+			Map.Entry<String, Integer> entry = entries.get(i);
+			JsonData jsonData = new JsonData(entry.getKey(), entry.getValue());
+			jsonDatas.add(jsonData);
+		}
+		return jsonDatas;
+	}
 }

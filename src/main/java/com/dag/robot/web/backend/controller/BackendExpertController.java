@@ -40,6 +40,7 @@ import com.dag.robot.utils.StringSplitUtil;
 import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.ExpertForShow;
+import com.dag.robot.web.bean.JsonData;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperKeyword;
 import com.dag.robot.web.bean.PaperRefGrade;
@@ -181,31 +182,35 @@ public class BackendExpertController {
 		return "redirect:/backend/expert/" + expertId;
 	}
 
-	@RequestMapping(value = "/getPaperRefNum/{expertId}", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Integer> getPaperRef(@PathVariable int expertId) {
-		Map<String, Integer> map =  expertDao.getPaperRefInfo(expertId);
-		return map;
+	@RequestMapping(value = "/getPaperRefNum/{expertId}", method = RequestMethod.GET)
+	public @ResponseBody List<JsonData> getPaperRef(@PathVariable int expertId) {
+		List<JsonData> list =  expertDao.getPaperRefInfo(expertId);
+		return list;
 	}
 	
-	@RequestMapping(value = "/getPaperRefGrade/{expertId}", method = RequestMethod.POST)
-	public @ResponseBody PaperRefGrade getPaperRefGrade(@PathVariable int expertId) {
-		PaperRefGrade paperRefGrade = expertDao.getPaperRefGrade(expertId);
-		return paperRefGrade;
+	@RequestMapping(value = "/getPaperRefGrade/{expertId}", method = RequestMethod.GET)
+	public @ResponseBody int[] getPaperRefGrade(@PathVariable int expertId) {
+		return expertDao.getPaperRefGrade(expertId);
 	}
 	
-	@RequestMapping(value = "/getPaperRefTenYears/{expertId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/getPaperRefTenYears/{expertId}", method = RequestMethod.GET)
 	public @ResponseBody int[] getPaperTenYears(@PathVariable int expertId) {
 		return expertDao.getPaperNumTenYears(expertId);
 	}
 	
-	@RequestMapping(value = "/getPaperKey/{expertId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/getPaperKey/{expertId}", method = RequestMethod.GET)
 	public @ResponseBody List<PaperKeyword> getPaperKey(@PathVariable int expertId) {
 		return expertDao.getPaperKey(expertId);
 	}
 	
-	@RequestMapping(value = "/getPaperAvg", method = RequestMethod.POST)
+	@RequestMapping(value = "/getPaperAvg", method = RequestMethod.GET)
 	public @ResponseBody String getPaperAvg() {
 		return expertDao.getPaperAvg();
+	}
+	
+	@RequestMapping(value = "/getExpertArea/{field}", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Integer> getExpertArea(@PathVariable String field) {
+		return expertDao.getAreaByField(field);
 	}
 	
 }

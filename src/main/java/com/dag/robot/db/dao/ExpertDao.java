@@ -13,6 +13,8 @@ import com.dag.robot.entities.Patent;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForCheck;
 import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.ExpertForShow;
+import com.dag.robot.web.bean.JsonData;
 import com.dag.robot.web.bean.Page;
 import com.dag.robot.web.bean.PaperKeyword;
 import com.dag.robot.web.bean.PaperNumTenYears;
@@ -218,7 +220,7 @@ public interface ExpertDao {
 	 * 获得专家论文被引用与未被引用数量对比
 	 * @return
 	 */
-	public Map<String, Integer> getPaperRefInfo(int expertId);
+	public List<JsonData> getPaperRefInfo(int expertId);
 	
 	
 	/**
@@ -226,7 +228,7 @@ public interface ExpertDao {
 	 * @param expertId
 	 * @return
 	 */
-	public PaperRefGrade getPaperRefGrade(int expertId);
+	public int[] getPaperRefGrade(int expertId);
 	
 	/**
 	 * 获得近十年论文发表数量对比
@@ -240,6 +242,20 @@ public interface ExpertDao {
 	 * @param name
 	 * @return
 	 */
-	public List<Expert> getByFuzzyName(String name);
+	public List<ExpertForShow> getByFuzzyName(String name);
+	
+	/**
+	 * 根据领域检索
+	 * @param field
+	 * @return
+	 */
+	public List<Expert> getByField(String field);
+	
+	/**
+	 * 获取某领域下的专家省份分布
+	 * @param field
+	 * @return
+	 */
+	public Map<String, Integer> getAreaByField(String field);
 	
 }
