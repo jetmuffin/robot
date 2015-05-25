@@ -23,6 +23,8 @@ import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.RelFieldTopic;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.entities.RelExpertTopic;
+import com.dag.robot.utils.EntitiesForListUtil;
+import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.JsonData;
 import com.mysql.fabric.xmlrpc.base.Array;
@@ -82,7 +84,7 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 			return null;
 		return topics.get(0);// 重名的只有一个
 	}
-
+	
 	@Override
 	public List<Expert> getExperts(String topicName) {
 		Topic topic = getByName(topicName);
@@ -96,10 +98,25 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 		}
 		return experts;
 	}
-
+	
 	@Override
-	public List<JsonData> getExpertGenderDatas(String topic) {
-		List<Expert> experts = getExperts(topic);
+	public List<Expert> getExperts(int topicId) {
+		Topic topic = getById(topicId);
+		Set<RelExpertTopic> relExpertTopics = topic.getRelExpertTopics();
+		Iterator<RelExpertTopic> iterator = relExpertTopics.iterator();
+		List<Expert> experts = new ArrayList<Expert>();
+		while (iterator.hasNext()) {
+			RelExpertTopic relExpertTopic = iterator.next();
+			Expert expert = relExpertTopic.getExpert();
+			experts.add(expert);
+		}
+		return experts;
+	}
+
+	
+	@Override
+	public List<JsonData> getExpertGenderDatas(int topicId) {
+		List<Expert> experts = getExperts(topicId);
 		int man = 0;
 		int women = 0;
 		for (int i = 0; i < experts.size(); i++) {
@@ -118,8 +135,8 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 	}
 
 	@Override
-	public List<JsonData> getExpertOrgDatas(String topic, int num) {
-		List<Expert> experts = getExperts(topic);
+	public List<JsonData> getExpertOrgDatas(int topicId, int num) {
+		List<Expert> experts = getExperts(topicId);
 		Map<String, Integer> map = new TreeMap<String, Integer>();
 		for (int i = 0; i < experts.size(); i++) {
 			Expert expert = experts.get(i);
@@ -153,8 +170,8 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 	}
 
 	@Override
-	public List<JsonData> getExpertAreaDatas(String topic) {
-		List<Expert> experts = getExperts(topic);
+	public List<JsonData> getExpertAreaDatas(int topicId) {
+		List<Expert> experts = getExperts(topicId);
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		for (int i = 0; i < experts.size(); i++) {
 			Expert expert = experts.get(i);
@@ -185,5 +202,23 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 		query.setString(0, "%" + name + "%");
 		List<Topic> topics = query.list();
 		return topics;
+	}
+
+	@Override
+	public List<ExpertForList> getTopTen(int topicId) {
+		List<Expert> expertTemp = getExperts(topicId);
+		List<Expert> experts = new ArrayList<Expert>();
+		int n = experts.size();
+		if(n > 10)
+			n = 10;
+		for(int i = 0; i < n; i++){
+			experts.add(expertTemp.get(i));
+		}
+		Collections.sort(experts, new Comparator<Expert>() {
+			public int compare(Expert o1, Expert o2) {
+				return (o2.getRate() - o1.getRate());
+			}
+		});
+		return EntitiesForListUtil.expertForLists(experts);
 	}
 }
