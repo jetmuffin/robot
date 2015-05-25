@@ -45,7 +45,7 @@ import com.dag.robot.utils.StringSplitUtil;
 @Service
 public class AddService {
 
-	private static String dbPath = "/home/sloriac/neoOut";
+	private static String dbPath = "/home/innerac/workspace/neoDB";
 
 	@Autowired
 	private SessionDao sessionDao;
@@ -130,7 +130,6 @@ public class AddService {
 				fieldDao.addField(field2);
 			}
 			expert.setField(field2);
-
 			// 组织查重
 			List<Orgnization> orgnizations = orgnizationDao
 					.getByName(orgnization);
@@ -178,13 +177,12 @@ public class AddService {
 				// 保存关系到图数据库
 				addToNeo.addExpertTopic(expert.getExpertId(), expert.getName(),
 						topic1.getTopicId(), topic1.getName());
-
 				addToNeo.addTopicField(topic1.getTopicId(), topic1.getName(),
 						field2.getFieldId(), field2.getName());
-				// 关闭连接
-				addToNeo.success();
-				addToNeo.finish();
 			}
+			// 关闭连接
+			addToNeo.success();
+			addToNeo.finish();
 		}
 	}
 
@@ -274,10 +272,9 @@ public class AddService {
 
 			addToNeo.addExpertPaper(expert.getExpertId(), expert.getName(),
 					paper.getPaperId(), paper.getTitle());
-
-			addToNeo.success();
-			addToNeo.finish();
 		}
+		addToNeo.success();
+		addToNeo.finish();
 	}
 
 	public void addPatent(String title, String applicant, String abs,
@@ -324,8 +321,8 @@ public class AddService {
 			addToNeo.begin();
 			addToNeo.addExpertPatent(expert.getExpertId(), expert.getName(),
 					patent.getPatentId(), patent.getTitle());
-			addToNeo.success();
-			addToNeo.finish();
 		}
+		addToNeo.success();
+		addToNeo.finish();
 	}
 }

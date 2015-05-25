@@ -33,6 +33,7 @@ public class NeoObject {
 		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase( DB_PATH );
 	}
 	public void begin(){
+		System.out.println("begin");
 		transaction = graphDb.beginTx();
 	}
 	public void success() {
