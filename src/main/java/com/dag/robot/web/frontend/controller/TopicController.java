@@ -67,9 +67,12 @@ public class TopicController {
 		return topicDao.getExpertAreaDatas(topicName);
 	}
 	
-	@RequestMapping(value = "/getTopicGraph/{topicName}/{depth}", method = RequestMethod.GET)
-	public @ResponseBody JsonShowList getTopicGraph(@PathVariable String topicName, @PathVariable int depth){
-		JsonShowList jsList = snk.getGraphJSON(topicName, depth);
+	@RequestMapping(value = "/getTopicGraph/{topicId}", method = RequestMethod.GET)
+	public @ResponseBody JsonShowList getTopicGraph(@PathVariable int topicId, int depth){
+		Topic topic = topicDao.getById(topicId);
+		JsonShowList jsList = new JsonShowList();
+		if(topic != null)
+			jsList = snk.getGraphJSON(topic.getName(), depth);
 		return jsList;
 	}
 }
