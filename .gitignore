@@ -4,3 +4,4 @@ target/*
 .project
 src/main/webapps/WEB-INF/config/mysql.properties
 /target/
+src/main/java/config.properties

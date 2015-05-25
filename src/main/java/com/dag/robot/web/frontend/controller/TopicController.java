@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dag.robot.data.search.ShowNeoKnowlage;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.JsonData;
+import com.dag.robot.web.bean.JsonShowList;
 
 
 @Controller
@@ -57,5 +59,11 @@ public class TopicController {
 	@RequestMapping(value = "/getExpertAreaDatas/{topicName}", method = RequestMethod.GET)
 	public @ResponseBody List<JsonData> getExpertAreaDatas(@PathVariable String topicName) {
 		return topicDao.getExpertAreaDatas(topicName);
+	}
+	
+	@RequestMapping(value = "/getTopicGraph/{topicName}/{depth}", method = RequestMethod.GET)
+	public @ResponseBody JsonShowList getTopicGraph(@PathVariable String topicName, @PathVariable int depth){
+		ShowNeoKnowlage snk = new ShowNeoKnowlage();
+		return snk.getGraphJSON(topicName, depth);
 	}
 }
