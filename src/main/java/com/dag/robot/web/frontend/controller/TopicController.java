@@ -1,5 +1,7 @@
 package com.dag.robot.web.frontend.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -7,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.web.bean.JsonData;
 
 
 @Controller
@@ -43,5 +47,15 @@ public class TopicController {
 		Topic topic = topicDao.getById(topicId);
 		model.addAttribute("topic", topic);
 		return "topic/knowledge";
+	}
+	
+	@RequestMapping(value = "/getTopicExpertDataInfo/{topicName}", method = RequestMethod.GET)
+	public @ResponseBody List<JsonData> getTopicExpertOrgInfo(@PathVariable String topicName) {
+		return topicDao.getExpertOrgDatas(topicName, 10);
+	}
+	
+	@RequestMapping(value = "/getExpertAreaDatas/{topicName}", method = RequestMethod.GET)
+	public @ResponseBody List<JsonData> getExpertAreaDatas(@PathVariable String topicName) {
+		return topicDao.getExpertAreaDatas(topicName);
 	}
 }
