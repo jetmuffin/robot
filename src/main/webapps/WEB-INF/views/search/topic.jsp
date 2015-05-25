@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,19 +23,27 @@
 	<jsp:include page="../common/navbar.jsp"></jsp:include>
 	<section id="main">
 	<div class="left-side">
-		<div class="total">共找到<strong>2</strong>个结果</div>
+		<div class="total">
+			共找到<strong>2</strong>个结果
+		</div>
 		<div class="filter">
 			<div class="filter-all">
 				<div class="des">选择搜索类型</div>
 				<ul>
-					<li class="hover"><a href="#">专家</a></li>
-					<li><a href="#">研究领域</a></li>
-					<li><a href="#">研究方向</a></li>
+					<li
+						<c:if test="${param.searchType eq 'expert'}">class="hover"</c:if>><a
+						href="/robot/search?searchKey=${param.searchKey}&searchType=expert">专家</a></li>
+					<li
+						<c:if test="${param.searchType eq 'field'}">class="hover"</c:if>><a
+						href="/robot/search?searchKey=${param.searchKey}&searchType=field">研究领域</a></li>
+					<li
+						<c:if test="${param.searchType eq 'topic'}">class="hover"</c:if>><a
+						href="/robot/search?searchKey=${param.searchKey}&searchType=topic">研究方向</a></li>
 				</ul>
 			</div>
 			<div class="filter-item">
 				<div class="item-hd">
-					地区选择<i class="icon up" jd="e:drop,ua"></i>
+					地区选择<i class="icon up"></i>
 				</div>
 				<ul>
 					<li class="item"><i class="icon checked"></i> <span
@@ -53,13 +62,18 @@
 					<div class="selectui search-field" data-maxheight="200"
 						data-dock="false">
 						<div class="selectui-head">
-							<div class="selectui-result">专家</div>
-							<div class="selectui-drop"  data-name="searchField" data-toggle="dropdown"></div>
+							<div class="selectui-result">
+								<c:if test="${param.searchType eq 'expert'}">专家</c:if>
+								<c:if test="${param.searchType eq 'field'}">领域</c:if>
+								<c:if test="${param.searchType eq 'topic'}">方向</c:if>
+							</div>
+							<div class="selectui-drop" data-name="searchField"
+								data-toggle="dropdown"></div>
 							<ul class="dropdown-menu" role="menu" id="search-menu">
-						    <li class="current" data-key="expert"><a href="#">专家</a></li>
-						    <li data-key="field"><a href="#">研究领域</a></li>
-						    <li data-key="topic"><a href="#">研究方向</a></li>
-						  </ul>
+								<li class="current" data-key="expert"><a href="#">专家</a></li>
+								<li data-key="field"><a href="#">研究领域</a></li>
+								<li data-key="topic"><a href="#">研究方向</a></li>
+							</ul>
 						</div>
 
 					</div>
@@ -68,9 +82,11 @@
 							<i class="icon-32-nd icon-32-find"></i>搜索
 						</button>
 						<input maxlength="100" type="text" data-selector="keyword"
-							data-synonym-key="4" class="keyword input-large " name="searchKey"
-							size="20" placeholder="输入专家名，如：周志华"  id="keyInput">
-						<input type="text" style="display:none" name="searchType" id="typeInput"/>
+							data-synonym-key="4" class="keyword input-large "
+							name="searchKey" size="20" placeholder="输入专家名，如：周志华"
+							value="${param.searchKey}" id="keyInput"> <input
+							type="text" style="display: none" name="searchType"
+							id="typeInput" />
 						<div class="sojob-suggest" data-selector="sojob-suggest"></div>
 					</div>
 				</fieldset>
@@ -79,44 +95,14 @@
 
 		<div class="result">
 			<ul>
+				<li><a class="topic-name" href="/robot/topic/1">机器学习</a>
+					<div class="ind">领域：计算机</div>
+					<div class="desc"></div>
+					<div class="clear"></div></li>
 				<li>
-					<div class="expert-avatar">
-						<a href="#"><img
-							src="/robot/resources/img/common/user-thumb.png" alt="" /></a>
-					</div>
-					<div class="expert-info info-item">
-						<a class="expert-name info-item" href="/robot/expert/15">周志华</a>
-						<div class="expert-org info-item">南京大学</div>
-						<div class="expert-field info-item">
-							研究领域 :<span>计算机</span>
-						</div>
-						<div class="expert-topic info-item">
-							研究方向 :<span>机器学习</span><span>人工智能</span>
-						</div>
-						<div class="expert-paper info-item">
-							发表文章: <span>30</span> 被引用: <span>18</span> 专利数: <span>9</span>
-						</div>
-					</div>
-					<div class="clear"></div>
-				</li>
-				<li>
-					<div class="expert-avatar">
-						<a href="#"><img
-							src="/robot/resources/img/common/user-thumb.png" alt="" /></a>
-					</div>
-					<div class="expert-info">
-						<a class="expert-name info-item" href="#">姚期智</a>
-						<div class="expert-org info-item">清华大学</div>
-						<div class="expert-field info-item">
-							研究领域 :<span>计算机</span>
-						</div>
-						<div class="expert-topic info-item">
-							研究方向 :<span>计算机理论</span>
-						</div>
-						<div class="expert-paper info-item">
-							发表文章: <span>30</span> 被引用: <span>18</span> 专利数: <span>9</span>
-						</div>
-					</div>
+					<a class="topic-name" href="#">数据挖掘</a>
+					<div class="ind">领域：计算机</div>
+					<div class="desc"></div>
 					<div class="clear"></div>
 				</li>
 			</ul>
@@ -125,7 +111,7 @@
 	</div>
 	<div class="clear"></div>
 	</section>
-	
+
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 <script src="/robot/resources/js/jquery/jquery-2.0.0.min.js"></script>
