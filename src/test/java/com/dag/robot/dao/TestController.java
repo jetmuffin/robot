@@ -237,7 +237,6 @@ public class TestController {
 //		inputFromJson.inputPaper("paperData.txt");
 //		inputFromJson.inputPatent("patentData.txt");
 //		System.out.println(expertDao.getPaperRefInfo(59));
-		List<Expert> experts = expertDao.getByFuzzyName("ex");
 		for(int i = 0; i < experts.size(); i++){
 			System.out.println(experts.get(i).getName());
 		}

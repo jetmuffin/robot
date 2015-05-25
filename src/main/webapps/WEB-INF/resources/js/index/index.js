@@ -33,7 +33,6 @@ $(function() {
     			var searchKey = searchInput.val();
     			if(searchKey.length != 0)
     				var url = '/robot/search?searchKey='+urlencode(searchKey)+'&searchType='+searchType;
-    					console.log(url);
     			window.open(url);
     		});
     
