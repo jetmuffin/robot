@@ -6,6 +6,7 @@ import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 
 import com.dag.robot.entities.Expert;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.JsonData;
 
 public interface TopicDao {
@@ -69,6 +70,18 @@ public interface TopicDao {
 	 */
 	public List<JsonData> getExpertOrgDatas(String topic, int num);
 	
+	/**
+	 * 获取某方向专家的省份分布
+	 * @param topic
+	 * @return
+	 */
 	public List<JsonData> getExpertAreaDatas(String topic);
+	
+	/**
+	 * 根据名称模糊查询
+	 * @param name
+	 * @return
+	 */
+	public List<Topic> getTopicByFuzzyName(String name);
 	
 }
