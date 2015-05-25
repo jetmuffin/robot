@@ -58,24 +58,24 @@ public class TopicController {
 		return "topic/knowledge";
 	}
 	
-	@RequestMapping(value = "/getTopicExpertDataInfo/{topicId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getTopicExpertDataInfo/{topicId}.json", method = RequestMethod.GET)
 	public @ResponseBody List<JsonData> getTopicExpertOrgInfo(@PathVariable int topicId) {
 		return topicDao.getExpertOrgDatas(topicId, 10);
 	}
 	
-	@RequestMapping(value = "/getExpertAreaDatas/{topicId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getExpertAreaDatas/{topicId}.json", method = RequestMethod.GET)
 	public @ResponseBody List<JsonData> getExpertAreaDatas(@PathVariable int topicId) {
 		return topicDao.getExpertAreaDatas(topicId);
 	}
 	
-	@RequestMapping(value = "/getTopicGraph/{topicId}/{depth}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getTopicGraph/{topicId}/{depth}.json", method = RequestMethod.GET)
 	public @ResponseBody JsonShowList getTopicGraph(@PathVariable int topicId, @PathVariable int depth){
 		ShowNeoKnowlage snk = new ShowNeoKnowlage();
 //		return snk.getGraphJSON(topicId, depth);
 		return null;
 	}
 	
-	@RequestMapping(value = "/getTopTen/{topicId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getTopTen/{topicId}.json", method = RequestMethod.GET)
 	public @ResponseBody List<ExpertForList> getTopTen(@PathVariable int topicId){
 		return topicDao.getTopTen(topicId);
 	}
