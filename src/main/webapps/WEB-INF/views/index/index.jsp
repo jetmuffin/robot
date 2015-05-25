@@ -56,7 +56,7 @@
 						<ul class="dropdown-box"></ul>
 					<div class="clear"></div>
 					</div>
-					<p class="tips">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+					<p class="tips">比特能专家机器人系统抓取了互联网中专家的各类情报,构建专家,领域,研究方向的数据模型.</p>
 				</div>
 			</div>
 		</div>

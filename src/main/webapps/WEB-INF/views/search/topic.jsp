@@ -41,18 +41,11 @@
 						href="/robot/search?searchKey=${searchKey}&searchType=topic">研究方向</a></li>
 				</ul>
 			</div>
+			<!-- 
 			<div class="filter-item">
-				<div class="item-hd">
-					地区选择<i class="icon up"></i>
-				</div>
-				<ul>
-					<li class="item"><i class="icon checked"></i> <span
-						class="name">所有</span></li>
-					<li class="item"><i class="icon"></i> <span class="name"
-						title="江苏">江苏</span> <span class="rs" title="1">1</span></li>
-				</ul>
 			</div>
-		</div>
+ -->
+ 		</div>
 	</div>
 
 	<div class="right-side">
@@ -95,6 +88,14 @@
 
 		<div class="result">
 			<ul>
+			<c:forEach items="${topics}" var="topic">
+				<li><a class="topic-name" href="/robot/topic/${topic.topicId}">${topic.name}</a>
+					<div class="ind">领域：计算机</div>
+					<div class="desc"></div>
+					<div class="clear"></div></li>
+				<li>			
+			</c:forEach>
+			
 				<li><a class="topic-name" href="/robot/topic/1">机器学习</a>
 					<div class="ind">领域：计算机</div>
 					<div class="desc"></div>
