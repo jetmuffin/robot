@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,6 +17,8 @@ import com.dag.robot.db.dao.OrgnizationDao;
 import com.dag.robot.db.dao.RelExpertTopicDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Expert;
+import com.dag.robot.entities.Topic;
+import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.ExpertForShow;
 
 @Controller
@@ -64,5 +67,13 @@ public class SearchController {
 		}else {
 			return "search/topic";
 		}
+	}
+	
+	@RequestMapping(value = "/fuzzyTopic/{topic}", method = RequestMethod.GET)
+	public String paper(@PathVariable String topic, Model model) {
+		List<Topic> topics = topicDao.getTopicByFuzzyName(topic);
+		model.addAttribute("topics", topics);
+		//返回需要修改！！！
+		return "expert/paper";
 	}
 }

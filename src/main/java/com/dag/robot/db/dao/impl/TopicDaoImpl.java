@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.math3.analysis.function.Exp;
+import org.hibernate.Query;
 import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +23,7 @@ import com.dag.robot.entities.Orgnization;
 import com.dag.robot.entities.RelFieldTopic;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.entities.RelExpertTopic;
+import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.JsonData;
 import com.mysql.fabric.xmlrpc.base.Array;
 import com.sun.tools.classfile.Annotation.element_value;
@@ -174,5 +176,14 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 			jsonDatas.add(jsonData);
 		}
 		return jsonDatas;
+	}
+
+	@Override
+	public List<Topic> getTopicByFuzzyName(String name) {
+		String hql = "from Topic as topic where topic.name like ?";
+		Query query = query(hql);
+		query.setString(0, "%" + name + "%");
+		List<Topic> topics = query.list();
+		return topics;
 	}
 }
