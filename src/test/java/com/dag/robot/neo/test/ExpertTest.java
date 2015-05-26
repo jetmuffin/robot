@@ -12,7 +12,7 @@ import com.dag.robot.neo.type.LabelTypes;
 
 public class ExpertTest {
 	
-	String db_path = "/home/innerac/workspace/neoDB";
+	String db_path = "/home/innerac/neoOut";
 	
 	String fieldName = "领域";
 	int fieldId = 0;
@@ -40,59 +40,65 @@ public class ExpertTest {
 	@Test
 	public void test(){
 		AddToNeo ato = new AddToNeo();
+		ato.setDB_PATH(db_path);
+//		ato.begin();
 		
-		ato.addExpertField(expertId, expertName, fieldId, fieldName);
-		ato.addExpertOrg(expertId, expertName, orgId, orgName);
-		ato.addExpertPaper(expertId, expertName, paperId, paperName);
-		ato.addExpertPatent(expertId, expertName, patentId, patentName);
-		ato.addExpertTopic(expertId, expertName, topicId, topicName);
-		ato.addTopicField(topicId, topicName, fieldId, fieldName);
+//		ato.addExpertField(expertId, expertName, fieldId, fieldName);
+//		ato.addExpertOrg(expertId, expertName, orgId, orgName);
+//		ato.addExpertPaper(expertId, expertName, paperId, paperName);
+//		ato.addExpertPatent(expertId, expertName, patentId, patentName);
+//		ato.addExpertTopic(expertId, expertName, topicId, topicName);
+//		ato.addTopicField(topicId, topicName, fieldId, fieldName);
+//		
+//
+//		ato.addExpertField(expertIdFie, expertNameFie, fieldId, fieldName);
+//		ato.addExpertOrg(expertIdOrg, expertNameOrg, orgId, orgName);
+//		ato.addExpertPaper(expertIdPar, expertNamePar, paperId, paperName);
+//		ato.addExpertPatent(expertIdPat, expertNamePat, patentId, patentName);
+//		ato.addExpertTopic(expertIdTop, expertNameTop, topicId, topicName);
+//		
+//		ato.success();	
+//		ato.finish();	
+//		ato.begin();
 		
-
-		ato.addExpertField(expertIdFie, expertNameFie, fieldId, fieldName);
-		ato.addExpertOrg(expertIdOrg, expertNameOrg, orgId, orgName);
-		ato.addExpertPaper(expertIdPar, expertNamePar, paperId, paperName);
-		ato.addExpertPatent(expertIdPat, expertNamePat, patentId, patentName);
-		ato.addExpertTopic(expertIdTop, expertNameTop, topicId, topicName);
-		
-		ato.success();	
-		ato.finish();	
-		ato.begin();
-		
-		Node node = ato.getNeoObject().findNode(LabelTypes.Expert, "mainKey", 5);
+		Node node = ato.getNeoObject().findNode(LabelTypes.Expert, "mainKey", 0);
 		System.out.println("id = "+node.getId());
 	}
 	
 	@Test
 	public void searchTest(){
-		SearchFromNeo sfn = new SearchFromNeo(db_path);
-		List<Long> idslList = sfn.matchSameOrg(0);
+		SearchFromNeo sfn = new SearchFromNeo();
+		sfn.setDB_PATH(db_path);
+		
+		List<Long> idslList = sfn.matchSameOrg(5);
 		for(long id : idslList){
 			System.out.println(sfn.findNodeById(id).getProperty("name"));
 		}
 		
 		System.out.println("----------------------------------");
-		idslList = sfn.matchSamePaper(0);
+		idslList = sfn.matchSamePaper(5);
 		for(long id : idslList){
 			System.out.println(sfn.findNodeById(id).getProperty("name"));
 		}
 		
 		System.out.println("----------------------------------");
-		idslList = sfn.matchSameTopic(0);
+		idslList = sfn.matchSameTopic(5);
 		for(long id : idslList){
 			System.out.println(sfn.findNodeById(id).getProperty("name"));
 		}
 		
 		System.out.println("----------------------------------");
-		idslList = sfn.matchSameField(0);
+		idslList = sfn.matchSameField(5);
 		for(long id : idslList){
 			System.out.println(sfn.findNodeById(id).getProperty("name"));
 		}
 		
 		System.out.println("----------------------------------");
-		idslList = sfn.matchSamePatent(0);
+		idslList = sfn.matchSamePatent(5);
 		for(long id : idslList){
 			System.out.println(sfn.findNodeById(id).getProperty("name"));
 		}
+		
+		sfn.finish();
 	}
 }

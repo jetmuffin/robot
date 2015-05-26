@@ -1,7 +1,11 @@
 package com.dag.robot.data.search;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Path;
 import org.neo4j.graphdb.ResourceIterable;
 
 import com.dag.robot.neo.object.NeoSearchObject;
@@ -77,12 +81,28 @@ public class SearchFromNeo extends NeoSearchObject {
 		setDeepth(1);
 		setTraverser(nodes);
 		
-		System.out.println(node.getProperty("name"));
 		
 		List<Long> idsList = getListSearch(LabelTypes.Expert);
 		
-		finish();
+//		finish();
 		
+		return idsList;
+	}
+	
+	private List<Long> getJsonListSearch(LabelTypes label) {
+		
+		if(label == null){
+			for(Path path : traverser){
+				idsList.add(path.endNode().getId());
+			}
+		}else{
+			for(Path path : traverser){
+				Label aLabelTypes = path.endNode().getLabels().iterator().next();
+				if(aLabelTypes.toString().equals(label.toString()))
+					idsList.add(path.endNode().getId());
+			}
+		}
+
 		return idsList;
 	}
 }

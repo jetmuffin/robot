@@ -28,6 +28,8 @@ public class KnowlageTest {
 	public void buildKnowlageTest(){
 		KnowlageObject ko = new KnowlageObject(dB_PATH);
 		
+		ko.begin();
+		
 		String input[] = null;
 		
 		String s = null;
