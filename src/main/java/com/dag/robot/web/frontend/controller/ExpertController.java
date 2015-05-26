@@ -110,4 +110,9 @@ public class ExpertController {
 	public @ResponseBody JsonExpertList getExpertGraph(@PathVariable int expertId){
 		return sfn.getExpertList(expertId);
 	}
+	
+	@RequestMapping(value = "/getExpertTopic/{topicId}", method = RequestMethod.GET)
+	public @ResponseBody JsonExpertList getExpertTopicGraph(@PathVariable int topicId,int depth){
+		return sfn.getTopicExpertGraph(topicId,depth);
+	}
 }

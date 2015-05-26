@@ -45,25 +45,29 @@ public class ExpertTest {
 	public void test(){
 		AddToNeo ato = new AddToNeo();
 		ato.setDB_PATH(db_path);
-//		ato.begin();
 		
-//		ato.addExpertField(expertId, expertName, fieldId, fieldName);
-//		ato.addExpertOrg(expertId, expertName, orgId, orgName);
-//		ato.addExpertPaper(expertId, expertName, paperId, paperName);
-//		ato.addExpertPatent(expertId, expertName, patentId, patentName);
-//		ato.addExpertTopic(expertId, expertName, topicId, topicName);
-//		ato.addTopicField(topicId, topicName, fieldId, fieldName);
-//		
-//
-//		ato.addExpertField(expertIdFie, expertNameFie, fieldId, fieldName);
-//		ato.addExpertOrg(expertIdOrg, expertNameOrg, orgId, orgName);
-//		ato.addExpertPaper(expertIdPar, expertNamePar, paperId, paperName);
-//		ato.addExpertPatent(expertIdPat, expertNamePat, patentId, patentName);
-//		ato.addExpertTopic(expertIdTop, expertNameTop, topicId, topicName);
-//		
-//		ato.success();	
-//		ato.finish();	
-//		ato.begin();
+		ato.addExpertField(expertId, expertName, fieldId, fieldName);
+		ato.addExpertOrg(expertId, expertName, orgId, orgName);
+		ato.addExpertPaper(expertId, expertName, paperId, paperName);
+		ato.addExpertPatent(expertId, expertName, patentId, patentName);
+		ato.addExpertTopic(expertId, expertName, topicId, topicName);
+		ato.addTopicField(topicId, topicName, fieldId, fieldName);
+		
+
+		ato.addExpertField(expertIdFie, expertNameFie, fieldId, fieldName);
+		ato.addExpertOrg(expertIdOrg, expertNameOrg, orgId, orgName);
+		ato.addExpertPaper(expertIdPar, expertNamePar, paperId, paperName);
+		ato.addExpertPatent(expertIdPat, expertNamePat, patentId, patentName);
+		ato.addExpertTopic(expertIdTop, expertNameTop, topicId, topicName);
+		
+
+		ato.addExpertTopic(expertIdOrg, expertNameOrg, topicId, topicName);
+		ato.addExpertTopic(expertIdPar, expertNamePar, topicId, topicName);
+		ato.addExpertTopic(expertIdPat, expertNamePat, topicId, topicName);
+		
+		ato.success();	
+		ato.finish();	
+		ato.begin();
 		
 		Node node = ato.getNeoObject().findNode(LabelTypes.Expert, "mainKey", 0);
 		System.out.println("id = "+node.getId());
@@ -105,7 +109,7 @@ public class ExpertTest {
 //		
 //		sfn.finish();
 		
-		JsonExpertList jsonExpertList = sfn.getExpertList(5);
+		JsonExpertList jsonExpertList = sfn.getTopicExpertGraph(1, 4);
 		
 		
 		{
