@@ -16,6 +16,7 @@ import com.dag.robot.data.search.ShowNeoKnowlage;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.db.dao.TopicDao;
 import com.dag.robot.entities.Topic;
+import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.JsonData;
 import com.dag.robot.web.bean.JsonShowList;
@@ -35,7 +36,8 @@ public class TopicController {
 	@RequestMapping(value = {"/{topicId}","/basic/{topicId}"}, method = RequestMethod.GET)
 	public String get(@PathVariable int topicId, Model model) {
 		Topic topic = topicDao.getById(topicId);
-		model.addAttribute("topic", topic);
+		//topic转换
+		model.addAttribute("topic", EntitiesForShowUtil.topicForShow(topic));
 		
 		model.addAttribute("module", "研究领域");
 		return "topic/basic";
