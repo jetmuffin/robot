@@ -289,7 +289,7 @@ public class AddService {
 
 			addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
 					orgnization2.getOrgId(), orgnization2.getName());
-			
+
 			addToNeo.addExpertPaper(expert.getExpertId(), expert.getName(),
 					paper.getPaperId(), paper.getTitle());
 
@@ -336,15 +336,15 @@ public class AddService {
 			int patentNum = expert.getPatentNum();
 			patentNum = patentNum + 1;
 			expert.setPatentNum(patentNum);
-			//专家评级
+			// 专家评级
 			int rate = expert.getRate();
-			if(type.equals("invention")){
+			if (type.equals("invention")) {
 				rate = rate + 2;
-			}else{
+			} else {
 				rate = rate + 1;
 			}
 			expert.setRate(rate);
-			
+
 			expertDao.updateExpert(expert);
 
 			RelExpertPatentId relExpertPatentId = new RelExpertPatentId(
@@ -353,6 +353,8 @@ public class AddService {
 					relExpertPatentId, expert, patent, i + 1);
 			relExpertPatentDao.addRelExeprtPatent(relExpertPatent);
 			addToNeo.begin();
+			addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
+					orgnization2.getOrgId(), orgnization2.getName());
 			addToNeo.addExpertPatent(expert.getExpertId(), expert.getName(),
 					patent.getPatentId(), patent.getTitle());
 		}
