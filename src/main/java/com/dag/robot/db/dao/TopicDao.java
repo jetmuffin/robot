@@ -100,5 +100,10 @@ public interface TopicDao {
 	 */
 	public List<ExpertForList> getTopTen(int topicId);
 
-	Map<String, Integer> getAreaByField(int topicId);
+	/**
+	 * 获取某方向下的专家分布情况
+	 * @param topicId
+	 * @return
+	 */
+	Map<String, Integer> getAreaByTopic(int topicId);
 }

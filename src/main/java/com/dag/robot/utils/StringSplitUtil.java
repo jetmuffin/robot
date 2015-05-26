@@ -11,4 +11,10 @@ public class StringSplitUtil {
 		List<String> list = Arrays.asList(strings);
 		return list;
 	}
+	
+	public static List<String> stringSplit(String string, String div1) {
+		String[] strings = string.split(div1);
+		List<String> list = Arrays.asList(strings);
+		return list;
+	}
 }

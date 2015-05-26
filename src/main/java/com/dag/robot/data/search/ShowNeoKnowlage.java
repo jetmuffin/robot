@@ -76,7 +76,7 @@ public class ShowNeoKnowlage {
 		nowType = 1;
 		if(nodes.iterator().hasNext()){
 			Node node0 = nodes.iterator().next();
-			nc.add(new NodeBean(node0.getId(), nowType, node0.getProperty("name").toString(), nowDepth));
+			nc.add(new NodeBean(node0.getId(), 2, node0.getProperty("name").toString(), nowDepth));
 		}else{
 			finish();
 			return jsList;

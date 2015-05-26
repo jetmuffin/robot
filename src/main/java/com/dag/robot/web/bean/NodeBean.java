@@ -1,5 +1,7 @@
 package com.dag.robot.web.bean;
 
+import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
+
 public class NodeBean {
 	int id;
 	int category;	//0,1,2 叶子结点，中间节点，根节点
@@ -10,14 +12,20 @@ public class NodeBean {
 		id = iId;
 		category = iCategory;
 		name = iName;
-		value = 10 - iDepth;
+		if(category == 2)
+			value = 10;
+		else
+			value = (int)(Math.random()*(10-2) +2);
 		depth = iDepth;
 	}
 	public NodeBean(long iId,int iCategory,String iName,int iDepth){
 		id = (int) iId;
 		category = iCategory;
 		name = iName;
-		value = 10 - iDepth;
+		if(category == 2)
+			value = 10;
+		else
+			value = (int)(Math.random()*(10-2) +2);
 		depth = iDepth;
 	}
 	public int getId() {

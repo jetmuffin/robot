@@ -55,11 +55,10 @@ public class InputFromJson {
 				String topic = jObject.getString("topic");
 				String achievement = jObject.getString("achievement");
 				int age = jObject.getInt("age");
-				String area = jObject.getString("area");
 				String field = jObject.getString("field");
 				addService.addExpert(name, gender, email, address, homepage,
 						experience, info, topic, achievement, orgnization, age,
-						area, field);
+						field);
 			}
 
 		} catch (JSONException e) {

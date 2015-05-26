@@ -11,15 +11,18 @@ import org.apache.commons.math3.analysis.function.Exp;
 import com.dag.robot.entities.Activity;
 import com.dag.robot.entities.CoreJournal;
 import com.dag.robot.entities.Expert;
+import com.dag.robot.entities.Field;
 import com.dag.robot.entities.Paper;
 import com.dag.robot.entities.Patent;
 import com.dag.robot.entities.RelExpertPaper;
 import com.dag.robot.entities.RelExpertPatent;
 import com.dag.robot.entities.RelExpertTopic;
+import com.dag.robot.entities.RelFieldTopic;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.PaperForShow;
 import com.dag.robot.web.bean.PatentForShow;
+import com.dag.robot.web.bean.TopicForShow;
 
 public class EntitiesForShowUtil {
 
@@ -44,7 +47,7 @@ public class EntitiesForShowUtil {
 		expertForShow.setAge(expert.getAge());
 		expertForShow.setArea(expert.getArea());
 		expertForShow.setField(expert.getField());
-		
+
 		Iterator<?> iterator;
 
 		Set<RelExpertPaper> relExpertPapers = expert.getRelExpertPapers();
@@ -95,24 +98,24 @@ public class EntitiesForShowUtil {
 		paperForShow.setType(paper.getType());
 		paperForShow.setConferences(paper.getConference());
 		paperForShow.setJournal(paper.getJournal());
-		
+
 		List<CoreJournal> coreJournals = new ArrayList<CoreJournal>();
 		coreJournals.addAll(paper.getCoreJournals());
 		paperForShow.setCoreJournals(coreJournals);
-		
+
 		Set<Topic> topics = paper.getTopics();
 		List<Topic> topicList = new ArrayList<Topic>();
 		Iterator<Topic> iterator = topics.iterator();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			Topic topic = iterator.next();
 			topicList.add(topic);
 		}
 		paperForShow.setTopics(topicList);
-		
+
 		Set<RelExpertPaper> relExpertPapers = paper.getRelExpertPapers();
 		List<Expert> experts = new ArrayList<Expert>();
 		Iterator<RelExpertPaper> iterator2 = relExpertPapers.iterator();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			RelExpertPaper relExpertPaper = iterator2.next();
 			Expert expert = relExpertPaper.getExpert();
 			experts.add(expert);
@@ -120,9 +123,9 @@ public class EntitiesForShowUtil {
 		paperForShow.setExperts(experts);
 		return paperForShow;
 	}
-	
-	public static PatentForShow patentForShow(Patent patent){
-		
+
+	public static PatentForShow patentForShow(Patent patent) {
+
 		PatentForShow patentForShow = new PatentForShow();
 		patentForShow.setPatentId(patent.getPatentId());
 		patentForShow.setAbs(patent.getAbs());
@@ -134,14 +137,26 @@ public class EntitiesForShowUtil {
 		Set<RelExpertPatent> relExpertPatents = patent.getRelExpertPatents();
 		List<Expert> experts = new ArrayList<Expert>();
 		Iterator<RelExpertPatent> iterator = relExpertPatents.iterator();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			RelExpertPatent relExpertPatent = iterator.next();
 			Expert expert = relExpertPatent.getExpert();
 			experts.add(expert);
 		}
 		patentForShow.setExperts(experts);
 		return patentForShow;
-		
+
+	}
+
+	public static TopicForShow topicForShow(Topic topic) {
+		TopicForShow topicForShow = new TopicForShow();
+		topicForShow.setTopicId(topic.getTopicId());
+		topicForShow.setName(topic.getName());
+		Set<RelFieldTopic> relFieldTopics = topic.getRelFieldTopics();
+		Iterator<RelFieldTopic> iterator = relFieldTopics.iterator();
+		RelFieldTopic relFieldTopic = iterator.next();
+		Field field = relFieldTopic.getField();
+		topicForShow.setField(field);
+		return topicForShow;
 	}
 
 }

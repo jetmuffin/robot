@@ -24,6 +24,7 @@ import com.dag.robot.entities.RelFieldTopic;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.entities.RelExpertTopic;
 import com.dag.robot.utils.EntitiesForListUtil;
+import com.dag.robot.utils.StringSplitUtil;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.JsonData;
@@ -223,12 +224,13 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 	}
 	
 	@Override
-	public Map<String, Integer> getAreaByField(int topicId) {
+	public Map<String, Integer> getAreaByTopic(int topicId) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		List<Expert> experts = getExperts(topicId);
 		for (int i = 0; i < experts.size(); i++) {
 			Expert expert = experts.get(i);
-			String area = expert.getArea();
+			List<String> address = StringSplitUtil.stringSplit(expert.getAddress(), "#");
+			String area = address.get(2);
 			if (map.containsKey(area)) {
 				int val = map.get(area);
 				val = val + 1;
