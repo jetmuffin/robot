@@ -95,4 +95,15 @@ public class TopicController {
 	public @ResponseBody Map<String, Integer> getExpertArea(@PathVariable int topicId) {
 		return topicDao.getAreaByTopic(topicId);
 	}
+	
+	
+	/**
+	 * 获取某方向下的专家性别分布情况
+	 * @param topicId
+	 * @return
+	 */
+	@RequestMapping(value = "/getExpertGender/{topicId}.json", method = RequestMethod.GET)
+	public @ResponseBody List<JsonData> getExpertGender(@PathVariable int topicId){
+		return topicDao.getExpertGenderDatas(topicId);
+	}
 }
