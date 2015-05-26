@@ -51,7 +51,7 @@
 					<div class="block-content">
 						<div class="basic-info row">
 							<div class="basic-info-left col-md-6">
-								<span>中文名</span> 机器学习
+								<span>中文名</span>${topic.name}
 							</div>
 							<div class="basic-info-right col-md-6">
 								<span>领域</span> 计算机

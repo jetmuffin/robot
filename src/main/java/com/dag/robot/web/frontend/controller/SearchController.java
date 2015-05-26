@@ -67,7 +67,6 @@ public class SearchController {
 		}else {
 			List<Topic> topics = topicDao.getTopicByFuzzyName(searchKey);
 			model.addAttribute("topics", EntitiesForListUtil.topicForShows(topics));
-			System.out.println(topics.size());
 			return "result/topic";
 		}
 	}

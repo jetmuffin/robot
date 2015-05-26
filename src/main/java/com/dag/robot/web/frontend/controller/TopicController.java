@@ -1,6 +1,7 @@
 package com.dag.robot.web.frontend.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -68,15 +69,28 @@ public class TopicController {
 		return topicDao.getExpertAreaDatas(topicId);
 	}
 	
-	@RequestMapping(value = "/getTopicGraph/{topicId}/{depth}.json", method = RequestMethod.GET)
-	public @ResponseBody JsonShowList getTopicGraph(@PathVariable int topicId, @PathVariable int depth){
-		ShowNeoKnowlage snk = new ShowNeoKnowlage();
-//		return snk.getGraphJSON(topicId, depth);
-		return null;
+	@RequestMapping(value = "/getTopicGraph/{topicId}", method = RequestMethod.GET)
+	public @ResponseBody JsonShowList getTopicGraph(@PathVariable int topicId, int depth){
+		Topic topic = topicDao.getById(topicId);
+		JsonShowList jsList = new JsonShowList();
+		if(topic != null)
+			jsList = snk.getGraphJSON(topic.getName(), depth);
+		return jsList;
 	}
 	
 	@RequestMapping(value = "/getTopTen/{topicId}.json", method = RequestMethod.GET)
 	public @ResponseBody List<ExpertForList> getTopTen(@PathVariable int topicId){
 		return topicDao.getTopTen(topicId);
+	}
+	
+	
+	/**
+	 * 获取专家地域分布
+	 * @param field
+	 * @return
+	 */
+	@RequestMapping(value = "/getExpertArea/{topicId}.json", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Integer> getExpertArea(@PathVariable int topicId) {
+		return topicDao.getAreaByField(topicId);
 	}
 }

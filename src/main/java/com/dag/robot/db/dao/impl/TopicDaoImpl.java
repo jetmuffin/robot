@@ -221,4 +221,22 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 		});
 		return EntitiesForListUtil.expertForLists(experts);
 	}
+	
+	@Override
+	public Map<String, Integer> getAreaByField(int topicId) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		List<Expert> experts = getExperts(topicId);
+		for (int i = 0; i < experts.size(); i++) {
+			Expert expert = experts.get(i);
+			String area = expert.getArea();
+			if (map.containsKey(area)) {
+				int val = map.get(area);
+				val = val + 1;
+				map.put(area, val);
+			} else {
+				map.put(area, 1);
+			}
+		}
+		return map;
+	}
 }
