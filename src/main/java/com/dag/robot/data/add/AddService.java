@@ -270,7 +270,8 @@ public class AddService {
 			
 			//引用次数
 			int refNum = expert.getPaperReferedNum();
-			refNum = refNum + referencedNum;
+			if(referencedNum != 0)
+				refNum = refNum + 1;
 			expert.setPaperReferedNum(refNum);
 			
 			// 设置专家评级
