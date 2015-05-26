@@ -14,7 +14,6 @@ public class SearchFromNeo extends NeoSearchObject {
 	}
 	public SearchFromNeo(String db_path){
 		super(db_path);
-		begin();
 	}
 	
 	/**
@@ -23,6 +22,7 @@ public class SearchFromNeo extends NeoSearchObject {
 	 * @return		返回寻找到的专家的图id列表
 	 */
 	public List<Long> matchSameOrg(int ExpertId){
+		begin();
 		Node expertNode = findExpertByMainKey(ExpertId);
 		return findSameTypes(RelTypes.WORK_FOR,expertNode);
 	}
@@ -32,6 +32,7 @@ public class SearchFromNeo extends NeoSearchObject {
 	 * @return		返回寻找到的专家的图id列表
 	 */
 	public List<Long> matchSameTopic(int ExpertId){
+		begin();
 		Node expertNode = findExpertByMainKey(ExpertId);
 		return findSameTypes(RelTypes.RESEARCH,expertNode);
 	}
@@ -41,6 +42,7 @@ public class SearchFromNeo extends NeoSearchObject {
 	 * @return		返回寻找到的专家的图id列表
 	 */
 	public List<Long> matchSamePaper(int ExpertId){
+		begin();
 		Node expertNode = findExpertByMainKey(ExpertId);
 		return findSameTypes(RelTypes.PUBLISH,expertNode);
 	}
@@ -50,6 +52,7 @@ public class SearchFromNeo extends NeoSearchObject {
 	 * @return		返回寻找到的专家的图id列表
 	 */
 	public List<Long> matchSamePatent(int ExpertId){
+		begin();
 		Node expertNode = findExpertByMainKey(ExpertId);
 		return findSameTypes(RelTypes.APPLLY,expertNode);
 	}
@@ -59,6 +62,7 @@ public class SearchFromNeo extends NeoSearchObject {
 	 * @return		返回寻找到的专家的图id列表
 	 */
 	public List<Long> matchSameField(int ExpertId){
+		begin();
 		Node expertNode = findExpertByMainKey(ExpertId);
 		return findSameTypes(RelTypes.ENGAGED,expertNode);
 	}
@@ -72,7 +76,12 @@ public class SearchFromNeo extends NeoSearchObject {
 		setTraversalDescription();
 		setDeepth(1);
 		setTraverser(nodes);
+		
+		System.out.println(node.getProperty("name"));
+		
 		List<Long> idsList = getListSearch(LabelTypes.Expert);
+		
+		finish();
 		
 		return idsList;
 	}

@@ -35,11 +35,9 @@ public class NeoSearchObject {
 	}
 	public NeoSearchObject(String db_path){
 		neoObject = new NeoObject(db_path);
-		neoObject.begin();
 	}
 	public void setDB_PATH(String dB_PATH){
 		neoObject.setDB_PATH(dB_PATH);
-		neoObject.begin();
 	}
 	
 	/**
