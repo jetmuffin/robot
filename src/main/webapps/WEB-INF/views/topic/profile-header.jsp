@@ -4,7 +4,7 @@
 	<div class="profile-head">
 		<div class="container">
 				<div class="text-area">
-					<h1>机器学习</h1>
+					<h1>${topic.name}</h1>
 					<!-- 
 					<div class="line">
 						<span class="field">领域:计算机</span>

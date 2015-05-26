@@ -15,6 +15,7 @@ import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
 import org.neo4j.graphdb.traversal.Traverser;
 import org.neo4j.kernel.Traversal;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dag.robot.neo.type.LabelTypes;
 import com.dag.robot.neo.type.RelTypes;
@@ -26,17 +27,19 @@ import com.dag.robot.neo.type.RelTypes;
 @SuppressWarnings("deprecation")
 public class NeoSearchObject {
 
-	protected NeoObject neoObject = null;
+	@Autowired
+	protected NeoObject neoObject;
 	protected TraversalDescription traversalDescription = null;
 	protected Traverser traverser = null;
 	
 	public NeoSearchObject() {
-		neoObject = new NeoObject();
+//		neoObject = new NeoObject();
 	}
 	public NeoSearchObject(String db_path){
 		neoObject = new NeoObject(db_path);
 	}
 	public void setDB_PATH(String dB_PATH){
+		neoObject = new NeoObject();
 		neoObject.setDB_PATH(dB_PATH);
 	}
 	

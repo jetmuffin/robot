@@ -15,6 +15,7 @@ public class NeoCreateObject{
 	}
 	
 	public NeoCreateObject(String db_path){
+		neoObject = new NeoObject(db_path);
 	}
 
 	
@@ -23,6 +24,7 @@ public class NeoCreateObject{
 	}
 
 	public void setDB_PATH(String dB_PATH) {
+		neoObject = new NeoObject();
 		neoObject.setDB_PATH(dB_PATH);
 		neoObject.begin();
 	}
@@ -62,7 +64,7 @@ public class NeoCreateObject{
 			,LabelTypes labelb,String idb,int valueIdb,String nameb,String valueNameb){
 		
 
-		System.out.println(valueNamea+" -> "+valueNameb);
+		System.out.println(valueNamea+"("+valueIda+")"+" -> "+valueNameb+"("+valueIdb+")");
 		
 		Node aNode = null;
 		Node bNode = null;

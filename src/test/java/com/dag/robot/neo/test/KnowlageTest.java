@@ -29,6 +29,8 @@ public class KnowlageTest {
 		KnowlageObject ko = new KnowlageObject(dB_PATH);
 		ko.begin();
 		
+		ko.begin();
+		
 		String input[] = null;
 		
 		String s = null;

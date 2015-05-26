@@ -10,6 +10,7 @@ public class LinkBean {
 //		weight = 1;
 //	}
 	public LinkBean(long iSource,long iTarget){
+<<<<<<< HEAD
 //		source = String.valueOf(iSource);
 //		target = String.valueOf(iTarget);
 		source = (int) iSource;
@@ -19,6 +20,13 @@ public class LinkBean {
 	public LinkBean(int iSource,int iTarget){
 //		source = String.valueOf(iSource);
 //		target = String.valueOf(iTarget);
+=======
+		source = (int)iSource;
+		target = (int)iTarget;
+		weight = 1;
+	}
+	public LinkBean(int iSource,int iTarget){
+>>>>>>> 4634f0ae8a01ab5b2c98cdf1787da9ecc3cced66
 		source = iSource;
 		target = iTarget;
 		weight = 1;
