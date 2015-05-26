@@ -20,6 +20,7 @@ import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.PaperForShow;
 import com.dag.robot.web.bean.PatentForShow;
+import com.dag.robot.web.bean.TopicForShow;
 
 public class EntitiesForListUtil {
 
@@ -110,7 +111,7 @@ public class EntitiesForListUtil {
 		return patentForLists;
 	}
 
-	public static List<TopicForShow> topicForShows(List<Topic> topics) {
+	public static List<TopicForShow> topicForList(List<Topic> topics) {
 		List<TopicForShow> topicForShows = new ArrayList<TopicForShow>();
 		for (int i = 0; i < topics.size(); i++) {
 			Topic topic = topics.get(i);

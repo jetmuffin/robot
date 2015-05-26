@@ -1,4 +1,4 @@
-package com.dag.robot.utils;
+package com.dag.robot.web.bean;
 
 import com.dag.robot.entities.Field;
 
