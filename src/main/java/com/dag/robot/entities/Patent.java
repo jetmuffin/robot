@@ -32,6 +32,7 @@ public class Patent implements java.io.Serializable {
 	private Date date;
 	private String applicant;
 	private String inventor;
+	private String type;
 	private Set<RelExpertPatent> relExpertPatents = new HashSet<RelExpertPatent>(
 			0);
 
@@ -134,5 +135,13 @@ public class Patent implements java.io.Serializable {
 	public void setRelExpertPatents(Set<RelExpertPatent> relExpertPatents) {
 		this.relExpertPatents = relExpertPatents;
 	}
+	
+	@Column(name = "type", nullable = false, length = 50)
+	public String getType() {
+		return type;
+	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
 }

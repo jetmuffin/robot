@@ -134,6 +134,7 @@ public class EntitiesForShowUtil {
 		patentForShow.setInventor(patent.getInventor());
 		patentForShow.setTitle(patent.getTitle());
 		patentForShow.setOrgnization(patent.getOrgnization());
+		patentForShow.setType(patent.getType());
 		Set<RelExpertPatent> relExpertPatents = patent.getRelExpertPatents();
 		List<Expert> experts = new ArrayList<Expert>();
 		Iterator<RelExpertPatent> iterator = relExpertPatents.iterator();

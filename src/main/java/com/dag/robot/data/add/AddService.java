@@ -244,7 +244,7 @@ public class AddService {
 			String core = list.get(i);
 			CoreJournal coreJournal2 = coreJournalDao.getByName(core);
 			if (coreJournal2 == null) {
-				coreJournal2 = new CoreJournal(core, 1);
+				coreJournal2 = new CoreJournal(core, 3);
 				coreJournalDao.addCoreJournal(coreJournal2);
 			}
 			rate = rate + coreJournal2.getRate();
@@ -289,7 +289,7 @@ public class AddService {
 
 			addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
 					orgnization2.getOrgId(), orgnization2.getName());
-			
+
 			addToNeo.addExpertPaper(expert.getExpertId(), expert.getName(),
 					paper.getPaperId(), paper.getTitle());
 
@@ -302,7 +302,7 @@ public class AddService {
 	}
 
 	public void addPatent(String title, String applicant, String abs,
-			String[] inventors, String date, String orgnization)
+			String[] inventors, String date, String orgnization, String type)
 			throws ParseException {
 
 		Patent patent = new Patent();
@@ -311,6 +311,7 @@ public class AddService {
 		patent.setApplicant(applicant);
 		patent.setInventor(inventors[0]);
 		patent.setDate(DateUtil.toDate(date, "yyyy/mm/dd"));
+		patent.setType(type);
 
 		// 组织查重
 		Orgnization orgnization2 = orgnizationDao.check(orgnization);
@@ -335,6 +336,15 @@ public class AddService {
 			int patentNum = expert.getPatentNum();
 			patentNum = patentNum + 1;
 			expert.setPatentNum(patentNum);
+			// 专家评级
+			int rate = expert.getRate();
+			if (type.equals("invention")) {
+				rate = rate + 2;
+			} else {
+				rate = rate + 1;
+			}
+			expert.setRate(rate);
+
 			expertDao.updateExpert(expert);
 
 			RelExpertPatentId relExpertPatentId = new RelExpertPatentId(
@@ -343,6 +353,8 @@ public class AddService {
 					relExpertPatentId, expert, patent, i + 1);
 			relExpertPatentDao.addRelExeprtPatent(relExpertPatent);
 			addToNeo.begin();
+			addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
+					orgnization2.getOrgId(), orgnization2.getName());
 			addToNeo.addExpertPatent(expert.getExpertId(), expert.getName(),
 					patent.getPatentId(), patent.getTitle());
 		}

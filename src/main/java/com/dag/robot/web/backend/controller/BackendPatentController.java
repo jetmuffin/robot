@@ -123,9 +123,9 @@ public class BackendPatentController {
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(String title,String applicant,String abs,
-			String[] inventors,String date, String orgnization, RedirectAttributes redirectAttributes) throws ParseException {
+			String[] inventors,String date, String orgnization, String type, RedirectAttributes redirectAttributes) throws ParseException {
 		
-		addService.addPatent(title, applicant, abs, inventors, date, orgnization);
+		addService.addPatent(title, applicant, abs, inventors, date, orgnization, type);
 		redirectAttributes.addFlashAttribute("message", "添加专利成功！");
 		return "redirect:patents";
 	}	

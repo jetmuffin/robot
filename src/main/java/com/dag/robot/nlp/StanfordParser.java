@@ -2,6 +2,8 @@ package com.dag.robot.nlp;
 
 import java.util.List;
 
+import org.junit.Test;
+
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.Sentence;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
