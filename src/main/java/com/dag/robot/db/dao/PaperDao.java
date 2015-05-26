@@ -62,4 +62,17 @@ public interface PaperDao {
 	 */
 	public void updateKeywords(int paperId, String keywords);
 	
+	/**
+	 * 模糊检索论文摘要
+	 * @param string
+	 * @return
+	 */
+	public List<PaperForShow> getAbsFuzzy(String string);
+	
+	/**
+	 * 根据名称模糊检索论文
+	 * @param name
+	 * @return
+	 */
+	public List<PaperForShow> getByFuzzyName(String name);
 }

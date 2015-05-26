@@ -226,8 +226,8 @@ public class TestController {
 	
 	@RequestMapping(value = "/testInput", method = RequestMethod.GET)
 	public String test3() {
-		inputFromJson.inputPaper("paperData.txt");
-//		inputFromJson.inputPatent("patentData.txt");
+//		inputFromJson.inputPaper("paperData.txt");
+		inputFromJson.inputPatent("patentData.txt");
 //		inputFromJson.inputExpert("expertData.txt");
 		return "test/index";
 	}

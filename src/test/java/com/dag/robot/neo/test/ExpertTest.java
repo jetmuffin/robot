@@ -45,7 +45,6 @@ public class ExpertTest {
 	public void test(){
 		AddToNeo ato = new AddToNeo();
 		ato.setDB_PATH(db_path);
-//		ato.begin();
 		
 		ato.addExpertField(expertId, expertName, fieldId, fieldName);
 		ato.addExpertOrg(expertId, expertName, orgId, orgName);
@@ -59,7 +58,6 @@ public class ExpertTest {
 		ato.addExpertPaper(expertIdPar, expertNamePar, paperId, paperName);
 		ato.addExpertPatent(expertIdPat, expertNamePat, patentId, patentName);
 		ato.addExpertTopic(expertIdTop, expertNameTop, topicId, topicName);
-		
 		ato.success();	
 		ato.finish();	
 		ato.begin();
@@ -104,7 +102,7 @@ public class ExpertTest {
 //		
 //		sfn.finish();
 		
-		JsonExpertList jsonExpertList = sfn.getExpertList(5);
+		JsonExpertList jsonExpertList = sfn.getTopicExpertGraph(1, 4);
 		
 		
 		{

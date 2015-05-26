@@ -2,6 +2,8 @@ package com.dag.robot.db.dao;
 
 import java.util.List;
 
+import org.apache.hadoop.classification.InterfaceAudience.Public;
+
 import com.dag.robot.entities.Patent;
 import com.dag.robot.web.bean.ExpertForList;
 import com.dag.robot.web.bean.Page;
@@ -54,5 +56,20 @@ public interface PatentDao {
 	 * @param abs
 	 */
 	public void updateAbs(int patentId, String abs);
+	
+	/**
+	 * 模糊检索
+	 * @param string
+	 * @return
+	 */
+	public List<PatentForShow> getFuzzyAbs(String string);
+	
+	/**
+	 * 根据名称模糊检索
+	 * @param name
+	 * @return
+	 */
+	public List<PatentForShow> getByFuzzyName(String name);
+	
 	
 }

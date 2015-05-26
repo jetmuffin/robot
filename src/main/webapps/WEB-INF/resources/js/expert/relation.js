@@ -14,6 +14,7 @@ require([ 'echarts', 'echarts/chart/force', ], function(ec) {
 	var id = $('#expertId').attr('data-id');
 	var url = '/robot/expert/getExpertGraph/'+id+'.json'
 	$.getJSON(url,function(data){
+		console.log(data);
 		option = {
 				title : {
 					text : '人物关系：周志华',
@@ -41,7 +42,7 @@ require([ 'echarts', 'echarts/chart/force', ], function(ec) {
 				},
 				legend : {
 					x : 'left',
-					data : [ '同事', '合作伙伴' ]
+					data : [ '专家','同事', '合作伙伴' ]
 				},
 				series : [ {
 					type : 'force',

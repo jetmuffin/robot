@@ -68,5 +68,23 @@ public class PaperDaoImpl extends BaseDao implements PaperDao {
 		paper.setKeywords(keywords);
 		update(paper);
 	}
+
+	@Override
+	public List<PaperForShow> getAbsFuzzy(String string) {
+		String hql = "from Paper as paper where paper.abs like ? order by referencedNum desc";
+		Query query = query(hql);
+		query.setString(0, "%" + string + "%");
+		List<Paper> papers = query.list(); 
+		return EntitiesForListUtil.paperForLists(papers);
+	}
+
+	@Override
+	public List<PaperForShow> getByFuzzyName(String name) {
+		String hql = "from Paper as paper where paper.title like ? order by referencedNum desc";
+		Query query = query(hql);
+		query.setString(0, "%" + name + "%");
+		List<Paper> papers = query.list(); 
+		return EntitiesForListUtil.paperForLists(papers);
+	}
 	
 }

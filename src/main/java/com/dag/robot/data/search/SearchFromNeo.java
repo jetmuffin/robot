@@ -3,6 +3,7 @@ package com.dag.robot.data.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
@@ -43,15 +44,7 @@ public class SearchFromNeo extends NeoSearchObject {
 		begin();
 		Node rootExpert = findExpertByMainKey(ExpertId);
 		if(rootExpert != null){
-			nodeBeans.add(new NodeBean(rootExpert.getId(), 2, rootExpert.getProperty("name").toString(), 0));
-			/**
-			 * 查找同事
-			 * */
-			{
-				nowType = 1;
-				nowDepth = 1;
-				findSameNodes(RelTypes.WORK_FOR, rootExpert);
-			}
+			nodeBeans.add(new NodeBean(rootExpert.getId(), 0, rootExpert.getProperty("name").toString(), 0));
 			/**
 			 * 查找合作伙伴
 			 * */
@@ -61,7 +54,14 @@ public class SearchFromNeo extends NeoSearchObject {
 				findSameNodes(RelTypes.PUBLISH, rootExpert);
 				findSameNodes(RelTypes.APPLLY,rootExpert);
 			}
-			
+			/**
+			 * 查找同事
+			 * */
+			{
+				nowType = 1;
+				nowDepth = 1;
+				findSameNodes(RelTypes.WORK_FOR, rootExpert);
+			}			
 		}
 		finish();	
 		
@@ -71,6 +71,56 @@ public class SearchFromNeo extends NeoSearchObject {
 		
 		return jsonExpertList;
 		
+	}
+	
+	public JsonExpertList getTopicExpertGraph(int TopicId,int n){
+		linkExpertBeans.clear();
+		nodeBeans.clear();
+		
+		begin();
+		Node topicNode = findTopicByMainKey(TopicId);
+		List<Node> nodelList = null;
+		if(topicNode != null){
+			nodeBeans.add(new NodeBean(topicNode.getId(), 2, topicNode.getProperty("name").toString(), 0));
+			/**
+			 * 查找专家
+			 * */
+			{
+				nowType = 1;
+				nowDepth = 1;
+				nodelList = findExpertInTopic(topicNode,n);
+				
+				for(Node node : nodelList){
+					nodeBeans.add(new NodeBean(node.getId(), nowType, node.getProperty("name").toString(), nowDepth));
+					linkExpertBeans.add(new LinkExpertBean(topicNode.getProperty("name").toString(), node.getProperty("name").toString()));
+				}
+			}
+//			/**
+//			 * 挖掘专家关系
+//			 * */
+//			if(nodelList != null)
+//			{
+//				int nSize = nodelList.size();
+//				Node node1,node2;
+//				for(int i=0;i<nSize;i++){
+//					node1 = nodelList.get(i);
+//					for(int j=i+1;j<nSize;j++){
+//						node2 = nodelList.get(j);
+//						if(judgeIsRelation(node1,node2)){
+//							linkExpertBeans.add(new LinkExpertBean(node1.getProperty("name").toString(),node2.getProperty("name").toString()));
+//						}
+//					}
+//				}
+//			}
+			
+		}
+		finish();	
+		
+		JsonExpertList jsonExpertList = new JsonExpertList();
+		jsonExpertList.setLinks(linkExpertBeans);
+		jsonExpertList.setNodes(nodeBeans);
+		
+		return jsonExpertList;
 	}
 	
 	/**
@@ -133,10 +183,17 @@ public class SearchFromNeo extends NeoSearchObject {
 			
 		getJsonListSearch(LabelTypes.Expert);
 		
-		
 		return getListSearch(LabelTypes.Expert);
 	}
-	
+	private List<Node> findExpertInTopic(Node topicNode,int n){
+		setTraversalDescription();
+		addRelationships(RelTypes.RESEARCH,Direction.INCOMING);
+		excludeStartPosition();
+		setDeepth(1);
+		setTraverser(topicNode);	
+		
+		return getNodeList(n);
+	}
 	private void findSameNodes(RelTypes reltype, Node node) {
 		setTraversalDescription();
 		addRelationships(reltype,Direction.OUTGOING);
@@ -145,6 +202,36 @@ public class SearchFromNeo extends NeoSearchObject {
 		setTraverser(node);	
 			
 		getJsonListSearch(LabelTypes.Expert);
+	}
+
+	private boolean judgeIsRelation(Node aNode,Node bNode){
+		boolean res = false;
+		
+		{
+			setTraversalDescription();
+//			addRelationships(RelTypes.WORK_FOR,Direction.OUTGOING);
+//			addRelationships(RelTypes.WORK_FOR,Direction.INCOMING);
+//			addRelationships(RelTypes.PUBLISH,Direction.OUTGOING);
+//			addRelationships(RelTypes.PUBLISH,Direction.INCOMING);
+//			addRelationships(RelTypes.APPLLY,Direction.OUTGOING);
+//			addRelationships(RelTypes.APPLLY,Direction.INCOMING);
+			setSection(2,2);
+			setTraverser(aNode);	
+			int i=0;
+			for(Path path : traverser){
+				System.out.println(path.endNode().getId() +" (i++) "+ bNode.getId());
+				if(path.endNode().getId() == bNode.getId()){
+					System.out.println(path.endNode().getProperty("name")+" ^ "+bNode.getProperty("name"));
+					res = true;
+					break;
+				}
+				
+			}
+			
+		}
+	
+		
+		return res;
 	}
 	
 	private void getJsonListSearch(LabelTypes label) {
