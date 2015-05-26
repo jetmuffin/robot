@@ -16,7 +16,7 @@ import com.dag.robot.web.bean.JsonExpertList;
 
 public class ExpertTest {
 	
-	String db_path = "/home/innerac/neoOut";
+	String db_path = "/home/jeff/workspace/expertNeoDB";
 	
 	String fieldName = "领域";
 	int fieldId = 0;
@@ -47,23 +47,22 @@ public class ExpertTest {
 		ato.setDB_PATH(db_path);
 //		ato.begin();
 		
-//		ato.addExpertField(expertId, expertName, fieldId, fieldName);
-//		ato.addExpertOrg(expertId, expertName, orgId, orgName);
-//		ato.addExpertPaper(expertId, expertName, paperId, paperName);
-//		ato.addExpertPatent(expertId, expertName, patentId, patentName);
-//		ato.addExpertTopic(expertId, expertName, topicId, topicName);
-//		ato.addTopicField(topicId, topicName, fieldId, fieldName);
-//		
-//
-//		ato.addExpertField(expertIdFie, expertNameFie, fieldId, fieldName);
-//		ato.addExpertOrg(expertIdOrg, expertNameOrg, orgId, orgName);
-//		ato.addExpertPaper(expertIdPar, expertNamePar, paperId, paperName);
-//		ato.addExpertPatent(expertIdPat, expertNamePat, patentId, patentName);
-//		ato.addExpertTopic(expertIdTop, expertNameTop, topicId, topicName);
-//		
-//		ato.success();	
-//		ato.finish();	
-//		ato.begin();
+		ato.addExpertField(expertId, expertName, fieldId, fieldName);
+		ato.addExpertOrg(expertId, expertName, orgId, orgName);
+		ato.addExpertPaper(expertId, expertName, paperId, paperName);
+		ato.addExpertPatent(expertId, expertName, patentId, patentName);
+		ato.addExpertTopic(expertId, expertName, topicId, topicName);
+		ato.addTopicField(topicId, topicName, fieldId, fieldName);
+
+		ato.addExpertField(expertIdFie, expertNameFie, fieldId, fieldName);
+		ato.addExpertOrg(expertIdOrg, expertNameOrg, orgId, orgName);
+		ato.addExpertPaper(expertIdPar, expertNamePar, paperId, paperName);
+		ato.addExpertPatent(expertIdPat, expertNamePat, patentId, patentName);
+		ato.addExpertTopic(expertIdTop, expertNameTop, topicId, topicName);
+		
+		ato.success();	
+		ato.finish();	
+		ato.begin();
 		
 		Node node = ato.getNeoObject().findNode(LabelTypes.Expert, "mainKey", 0);
 		System.out.println("id = "+node.getId());

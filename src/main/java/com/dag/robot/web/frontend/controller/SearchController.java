@@ -66,7 +66,7 @@ public class SearchController {
 			
 		}else {
 			List<Topic> topics = topicDao.getTopicByFuzzyName(searchKey);
-			model.addAttribute("topics", EntitiesForListUtil.topicForShows(topics));
+			model.addAttribute("topics", EntitiesForListUtil.topicForList(topics));
 			return "result/topic";
 		}
 	}

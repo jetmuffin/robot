@@ -17,6 +17,7 @@ public class AddToNeo extends NeoCreateObject{
 	
 	public void addExpertOrg(int expertId, String expertName, int OrgId,
 			String orgName) {
+		System.out.println("add link " + orgName + " - " +  expertName);
 		createNormal(LabelTypes.Expert,expertId,expertName,RelTypes.WORK_FOR,LabelTypes.Organization,OrgId,orgName);
 	}
 

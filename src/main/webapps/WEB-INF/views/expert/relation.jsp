@@ -70,8 +70,11 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="expertId" data-id="${expert.expertId}"></div>
 	</section>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<script src="/robot/resources/js/jquery/jquery-2.0.0.min.js"></script>
 	<script src="/robot/resources/plugin/echarts/dist/echarts.js"></script>
 	<script src="/robot/resources/js/expert/relation.js"></script>
 </body>
