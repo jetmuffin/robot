@@ -62,4 +62,5 @@ public interface PaperDao {
 	 */
 	public void updateKeywords(int paperId, String keywords);
 	
+	public List<PaperForShow> getAbsFuzzy(String string);
 }

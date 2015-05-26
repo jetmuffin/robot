@@ -106,8 +106,6 @@ public class AddService {
 	@Qualifier("coreJournalDao")
 	private CoreJournalDao coreJournalDao;
 
-	
-	
 	public AddService() {
 		super();
 		dbPath = PropertiesUtil.getValue("dbPath");
@@ -254,7 +252,6 @@ public class AddService {
 
 		// 作者查重
 		for (int i = 0; i < authors.length; i++) {
-			System.out.println("-----------index: " + i+ "  name: " + authors[i]);
 			Expert expert = expertDao.checkSame(authors[i], orgnization);
 			if (expert == null) {
 				// 没有重复
@@ -262,18 +259,18 @@ public class AddService {
 				expert.setOrgnization(orgnization2);
 				expertDao.addExpert(expert);
 			}
-			System.out.println(expert.getExpertId() + " " + expert.getName());
+
 			// 论文数量加1
 			int paperNum = expert.getPaperNum();
 			paperNum = paperNum + 1;
 			expert.setPaperNum(paperNum);
-			
-			//引用次数
+
+			// 引用次数
 			int refNum = expert.getPaperReferedNum();
-			if(referencedNum != 0)
+			if (referencedNum != 0)
 				refNum = refNum + 1;
 			expert.setPaperReferedNum(refNum);
-			
+
 			// 设置专家评级
 			expert.setRate(rate + expert.getRate());
 			// 更新专家信息
@@ -282,17 +279,20 @@ public class AddService {
 			// 专家论文关联
 			RelExpertPaperId relExpertPaperId = new RelExpertPaperId(
 					expert.getExpertId(), paper.getPaperId());
-			
-			System.out.println(expert.getExpertId()+" "+paper.getPaperId());
-			System.out.println(expert.getName()+" "+paper.getTitle());
-			
+
+			System.out.println(expert.getExpertId() + " " + paper.getPaperId());
+			System.out.println(expert.getName() + " " + paper.getTitle());
+
 			RelExpertPaper relExpertPaper = new RelExpertPaper(
 					relExpertPaperId, expert, paper, i + 1);
 			relExpertPaperDao.addRelExeprtPaper(relExpertPaper);
 
+			addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
+					orgnization2.getOrgId(), orgnization2.getName());
+			
 			addToNeo.addExpertPaper(expert.getExpertId(), expert.getName(),
 					paper.getPaperId(), paper.getTitle());
-			
+
 			sessionDao.evict(relExpertPaper);
 			sessionDao.evict(expert);
 		}
