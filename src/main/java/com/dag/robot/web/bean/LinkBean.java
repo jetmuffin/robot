@@ -1,29 +1,34 @@
 package com.dag.robot.web.bean;
 
 public class LinkBean {
-	int source;
-	int target;
+	String source;
+	String target;
 	int weight;
-	public LinkBean(long iSource,long iTarget){
-		source = (int) iSource;
-		target = (int) iTarget;
-		weight = 1;
-	}
-	public LinkBean(int iSource,int iTarget){
+	public LinkBean(String iSource,String iTarget){
 		source = iSource;
 		target = iTarget;
 		weight = 1;
 	}
-	public int getSource() {
+	public LinkBean(long iSource,long iTarget){
+		source = String.valueOf(iSource);
+		target = String.valueOf(iTarget);
+		weight = 1;
+	}
+	public LinkBean(int iSource,int iTarget){
+		source = String.valueOf(iSource);
+		target = String.valueOf(iTarget);
+		weight = 1;
+	}
+	public String getSource() {
 		return source;
 	}
-	public void setSource(int source) {
+	public void setSource(String source) {
 		this.source = source;
 	}
-	public int getTarget() {
+	public String getTarget() {
 		return target;
 	}
-	public void setTarget(int target) {
+	public void setTarget(String target) {
 		this.target = target;
 	}
 	public int getWeight() {

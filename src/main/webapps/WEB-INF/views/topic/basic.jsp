@@ -101,8 +101,10 @@
 			</div>
 		</div>
 	</div>
+	<div id="topicId" data-id="${topic.topicId}"></div>
 	</section>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<script src="/robot/resources/js/jquery/jquery-2.0.0.min.js"></script>
 	<script src="/robot/resources/plugin/echarts/dist/echarts.js"></script>
 	<script src="/robot/resources/js/topic/basic.js"></script>
 </body>

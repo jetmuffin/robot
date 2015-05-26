@@ -13,7 +13,84 @@ require.config({
 require([ 'echarts', 'echarts/theme/macarons', 'echarts/chart/pie',
 		'echarts/chart/bar', 'echarts/chart/line', 'echarts/chart/map' ],
 		function(ec, theme) {
-			option_pie = {
+		
+		var id = $('#topicId').attr('data-id');
+		var url_org = '/robot/topic/getTopicExpertDataInfo/'+id+'.json';
+		$.getJSON(url_org,function(data){
+			var data_org = [];
+			var data_org_num = [];
+			$.each(data,function(i,item){
+				data_org.push(item.name);
+				data_org_num.push(item.value);
+			});
+			option_bar = {
+					title:{
+						text:'本方向专家组织分布',
+						x:'center'
+					},
+				tooltip : {
+					trigger : 'axis'
+				},
+
+				color : [ '#6699FF' ],
+				calculable : true,
+				xAxis : [ {
+					type : 'value',
+					boundaryGap : [ 0, 0.01 ]
+				} ],
+				yAxis : [ {
+					type : 'category',
+					data : data_org
+				} ],
+				series : [ {
+					sort : 'ascending',
+					itemStyle : {
+						normal : {
+							barBorderRadius : 5
+						},
+						emphasis : {
+							barBorderRadius : 5
+						}
+					},
+					name : '专家数',
+					type : 'bar',
+					data : data_org_num
+				} ]
+			};
+
+		
+			var location = ec.init(document.getElementById('expertLocation'),
+					theme);
+			location.setOption(option_bar);
+		});
+		//end of orgnization
+		
+		var dataStyle = {
+				normal : {
+					label : {
+						show : false
+					},
+					labelLine : {
+						show : false
+					}
+				}
+			};
+			var placeHolderStyle = {
+				normal : {
+					color : 'rgba(0,0,0,0)',
+					label : {
+						show : false
+					},
+					labelLine : {
+						show : false
+					}
+				},
+				emphasis : {
+					color : 'rgba(0,0,0,0)'
+				}
+			};
+			
+		option_pie = {
 				legend : {
 					orient : 'vertical',
 					x : 'left',
@@ -55,66 +132,7 @@ require([ 'echarts', 'echarts/theme/macarons', 'echarts/chart/pie',
 				} ]
 			};
 
-			option_bar = {
-					title:{
-						text:'本方向专家组织分布',
-						x:'center'
-					},
-				tooltip : {
-					trigger : 'axis'
-				},
-
-				color : [ '#6699FF' ],
-				calculable : true,
-				xAxis : [ {
-					type : 'value',
-					boundaryGap : [ 0, 0.01 ]
-				} ],
-				yAxis : [ {
-					type : 'category',
-					data : [ '南京大学', '清华大学', '厦门大学', '吉林大学', '中国科学技术大学',
-							'重庆大学', '北京大学', '复旦大学', '上海交通大学' ]
-				} ],
-				series : [ {
-					sort : 'ascending',
-					itemStyle : {
-						normal : {
-							barBorderRadius : 5
-						},
-						emphasis : {
-							barBorderRadius : 5
-						}
-					},
-					name : '专家数',
-					type : 'bar',
-					data : [ 255, 225, 198, 171, 163, 155, 126, 89, 85, 73 ]
-				} ]
-			};
-
-			var dataStyle = {
-				normal : {
-					label : {
-						show : false
-					},
-					labelLine : {
-						show : false
-					}
-				}
-			};
-			var placeHolderStyle = {
-				normal : {
-					color : 'rgba(0,0,0,0)',
-					label : {
-						show : false
-					},
-					labelLine : {
-						show : false
-					}
-				},
-				emphasis : {
-					color : 'rgba(0,0,0,0)'
-				}
-			};
+	
 
 			option_edu = {
 				tooltip : {
@@ -255,9 +273,7 @@ require([ 'echarts', 'echarts/theme/macarons', 'echarts/chart/pie',
 
 			var gender = ec.init(document.getElementById('expertGender'));
 			gender.setOption(option_pie);
-			var location = ec.init(document.getElementById('expertLocation'),
-					theme);
-			location.setOption(option_bar);
+
 			var edu = ec.init(document.getElementById('expertEdu'), theme);
 			edu.setOption(option_edu);
 			var province = ec

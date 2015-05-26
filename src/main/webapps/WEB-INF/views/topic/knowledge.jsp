@@ -53,7 +53,7 @@
 							<div class="static-item  row">
 								<div class="static-title">知识图谱</div>
 								<div class="static-graph col-md-12">
-									<div id="knowledgeNet" style="height:400px">
+									<div id="knowledgeNet" style="height:500px">
 										
 									</div>
 								</div>

@@ -59,9 +59,13 @@ public class ShowNeoKnowlage {
 	
 	public JsonShowList getGraphJSON(String rootName,int deepth){
 		
+		System.out.println("path = "+path);
+		
 		begin();
 		
 		nodes = kObject.getNodes(rootName);
+		
+		JsonShowList jsList = new JsonShowList();
 		
 		nc.clear();
 		lc.clear();
@@ -70,8 +74,13 @@ public class ShowNeoKnowlage {
 		linkId = 0;
 		nowDepth = 0;
 		nowType = 1;
-		Node node0 = nodes.iterator().next();
-		nc.add(new NodeBean(node0.getId(), nowType, node0.getProperty("name").toString(), nowDepth));
+		if(nodes.iterator().hasNext()){
+			Node node0 = nodes.iterator().next();
+			nc.add(new NodeBean(node0.getId(), nowType, node0.getProperty("name").toString(), nowDepth));
+		}else{
+			finish();
+			return jsList;
+		}
 		for(nowDepth=1;nowDepth<=deepth;nowDepth++){
 			findSubNodes(nodes);
 			nodes = getTmpNodes();
@@ -85,7 +94,6 @@ public class ShowNeoKnowlage {
 			saveJSONs();
 		}
 		{
-			JsonShowList jsList = new JsonShowList();
 			jsList.setNodes(nc);
 			jsList.setLinks(lc);			
 			
