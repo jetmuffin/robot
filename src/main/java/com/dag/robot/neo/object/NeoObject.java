@@ -27,6 +27,7 @@ public class NeoObject {
 	
 	public NeoObject(String db_path){
 		setDB_PATH(db_path);
+		System.out.println(DB_PATH);
 	}
 	public void setDB_PATH(String dB_PATH) {
 		DB_PATH = dB_PATH;

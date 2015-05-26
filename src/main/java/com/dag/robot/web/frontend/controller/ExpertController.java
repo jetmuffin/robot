@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dag.robot.data.search.SearchFromNeo;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.entities.Expert;
 import com.dag.robot.utils.EntitiesForShowUtil;
 import com.dag.robot.web.bean.ExpertForShow;
 import com.dag.robot.web.bean.JsonData;
+import com.dag.robot.web.bean.JsonExpertList;
 import com.dag.robot.web.bean.PaperKeyword;
 
 @Controller
@@ -26,6 +28,9 @@ public class ExpertController {
 	@Autowired
 	@Qualifier("expertDao")
 	ExpertDao expertDao;
+	
+	@Autowired
+	SearchFromNeo sfn;
 
 	public ExpertController() {
 		super();
@@ -101,4 +106,8 @@ public class ExpertController {
 		return expertDao.getPaperRefInfo(expertId);
 	}
 
+	@RequestMapping(value = "/getExpertGraph/{expertId}.json", method = RequestMethod.GET)
+	public @ResponseBody JsonExpertList getExpertGraph(@PathVariable int expertId){
+		return sfn.getExpertList(expertId);
+	}
 }

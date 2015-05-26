@@ -1,13 +1,17 @@
 package com.dag.robot.neo.test;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
 
 import com.dag.robot.data.add.AddToNeo;
 import com.dag.robot.data.search.SearchFromNeo;
 import com.dag.robot.neo.type.LabelTypes;
+import com.dag.robot.web.bean.JsonExpertList;
 
 
 public class ExpertTest {
@@ -70,35 +74,58 @@ public class ExpertTest {
 		SearchFromNeo sfn = new SearchFromNeo();
 		sfn.setDB_PATH(db_path);
 		
-		List<Long> idslList = sfn.matchSameOrg(5);
-		for(long id : idslList){
-			System.out.println(sfn.findNodeById(id).getProperty("name"));
-		}
+//		List<Long> idslList = sfn.matchSameOrg(5);
+//		for(long id : idslList){
+//			System.out.println(sfn.findNodeById(id).getProperty("name"));
+//		}
+//		
+//		System.out.println("----------------------------------");
+//		idslList = sfn.matchSamePaper(5);
+//		for(long id : idslList){
+//			System.out.println(sfn.findNodeById(id).getProperty("name"));
+//		}
+//		
+//		System.out.println("----------------------------------");
+//		idslList = sfn.matchSameTopic(5);
+//		for(long id : idslList){
+//			System.out.println(sfn.findNodeById(id).getProperty("name"));
+//		}
+//		
+//		System.out.println("----------------------------------");
+//		idslList = sfn.matchSameField(5);
+//		for(long id : idslList){
+//			System.out.println(sfn.findNodeById(id).getProperty("name"));
+//		}
+//		
+//		System.out.println("----------------------------------");
+//		idslList = sfn.matchSamePatent(5);
+//		for(long id : idslList){
+//			System.out.println(sfn.findNodeById(id).getProperty("name"));
+//		}
+//		
+//		sfn.finish();
 		
-		System.out.println("----------------------------------");
-		idslList = sfn.matchSamePaper(5);
-		for(long id : idslList){
-			System.out.println(sfn.findNodeById(id).getProperty("name"));
-		}
+		JsonExpertList jsonExpertList = sfn.getExpertList(5);
 		
-		System.out.println("----------------------------------");
-		idslList = sfn.matchSameTopic(5);
-		for(long id : idslList){
-			System.out.println(sfn.findNodeById(id).getProperty("name"));
-		}
 		
-		System.out.println("----------------------------------");
-		idslList = sfn.matchSameField(5);
-		for(long id : idslList){
-			System.out.println(sfn.findNodeById(id).getProperty("name"));
+		{
+			ObjectMapper objectMapper = new ObjectMapper();      
+			JsonGenerator jsonGenerator = null;
+			try {
+				jsonGenerator = objectMapper.getJsonFactory().createJsonGenerator(System.out);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			};
+			
+			try {
+				jsonGenerator.writeObject(jsonExpertList);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+			System.out.println(jsonExpertList.toString());
 		}
-		
-		System.out.println("----------------------------------");
-		idslList = sfn.matchSamePatent(5);
-		for(long id : idslList){
-			System.out.println(sfn.findNodeById(id).getProperty("name"));
-		}
-		
-		sfn.finish();
 	}
 }
