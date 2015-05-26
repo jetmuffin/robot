@@ -92,7 +92,7 @@ public class TopicController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getExpertArea/{topicId}.json", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Integer> getExpertArea(@PathVariable int topicId) {
+	public @ResponseBody List<JsonData> getExpertArea(@PathVariable int topicId) {
 		return topicDao.getAreaByTopic(topicId);
 	}
 	

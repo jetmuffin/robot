@@ -224,7 +224,7 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 	}
 	
 	@Override
-	public Map<String, Integer> getAreaByTopic(int topicId) {
+	public List<JsonData> getAreaByTopic(int topicId) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		List<Expert> experts = getExperts(topicId);
 		for (int i = 0; i < experts.size(); i++) {
@@ -239,6 +239,14 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 				map.put(area, 1);
 			}
 		}
-		return map;
+		List<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(
+				map.entrySet());
+		List<JsonData> jsonDatas = new ArrayList<JsonData>();
+		for (int i = 0; i < entries.size(); i++) {
+			Map.Entry<String, Integer> entry = entries.get(i);
+			JsonData jsonData = new JsonData(entry.getKey(), entry.getValue());
+			jsonDatas.add(jsonData);
+		}
+		return jsonDatas;
 	}
 }

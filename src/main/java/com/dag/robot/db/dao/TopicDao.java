@@ -105,5 +105,5 @@ public interface TopicDao {
 	 * @param topicId
 	 * @return
 	 */
-	Map<String, Integer> getAreaByTopic(int topicId);
+	public List<JsonData> getAreaByTopic(int topicId);
 }
