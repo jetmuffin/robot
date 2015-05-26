@@ -15,6 +15,7 @@ public class PatentForShow {
 	private String inventor;
 	private List<Expert> experts;
 	private Orgnization orgnization;
+	private String type;
 	
 	public PatentForShow() {
 		super();
@@ -22,7 +23,7 @@ public class PatentForShow {
 
 	public PatentForShow(int patentId, String title, String abs, Date date,
 			String applicant, String inventor, List<Expert> experts,
-			Orgnization orgnization) {
+			Orgnization orgnization, String type) {
 		super();
 		this.patentId = patentId;
 		this.title = title;
@@ -32,6 +33,7 @@ public class PatentForShow {
 		this.inventor = inventor;
 		this.experts = experts;
 		this.orgnization = orgnization;
+		this.type = type;
 	}
 
 	public int getPatentId() {
@@ -96,6 +98,14 @@ public class PatentForShow {
 
 	public void setOrgnization(Orgnization orgnization) {
 		this.orgnization = orgnization;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }

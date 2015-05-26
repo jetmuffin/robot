@@ -125,8 +125,9 @@ public class InputFromJson {
 				String applicant = jObject.getString("applicant");
 				String date = jObject.getString("date");
 				String orgnization = jObject.getString("orgnization");
+				String type = jObject.getString("type");
 				addService.addPatent(title, applicant, abs, inventors, date,
-						orgnization);
+						orgnization, type);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
