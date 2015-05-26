@@ -66,6 +66,9 @@ public class NeoSearchObject {
 	public Node findExpertByMainKey(int mainKey){
 		return neoObject.findNode(LabelTypes.Expert, "mainKey", mainKey);
 	}
+	public Node findTopicByMainKey(int mainKey){
+		return neoObject.findNode(LabelTypes.Topic, "mainKey", mainKey);
+	}
 	public Node findNode(LabelTypes label, String property, String value){
 		return neoObject.findNode(label, property, value);
 	}
@@ -176,6 +179,25 @@ public class NeoSearchObject {
 		}
 		return idsMap;
 	}
+	
+	/**
+	 * 返回n个查找的节点
+	 * @param n	节点个数，如果n 为0 则都返回
+	 * @return
+	 */
+	public List<Node> getNodeList(int n) {
+		List<Node> nodeList = new ArrayList<Node>();
+		int i = 0;
+		for(Path path : traverser){
+			if(n == 0 | n > i++){
+				nodeList.add(path.endNode());
+			}else {
+				break;
+			}
+		}
+		return nodeList;
+	}
+	
 	public ResourceIterable<Node> getTmpNodes() {
 //		Map<Long, Integer> idsMap = new HashMap<Long, Integer>();
 		return traverser.nodes();
