@@ -130,9 +130,9 @@ public class BackendExpertController {
 	public String add(Model model, String name, String gender, String email,
 			String address, String homepage, String experience, String info,
 			String topic, String achievement, String organization, Integer age,
-			String area, String field, RedirectAttributes redirectAttributes) {
+			String field, RedirectAttributes redirectAttributes) {
 		addService.addExpert(name, gender, email, address, homepage,
-				experience, info, topic, achievement, organization, age, area, field);
+				experience, info, topic, achievement, organization, age, field);
 		redirectAttributes.addFlashAttribute("message", "专家信息添加成功!");
 		return "redirect:experts";
 	}

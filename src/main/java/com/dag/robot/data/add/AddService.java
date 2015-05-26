@@ -116,7 +116,7 @@ public class AddService {
 	public void addExpert(String name, String gender, String email,
 			String address, String homepage, String experience, String info,
 			String topic, String achievement, String orgnization, Integer age,
-			String area, String field) {
+			String field) {
 
 		Expert expert = expertDao.checkSame(name, orgnization);
 		if (expert == null) {// 没有重复
@@ -127,8 +127,6 @@ public class AddService {
 			// 可空信息
 			if (age != null)
 				expert.setAge(age);
-			if (area != null)
-				expert.setArea(area);
 
 			// 领域查重
 			Field field2 = fieldDao.getByName(field);
