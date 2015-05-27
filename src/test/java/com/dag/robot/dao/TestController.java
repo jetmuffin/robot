@@ -219,8 +219,8 @@ public class TestController {
 	
 	@RequestMapping(value = "/testPaperKey", method = RequestMethod.GET)
 	public String test2() {
-	List<PaperKeyword> paperKeywords = expertDao.getPaperKey(59);
-		System.out.println(paperKeywords);
+//	List<PaperKeyword> paperKeywords = expertDao.getPaperKey(59);
+//		System.out.println(paperKeywords);
 		return "test/index";
 	}
 	

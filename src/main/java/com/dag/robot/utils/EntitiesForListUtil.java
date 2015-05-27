@@ -142,6 +142,7 @@ public class EntitiesForListUtil {
 			expertSimple.setName(expert.getName());
 			expertSimple.setOrg(expert.getOrgnization().getName());
 			expertSimple.setUrl(expert.getUrl());
+			ExpertSimples.add(expertSimple);
 		}
 		return ExpertSimples;
 	}

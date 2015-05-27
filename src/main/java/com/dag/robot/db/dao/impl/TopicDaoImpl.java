@@ -103,6 +103,7 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 	@Override
 	public List<Expert> getExperts(int topicId) {
 		Topic topic = getById(topicId);
+		System.out.println("---------"+topic.getName());
 		Set<RelExpertTopic> relExpertTopics = topic.getRelExpertTopics();
 		Iterator<RelExpertTopic> iterator = relExpertTopics.iterator();
 		List<Expert> experts = new ArrayList<Expert>();
@@ -111,6 +112,7 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 			Expert expert = relExpertTopic.getExpert();
 			experts.add(expert);
 		}
+		System.out.println("++++++++++"+experts.size());
 		return experts;
 	}
 
@@ -209,17 +211,18 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 	public List<Expert> getTopTen(int topicId) {
 		List<Expert> expertTemp = getExperts(topicId);
 		List<Expert> experts = new ArrayList<Expert>();
-		int n = experts.size();
+		Collections.sort(expertTemp, new Comparator<Expert>() {
+			public int compare(Expert o1, Expert o2) {
+				return (o2.getRate() - o1.getRate());
+			}
+		});
+		int n = expertTemp.size();
 		if(n > 10)
 			n = 10;
 		for(int i = 0; i < n; i++){
 			experts.add(expertTemp.get(i));
 		}
-		Collections.sort(experts, new Comparator<Expert>() {
-			public int compare(Expert o1, Expert o2) {
-				return (o2.getRate() - o1.getRate());
-			}
-		});
+		System.out.println("nnnn"+n);
 		return experts;
 	}
 	
