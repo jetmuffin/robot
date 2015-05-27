@@ -121,6 +121,20 @@ public interface ExpertDao {
 	public List<Paper> getPapersOrderByRefNum(int expertId);
 	
 	/**
+	 * 检索专家专利
+	 * @param expertId
+	 * @return
+	 */
+	public List<Patent> getPatent(int expertId);
+	
+	/**
+	 * 根据名称模糊检索专利
+	 * @param expertId
+	 * @return
+	 */
+	public List<Patent> getPatentsFuzzyName(int expertId,String string);
+	
+	/**
 	 * 检索专家专利信息
 	 * @param expertId 专家id
 	 * @return 专利List

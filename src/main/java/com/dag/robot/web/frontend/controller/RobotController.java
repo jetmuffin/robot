@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dag.robot.analyzer.Analyzer;
 import com.dag.robot.db.dao.ExpertDao;
 import com.dag.robot.nlp.StanfordParser;
+import com.dag.robot.web.answer.Answer;
+import com.dag.robot.web.bean.RobotResponse;
 
 import edu.stanford.nlp.process.WordSegmenter;
 
@@ -21,30 +23,29 @@ import edu.stanford.nlp.process.WordSegmenter;
 @RequestMapping("/robot")
 public class RobotController {
 	private int pointNum = 1;
-	
+
 	@Autowired
 	@Qualifier("expertDao")
 	ExpertDao expertDao;
-	
+
+	@Autowired
+	Answer answer;
+
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(Model model){
+	public String index(Model model) {
 		model.addAttribute("module", "expertRobot");
-		
+
 		return "robot/index";
 	}
-	
-	@RequestMapping(value="/answer",method = RequestMethod.GET)
+
+	@RequestMapping(value = "/answer", method = RequestMethod.GET)
 	@ResponseBody
-	public List<String> answer(Model model,String sentence,int expertId) throws UnsupportedEncodingException{
-		
-		sentence = new String(sentence.getBytes("ISO-8859-1"),"UTF-8");
-		System.out.println(sentence);
-		Analyzer analyzer = new Analyzer();
-		String [] words = analyzer.analyzeSplit(sentence);
-		String keyword = StanfordParser.parse(words);
-		List<String> points = expertDao.getPoint(expertId, keyword, pointNum);
+	public RobotResponse answer(Model model, String sentence, int expertId)
+			throws UnsupportedEncodingException {
+
+		sentence = new String(sentence.getBytes("ISO-8859-1"), "UTF-8");
+		RobotResponse robotResponse = answer.responseSingle(expertId,sentence);
 		model.addAttribute("module", "expertRobot");
-		System.out.println(points.size());
-		return points;
+		return robotResponse;
 	}
 }

@@ -506,6 +506,11 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		}
 		if (papers2.size() == 0)
 			return null;
+		Collections.sort(papers, new Comparator<Paper>() {
+			public int compare(Paper arg0, Paper arg1) {
+				return arg1.getReferencedNum() - arg0.getReferencedNum();
+			}
+		});
 		return papers2;
 	}
 
@@ -517,15 +522,11 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			Paper paper = papers.get(i);
 			String abs = paper.getAbs();
 			String title = paper.getTitle();
-			System.out.println("1: "+ abs);
-			System.out.println("2: "+string);
-			System.out.println("3:" + abs.contains(string));
 			// 如果摘要包含关键字
 			if (abs.contains(string)) {
 				papers2.add(paper);
 			}
 		}
-		System.out.println(papers2.size()+"-----------------------------");
 		if (papers2.size() == 0)
 			return null;
 		return papers2;
@@ -555,5 +556,39 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			}
 		}
 		return resList;
+	}
+
+	@Override
+	public List<Patent> getPatent(int expertId) {
+		Expert expert = getById(expertId);
+		Set<RelExpertPatent> relExpertPatents = expert.getRelExpertPatents();
+		if (relExpertPatents.size() == 0)
+			return null;
+		Iterator<RelExpertPatent> iterator = relExpertPatents.iterator();
+		List<Patent> patents = new ArrayList<Patent>();
+		while (iterator.hasNext()) {
+			RelExpertPatent relExpertPatent = iterator.next();
+			Patent patent = relExpertPatent.getPatent();
+			patents.add(patent);
+		}
+		return patents;
+	}
+
+	@Override
+	public List<Patent> getPatentsFuzzyName(int expertId, String string) {
+		List<Patent> patents = getPatent(expertId);
+		if(patents == null)
+			return null;
+		List<Patent> patents2 = new ArrayList<Patent>();
+		for(int i = 0; i < patents.size(); i++){
+			Patent patent = patents.get(i);
+			String title = patent.getTitle();
+			if(title.contains(string)){
+				patents2.add(patent);
+			}
+		}
+		if(patents2.size() == 0)
+			return null;
+		return patents2;
 	}
 }
