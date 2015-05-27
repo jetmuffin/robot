@@ -29,7 +29,7 @@ public class ExpertForShow {
 	private Orgnization orgnization;
 	private Field field;
 	
-	private List<Paper> papers;
+	private List<PaperForShow> papers;
 	private List<Patent> patents;
 	private List<Topic> topics;
 	private List<Activity> activities;
@@ -42,7 +42,7 @@ public class ExpertForShow {
 			int patentNum, int paperReferedNum, String prize,
 			String experience, String info, String achievement, int rate,
 			Integer age, String area, Orgnization orgnization, Field field,
-			List<Paper> papers, List<Patent> patents, List<Topic> topics,
+			List<PaperForShow> papers, List<Patent> patents, List<Topic> topics,
 			List<Activity> activities) {
 		super();
 		this.expertId = expertId;
@@ -176,10 +176,10 @@ public class ExpertForShow {
 	public void setField(Field field) {
 		this.field = field;
 	}
-	public List<Paper> getPapers() {
+	public List<PaperForShow> getPapers() {
 		return papers;
 	}
-	public void setPapers(List<Paper> papers) {
+	public void setPapers(List<PaperForShow> papers) {
 		this.papers = papers;
 	}
 	public List<Patent> getPatents() {

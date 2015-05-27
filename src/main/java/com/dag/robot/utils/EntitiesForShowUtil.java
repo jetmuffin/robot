@@ -58,7 +58,7 @@ public class EntitiesForShowUtil {
 			Paper paper = relExpertPaper.getPaper();
 			papers.add(paper);
 		}
-		expertForShow.setPapers(papers);
+		expertForShow.setPapers(EntitiesForListUtil.paperForLists(papers));
 
 		Set<RelExpertPatent> relExpertPatents = expert.getRelExpertPatents();
 		List<Patent> patents = new ArrayList<Patent>();
