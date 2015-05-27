@@ -250,6 +250,8 @@ public class AddService {
 			rate = rate + coreJournal2.getRate();
 		}
 
+		List<String> keywordList = StringSplitUtil.stringSplit(keywords, ",");
+
 		// 作者查重
 		for (int i = 0; i < authors.length; i++) {
 			Expert expert = expertDao.checkSame(authors[i], orgnization);
@@ -286,6 +288,24 @@ public class AddService {
 			RelExpertPaper relExpertPaper = new RelExpertPaper(
 					relExpertPaperId, expert, paper, i + 1);
 			relExpertPaperDao.addRelExeprtPaper(relExpertPaper);
+
+			// 专家话题关联
+			for (int j = 0; j < keywordList.size(); j++) {
+				Topic topic = topicDao.getByName(keywordList.get(j));
+				if (topic == null) {
+					// 没有重复的
+					topic = new Topic(keywordList.get(j));
+					topicDao.addTopic(topic);
+				}
+
+				RelExpertTopicId relExpertTopicId = new RelExpertTopicId(
+						expert.getExpertId(), topic.getTopicId());
+				RelExpertTopic relExpertTopic = new RelExpertTopic(
+						relExpertTopicId, expert, topic);
+				relExpertTopicDao.addRelExeprtTopic(relExpertTopic);
+				addToNeo.addExpertTopic(expert.getExpertId(), expert.getName(),
+						topic.getTopicId(), topic.getName());
+			}
 
 			addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
 					orgnization2.getOrgId(), orgnization2.getName());
