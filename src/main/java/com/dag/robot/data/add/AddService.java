@@ -305,6 +305,8 @@ public class AddService {
 				relExpertTopicDao.addRelExeprtTopic(relExpertTopic);
 				addToNeo.addExpertTopic(expert.getExpertId(), expert.getName(),
 						topic.getTopicId(), topic.getName());
+				sessionDao.evict(topic);
+				sessionDao.evict(relExpertTopic);
 			}
 
 			addToNeo.addExpertOrg(expert.getExpertId(), expert.getName(),
