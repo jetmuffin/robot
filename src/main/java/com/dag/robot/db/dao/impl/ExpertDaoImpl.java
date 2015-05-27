@@ -518,10 +518,14 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			String abs = paper.getAbs();
 			String title = paper.getTitle();
 			// 如果包含关键摘要字
+			System.out.println("1: "+ abs);
+			System.out.println("2: "+string);
+			System.out.println("3:" + abs.contains(string));
 			if (abs.contains(string)) {
 				papers2.add(paper);
 			}
 		}
+		System.out.println(papers2.size()+"-----------------------------");
 		if (papers2.size() == 0)
 			return null;
 		return papers2;

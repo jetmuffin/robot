@@ -42,9 +42,9 @@ public class RobotController {
 		Analyzer analyzer = new Analyzer();
 		String [] words = analyzer.analyzeSplit(sentence);
 		String keyword = StanfordParser.getRoot(words);
-		System.out.println(keyword);
-		List<String> points = expertDao.getPoint(expertId, sentence, pointNum);
+		List<String> points = expertDao.getPoint(expertId, keyword, pointNum);
 		model.addAttribute("module", "expertRobot");
+		System.out.println(points.size());
 		return points;
 	}
 }

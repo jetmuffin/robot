@@ -69,7 +69,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 wow fadeInUp templatemo-box" data-wow-delay="0.3s">
-						<i class="fa fa-laptop"></i>
+						<i class="fa fa-user-secret"></i>
 						<h3 class="text-uppercase">RESPONSIVE LAYOUT</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. </p>
 					</div>
