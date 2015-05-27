@@ -280,6 +280,6 @@ public interface ExpertDao {
 	 * @param string
 	 * @return
 	 */
-	public List<String> getPoint(int expertId, String string);
+	public List<String> getPoint(int expertId, String string, int num);
 	
 }

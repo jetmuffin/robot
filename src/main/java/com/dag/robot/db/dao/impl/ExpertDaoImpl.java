@@ -506,18 +506,28 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 
 
 	@Override
-	public List<String> getPoint(int expertId, String string) {
+	public List<String> getPoint(int expertId, String string, int num) {
 		List<Paper> papers = getPaperFuzzyName(expertId, string);
+		List<String> resList = new ArrayList<String>();
 		for(int i = 0; i < papers.size(); i++){
 			Paper paper = papers.get(i);
 			String abs = paper.getAbs();
 			//如果摘要包含关键字
 			if(abs.contains(string)){
-				String temp = abs;
-				if(abs.endsWith("。")){
+				List<String> strings = StringSplitUtil.stringSplit(abs, "。");
+				for(int j = 0; j < strings.size(); j++){
+					String temp = strings.get(j);
+					//以关键字为前缀的句子
+					if(temp.startsWith(string)){
+						resList.add(temp);
+						if(resList.size() >= num){
+							return resList;
+						}
+					}
 				}
+				
 			}
 		}
-		return null;
+		return resList;
 	}
 }
