@@ -206,7 +206,7 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 	}
 
 	@Override
-	public List<ExpertForList> getTopTen(int topicId) {
+	public List<Expert> getTopTen(int topicId) {
 		List<Expert> expertTemp = getExperts(topicId);
 		List<Expert> experts = new ArrayList<Expert>();
 		int n = experts.size();
@@ -220,7 +220,7 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 				return (o2.getRate() - o1.getRate());
 			}
 		});
-		return EntitiesForListUtil.expertForLists(experts);
+		return experts;
 	}
 	
 	@Override

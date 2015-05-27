@@ -18,6 +18,7 @@ import com.dag.robot.entities.RelExpertPaper;
 import com.dag.robot.entities.RelFieldTopic;
 import com.dag.robot.entities.Topic;
 import com.dag.robot.web.bean.ExpertForList;
+import com.dag.robot.web.bean.ExpertSimple;
 import com.dag.robot.web.bean.PaperForShow;
 import com.dag.robot.web.bean.PatentForShow;
 import com.dag.robot.web.bean.TopicForShow;
@@ -129,4 +130,20 @@ public class EntitiesForListUtil {
 		return topicForShows;
 	}
 
+	
+	public static List<ExpertSimple> expertForSimpleLists(List<Expert> experts) {
+		List<ExpertSimple> ExpertSimples = new ArrayList<ExpertSimple>();
+		if (experts == null || experts.size() == 0)
+			return ExpertSimples;
+		for (int i = 0; i < experts.size(); i++) {
+			Expert expert = experts.get(i);
+			ExpertSimple expertSimple = new ExpertSimple();
+			expertSimple.setExpertId(expert.getExpertId());
+			expertSimple.setName(expert.getName());
+			expertSimple.setOrg(expert.getOrgnization().getName());
+			expertSimple.setUrl(expert.getUrl());
+		}
+		return ExpertSimples;
+	}
+	
 }

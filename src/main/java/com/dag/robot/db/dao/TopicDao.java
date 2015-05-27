@@ -98,7 +98,7 @@ public interface TopicDao {
 	 * @param topicName
 	 * @return
 	 */
-	public List<ExpertForList> getTopTen(int topicId);
+	public List<Expert> getTopTen(int topicId);
 
 	/**
 	 * 获取某方向下的专家分布情况
