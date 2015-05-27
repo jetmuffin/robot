@@ -2,6 +2,7 @@ package com.dag.robot.data.add;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Set;
 
 import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -318,6 +319,15 @@ public class AddService {
 			sessionDao.evict(relExpertPaper);
 			sessionDao.evict(expert);
 		}
+		Set<Topic> topics = paper.getTopics();
+		for (int j = 0; j < keywordList.size(); j++) {
+			Topic topic = topicDao.getByName(keywordList.get(j));
+			if(topic != null){
+				topics.add(topic); 
+			}
+		}
+		paper.setTopics(topics);
+		paperDao.updatePaper(paper);
 		sessionDao.evict(paper);
 		addToNeo.success();
 		addToNeo.finish();
@@ -380,6 +390,7 @@ public class AddService {
 			addToNeo.addExpertPatent(expert.getExpertId(), expert.getName(),
 					patent.getPatentId(), patent.getTitle());
 		}
+		
 		addToNeo.success();
 		addToNeo.finish();
 	}
