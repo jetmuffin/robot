@@ -10,6 +10,7 @@ import java.util.Set;
 import org.apache.commons.math3.analysis.function.Exp;
 import org.aspectj.weaver.patterns.OrSignaturePattern;
 import org.codehaus.jettison.json.JSONArray;
+import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.neo4j.register.Register.Int;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -218,10 +219,15 @@ public class TestController {
 		return "test/index";
 	}
 	
-	@RequestMapping(value = "/testPaperKey", method = RequestMethod.GET)
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public String test2() {
 //	List<PaperKeyword> paperKeywords = expertDao.getPaperKey(59);
 //		System.out.println(paperKeywords);
+		
+        List<Topic> topics = topicDao.getAllTopics();
+        for(int i = 0; i < topics.size();i++){
+        	System.out.println(topics.get(i).getName() + " n");
+        }
 		return "test/index";
 	}
 	

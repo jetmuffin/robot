@@ -41,7 +41,7 @@ public class RobotController {
 		System.out.println(sentence);
 		Analyzer analyzer = new Analyzer();
 		String [] words = analyzer.analyzeSplit(sentence);
-		String keyword = StanfordParser.getRoot(words);
+		String keyword = StanfordParser.parse(words);
 		List<String> points = expertDao.getPoint(expertId, keyword, pointNum);
 		model.addAttribute("module", "expertRobot");
 		System.out.println(points.size());
