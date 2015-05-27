@@ -34,7 +34,7 @@ public class Answer {
 		List<String> points = expertDao.getPoint(expertId, keyword, 1);
 		// 获取观点
 		if (points == null || points.size() == 0) {
-			response.setPoint("我目前还没有对此做具体的描述，请参考相关论文或者询问其他专家。");
+			response.setPoint(null);
 		} else {
 			response.setPoint(points.get(0));
 		}
@@ -42,8 +42,7 @@ public class Answer {
 		List<String> paperList = new ArrayList<String>();
 		List<Paper> papers = expertDao.getPaperFuzzyName(expertId, keyword);
 		if (papers == null) {
-			String paperString = "没有相关论文。";
-			paperList.add(paperString);
+			paperList.add(null);
 		} else {
 			int n = papers.size();
 			if (n > 3)
@@ -58,8 +57,7 @@ public class Answer {
 		List<String> patentList = new ArrayList<String>();
 		List<Patent> patents = expertDao.getPatentsFuzzyName(expertId, keyword);
 		if(patents == null){
-			String patnetString = "没有相关专利。";
-			patentList.add(patnetString);
+			patentList.add(null);
 		}else {
 			int n = patents.size();
 			if(n > 3)
