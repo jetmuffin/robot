@@ -517,7 +517,7 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			Paper paper = papers.get(i);
 			String abs = paper.getAbs();
 			String title = paper.getTitle();
-			// 如果包含关键摘要字
+			// 如果摘要包含关键字
 			if (abs.contains(string)) {
 				papers2.add(paper);
 			}
