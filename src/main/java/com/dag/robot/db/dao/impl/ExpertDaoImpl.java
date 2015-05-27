@@ -302,7 +302,7 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 	}
 
 	@Override
-	public List<PaperKeyword> getPaperKey(int expertId) {
+	public List<PaperKeyword> getPaperKey(int expertId, int num) {
 		Map<String, Integer> keywordsMap = new TreeMap<String, Integer>();
 		List<Paper> papers = getPapers(expertId);
 		for (int i = 0; i < papers.size(); i++) {
@@ -338,6 +338,9 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			PaperKeyword paperKeyword = new PaperKeyword(entry.getKey(),
 					entry.getValue());
 			paperKeywords.add(paperKeyword);
+			if(paperKeywords.size() == num){
+				return paperKeywords;
+			}
 		}
 		return paperKeywords;
 	}

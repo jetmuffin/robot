@@ -202,7 +202,7 @@ public interface ExpertDao {
 	 * 获取专家论文关键字的出现次数
 	 * @return
 	 */
-	public List<PaperKeyword> getPaperKey(int expertId);
+	public List<PaperKeyword> getPaperKey(int expertId, int num);
 	
 	/**
 	 * 解决内存中多个同名引用问题
