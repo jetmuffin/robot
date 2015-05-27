@@ -25,7 +25,7 @@
 						<div class="col-md-1"></div>
 						<div class="col-md-10 wow fadeIn" data-wow-delay="0.3s">
 							<h1 class="text-upper">比特能·专家机器人</h1>
-							<p class="tm-white">This is a fully Responsive, Clean Design, Modern, and Flexible Software Landing Page for startups, businesses and agencies. It is built with HTML5 &amp; CSS3, Bootstrap 3.3.4, Font Awesome 4.3.0, and much more. Designed by <a href="http://www.templatemo.com">templatemo</a>. Images by <a href="http://pixabay.com">Pixabay</a></p>
+							<p class="tm-white">比特能专家机器人系统抓取了互联网中专家的各类情报,构建专家,领域,研究方向的数据模型.</p>
 							<img src="/robot/resources/img/index/software-img.png" class="img-responsive" alt="home img">
 						</div>
 						<div class="col-md-1"></div>
@@ -57,7 +57,7 @@
 						<ul class="dropdown-box"></ul>
 					<div class="clear"></div>
 					</div>
-					<p class="tips">比特能专家机器人系统抓取了互联网中专家的各类情报,构建专家,领域,研究方向的数据模型.</p>
+					<p class="tips">比特能专家机器人系统收录了各研究方向及专家的信息,可以进行分析和查询.</p>
 				</div>
 			</div>
 		</div>

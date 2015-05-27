@@ -1,5 +1,6 @@
 package com.dag.robot.web.frontend.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -127,9 +128,10 @@ public class ExpertController {
 		return sfn.getTopicExpertGraph(topicId, depth);
 	}
 
-	@RequestMapping(value = "/getTopTen/{topicId}.json", method = RequestMethod.GET)
-	public @ResponseBody List<ExpertSimple> getTopTen(@PathVariable int topicId) {
+	@RequestMapping(value = "/getTopTen/{topic}.json", method = RequestMethod.GET)
+	public @ResponseBody List<ExpertSimple> getTopTen(@PathVariable String topic) throws UnsupportedEncodingException {
+		topic = new String(topic.getBytes("ISO-8859-1"),"UTF-8");
 		return EntitiesForListUtil.expertForSimpleLists(topicDao
-				.getTopTen(topicId));
+				.getTopTen(topic));
 	}
 }

@@ -16,10 +16,10 @@ import edu.stanford.nlp.trees.international.pennchinese.ChineseTreebankLanguageP
 
 public class StanfordParser {
 
-	LexicalizedParser lp = LexicalizedParser
+	static LexicalizedParser lp = LexicalizedParser
 			.loadModel("edu/stanford/nlp/models/lexparser/chinesePCFG.ser.gz");
 
-	public String getRoot(String string[]) {
+	public static String getRoot(String string[]) {
 		List<CoreLabel> rawWords = Sentence.toCoreLabelList(string);
 		Tree parse = lp.parse(rawWords);
 		TreebankLanguagePack tlp = new ChineseTreebankLanguagePack();

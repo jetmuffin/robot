@@ -26,14 +26,9 @@
 	<div id="friendList">
 		<div id="fList">
 			<div id="friendBox">
-				<div class="friend">
-					<div class="friend_pic"></div>
-					<div class="friend_name">ADMIN</div>
-					<div class="clear"></div>
-				</div>
 			</div>
 			<button class="btn btn-primary" data-toggle="modal"
-				data-target="#loadExpert" id="add-expert">选择研究领域</button>
+				data-target="#loadExpert" id="add-expert">选择专家机器人</button>
 		</div>
 		<div id="fOnOff"></div>
 
@@ -41,31 +36,6 @@
 	<div id="index_main" style="float: right">
 
 		<div id="index_msg" class="msg">
-			<div class="msg_left msg_sys">
-				<div class="avatar"></div>
-				<div class="cont">
-					<div class="name">系统消息：</div>
-					<div>admin 上线了</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-
-			<div class="msg_left">
-				<div class="avatar"></div>
-				<div class="cont">
-					<div class="name">name</div>
-					<div>Hello World !</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-			<div class="msg_right">
-				<div class="avatar"></div>
-				<div class="cont">
-					<div class="name">name</div>
-					<div>Hello World !</div>
-				</div>
-				<div class="clear"></div>
-			</div>
 
 		</div>
 		<div class="clear"></div>
@@ -89,7 +59,7 @@
 	</section>
 
 	<!-- Modal -->
-	<div class="modal fade" id="loadExpert" tabindex="-1" role="dialog"
+	<div class="modal " id="loadExpert" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -99,10 +69,10 @@
 						<div class="base-line">
 							<label>热门领域</label>
 							<div class="bd" id="choosing-h1Type" type="radio">
-								<label class="tag tag-hover"> <a href="#">数据挖掘</a>
-								</label> <label class="tag"> <a href="#">机器学习</a>
-								</label> <label class="tag"> <a href="#">自然语言处理</a>
-								</label> <label class="tag"> <a href="#">人工智能</a>
+								<label class="tag tag-hover"> <a href="#" class="hot-keyword">数据挖掘</a>
+								</label> <label class="tag"> <a href="#" class="hot-keyword">机器学习</a>
+								</label> <label class="tag"> <a href="#" class="hot-keyword">自然语言处理</a>
+								</label> <label class="tag"> <a href="#" class="hot-keyword">人工智能</a>
 								</label>
 							</div>
 						</div>
@@ -123,10 +93,14 @@
 									<th class="col3">专家评分</th>
 								</tr>
 							</thead>
+							
 							<tbody>
 
 							</tbody>
+							
 						</table>
+						<div id="searchLoading"></div>
+						<button class="btn btn-primary confirm-choose" id="confirmButton">确认</button>
 					</div>
 				</div>
 			</div>

@@ -33,9 +33,9 @@
 					<li
 						<c:if test="${param.searchType eq 'expert'}">class="hover"</c:if>><a
 						href="/robot/search?searchKey=${searchKey}&searchType=expert">专家</a></li>
-					<li
+				<!-- <li
 						<c:if test="${param.searchType eq 'field'}">class="hover"</c:if>><a
-						href="/robot/search?searchKey=${searchKey}&searchType=field">研究领域</a></li>
+						href="/robot/search?searchKey=${searchKey}&searchType=field">研究领域</a></li> -->	
 					<li
 						<c:if test="${param.searchType eq 'topic'}">class="hover"</c:if>><a
 						href="/robot/search?searchKey=${searchKey}&searchType=topic">研究方向</a></li>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -59,7 +60,7 @@
 									<div class="static-title">论文引用情况</div>
 									<div id="paper-refer" style="height: 200px"></div>
 									<div class="static-conclude">多数论文被引用</div>
-									<div class="static-desc">76%的论文被引用</div>
+									<div class="static-desc"><fmt:formatNumber value="${expert.paperReferedNum/expert.paperNum}" type="percent" pattern="#0.00%"/>的论文被引用</div>
 								</div>
 								<div class="col-md-6 static-item">
 									<div class="static-title">论文引用次数</div>
@@ -94,10 +95,14 @@
 										</c:otherwise>
 									</c:choose>
 									<td>
-									<!--  <span title="被中信所《中国科技期刊引证报告》收录">ISTIC</span>-->
-									<span title="被EI收录">EI</span>
-									<span title="被SCI收录">SCI</span>
-									<span title="被北京大学《中文核心期刊要目总览》收录">PKU</span>
+									<c:forEach items="${paper.coreJournals}" var="coreJournal">
+										<c:choose>
+											<c:when test="${coreJournal.name eq EI}"><span title="被EI收录">EI</span></c:when>
+											<c:when test="${coreJournal.name eq SCI}"><span title="被SCI收录">SCI</span></c:when>
+											<c:when test="${coreJournal.name eq PKU}"><span title="被北京大学《中文核心期刊要目总览》收录">PKU</span></c:when>
+											<c:when test="${coreJournal.name eq ISTIC}"><span title="被中信所《中国科技期刊引证报告》收录">ISTIC</span></c:when>
+										</c:choose>
+									</c:forEach>
 									</td>
 									</tr>
 								</c:forEach>

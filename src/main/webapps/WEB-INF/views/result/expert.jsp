@@ -29,7 +29,7 @@
 				<div class="des">选择搜索类型</div>
 				<ul>
 					<li <c:if test="${param.searchType eq 'expert'}">class="hover"</c:if> ><a href="/robot/search?searchKey=${searchKey}&searchType=expert">专家</a></li>
-					<li <c:if test="${param.searchType eq 'field'}">class="hover"</c:if> ><a href="/robot/search?searchKey=${searchKey}&searchType=field">研究领域</a></li>
+				<!--<li <c:if test="${param.searchType eq 'field'}">class="hover"</c:if> ><a href="/robot/search?searchKey=${searchKey}&searchType=field">研究领域</a></li>  -->	
 					<li <c:if test="${param.searchType eq 'topic'}">class="hover"</c:if> ><a href="/robot/search?searchKey=${searchKey}&searchType=topic">研究方向</a></li>
 				</ul>
 			</div>
@@ -96,7 +96,7 @@
 							研究领域 :<c:if test="${empty expert.field}">暂未收录</c:if><span>${expert.field.name}</span>
 						</div>
 						<div class="expert-topic info-item">
-			  			研究方向 :<c:if test="${empty expert.topics}">暂未收录</c:if><c:forEach items="${expert.topics}" var="topic"><span>${topic.name}</span></c:forEach>			
+			  			研究方向 :<c:if test="${empty expert.topics}">暂未收录</c:if><c:forEach items="${expert.topics}" var="topic" begin="0" end="9"><span>${topic.name}</span></c:forEach>			
 						</div>
 						<div class="expert-paper info-item">
 							发表文章: <span>${expert.paperNum}</span> 被引用: <span>${expert.paperReferedNum}</span> 专利数: <span>${expert.patentNum}</span>
