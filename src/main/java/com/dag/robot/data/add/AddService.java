@@ -146,6 +146,7 @@ public class AddService {
 				orgnization1 = orgnizations.get(0);
 			}
 			expert.setOrgnization(orgnization1);
+
 			expertDao.addExpert(expert);
 
 			addToNeo.begin();
@@ -201,6 +202,13 @@ public class AddService {
 		paper.setKeywords(keywords);
 		paper.setType(type);
 		paper.setReferencedNum(referencedNum);
+
+		Field field = fieldDao.getByName("计算机");
+		if (field == null) {
+			// 没有重名的
+			field = new Field("计算机");
+			fieldDao.addField(field);
+		}
 		addToNeo.begin();
 		if (type.equals("journal")) {
 			Journal journal2 = journalDao.check(journal);
@@ -264,6 +272,8 @@ public class AddService {
 				expert.setOrgnization(orgnization2);
 				expertDao.addExpert(expert);
 			}
+			// 关联topic
+			expert.setField(field);
 
 			// 论文数量加1
 			int paperNum = expert.getPaperNum();
@@ -301,6 +311,14 @@ public class AddService {
 					topicDao.addTopic(topic);
 				}
 
+				// topic field关联
+				RelFieldTopicId relFieldTopicId = new RelFieldTopicId(
+						field.getFieldId(), topic.getTopicId());
+				RelFieldTopic relFieldTopic = new RelFieldTopic(
+						relFieldTopicId, field, topic);
+				relFieldTopicDao.addRelFieldTopic(relFieldTopic);
+				sessionDao.evict(relFieldTopic);
+				
 				RelExpertTopicId relExpertTopicId = new RelExpertTopicId(
 						expert.getExpertId(), topic.getTopicId());
 				RelExpertTopic relExpertTopic = new RelExpertTopic(
@@ -317,15 +335,15 @@ public class AddService {
 
 			addToNeo.addExpertPaper(expert.getExpertId(), expert.getName(),
 					paper.getPaperId(), paper.getTitle());
-
+			sessionDao.evict(field);
 			sessionDao.evict(relExpertPaper);
 			sessionDao.evict(expert);
 		}
 		Set<Topic> topics = paper.getTopics();
 		for (int j = 0; j < keywordList.size(); j++) {
 			Topic topic = topicDao.getByName(keywordList.get(j));
-			if(topic != null){
-				topics.add(topic); 
+			if (topic != null) {
+				topics.add(topic);
 			}
 		}
 		paper.setTopics(topics);
@@ -392,7 +410,7 @@ public class AddService {
 			addToNeo.addExpertPatent(expert.getExpertId(), expert.getName(),
 					patent.getPatentId(), patent.getTitle());
 		}
-		
+
 		addToNeo.success();
 		addToNeo.finish();
 	}

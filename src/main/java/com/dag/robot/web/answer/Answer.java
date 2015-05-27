@@ -21,6 +21,11 @@ public class Answer {
 	@Qualifier("expertDao")
 	ExpertDao expertDao;
 
+	public Answer() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public RobotResponse responseSingle(int expertId, String sentence) {
 		RobotResponse response = new RobotResponse();
 		Analyzer analyzer = new Analyzer();
