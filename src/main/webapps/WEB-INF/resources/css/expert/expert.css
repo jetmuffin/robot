@@ -221,7 +221,10 @@
 	border-top: 1px solid #e1e1e3;
 	width: 100%;
 }
-
+.paper-table  td{
+	overflow:hidden;
+	white-space:nowrap;
+}
 .paper-table tr {
 	font-size: 14px;
 	color: #000;

@@ -45,7 +45,8 @@
 					<ul class="search-menu">
 						<li><a  v="expert" class="cur">专家</a></li>
 						<li><a v="topic"  class="">研究方向</a></li>
-						<li><a v="field"  class="">研究领域</a></li>
+						<!--<li><a v="field"  class="">研究领域</a></li>  -->
+						
 					</ul>
 					<div class="clear"></div>
 				</div>

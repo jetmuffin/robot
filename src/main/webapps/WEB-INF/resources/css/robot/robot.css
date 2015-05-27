@@ -1,0 +1,476 @@
+@CHARSET "UTF-8";
+
+/**
+ +------------------------------------------------------------------------------
+ * Author zhpengle
+ +------------------------------------------------------------------------------
+ * index_style.css
+ * 2012-11-03
+ +------------------------------------------------------------------------------
+ */
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-size: 14px;
+	font-family: '微软雅黑';
+	background: #FBFBFB;
+	height: 100%;
+}
+
+/**
+ +------------------------------------------------------------------------------
+ * Index Page CSS
+ +------------------------------------------------------------------------------
+ */
+.clear {
+	clear: both;
+}
+
+#main {
+	padding-top: 50px;
+}
+
+#friendList {
+	height: 400px;
+	width: 48px;
+	float: left;
+	border: 1px solid #E8E8E8;
+	margin: 10px 0px 10px 10px;
+	background: #FFF;
+	border-radius: 5px;
+	box-shadow: 0px 2px 6px #E5E5E5;
+	position: fixed;
+}
+
+#fList {
+	display: none;
+	height: 100px;
+	background: #F8F8F8;
+	width: 200px;
+	float: left;
+	margin: 10px 0px 0px 10px;
+	border-radius: 5px;
+}
+
+#fOnOff {
+	width: 30px;
+	background: #F8F8F8;
+	float: left;
+	margin: 10px 0px 0px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 30px;
+	color: #999;
+	font-family: Simsun, Arial, 'Microsoft Yahei', Simsun, sans-serif;
+}
+
+#fOnOff:hover {
+	background: #F0F0F0;
+	color: #666;
+}
+
+#fList .friend {
+	margin: 10px 10px 0px 10px;
+	padding: 4px 8px;
+	width: 160px;
+	border: 1px solid #F8F8F8;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+#fList .friend:hover {
+	background: #F0F0F0;
+	border: 1px solid #E5E5E5;
+}
+
+#fList .friend .friend_pic {
+	height: 24px;
+	width: 24px;
+	background: url(../img/avatar/qq.png);
+	float: left;
+}
+
+#fList .friend .friend_name {
+	line-height: 24px;
+	color: #666;
+	width: 128px;
+	float: right;
+	font-weight: 600;
+}
+
+#fList .friend .friend_name:hover {
+	color: #333;
+}
+
+#to {
+	height: 26px;
+	background: #FFF;
+	padding: 0px 10px;
+	border-radius: 5px;
+	border: 1px solid #F5F5F5;
+	box-shadow: inset 1px 0px 1px #CCC;
+}
+
+#to .toName {
+	margin-right: 5px;
+	color: #0CC;
+	cursor: pointer;
+}
+
+#fenge {
+	height: 8px;
+}
+
+#index_main {
+	float: right;
+	border: 1px solid #E8E8E8;
+	margin: 10px;
+	background: #FFF;
+	border-radius: 5px;
+	box-shadow: 0px 2px 6px #E5E5E5;
+}
+
+#index_title {
+	height: 40px;
+}
+
+#index_msg {
+	
+}
+
+#index_send {
+	height: 156px;
+}
+
+#index_main .msg {
+	margin: 10px;
+	background: #F8F8F8;
+	border-radius: 5px;
+	border: 1px solid #F5F5F5;
+	box-shadow: 0px 0px 1px #EFEFEF;
+}
+
+#index_main #index_msg {
+	height: 410px;
+	overflow-y: scroll;
+}
+
+#index_main #index_send {
+	height: 200px;
+}
+
+#index_main .msg_left {
+	margin: 10px;
+}
+
+#index_main .msg_left .avatar {
+	float: left;
+	height: 44px;
+	width: 44px;
+	border-radius: 5px;
+	background: url('/robot/resources/img/common/user-thumb.png');
+}
+
+#index_main .msg_left .cont {
+	height: 60px;
+	background: #FFF;
+	width: 400px;
+	float: left;
+	margin-left: 10px;
+	padding: 10px;
+	color: #333;
+	border-radius: 5px;
+	box-shadow: 1px 1px 2px #CCC;
+	word-wrap: break-word;
+}
+
+#index_main .msg_right {
+	margin: 10px;
+}
+
+#index_main .msg_right .avatar {
+	float: right;
+	height: 44px;
+	width: 44px;
+	border-radius: 5px;
+	background: url('/robot/resources/img/common/user-thumb.png');
+}
+
+#index_main .msg_right .cont {
+	float: right;
+	height: 60px;
+	width: 400px;
+	margin-right: 10px;
+	padding: 10px;
+	background: #8FA9C4;
+	color: #FFF;
+	border-radius: 5px;
+	border: 1px solid #8FA9C4;
+	box-shadow: -1px 1px 2px #AAA;
+	word-wrap: break-word;
+}
+
+#index_main .name {
+	font-weight: 600;
+}
+
+#index_main #index_msg .msg_sys .avatar {
+	background: url(/robot/resources/img/robot/avatar/system.png);
+}
+
+#index_main #index_msg .msg_sys .cont {
+	background: #FFFFE0;
+	border: 1px solid #E6DB55;
+	border-radius: 5px;
+	height: 50px;
+	padding: 3px 10px;
+	color: #666;
+	word-wrap: break-word;
+}
+
+#index_send {
+	padding: 10px;
+	position: relative;
+}
+
+#index_send textarea {
+	height: 110px;
+	resize: none;
+	border: 1px solid #CCC;
+	box-shadow: inset 1px 1px 2px #E5E5E5;
+	border-bottom: 1px solid #DDD;
+	border-right: 1px solid #DDD;
+	font-family: 'Microsoft Yahei';
+	font-size: 16px;
+	outline: none;
+	border-radius: 5px;
+	padding-top: 8px;
+	padding-left: 10px;
+}
+
+#index_send #send_notice {
+	position: absolute;
+	height: 23px;
+	width: 120px;
+	bottom: 20px;
+	right: 20px;
+	color: #666;
+}
+
+#friendList {
+	height: 400px;
+	width: 48px;
+	float: left;
+	border: 1px solid #E8E8E8;
+	margin: 10px 0px 10px 10px;
+	background: #FFF;
+	border-radius: 5px;
+	box-shadow: 0px 2px 6px #E5E5E5;
+	position: fixed;
+}
+
+#fList {
+	display: none;
+	height: 100px;
+	background: #F8F8F8;
+	width: 200px;
+	float: left;
+	margin: 10px 0px 0px 10px;
+	border-radius: 5px;
+}
+
+#fOnOff {
+	width: 30px;
+	background: #F8F8F8;
+	float: left;
+	margin: 10px 0px 0px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#fOnOff:hover {
+	background: #F0F0F0;
+}
+
+#fList .friend {
+	margin: 10px 10px 0px 10px;
+	padding: 4px 8px;
+	width: 180px;
+	background: #CCC;
+	cursor: pointer;
+}
+
+#fList .friend .friend_pic {
+	height: 24px;
+	width: 24px;
+	background: url('/robot/resources/img/common/user-thumb.png');
+	background-size: cover;
+	float: left;
+}
+
+#fList .friend .friend_name {
+	line-height: 24px;
+	color: #333;
+}
+
+#send {
+	height: 110px;
+	font-size: 20px;
+}
+
+#add-expert {
+	margin: 10px 10px 0px 10px;
+	width: 180px;
+}
+
+#index_send .row {
+	margin: 0;
+}
+
+footer {
+	position: fixed;
+}
+
+/* modal */
+.expert-choosing {
+	background: #efefef;
+}
+
+.choosing {
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	background: #efefef;
+	padding-top: 30px;
+}
+
+.choosing h1.choosing-h1 {
+	text-align: center;
+	font-size: 24px;
+	color: #444;
+	margin: 5px 0 35px;
+}
+
+.choosing .base-form {
+	margin-top: 0px;
+	margin-left: 20px;
+}
+
+.expert-choosing .base-form .base-line {
+	margin-bottom: 0;
+}
+
+.choosing .base-form .base-line {
+	margin-bottom: 20px;
+	margin-top: 0px;
+	float: left;
+}
+
+.base-form .base-line {
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.choosing .base-form label {
+	float: left;
+	color: #777;
+	margin-right: 10px;
+	height: 14px;
+	line-height: 14px;
+	padding: 7px 0;
+	margin-left: 0px;
+}
+
+.expert-choosing .base-form .bd {
+	display: table;
+}
+
+.search-mod {
+	width: 130px;
+	height: 20px;
+	border: 1px solid #d7d7d7;
+	position: relative;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.search-mod i.icon {
+	float: left;
+	width: 15px;
+	height: 15px;
+	background-image: url(img/choosing.png?v=140);
+	background-position: -174px -116px;
+	margin: 3px 5px 2px 5px;
+	vertical-align: top;
+}
+
+.search-mod input {
+	float: left;
+	width: 105px;
+	height: 20px;
+	padding: 0px;
+	border: 0 none;
+	font-size: 12px;
+	color: #b2b2b2;
+}
+
+.choosing .base-form .base-line .search-mod input {
+	height: 24px;
+	width: 145px;
+}
+
+.choosing .base-form .base-line .search-mod i.icon {
+	margin: 5px 5px 4px;
+}
+
+.choosing .base-form .base-line .search-mod {
+	display: inline-block;
+	vertical-align: middle;
+	border-width: 2px;
+	height: 24px;
+	width: 170px;
+	background: #fff;
+}
+
+.choosing .tabDiv {
+	margin-top: 5px;
+	width: 100%;
+	background: #fff;
+	min-height: 500px;
+	padding-top: 20px;
+}
+
+.choosing table {
+	border-collapse: collapse;
+	color: #333;
+	margin: 0 20px;
+}
+
+.choosing table td, .choosing table th {
+	text-indent: 30px;
+	border: 1px solid #e5e5e5;
+}
+
+.choosing table tr {
+	height: 35px;
+	line-height: 35px;
+}
+
+.choosing table .col1, .choosing table .col2, .choosing table .col3,
+	.choosing table .col4 {
+	width: 185px;
+	background: #efefef;
+	border: 1px solid #e5e5e5;
+}
+
+.choosing table .col1 {
+	width: 400px;
+	text-align: left;
+	text-indent: 20px;
+	border-left: 1px solid #efefef;
+}

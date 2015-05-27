@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.apache.commons.math3.analysis.function.Exp;
 import org.aspectj.weaver.patterns.OrSignaturePattern;
+import org.codehaus.jettison.json.JSONArray;
 import org.neo4j.register.Register.Int;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -224,14 +225,29 @@ public class TestController {
 		return "test/index";
 	}
 	
-	@RequestMapping(value = "/testInput", method = RequestMethod.GET)
+	@RequestMapping(value = "/testInput/paper", method = RequestMethod.GET)
 	public String test3() {
+		inputFromJson.inputPaper("paperData.txt");
+//		inputFromJson.inputPatent("patentData.txt");
+//		inputFromJson.inputExpert("expertData.txt");
+		return "test/index";
+	}
+	
+	@RequestMapping(value = "/testInput/patent", method = RequestMethod.GET)
+	public String test4() {
 //		inputFromJson.inputPaper("paperData.txt");
 		inputFromJson.inputPatent("patentData.txt");
 //		inputFromJson.inputExpert("expertData.txt");
 		return "test/index";
 	}
 	
+	@RequestMapping(value = "/testInput/expert", method = RequestMethod.GET)
+	public String test6() {
+//		inputFromJson.inputPaper("paperData.txt");
+//		inputFromJson.inputPatent("patentData.txt");
+		inputFromJson.inputExpert("expertData.txt");
+		return "test/index";
+	}
 //	@RequestMapping(value = "/test", method = RequestMethod.GET)
 //	public String test4() {
 ////		inputFromJson.inputPaper("paperData.txt");
@@ -258,6 +274,12 @@ public class TestController {
 		return "test/index";
 	}
 	
+	@RequestMapping(value = "/getPoint/{expertId}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String> test10(@PathVariable int expertId,String key,int num) {
+		List<String> points = expertDao.getPoint(expertId, key, num);
+		return points;
+	}
 //	@RequestMapping(value = "/getTopicExpertDataInfo", method = RequestMethod.GET)
 //	public @ResponseBody List<JsonData> getTopicExpertOrgInfo() {
 //		return topicDao.getExpertOrgDatas("data", 2);
