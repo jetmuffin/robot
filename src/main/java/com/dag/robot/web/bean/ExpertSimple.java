@@ -1,22 +1,22 @@
 package com.dag.robot.web.bean;
 
-import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
-
 public class ExpertSimple {
 	
 	private int expertId;
 	private String name;
 	private String org;
 	private String url;
+	private int rate;
 	public ExpertSimple() {
 		super();
 	}
-	public ExpertSimple(int expertId, String name, String org, String url) {
+	public ExpertSimple(int expertId, String name, String org, String url, int rate) {
 		super();
 		this.expertId = expertId;
 		this.name = name;
 		this.org = org;
 		this.url = url;
+		this.rate = rate;
 	}
 	public int getExpertId() {
 		return expertId;
@@ -41,6 +41,12 @@ public class ExpertSimple {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public int getRate() {
+		return rate;
+	}
+	public void setRate(int rate) {
+		this.rate = rate;
 	}
 	
 }

@@ -121,16 +121,17 @@ public class EntitiesForListUtil {
 			topicForShow.setTopicId(topic.getTopicId());
 			topicForShow.setName(topic.getName());
 			Set<RelFieldTopic> relFieldTopics = topic.getRelFieldTopics();
-			Iterator<RelFieldTopic> iterator = relFieldTopics.iterator();
-			RelFieldTopic relFieldTopic = iterator.next();
-			Field field = relFieldTopic.getField();
-			topicForShow.setField(field);
+			if (relFieldTopics.size() != 0) {
+				Iterator<RelFieldTopic> iterator = relFieldTopics.iterator();
+				RelFieldTopic relFieldTopic = iterator.next();
+				Field field = relFieldTopic.getField();
+				topicForShow.setField(field);
+			}
 			topicForShows.add(topicForShow);
 		}
 		return topicForShows;
 	}
 
-	
 	public static List<ExpertSimple> expertForSimpleLists(List<Expert> experts) {
 		List<ExpertSimple> ExpertSimples = new ArrayList<ExpertSimple>();
 		if (experts == null || experts.size() == 0)
@@ -142,9 +143,10 @@ public class EntitiesForListUtil {
 			expertSimple.setName(expert.getName());
 			expertSimple.setOrg(expert.getOrgnization().getName());
 			expertSimple.setUrl(expert.getUrl());
+			expertSimple.setRate(expert.getRate());
 			ExpertSimples.add(expertSimple);
 		}
 		return ExpertSimples;
 	}
-	
+
 }
