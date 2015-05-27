@@ -258,4 +258,28 @@ public interface ExpertDao {
 	 */
 	public Map<String, Integer> getAreaByField(String field);
 	
+	/**
+	 * 根据名称模糊检索某个专家的相关论文
+	 * @param expertId
+	 * @param string
+	 * @return
+	 */
+	public List<Paper> getPaperFuzzyName(int expertId, String string);
+	
+	/**
+	 * 根据摘要模糊检索某个专家的相关论文
+	 * @param expertId
+	 * @param string
+	 * @return
+	 */
+	public List<Paper> getPaperFuzzyAbs(int expertId, String string);
+	
+	/**
+	 * 检索某个专家对某个问题的观点
+	 * @param expertId
+	 * @param string
+	 * @return
+	 */
+	public List<String> getPoint(int expertId, String string, int num);
+	
 }

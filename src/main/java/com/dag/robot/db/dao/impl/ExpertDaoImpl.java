@@ -16,6 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder.In;
 
 import org.apache.commons.math3.analysis.function.Exp;
 import org.hibernate.Query;
+import org.junit.Ignore;
 import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.stereotype.Repository;
 
@@ -467,4 +468,66 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		return map;
 	}
 
+	@Override
+	public List<Paper> getPaperFuzzyName(int expertId, String string) {
+		List<Paper> papers = getPapersOrderByRefNum(expertId);
+		List<Paper> papers2 = new ArrayList<Paper>();
+		for (int i = 0; i < papers.size(); i++) {
+			Paper paper = papers.get(i);
+			String title = paper.getTitle();
+			String abs = paper.getAbs();
+			// 如果标题包含关键字
+			if (title.contains(string)) {
+				papers2.add(paper);
+			} 
+		}
+		if (papers2.size() == 0)
+			return null;
+		return papers2;
+	}
+
+	@Override
+	public List<Paper> getPaperFuzzyAbs(int expertId, String string) {
+		List<Paper> papers = getPapersOrderByRefNum(expertId);
+		List<Paper> papers2 = new ArrayList<Paper>();
+		for (int i = 0; i < papers.size(); i++) {
+			Paper paper = papers.get(i);
+			String abs = paper.getAbs();
+			String title = paper.getTitle();
+			// 如果标题包含关键字，而标题不包含
+			if (abs.contains(string) && (!title.contains(string))) {
+				papers2.add(paper);
+			}
+		}
+		if (papers2.size() == 0)
+			return null;
+		return papers2;
+	}
+
+
+	@Override
+	public List<String> getPoint(int expertId, String string, int num) {
+		List<Paper> papers = getPaperFuzzyName(expertId, string);
+		List<String> resList = new ArrayList<String>();
+		for(int i = 0; i < papers.size(); i++){
+			Paper paper = papers.get(i);
+			String abs = paper.getAbs();
+			//如果摘要包含关键字
+			if(abs.contains(string)){
+				List<String> strings = StringSplitUtil.stringSplit(abs, "。");
+				for(int j = 0; j < strings.size(); j++){
+					String temp = strings.get(j);
+					//以关键字为前缀的句子
+					if(temp.startsWith(string)){
+						resList.add(temp);
+						if(resList.size() >= num){
+							return resList;
+						}
+					}
+				}
+				
+			}
+		}
+		return resList;
+	}
 }
