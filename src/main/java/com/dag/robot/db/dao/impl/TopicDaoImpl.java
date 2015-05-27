@@ -103,6 +103,7 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 	@Override
 	public List<Expert> getExperts(int topicId) {
 		Topic topic = getById(topicId);
+		System.out.println("---------"+topic.getName());
 		Set<RelExpertTopic> relExpertTopics = topic.getRelExpertTopics();
 		Iterator<RelExpertTopic> iterator = relExpertTopics.iterator();
 		List<Expert> experts = new ArrayList<Expert>();
@@ -111,6 +112,7 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 			Expert expert = relExpertTopic.getExpert();
 			experts.add(expert);
 		}
+		System.out.println("++++++++++"+experts.size());
 		return experts;
 	}
 
@@ -209,17 +211,17 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 	public List<Expert> getTopTen(int topicId) {
 		List<Expert> expertTemp = getExperts(topicId);
 		List<Expert> experts = new ArrayList<Expert>();
-		int n = experts.size();
+		Collections.sort(expertTemp, new Comparator<Expert>() {
+			public int compare(Expert o1, Expert o2) {
+				return (o2.getRate() - o1.getRate());
+			}
+		});
+		int n = expertTemp.size();
 		if(n > 10)
 			n = 10;
 		for(int i = 0; i < n; i++){
 			experts.add(expertTemp.get(i));
 		}
-		Collections.sort(experts, new Comparator<Expert>() {
-			public int compare(Expert o1, Expert o2) {
-				return (o2.getRate() - o1.getRate());
-			}
-		});
 		return experts;
 	}
 	
@@ -227,6 +229,101 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 	public List<JsonData> getAreaByTopic(int topicId) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		List<Expert> experts = getExperts(topicId);
+		for (int i = 0; i < experts.size(); i++) {
+			Expert expert = experts.get(i);
+			List<String> address = StringSplitUtil.stringSplit(expert.getAddress(), "#");
+			String area = address.get(2);
+			if (map.containsKey(area)) {
+				int val = map.get(area);
+				val = val + 1;
+				map.put(area, val);
+			} else {
+				map.put(area, 1);
+			}
+		}
+		List<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(
+				map.entrySet());
+		List<JsonData> jsonDatas = new ArrayList<JsonData>();
+		for (int i = 0; i < entries.size(); i++) {
+			Map.Entry<String, Integer> entry = entries.get(i);
+			JsonData jsonData = new JsonData(entry.getKey(), entry.getValue());
+			jsonDatas.add(jsonData);
+		}
+		return jsonDatas;
+	}
+
+	@Override
+	public List<JsonData> getExpertGenderDatas(String topic) {
+		Topic topic1 = getByName(topic);
+		List<Expert> experts = getExperts(topic1.getTopicId());
+		int man = 0;
+		int women = 0;
+		for (int i = 0; i < experts.size(); i++) {
+			if (experts.get(i).getGender().equals("男")) {
+				man = man + 1;
+			} else {
+				women = women + 1;
+			}
+		}
+		List<JsonData> jsonDatas = new ArrayList<JsonData>();
+		JsonData j1 = new JsonData("男", man);
+		JsonData j2 = new JsonData("女", women);
+		jsonDatas.add(j1);
+		jsonDatas.add(j2);
+		return jsonDatas;
+	}
+
+	@Override
+	public List<JsonData> getExpertAreaDatas(String topic) {
+		Topic topic2 = getByName(topic);
+		List<Expert> experts = getExperts(topic2.getTopicId());
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for (int i = 0; i < experts.size(); i++) {
+			Expert expert = experts.get(i);
+			String area = expert.getArea();
+			if (map.containsKey(area)) {
+				int value = map.get(area);
+				value = value + 1;
+				map.put(area, value);
+			} else {
+				map.put(area, 1);
+			}
+		}
+		List<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(
+				map.entrySet());
+		List<JsonData> jsonDatas = new ArrayList<JsonData>();
+		for (int i = 0; i < entries.size(); i++) {
+			Map.Entry<String, Integer> entry = entries.get(i);
+			JsonData jsonData = new JsonData(entry.getKey(), entry.getValue());
+			jsonDatas.add(jsonData);
+		}
+		return jsonDatas;
+	}
+
+	@Override
+	public List<Expert> getTopTen(String topic) {
+		Topic topic2 = getByName(topic);
+		List<Expert> expertTemp = getExperts(topic2.getTopicId());
+		List<Expert> experts = new ArrayList<Expert>();
+		Collections.sort(expertTemp, new Comparator<Expert>() {
+			public int compare(Expert o1, Expert o2) {
+				return (o2.getRate() - o1.getRate());
+			}
+		});
+		int n = expertTemp.size();
+		if(n > 10)
+			n = 10;
+		for(int i = 0; i < n; i++){
+			experts.add(expertTemp.get(i));
+		}
+		return experts;
+	}
+
+	@Override
+	public List<JsonData> getAreaByTopic(String topic) {
+		Topic topic2 = getByName(topic);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		List<Expert> experts = getExperts(topic2.getTopicId());
 		for (int i = 0; i < experts.size(); i++) {
 			Expert expert = experts.get(i);
 			List<String> address = StringSplitUtil.stringSplit(expert.getAddress(), "#");

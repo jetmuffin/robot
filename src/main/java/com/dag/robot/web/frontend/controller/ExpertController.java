@@ -101,7 +101,7 @@ public class ExpertController {
 	@RequestMapping(value = "/getPaperKey/{expertId}.json", method = RequestMethod.GET)
 	public @ResponseBody List<PaperKeyword> getPaperKey(
 			@PathVariable int expertId) {
-		return expertDao.getPaperKey(expertId);
+		return expertDao.getPaperKey(expertId, 10);
 	}
 
 	@RequestMapping(value = "/getPaperAvg", method = RequestMethod.GET)

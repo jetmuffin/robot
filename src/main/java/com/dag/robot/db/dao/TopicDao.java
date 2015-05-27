@@ -73,6 +73,13 @@ public interface TopicDao {
 	public List<JsonData> getExpertGenderDatas(int topicId);
 	
 	/**
+	 * 获取某话题下的专家的性别统计信息
+	 * @param topic　
+	 * @return　
+	 */
+	public List<JsonData> getExpertGenderDatas(String topic);
+	
+	/**
 	 * 
 	 * @param topic
 	 * @return
@@ -87,6 +94,13 @@ public interface TopicDao {
 	public List<JsonData> getExpertAreaDatas(int topicId);
 	
 	/**
+	 * 获取某方向专家的省份分布
+	 * @param topic
+	 * @return
+	 */
+	public List<JsonData> getExpertAreaDatas(String topic);
+	
+	/**
 	 * 根据名称模糊查询
 	 * @param name
 	 * @return
@@ -99,6 +113,13 @@ public interface TopicDao {
 	 * @return
 	 */
 	public List<Expert> getTopTen(int topicId);
+	
+	/**
+	 * 获取某方向下的top 10专家
+	 * @param topicName
+	 * @return
+	 */
+	public List<Expert> getTopTen(String topic);
 
 	/**
 	 * 获取某方向下的专家分布情况
@@ -106,4 +127,11 @@ public interface TopicDao {
 	 * @return
 	 */
 	public List<JsonData> getAreaByTopic(int topicId);
+	
+	/**
+	 * 获取某方向下的专家分布情况
+	 * @param topicId
+	 * @return
+	 */
+	public List<JsonData> getAreaByTopic(String topic);
 }
