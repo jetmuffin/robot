@@ -168,6 +168,8 @@ public class TopicDaoImpl extends BaseDao implements TopicDao {
 			Map.Entry<String, Integer> entry = entries.get(i);
 			JsonData jsonData = new JsonData(entry.getKey(), entry.getValue());
 			jsonDatas.add(jsonData);
+			if(jsonDatas.size() >= num)
+				return jsonDatas;
 		}
 		return jsonDatas;
 	}
