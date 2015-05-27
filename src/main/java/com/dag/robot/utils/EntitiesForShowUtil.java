@@ -153,10 +153,12 @@ public class EntitiesForShowUtil {
 		topicForShow.setTopicId(topic.getTopicId());
 		topicForShow.setName(topic.getName());
 		Set<RelFieldTopic> relFieldTopics = topic.getRelFieldTopics();
-		Iterator<RelFieldTopic> iterator = relFieldTopics.iterator();
-		RelFieldTopic relFieldTopic = iterator.next();
-		Field field = relFieldTopic.getField();
-		topicForShow.setField(field);
+		if(relFieldTopics.size() != 0){
+			Iterator<RelFieldTopic> iterator = relFieldTopics.iterator();
+			RelFieldTopic relFieldTopic = iterator.next();
+			Field field = relFieldTopic.getField();
+			topicForShow.setField(field);
+		}
 		return topicForShow;
 	}
 
