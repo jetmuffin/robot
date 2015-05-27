@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dag.robot.analyzer.Analyzer;
 import com.dag.robot.db.dao.ExpertDao;
+import com.dag.robot.nlp.StanfordParser;
+
+import edu.stanford.nlp.process.WordSegmenter;
 
 @Controller
 @RequestMapping("/robot")
@@ -35,6 +39,10 @@ public class RobotController {
 		
 		sentence = new String(sentence.getBytes("ISO-8859-1"),"UTF-8");
 		System.out.println(sentence);
+		Analyzer analyzer = new Analyzer();
+		String [] words = analyzer.analyzeSplit(sentence);
+		String keyword = StanfordParser.getRoot(words);
+		System.out.println(keyword);
 		List<String> points = expertDao.getPoint(expertId, sentence, pointNum);
 		model.addAttribute("module", "expertRobot");
 		return points;

@@ -239,6 +239,7 @@ public class AddService {
 
 		int rate = 0;
 
+		Set<CoreJournal> coreJournals = paper.getCoreJournals();
 		// 核心期刊计算
 		List<String> list = StringSplitUtil.stringSplit(coreJournal);
 		for (int i = 0; i < list.size(); i++) {
@@ -249,8 +250,9 @@ public class AddService {
 				coreJournalDao.addCoreJournal(coreJournal2);
 			}
 			rate = rate + coreJournal2.getRate();
+			coreJournals.add(coreJournal2);
 		}
-
+		paper.setCoreJournals(coreJournals);
 		List<String> keywordList = StringSplitUtil.stringSplit(keywords, ",");
 
 		// 作者查重

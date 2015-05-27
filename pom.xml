@@ -184,19 +184,34 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.solr</groupId>
 			<artifactId>solr-solrj</artifactId>
 			<version>5.1.0</version>
 		</dependency>
-		
-<dependency>
-  <groupId>com.huaban</groupId>
-  <artifactId>jieba-analysis</artifactId>
-  <version>1.0.0</version>
-</dependency>
-    
 
+		<dependency>
+			<groupId>com.huaban</groupId>
+			<artifactId>jieba-analysis</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun</groupId>
+			<artifactId>jna</artifactId>
+			<version>4.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapps/WEB-INF/lib/jna-4.0.0.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>edu.stanford</groupId>
+			<artifactId>nlp</artifactId>
+			<version>3.4.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapps/WEB-INF/lib/stanford-parser.jar</systemPath>
+		</dependency>
+		
 	</dependencies>
 </project>

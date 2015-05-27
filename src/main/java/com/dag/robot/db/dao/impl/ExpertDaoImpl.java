@@ -290,15 +290,34 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		return result;
 	}
 
+	/**
+	 * 暂时不需要实现
+	 * @return
+	 */
 	@Override
 	public String getPaperRate() {
-		Query query = query("from Expert as expert order by expert.paperNum");
 		return null;
 	}
 
 	@Override
 	public List<Paper> getPapersOrderByRefNum(int expertId) {
-		return null;
+		Expert expert = getById(expertId);
+		Set<RelExpertPaper> relExpertPapers = expert.getRelExpertPapers();
+		if(relExpertPapers.size() == 0)
+			return null;
+		Iterator<RelExpertPaper> iterator = relExpertPapers.iterator();
+		List<Paper> papers = new ArrayList<Paper>();
+		while(iterator.hasNext()){
+			RelExpertPaper relExpertPaper = iterator.next();
+			Paper paper= relExpertPaper.getPaper();
+			papers.add(paper);
+		}
+		 Collections.sort(papers, new Comparator<Paper>() {
+	            public int compare(Paper arg0, Paper arg1) {
+	                return arg1.getReferencedNum()-arg0.getReferencedNum();
+	            }
+	        });
+		return papers;
 	}
 
 	@Override
@@ -338,7 +357,7 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			PaperKeyword paperKeyword = new PaperKeyword(entry.getKey(),
 					entry.getValue());
 			paperKeywords.add(paperKeyword);
-			if(paperKeywords.size() == num){
+			if (paperKeywords.size() == num) {
 				return paperKeywords;
 			}
 		}
@@ -482,7 +501,7 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 			// 如果标题包含关键字
 			if (title.contains(string)) {
 				papers2.add(paper);
-			} 
+			}
 		}
 		if (papers2.size() == 0)
 			return null;
@@ -507,28 +526,27 @@ public class ExpertDaoImpl extends BaseDao implements ExpertDao {
 		return papers2;
 	}
 
-
 	@Override
 	public List<String> getPoint(int expertId, String string, int num) {
 		List<Paper> papers = getPaperFuzzyName(expertId, string);
 		List<String> resList = new ArrayList<String>();
-		for(int i = 0; i < papers.size(); i++){
+		for (int i = 0; i < papers.size(); i++) {
 			Paper paper = papers.get(i);
 			String abs = paper.getAbs();
-			//如果摘要包含关键字
-			if(abs.contains(string)){
+			// 如果摘要包含关键字
+			if (abs.contains(string)) {
 				List<String> strings = StringSplitUtil.stringSplit(abs, "。");
-				for(int j = 0; j < strings.size(); j++){
+				for (int j = 0; j < strings.size(); j++) {
 					String temp = strings.get(j);
-					//以关键字为前缀的句子
-					if(temp.startsWith(string)){
+					// 以关键字为前缀的句子
+					if (temp.startsWith(string)) {
 						resList.add(temp);
-						if(resList.size() >= num){
+						if (resList.size() >= num) {
 							return resList;
 						}
 					}
 				}
-				
+
 			}
 		}
 		return resList;

@@ -152,9 +152,19 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="item" varStatus="status" begin="${pages.currentPage-2}" end="${pages.currentPage+2}">
+						<c:choose>
+							<c:when test="${pages.currentPage lt 5}">
+		<c:forEach var="item" varStatus="status" begin="1" end="5">
+						  	<li ><a <c:if test="${pages.currentPage eq status.index}">class="active"</c:if> href="/robot/backend/expert/experts?page=${status.index}&pageSize=${pages.pageSize}">${status.index}</a></li>
+						</c:forEach>					
+							</c:when>
+							<c:otherwise>
+							<c:forEach var="item" varStatus="status" begin="${pages.currentPage-2}" end="${pages.currentPage+2}">
 						  	<li ><a <c:if test="${pages.currentPage eq status.index}">class="active"</c:if> href="/robot/backend/expert/experts?page=${status.index}&pageSize=${pages.pageSize}">${status.index}</a></li>
 						</c:forEach>						
+							</c:otherwise>
+						</c:choose>
+					
 					</c:otherwise>
 				</c:choose>
 				
