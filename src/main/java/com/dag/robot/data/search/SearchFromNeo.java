@@ -95,23 +95,23 @@ public class SearchFromNeo extends NeoSearchObject {
 					linkExpertBeans.add(new LinkExpertBean(topicNode.getProperty("name").toString(), node.getProperty("name").toString()));
 				}
 			}
-//			/**
-//			 * 挖掘专家关系
-//			 * */
-//			if(nodelList != null)
-//			{
-//				int nSize = nodelList.size();
-//				Node node1,node2;
-//				for(int i=0;i<nSize;i++){
-//					node1 = nodelList.get(i);
-//					for(int j=i+1;j<nSize;j++){
-//						node2 = nodelList.get(j);
-//						if(judgeIsRelation(node1,node2)){
-//							linkExpertBeans.add(new LinkExpertBean(node1.getProperty("name").toString(),node2.getProperty("name").toString()));
-//						}
-//					}
-//				}
-//			}
+			/**
+			 * 挖掘专家关系
+			 * */
+			if(nodelList != null)
+			{
+				int nSize = nodelList.size();
+				Node node1,node2;
+				for(int i=0;i<nSize;i++){
+					node1 = nodelList.get(i);
+					for(int j=i+1;j<nSize;j++){
+						node2 = nodelList.get(j);
+						if(judgeIsRelation(node1,node2)){
+							linkExpertBeans.add(new LinkExpertBean(node1.getProperty("name").toString(),node2.getProperty("name").toString()));
+						}
+					}
+				}
+			}
 			
 		}
 		finish();	
@@ -209,19 +209,17 @@ public class SearchFromNeo extends NeoSearchObject {
 		
 		{
 			setTraversalDescription();
-//			addRelationships(RelTypes.WORK_FOR,Direction.OUTGOING);
-//			addRelationships(RelTypes.WORK_FOR,Direction.INCOMING);
-//			addRelationships(RelTypes.PUBLISH,Direction.OUTGOING);
-//			addRelationships(RelTypes.PUBLISH,Direction.INCOMING);
-//			addRelationships(RelTypes.APPLLY,Direction.OUTGOING);
-//			addRelationships(RelTypes.APPLLY,Direction.INCOMING);
+			addRelationships(RelTypes.WORK_FOR,Direction.OUTGOING);
+			addRelationships(RelTypes.WORK_FOR,Direction.INCOMING);
+			addRelationships(RelTypes.PUBLISH,Direction.OUTGOING);
+			addRelationships(RelTypes.PUBLISH,Direction.INCOMING);
+			addRelationships(RelTypes.APPLLY,Direction.OUTGOING);
+			addRelationships(RelTypes.APPLLY,Direction.INCOMING);
 			setSection(2,2);
 			setTraverser(aNode);	
 			int i=0;
 			for(Path path : traverser){
-				System.out.println(path.endNode().getId() +" (i++) "+ bNode.getId());
 				if(path.endNode().getId() == bNode.getId()){
-					System.out.println(path.endNode().getProperty("name")+" ^ "+bNode.getProperty("name"));
 					res = true;
 					break;
 				}

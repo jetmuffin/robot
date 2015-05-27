@@ -1,0 +1,9 @@
+INFO: loading config from shadow.json
+Traceback (most recent call last):
+  File "/usr/local/bin/sslocal", line 9, in <module>
+    load_entry_point('shadowsocks==2.6.8', 'console_scripts', 'sslocal')()
+  File "/usr/local/lib/python2.7/dist-packages/shadowsocks/local.py", line 39, in main
+    config = shell.get_config(True)
+  File "/usr/local/lib/python2.7/dist-packages/shadowsocks/shell.py", line 149, in get_config
+    with open(config_path, 'rb') as f:
+IOError: [Errno 2] No such file or directory: 'shadow.json'

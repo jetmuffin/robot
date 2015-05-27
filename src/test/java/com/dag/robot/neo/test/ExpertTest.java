@@ -16,8 +16,8 @@ import com.dag.robot.web.bean.JsonExpertList;
 
 public class ExpertTest {
 	
-	String db_path = "/home/jeff/workspace/expertNeoDB";
-	
+//#	String db_path = "/home/jeff/workspace/expertNeoDB";
+	String db_path = "/home/innerac/neoOut";
 	String fieldName = "领域";
 	int fieldId = 0;
 	String topicName = "主题";
@@ -102,7 +102,7 @@ public class ExpertTest {
 //		
 //		sfn.finish();
 		
-		JsonExpertList jsonExpertList = sfn.getTopicExpertGraph(1, 4);
+		JsonExpertList jsonExpertList = sfn.getTopicExpertGraph(1, 5);
 		
 		
 		{
