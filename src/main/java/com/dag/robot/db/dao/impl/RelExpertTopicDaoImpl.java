@@ -25,7 +25,7 @@ public class RelExpertTopicDaoImpl extends BaseDao implements RelExpertTopicDao{
 	
 	@Override
 	public void addRelExeprtTopic(RelExpertTopic relExpertTopic) {
-		save(relExpertTopic);
+		saveOrUpdate(relExpertTopic);
 	}
 	@Override
 	public List<Expert> searchExpertsByTopics(String topic, int num) {
